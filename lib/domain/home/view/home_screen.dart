@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
