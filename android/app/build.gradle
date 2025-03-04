@@ -3,13 +3,34 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.github.johnrengelman.processes' version '0.5.0'
+}
+
+def dotenv = new Properties()
+
+def envFile = file("${rootProject.projectDir}/../.env")
+def localPropertiesFile = rootProject.file('local.properties')
+
+// local.properties 파일을 읽고 로드하기
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        dotenv.load(reader) // dotenv가 local.properties를 읽도록 수정
+    }
+}
+
+if (envFile.exists()) {
+    envFile.withInputStream { stream ->
+        dotenv.load(stream) // .env 파일 읽기
+    }
+} else {
+    throw new FileNotFoundException("Could not find .env file at: ${envFile.path}")
 }
 
 android {
     namespace = "site.gachtaxi.gachtaxi_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
-
+    
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -28,6 +49,12 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+       
+        def googleMapKey = dotenv['GOOGLE_MAP_API_KEY']
+            if (googleMapKey == null) {
+                throw new GradleException("GOOGLE_MAP_API_KEY not found in .env file")
+            }
+            manifestPlaceholders += [GOOGLE_MAP_API_KEY: googleMapKey]
     }
 
     buildTypes {
