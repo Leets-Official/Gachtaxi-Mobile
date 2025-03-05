@@ -41,6 +41,7 @@ dependencies:
   toastification: ^3.0.1
   json_annotation: ^4.9.0
   freezed_annotation: ^2.4.4
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
