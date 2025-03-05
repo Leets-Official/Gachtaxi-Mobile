@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
-import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_action_menu.dart';
-import '../../../../common/constants/typography.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_notifier.dart';
 
 class ChatInputField extends ConsumerStatefulWidget {
