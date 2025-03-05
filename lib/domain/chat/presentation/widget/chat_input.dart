@@ -13,6 +13,8 @@ class ChatInputField extends ConsumerStatefulWidget {
 }
 
 class ChatInputFieldState extends ConsumerState<ChatInputField> {
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     final chatController = ref.watch(chatInputNotifierProvider);
@@ -49,31 +51,44 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
             Expanded(
               child: Container(
                 width: 250.w,
-                constraints: BoxConstraints(minHeight: 36.h),
+                constraints: BoxConstraints(
+                  minHeight: 36.h,
+                  maxHeight: 100.h,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.chatInputField,
                   borderRadius: BorderRadius.circular(18.r),
                 ),
-                child: TextField(
-                  controller: chatController,
-                  style: TextStyle(color: Colors.white, fontSize: 14.sp),
-                  cursorColor: AppColors.lightGray,
-                  cursorWidth: 1.5.w,
-                  cursorHeight: 16.h,
-                  maxLines: null,
-                  keyboardType: TextInputType.multiline,
-                  expands: false,
-                  decoration: InputDecoration(
-                    hintText: "메시지 입력",
-                    hintStyle: TextStyle(
-                      color: AppColors.chatInputFieldHintText,
-                      fontSize: AppTypography.fontSizeSmall.sp,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: TextField(
+                    controller: chatController,
+                    scrollController: _scrollController,
+                    style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                    cursorColor: AppColors.lightGray,
+                    cursorWidth: 1.5.w,
+                    cursorHeight: 16.h,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    expands: false,
+                    decoration: InputDecoration(
+                      hintText: "메시지 입력",
+                      hintStyle: TextStyle(
+                        color: AppColors.chatInputFieldHintText,
+                        fontSize: AppTypography.fontSizeSmall.sp,
+                      ),
+                      border: InputBorder.none,
+                      isDense: true,
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 6.h, horizontal: 16.w),
                     ),
-                    border: InputBorder.none,
-                    isDense: true,
-                    contentPadding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 16.w),
+                    onChanged: (_) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+                      });
+                    },
+                    onSubmitted: (_) => chatNotifier.submitMessage(),
                   ),
-                  onSubmitted: (_) => chatNotifier.submitMessage(),
                 ),
               ),
             ),
