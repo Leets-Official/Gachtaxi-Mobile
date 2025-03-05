@@ -22,47 +22,63 @@ class CustomBottomNavBar extends StatelessWidget {
       labelColor: Colors.white,
       unselectedLabelColor: Colors.white54,
       tabs: [
-        Tab(
-          icon: SvgPicture.asset(
-            _selectedIndex == 0
-                ? 'assets/icons/taxi_on_icon.svg'
-                : 'assets/icons/taxi_off_icon.svg',
-            width: 30,
-            height: 17,
-          ),
-          text: '홈',
+        tabRender(
+          activeIcon: 'assets/icons/taxi_on_icon.svg',
+          inactiveIcon: 'assets/icons/taxi_off_icon.svg',
+          label: '홈',
+          index: 0,
+          width: 30,
+          height: 17,
         ),
-        Tab(
-          icon: SvgPicture.asset(
-            'assets/icons/manual_matching_icon.svg',
-            width: 23,
-            height: 23,
-            colorFilter: _selectedIndex == 1
-                ? ColorFilter.mode(Colors.white, BlendMode.srcIn)
-                : null,
-          ),
-          text: '수동매칭',
+        tabRender(
+          activeIcon: 'assets/icons/manual_matching_icon.svg',
+          inactiveIcon: 'assets/icons/manual_matching_icon.svg',
+          label: '수동매칭',
+          index: 1,
+          width: 23,
+          height: 23,
+          applyColorFilter: true,
         ),
-        Tab(
-          icon: SvgPicture.asset(
-            'assets/icons/friend_icon.svg',
-            width: 23,
-            height: 23,
-            colorFilter: _selectedIndex == 2
-                ? ColorFilter.mode(Colors.white, BlendMode.srcIn)
-                : null,
-          ),
-          text: '친구',
+        tabRender(
+          activeIcon: 'assets/icons/friend_icon.svg',
+          inactiveIcon: 'assets/icons/friend_icon.svg',
+          label: '친구',
+          index: 2,
+          width: 23,
+          height: 23,
+          applyColorFilter: true,
         ),
-        Tab(
-          icon: SvgPicture.asset(
-            'assets/icons/profile_icon.svg',
-            width: 24,
-            height: 24,
-          ),
-          text: '프로필',
+        tabRender(
+          activeIcon: 'assets/icons/profile_icon.svg',
+          inactiveIcon: 'assets/icons/profile_icon.svg',
+          label: '프로필',
+          index: 3,
+          width: 24,
+          height: 24,
         ),
       ],
+    );
+  }
+
+  Tab tabRender({
+    required String activeIcon,
+    required String inactiveIcon,
+    required String label,
+    required int index,
+    double width = 24,
+    double height = 24,
+    bool applyColorFilter = false,
+  }) {
+    return Tab(
+      icon: SvgPicture.asset(
+        _selectedIndex == index ? activeIcon : inactiveIcon,
+        width: width,
+        height: height,
+        colorFilter: applyColorFilter && _selectedIndex == index
+            ? ColorFilter.mode(Colors.white, BlendMode.srcIn)
+            : null,
+      ),
+      text: label,
     );
   }
 }

@@ -16,18 +16,14 @@ class NotifierIcon extends StatelessWidget {
         Positioned(
           top: 10,
           right: 12,
-          child: Stack(
-            children: [
-              Container(
-                width: 12,
-                height: 12,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xFFFF3636),
-                ),
-              ),
-            ],
+          child: Container(
+            width: 12,
+            height: 12,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Color(0xFFFF3636),
+            ),
           ),
         ),
       ],

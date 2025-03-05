@@ -71,26 +71,22 @@ class _CustomBottomSheetState extends ConsumerState<CustomBottomSheet> {
 
                 sheetHeightNotifier.updateHeight(newHeight);
               },
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 40,
+              child: Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Container(
+                    width: 50,
+                    height: 5,
                     decoration: BoxDecoration(
+                      color: Colors.grey[400],
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(
-                      child: Container(
-                        width: 50,
-                        height: 5,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[400],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
                   ),
-                ],
+                ),
               ),
             ),
             Expanded(child: widget.child),
