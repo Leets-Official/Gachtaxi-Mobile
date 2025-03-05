@@ -45,7 +45,7 @@ class ChatScreen extends StatelessWidget {
               ),
 
               Container(
-                color: AppColors.chatInputField,
+                color: AppColors.neutralComponent,
                 child: SafeArea(
                   child: const ChatInputField(),
                 ),

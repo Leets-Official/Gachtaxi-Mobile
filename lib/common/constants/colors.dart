@@ -19,4 +19,9 @@ class AppColors {
   static const Color darkGray = Color(0xFF838383);
   static const Color lightGray = Color(0xFFD9D9D9);
   static const Color white = Color(0xFFFFFFFF);
+
+  // 채팅
+  static const Color chatInputField = Color(0xFF465443);
+  static const Color chatInputFieldHintText = Color(0xFF2A3328);
+
 }

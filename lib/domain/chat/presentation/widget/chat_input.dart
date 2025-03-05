@@ -20,7 +20,7 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
 
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFF20271E),
+        color: AppColors.neutralComponent,
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 7.h),
@@ -51,7 +51,7 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
                 width: 250.w,
                 constraints: BoxConstraints(minHeight: 36.h),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF465443),
+                  color: AppColors.chatInputField,
                   borderRadius: BorderRadius.circular(18.r),
                 ),
                 child: TextField(
@@ -66,7 +66,7 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
                   decoration: InputDecoration(
                     hintText: "메시지 입력",
                     hintStyle: TextStyle(
-                      color: const Color(0xFF2A3328),
+                      color: AppColors.chatInputFieldHintText,
                       fontSize: AppTypography.fontSizeSmall.sp,
                     ),
                     border: InputBorder.none,
