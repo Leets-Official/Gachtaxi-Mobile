@@ -4,7 +4,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_input_notifier.g.dart';
 
-
 @riverpod
 class ChatInputNotifier extends _$ChatInputNotifier {
   @override
