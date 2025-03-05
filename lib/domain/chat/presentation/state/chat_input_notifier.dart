@@ -1,19 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class ChatInputNotifier extends StateNotifier<TextEditingController> {
-  ChatInputNotifier() : super(TextEditingController());
+part 'chat_input_notifier.g.dart';
+
+
+@riverpod
+class ChatInputNotifier extends _$ChatInputNotifier {
+  @override
+  TextEditingController build() => TextEditingController();
 
   void submitMessage() {
     if (state.text.isNotEmpty) {
-      /*
-      todo: API 연결
-       */
+      // TODO: API 연결
       state.clear();
     }
   }
 }
 
-final chatInputProvider = StateNotifierProvider<ChatInputNotifier, TextEditingController>(
-  (ref) => ChatInputNotifier(),
-);

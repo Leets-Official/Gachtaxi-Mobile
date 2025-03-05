@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_action_menu.dart';
 import '../../../../common/constants/typography.dart';
-import '../state/chat_input_notifier.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_notifier.dart';
 
 class ChatInputField extends ConsumerStatefulWidget {
   const ChatInputField({super.key});
@@ -15,8 +16,8 @@ class ChatInputField extends ConsumerStatefulWidget {
 class ChatInputFieldState extends ConsumerState<ChatInputField> {
   @override
   Widget build(BuildContext context) {
-    final chatController = ref.watch(chatInputProvider);
-    final chatNotifier = ref.read(chatInputProvider.notifier);
+    final chatController = ref.watch(chatInputNotifierProvider);
+    final chatNotifier = ref.read(chatInputNotifierProvider.notifier);
 
     return Container(
       decoration: const BoxDecoration(
@@ -38,7 +39,7 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
                 icon: Icon(Icons.add, color: Colors.black),
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  // TODO: 파일 추가 기능
+                  // TODO: 추가 액션
                 },
               ),
             ),
