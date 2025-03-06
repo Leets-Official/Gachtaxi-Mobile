@@ -22,7 +22,7 @@ class CustomBottomNavBar extends StatelessWidget {
       labelColor: Colors.white,
       unselectedLabelColor: Colors.white54,
       tabs: [
-        tabRender(
+        _buildTab(
           activeIcon: 'assets/icons/taxi_on_icon.svg',
           inactiveIcon: 'assets/icons/taxi_off_icon.svg',
           label: '홈',
@@ -30,7 +30,7 @@ class CustomBottomNavBar extends StatelessWidget {
           width: 30,
           height: 17,
         ),
-        tabRender(
+        _buildTab(
           activeIcon: 'assets/icons/manual_matching_icon.svg',
           inactiveIcon: 'assets/icons/manual_matching_icon.svg',
           label: '수동매칭',
@@ -39,7 +39,7 @@ class CustomBottomNavBar extends StatelessWidget {
           height: 23,
           applyColorFilter: true,
         ),
-        tabRender(
+        _buildTab(
           activeIcon: 'assets/icons/friend_icon.svg',
           inactiveIcon: 'assets/icons/friend_icon.svg',
           label: '친구',
@@ -48,7 +48,7 @@ class CustomBottomNavBar extends StatelessWidget {
           height: 23,
           applyColorFilter: true,
         ),
-        tabRender(
+        _buildTab(
           activeIcon: 'assets/icons/profile_icon.svg',
           inactiveIcon: 'assets/icons/profile_icon.svg',
           label: '프로필',
@@ -60,9 +60,9 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 
-  Tab tabRender({
+  Tab _buildTab({
     required String activeIcon,
-    required String inactiveIcon,
+    String? inactiveIcon,
     required String label,
     required int index,
     double width = 24,
@@ -71,11 +71,13 @@ class CustomBottomNavBar extends StatelessWidget {
   }) {
     return Tab(
       icon: SvgPicture.asset(
-        _selectedIndex == index ? activeIcon : inactiveIcon,
+        _selectedIndex == index || inactiveIcon == null
+            ? activeIcon
+            : inactiveIcon,
         width: width,
         height: height,
         colorFilter: applyColorFilter && _selectedIndex == index
-            ? ColorFilter.mode(Colors.white, BlendMode.srcIn)
+            ? const ColorFilter.mode(Colors.white, BlendMode.srcIn)
             : null,
       ),
       text: label,
