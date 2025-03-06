@@ -59,36 +59,27 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
                   color: AppColors.chatInputField,
                   borderRadius: BorderRadius.circular(18.r),
                 ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: TextField(
-                    controller: chatController,
-                    scrollController: _scrollController,
-                    style: TextStyle(color: Colors.white, fontSize: 14.sp),
-                    cursorColor: AppColors.lightGray,
-                    cursorWidth: 1.5.w,
-                    cursorHeight: 16.h,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    expands: false,
-                    decoration: InputDecoration(
-                      hintText: "메시지 입력",
-                      hintStyle: TextStyle(
-                        color: AppColors.chatInputFieldHintText,
-                        fontSize: AppTypography.fontSizeSmall.sp,
-                      ),
-                      border: InputBorder.none,
-                      isDense: true,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 6.h, horizontal: 16.w),
+                child: TextField(
+                  controller: chatController,
+                  style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                  cursorColor: AppColors.lightGray,
+                  cursorWidth: 1.5.w,
+                  cursorHeight: 16.h,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  expands: false,
+                  decoration: InputDecoration(
+                    hintText: "메시지 입력",
+                    hintStyle: TextStyle(
+                      color: AppColors.chatInputFieldHintText,
+                      fontSize: AppTypography.fontSizeSmall.sp,
                     ),
-                    onChanged: (_) {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-                      });
-                    },
-                    onSubmitted: (_) => chatNotifier.submitMessage(),
+                    border: InputBorder.none,
+                    isDense: true,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 6.h, horizontal: 16.w),
                   ),
+                  onSubmitted: (_) => chatNotifier.submitMessage(),
                 ),
               ),
             ),
