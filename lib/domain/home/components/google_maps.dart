@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gachtaxi_app/common/constants/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMaps extends StatefulWidget {
@@ -11,8 +12,8 @@ class GoogleMaps extends StatefulWidget {
 class _GoogleMapsState extends State<GoogleMaps> {
   GoogleMapController? _controller;
 
-  static const CameraPosition _gachonCenter = CameraPosition(
-    target: LatLng(37.44852635280086, 127.12855122490176),
+  static final CameraPosition _gachonCenter = CameraPosition(
+    target: Location.centerOfgachon.position,
     zoom: 16.7,
   );
 
