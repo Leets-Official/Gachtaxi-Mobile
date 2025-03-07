@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
 import 'domain/chat/presentation/view/chat_screen.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'NotoSansKR',
       ),
-      home: const ChatScreen(),
+      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -11,10 +11,12 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: AppColors.chatInputField,
-      systemNavigationBarIconBrightness: Brightness.light,
-    ));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: AppColors.chatInputField,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ));
+    });
 
     return Scaffold(
       body: GestureDetector(
