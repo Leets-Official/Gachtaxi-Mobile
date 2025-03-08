@@ -26,6 +26,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>이 앱은 현재 위치 기반 서비스를 제공하기 위해 위치 정보에 접근합니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>이 앱은 지속적인 위치 기반 서비스를 제공하기 위해 위치 정보에 접근합니다.</string>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
