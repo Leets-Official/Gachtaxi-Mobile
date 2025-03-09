@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
 
 void main() async {
@@ -24,13 +25,22 @@ void main() async {
     print('❌ Google Maps API 키 설정 오류: $e');
   }
 
-  runApp(ProviderScope(
-    child: MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'NotoSansKR',
+  runApp(
+    ProviderScope(
+      child: ScreenUtilInit(
+        designSize: const Size(360, 800),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp(
+            theme: ThemeData(
+              fontFamily: 'NotoSansKR',
+            ),
+            home: HomeScreen(),
+            debugShowCheckedModeBanner: false,
+          );
+        },
       ),
-      home: HomeScreen(),
-      debugShowCheckedModeBanner: false,
     ),
-  ));
+  );
 }
