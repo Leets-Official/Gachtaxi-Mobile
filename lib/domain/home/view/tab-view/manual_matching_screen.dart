@@ -5,6 +5,7 @@ import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/manual_category_view/manual_matching_category_screen.dart';
+import 'package:gachtaxi_app/domain/home/view/tab-view/manual_category_view/my_matching_category_screen.dart';
 
 class ManualMatchingScreen extends ConsumerWidget {
   const ManualMatchingScreen({super.key});
@@ -50,7 +51,7 @@ class ManualMatchingScreen extends ConsumerWidget {
         const SizedBox(
           height: AppSpacing.spaceLarge,
         ),
-        isManual ? ManualMatchingCategoryScreen() : Text('')
+        isManual ? ManualMatchingCategoryScreen() : MyMatchingCategoryScreen()
       ]),
     ));
   }

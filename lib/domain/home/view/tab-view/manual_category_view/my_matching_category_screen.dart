@@ -4,8 +4,8 @@ import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_matching_card.dart';
 import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
 
-class ManualMatchingCategoryScreen extends ConsumerWidget {
-  const ManualMatchingCategoryScreen({super.key});
+class MyMatchingCategoryScreen extends ConsumerWidget {
+  const MyMatchingCategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +20,7 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
             final room = manualListData.data.rooms[index];
             return ManualMatchingCard(
               matchingRoom: room,
-              isManualMatching: true,
+              isManualMatching: false,
             );
           },
           separatorBuilder: (context, index) {
