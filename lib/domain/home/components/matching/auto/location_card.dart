@@ -37,9 +37,9 @@ class LocationCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  LocationField(label: "가천대 정문"),
+                  _LocationField(label: "가천대 정문"),
                   Divider(color: AppColors.neutralAccent),
-                  LocationField(label: "가천대 AI 공학관"),
+                  _LocationField(label: "가천대 AI 공학관"),
                 ],
               ),
             ),
@@ -58,10 +58,11 @@ class LocationCard extends StatelessWidget {
   }
 }
 
-class LocationField extends StatelessWidget {
+// 입력 필드 UI
+class _LocationField extends StatelessWidget {
   final String label;
 
-  const LocationField({super.key, required this.label});
+  const _LocationField({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {

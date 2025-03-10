@@ -60,6 +60,7 @@ class ExpandedSettingCard extends StatelessWidget {
   }
 }
 
+// 태그 요소 UI
 class ListElement extends StatelessWidget {
   final String elementTitle;
   final bool isTag;
