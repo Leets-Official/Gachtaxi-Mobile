@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTypography {
+  static const double fontSizeExtraExtraSmall = 10.0;
   static const double fontSizeExtraSmall = 12.0;
   static const double fontSizeSmall = 14.0;
   static const double fontSizeMedium = 16.0;
