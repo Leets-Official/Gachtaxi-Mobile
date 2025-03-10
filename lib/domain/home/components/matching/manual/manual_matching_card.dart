@@ -57,30 +57,23 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
             ),
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.spaceCommon),
-              child: IntrinsicHeight(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _MatchingInfo(
-                      isExpand: isExpand,
-                      matchingRoom: widget.matchingRoom,
-                    ),
-                    _Route(
-                      isExpand: isExpand,
-                      matchingRoom: widget.matchingRoom,
-                    ),
-                    _TagList(cardListElement: widget.matchingRoom.tags),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _MatchingInfo(
+                      matchingRoom: widget.matchingRoom, isExpand: isExpand),
+                  _Route(matchingRoom: widget.matchingRoom, isExpand: isExpand),
+                  _TagList(tags: widget.matchingRoom.tags),
+                ],
               ),
             ),
           ),
         ),
-        if (isExpand && widget.isManualMatching) ...[
-          SizedBox(height: AppSpacing.spaceCommon),
-          Button(buttonText: '참여하기'),
-        ]
+        if (isExpand && widget.isManualMatching)
+          Padding(
+            padding: const EdgeInsets.only(top: AppSpacing.spaceCommon),
+            child: Button(buttonText: '참여하기'),
+          ),
       ],
     );
   }
@@ -99,58 +92,54 @@ class _MatchingInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '${matchingRoom.departureDate}${matchingRoom.departureTime.hour}:${matchingRoom.departureTime.minute}',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: AppTypography.fontWeightBold,
-                fontSize: AppTypography.fontSizeLarge,
-              ),
-            ),
-            Text(
-              '${matchingRoom.currentMembers}/${matchingRoom.maxCapacity}',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: AppTypography.fontWeightSemibold,
-                fontSize: AppTypography.fontSizeSmall,
-              ),
-            ),
-          ],
+        _buildRow(
+          '${matchingRoom.departureDate}${matchingRoom.departureTime.hour}:${matchingRoom.departureTime.minute}',
+          '${matchingRoom.currentMembers}/${matchingRoom.maxCapacity}',
         ),
         if (isExpand) ...[
-          const SizedBox(
-            height: AppSpacing.spaceCommon,
-          ),
+          const SizedBox(height: AppSpacing.spaceCommon),
           Row(
             children: [
-              matchingRoom.profilePicture != null
-                  ? CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(matchingRoom.profilePicture!),
-                    )
-                  : SvgPicture.asset(
-                      'assets/icons/profile_on_icon.svg',
-                      width: 32.w,
-                      height: 32.h,
-                    ),
-              SizedBox(
-                width: AppSpacing.spaceSmall,
-              ),
-              Text(
-                '${matchingRoom.nickname}의 매칭',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: AppTypography.fontWeightSemibold,
-                ),
-              )
+              _buildProfileImage(matchingRoom.profilePicture),
+              SizedBox(width: AppSpacing.spaceSmall),
+              Text('${matchingRoom.nickname}의 매칭', style: _buildTextStyle()),
             ],
-          )
+          ),
+          const SizedBox(height: AppSpacing.spaceCommon),
         ],
       ],
     );
+  }
+
+  Row _buildRow(String leftText, String rightText) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(leftText,
+            style: _buildTextStyle(
+                fontSize: AppTypography.fontSizeLarge,
+                fontWeight: AppTypography.fontWeightBold)),
+        Text(rightText,
+            style: _buildTextStyle(
+                fontSize: AppTypography.fontSizeSmall,
+                fontWeight: AppTypography.fontWeightSemibold)),
+      ],
+    );
+  }
+
+  TextStyle _buildTextStyle({double? fontSize, FontWeight? fontWeight}) {
+    return TextStyle(
+      color: Colors.white,
+      fontSize: fontSize ?? AppTypography.fontSizeSmall,
+      fontWeight: fontWeight ?? AppTypography.fontWeightRegular,
+    );
+  }
+
+  Widget _buildProfileImage(String? profilePicture) {
+    return profilePicture != null
+        ? CircleAvatar(backgroundImage: NetworkImage(profilePicture))
+        : SvgPicture.asset('assets/icons/profile_on_icon.svg',
+            width: 32.w, height: 32.h);
   }
 }
 
@@ -166,45 +155,22 @@ class _Route extends StatelessWidget {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment:
+            isExpand ? MainAxisAlignment.start : MainAxisAlignment.center,
         children: [
-          if (isExpand)
-            SizedBox(
-              height: AppSpacing.spaceCommon,
-            ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'assets/icons/start_to_end_icon.svg',
-                width: 11.w,
-                height: 38.h,
-              ),
+              SvgPicture.asset('assets/icons/start_to_end_icon.svg',
+                  width: 11.w, height: 38.h),
               SizedBox(width: 10.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    matchingRoom.departure,
-                    style: TextStyle(
-                      color: AppColors.darkGray,
-                      fontWeight: AppTypography.fontWeightMedium,
-                      fontSize: AppTypography.fontSizeSmall,
-                    ),
-                  ),
+                  Text(matchingRoom.departure,
+                      style: _buildTextStyle(color: AppColors.darkGray)),
                   SizedBox(height: 8.h),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 2),
-                    child: Text(
-                      matchingRoom.destination,
-                      style: TextStyle(
-                        color: AppColors.darkGray,
-                        fontWeight: AppTypography.fontWeightMedium,
-                        fontSize: AppTypography.fontSizeSmall,
-                      ),
-                    ),
-                  ),
+                  Text(matchingRoom.destination,
+                      style: _buildTextStyle(color: AppColors.darkGray)),
                 ],
               ),
             ],
@@ -212,34 +178,34 @@ class _Route extends StatelessWidget {
           if (isExpand) ...[
             const SizedBox(height: AppSpacing.spaceCommon),
             SizedBox(
-              height: 60.h,
+              height: 80.h,
               child: SingleChildScrollView(
-                child: Text(
-                  matchingRoom.description,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: AppTypography.fontWeightRegular,
-                    fontSize: AppTypography.fontSizeSmall,
-                  ),
-                ),
+                child: Text(matchingRoom.description,
+                    style: _buildTextStyle(color: Colors.white)),
               ),
             ),
-            const SizedBox(height: AppSpacing.spaceCommon),
           ],
         ],
       ),
     );
   }
+
+  TextStyle _buildTextStyle(
+      {Color? color,
+      double fontSize = AppTypography.fontSizeSmall,
+      FontWeight fontWeight = AppTypography.fontWeightMedium}) {
+    return TextStyle(
+      color: color ?? Colors.white,
+      fontWeight: fontWeight,
+      fontSize: fontSize,
+    );
+  }
 }
 
-// 태그 리스트 렌더링 UI
 class _TagList extends StatelessWidget {
-  const _TagList({
-    super.key,
-    required this.cardListElement,
-  });
+  final List<String> tags;
 
-  final List<String> cardListElement;
+  const _TagList({super.key, required this.tags});
 
   @override
   Widget build(BuildContext context) {
@@ -247,17 +213,9 @@ class _TagList extends StatelessWidget {
       height: 28.h,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: cardListElement.length,
-        itemBuilder: (context, index) {
-          return ListElement(
-            elementTitle: cardListElement[index],
-          );
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            width: 10.w,
-          );
-        },
+        itemCount: tags.length,
+        itemBuilder: (context, index) => ListElement(elementTitle: tags[index]),
+        separatorBuilder: (context, index) => SizedBox(width: 10.w),
       ),
     );
   }
@@ -265,6 +223,7 @@ class _TagList extends StatelessWidget {
 
 class ListElement extends StatelessWidget {
   final String elementTitle;
+
   const ListElement({super.key, required this.elementTitle});
 
   String _convertTagToLabel(String tag) {
@@ -274,7 +233,7 @@ class ListElement extends StatelessWidget {
       case 'ONLY_MALE':
         return '동성';
       default:
-        return tag; // 예기치 않은 태그는 그대로 출력
+        return tag;
     }
   }
 
@@ -289,15 +248,18 @@ class ListElement extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.spaceCommon),
         child: Center(
-            child: Text(
-          '# ${_convertTagToLabel(elementTitle)}',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: AppTypography.fontWeightMedium,
-            fontSize: AppTypography.fontSizeExtraSmall,
-          ),
-        )),
+          child: Text('# ${_convertTagToLabel(elementTitle)}',
+              style: _buildTextStyle()),
+        ),
       ),
+    );
+  }
+
+  TextStyle _buildTextStyle() {
+    return TextStyle(
+      color: Colors.black,
+      fontWeight: AppTypography.fontWeightMedium,
+      fontSize: AppTypography.fontSizeExtraSmall,
     );
   }
 }
