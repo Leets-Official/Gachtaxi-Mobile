@@ -1,105 +1,61 @@
-class MatchingRoom {
-  final int roomId;
-  final int chattingRoomId;
-  final String nickname;
-  final String? profilePicture;
-  final String description;
-  final String departure;
-  final String destination;
-  final DateTime departureTime;
-  final String departureDate;
-  final int maxCapacity;
-  final int currentMembers;
-  final List<String> tags;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  MatchingRoom({
-    required this.roomId,
-    required this.chattingRoomId,
-    required this.nickname,
-    required this.profilePicture,
-    required this.description,
-    required this.departure,
-    required this.destination,
-    required this.departureTime,
-    required this.departureDate,
-    required this.maxCapacity,
-    required this.currentMembers,
-    required this.tags,
-  });
+part 'manual_matching_response_model.freezed.dart';
+part 'manual_matching_response_model.g.dart';
 
-  factory MatchingRoom.fromJson(Map<String, dynamic> json) {
-    return MatchingRoom(
-      roomId: json['roomId'],
-      chattingRoomId: json['chattingRoomId'],
-      nickname: json['nickname'],
-      profilePicture: json['profilePicture'],
-      description: json['description'],
-      departure: json['departure'],
-      destination: json['destination'],
-      departureTime: DateTime.parse(json['departureTime']),
-      departureDate: json['departureDate'],
-      maxCapacity: json['maxCapacity'],
-      currentMembers: json['currentMembers'],
-      tags: List<String>.from(json['tags']),
-    );
-  }
+@freezed
+class MatchingRoom with _$MatchingRoom {
+  const factory MatchingRoom({
+    required int roomId,
+    required int chattingRoomId,
+    required String nickname,
+    String? profilePicture,
+    required String description,
+    required String departure,
+    required String destination,
+    required DateTime departureTime,
+    required String departureDate,
+    required int maxCapacity,
+    required int currentMembers,
+    required List<String> tags,
+  }) = _MatchingRoom;
+
+  factory MatchingRoom.fromJson(Map<String, dynamic> json) =>
+      _$MatchingRoomFromJson(json);
 }
 
-class Pageable {
-  final int pageNumber;
-  final int pageSize;
-  final int numberOfElements;
-  final bool isLast;
+@freezed
+class Pageable with _$Pageable {
+  const factory Pageable({
+    required int pageNumber,
+    required int pageSize,
+    required int numberOfElements,
+    required bool isLast,
+  }) = _Pageable;
 
-  Pageable({
-    required this.pageNumber,
-    required this.pageSize,
-    required this.numberOfElements,
-    required this.isLast,
-  });
-
-  factory Pageable.fromJson(Map<String, dynamic> json) {
-    return Pageable(
-      pageNumber: json['pageNumber'],
-      pageSize: json['pageSize'],
-      numberOfElements: json['numberOfElements'],
-      isLast: json['isLast'],
-    );
-  }
+  factory Pageable.fromJson(Map<String, dynamic> json) =>
+      _$PageableFromJson(json);
 }
 
-class MatchingData {
-  final List<MatchingRoom> rooms;
-  final Pageable pageable;
+@freezed
+class MatchingData with _$MatchingData {
+  const factory MatchingData({
+    required List<MatchingRoom> rooms,
+    required Pageable pageable,
+  }) = _MatchingData;
 
-  MatchingData({required this.rooms, required this.pageable});
-
-  factory MatchingData.fromJson(Map<String, dynamic> json) {
-    return MatchingData(
-      rooms: (json['rooms'] as List)
-          .map((room) => MatchingRoom.fromJson(room))
-          .toList(),
-      pageable: Pageable.fromJson(json['pageable']),
-    );
-  }
+  factory MatchingData.fromJson(Map<String, dynamic> json) =>
+      _$MatchingDataFromJson(json);
 }
 
-class ManualMatchingResponse {
-  final int code;
-  final String message;
-  final MatchingData data;
+@freezed
+class ManualMatchingResponse with _$ManualMatchingResponse {
+  const factory ManualMatchingResponse({
+    required int code,
+    required String message,
+    required MatchingData data,
+  }) = _ManualMatchingResponse;
 
-  ManualMatchingResponse({
-    required this.code,
-    required this.message,
-    required this.data,
-  });
-
-  factory ManualMatchingResponse.fromJson(Map<String, dynamic> json) {
-    return ManualMatchingResponse(
-      code: json['code'] as int,
-      message: json['message'] as String,
-      data: MatchingData.fromJson(json['data']),
-    );
-  }
+  factory ManualMatchingResponse.fromJson(Map<String, dynamic> json) =>
+      _$ManualMatchingResponseFromJson(json);
 }
