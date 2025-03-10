@@ -1,0 +1,10 @@
+<svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect y="0.183594" width="32" height="32" rx="16" fill="#B0B0B0"/> <!-- 기존 #838383 → 밝은 회색 #B0B0B0 -->
+  <mask id="mask0_2036_463" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="33">
+    <rect y="0.183594" width="32" height="32" rx="16" fill="#FFAFAF"/> <!-- 기존 #FF6969 → 밝은 핑크 #FFAFAF -->
+  </mask>
+  <g mask="url(#mask0_2036_463)">
+    <circle cx="16.0022" cy="11.1311" r="5.89474" fill="#FFFFFF"/> <!-- 기존 #D9D9D9 → 흰색 #FFFFFF -->
+    <circle cx="15.9981" cy="32.1835" r="13.4737" fill="#F0F0F0"/> <!-- 기존 #D9D9D9 → 더 밝은 회색 #F0F0F0 -->
+  </g>
+</svg>

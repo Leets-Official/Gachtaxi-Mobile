@@ -50,11 +50,11 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
        
-        def googleMapKey = dotenv['GOOGLE_MAP_API_KEY']
+        def googleMapKey = dotenv['GOOGLE_MAPS_API_KEY']
             if (googleMapKey == null) {
-                throw new GradleException("GOOGLE_MAP_API_KEY not found in .env file")
+                throw new GradleException("GOOGLE_MAPS_API_KEY not found in .env file")
             }
-            manifestPlaceholders += [GOOGLE_MAP_API_KEY: googleMapKey]
+            manifestPlaceholders += [GOOGLE_MAPS_API_KEY: googleMapKey]
     }
 
     buildTypes {

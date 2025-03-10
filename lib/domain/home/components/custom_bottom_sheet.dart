@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
-import 'package:gachtaxi_app/domain/home/providers/sheet_height_provider.dart';
+import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 
 class CustomBottomSheet extends ConsumerStatefulWidget {
   final Widget child;
@@ -27,6 +27,7 @@ class _CustomBottomSheetState extends ConsumerState<CustomBottomSheet> {
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
+      width: double.infinity,
       curve: Curves.easeOut,
       height: sheetHeightState.containerHeight,
       decoration: BoxDecoration(
@@ -42,17 +43,20 @@ class _CustomBottomSheetState extends ConsumerState<CustomBottomSheet> {
         children: [
           GestureDetector(
             onVerticalDragUpdate: (details) {
-              double newHeight = sheetHeightState.containerHeight -
-                  (details.primaryDelta! * 1.5);
+              // details.primaryDelta는 null일 수 있기 때문에, null 체크를 안전하게 처리합니다.
+              final delta = details.primaryDelta ?? 0;
+              final newHeight =
+                  sheetHeightState.containerHeight - (delta * 1.2);
               sheetHeightNotifier.updateHeight(newHeight);
             },
             onVerticalDragEnd: (details) {
-              double velocity = details.primaryVelocity ?? 0;
-              double threshold =
+              final velocity = details.primaryVelocity ?? 0;
+              final threshold =
                   (sheetHeightState.minHeight + sheetHeightState.maxHeight) / 2;
 
+              // 드래그 끝난 후 높이 결정
               double newHeight = sheetHeightState.containerHeight;
-              if (velocity.abs() > 300) {
+              if (velocity.abs() > 50) {
                 newHeight = velocity < 0
                     ? sheetHeightState.maxHeight
                     : sheetHeightState.minHeight;

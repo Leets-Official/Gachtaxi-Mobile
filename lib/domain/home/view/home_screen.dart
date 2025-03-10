@@ -5,7 +5,7 @@ import 'package:gachtaxi_app/domain/home/components/custom_bottom_nav_bar.dart';
 import 'package:gachtaxi_app/domain/home/components/custom_bottom_sheet.dart';
 import 'package:gachtaxi_app/domain/home/components/custom_top_bar.dart';
 import 'package:gachtaxi_app/domain/home/components/google_maps.dart';
-import 'package:gachtaxi_app/domain/home/providers/sheet_height_provider.dart';
+import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/tab_view.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -44,7 +44,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
           children: [
             GoogleMaps(),
             AnimatedPositioned(
-              duration: const Duration(milliseconds: 250),
+              duration: const Duration(milliseconds: 300),
               top:
                   bottomSheetState.containerHeight == bottomSheetState.minHeight
                       ? 20

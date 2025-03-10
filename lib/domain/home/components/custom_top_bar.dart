@@ -20,11 +20,11 @@ class CustomTopBar extends ConsumerWidget {
       child: Row(
         children: [
           SvgPicture.asset(
-            'assets/icons/profile_icon.svg',
+            'assets/icons/profile_on_icon.svg',
             width: 32,
             height: 32,
           ),
-          SizedBox(width: 20),
+          SizedBox(width: 15),
           Text(
             '닉네임',
             style: TextStyle(color: Colors.white),
