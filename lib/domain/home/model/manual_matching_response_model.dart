@@ -2,7 +2,7 @@ class MatchingRoom {
   final int roomId;
   final int chattingRoomId;
   final String nickname;
-  final String profilePicture;
+  final String? profilePicture;
   final String description;
   final String departure;
   final String destination;
