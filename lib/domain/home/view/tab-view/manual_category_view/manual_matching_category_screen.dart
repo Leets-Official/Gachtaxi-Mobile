@@ -5,7 +5,8 @@ import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_match
 import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
 
 class ManualMatchingCategoryScreen extends ConsumerWidget {
-  const ManualMatchingCategoryScreen({super.key});
+  final bool isManualMatching; // 이 값을 통해 두 화면을 구분
+  const ManualMatchingCategoryScreen(this.isManualMatching, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +21,7 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
             final room = manualListData.data.rooms[index];
             return ManualMatchingCard(
               matchingRoom: room,
-              isManualMatching: true,
+              isManualMatching: isManualMatching,
             );
           },
           separatorBuilder: (context, index) {
