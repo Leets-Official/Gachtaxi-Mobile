@@ -4,10 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   // Flutter 바인딩 초기화
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeDateFormatting();
 
   // .env 파일 로드
   await dotenv.load();
