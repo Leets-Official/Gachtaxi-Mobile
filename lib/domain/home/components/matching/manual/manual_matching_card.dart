@@ -231,7 +231,9 @@ class ListElement extends StatelessWidget {
       case 'NO_SMOKE':
         return '금연';
       case 'ONLY_MALE':
-        return '동성';
+        return '남자만';
+      case 'ONLY_FEMALE':
+        return '여자만';
       default:
         return tag;
     }
