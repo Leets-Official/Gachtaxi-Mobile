@@ -42,7 +42,7 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
             });
           },
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 150),
+            duration: const Duration(milliseconds: 0),
             width: double.infinity,
             constraints: BoxConstraints(
               minHeight: 164.h,
