@@ -5,7 +5,7 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
-import 'package:gachtaxi_app/domain/home/model/manual_matching_response_model.dart';
+import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_room_model.dart';
 
 class ManualMatchingCard extends StatefulWidget {
   final MatchingRoom matchingRoom;
@@ -31,6 +31,13 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
   }
 
   @override
+  void didUpdateWidget(covariant ManualMatchingCard oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    isExpand = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,21 +56,37 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
               maxHeight: isExpand ? 310.h : 164.h,
             ),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(
+                  20,
+                ),
+              ),
               border: isExpand
-                  ? Border.all(color: AppColors.primary, width: 1.5.w)
+                  ? Border.all(
+                      color: AppColors.primary,
+                      width: 1.5.w,
+                    )
                   : null,
               color: AppColors.neutralComponent,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.spaceCommon),
+              padding: const EdgeInsets.all(
+                AppSpacing.spaceCommon,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _MatchingInfo(
-                      matchingRoom: widget.matchingRoom, isExpand: isExpand),
-                  _Route(matchingRoom: widget.matchingRoom, isExpand: isExpand),
-                  _TagList(tags: widget.matchingRoom.tags),
+                    matchingRoom: widget.matchingRoom,
+                    isExpand: isExpand,
+                  ),
+                  _Route(
+                    matchingRoom: widget.matchingRoom,
+                    isExpand: isExpand,
+                  ),
+                  _TagList(
+                    tags: widget.matchingRoom.tags,
+                  ),
                 ],
               ),
             ),
@@ -97,15 +120,26 @@ class _MatchingInfo extends StatelessWidget {
           '${matchingRoom.currentMembers}/${matchingRoom.maxCapacity}',
         ),
         if (isExpand) ...[
-          const SizedBox(height: AppSpacing.spaceCommon),
+          const SizedBox(
+            height: AppSpacing.spaceCommon,
+          ),
           Row(
             children: [
-              _buildProfileImage(matchingRoom.profilePicture),
-              SizedBox(width: AppSpacing.spaceSmall),
-              Text('${matchingRoom.nickname}의 매칭', style: _buildTextStyle()),
+              _buildProfileImage(
+                matchingRoom.profilePicture,
+              ),
+              SizedBox(
+                width: AppSpacing.spaceSmall,
+              ),
+              Text(
+                '${matchingRoom.nickname}의 매칭',
+                style: _buildTextStyle(),
+              ),
             ],
           ),
-          const SizedBox(height: AppSpacing.spaceCommon),
+          const SizedBox(
+            height: AppSpacing.spaceCommon,
+          ),
         ],
       ],
     );
@@ -115,14 +149,20 @@ class _MatchingInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(leftText,
-            style: _buildTextStyle(
-                fontSize: AppTypography.fontSizeLarge,
-                fontWeight: AppTypography.fontWeightBold)),
-        Text(rightText,
-            style: _buildTextStyle(
-                fontSize: AppTypography.fontSizeSmall,
-                fontWeight: AppTypography.fontWeightSemibold)),
+        Text(
+          leftText,
+          style: _buildTextStyle(
+            fontSize: AppTypography.fontSizeLarge,
+            fontWeight: AppTypography.fontWeightBold,
+          ),
+        ),
+        Text(
+          rightText,
+          style: _buildTextStyle(
+            fontSize: AppTypography.fontSizeSmall,
+            fontWeight: AppTypography.fontWeightSemibold,
+          ),
+        ),
       ],
     );
   }
@@ -137,7 +177,11 @@ class _MatchingInfo extends StatelessWidget {
 
   Widget _buildProfileImage(String? profilePicture) {
     return profilePicture != null
-        ? CircleAvatar(backgroundImage: NetworkImage(profilePicture))
+        ? CircleAvatar(
+            backgroundImage: NetworkImage(
+              profilePicture,
+            ),
+          )
         : SvgPicture.asset('assets/icons/profile_on_icon.svg',
             width: 32.w, height: 32.h);
   }
@@ -166,22 +210,36 @@ class _Route extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(matchingRoom.departure,
-                      style: _buildTextStyle(color: AppColors.darkGray)),
+                  Text(
+                    matchingRoom.departure,
+                    style: _buildTextStyle(
+                      color: AppColors.darkGray,
+                    ),
+                  ),
                   SizedBox(height: 8.h),
-                  Text(matchingRoom.destination,
-                      style: _buildTextStyle(color: AppColors.darkGray)),
+                  Text(
+                    matchingRoom.destination,
+                    style: _buildTextStyle(
+                      color: AppColors.darkGray,
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
           if (isExpand) ...[
-            const SizedBox(height: AppSpacing.spaceCommon),
+            const SizedBox(
+              height: AppSpacing.spaceCommon,
+            ),
             SizedBox(
               height: 80.h,
               child: SingleChildScrollView(
-                child: Text(matchingRoom.description,
-                    style: _buildTextStyle(color: Colors.white)),
+                child: Text(
+                  matchingRoom.description,
+                  style: _buildTextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ],
@@ -190,10 +248,11 @@ class _Route extends StatelessWidget {
     );
   }
 
-  TextStyle _buildTextStyle(
-      {Color? color,
-      double fontSize = AppTypography.fontSizeSmall,
-      FontWeight fontWeight = AppTypography.fontWeightMedium}) {
+  TextStyle _buildTextStyle({
+    Color? color,
+    double fontSize = AppTypography.fontSizeSmall,
+    FontWeight fontWeight = AppTypography.fontWeightMedium,
+  }) {
     return TextStyle(
       color: color ?? Colors.white,
       fontWeight: fontWeight,
@@ -214,8 +273,12 @@ class _TagList extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: tags.length,
-        itemBuilder: (context, index) => ListElement(elementTitle: tags[index]),
-        separatorBuilder: (context, index) => SizedBox(width: 10.w),
+        itemBuilder: (context, index) => ListElement(
+          elementTitle: tags[index],
+        ),
+        separatorBuilder: (context, index) => SizedBox(
+          width: 10.w,
+        ),
       ),
     );
   }
@@ -244,11 +307,17 @@ class ListElement extends StatelessWidget {
     return Container(
       height: 28.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(999)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            999,
+          ),
+        ),
         color: AppColors.primary,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.spaceCommon),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.spaceCommon,
+        ),
         child: Center(
           child: Text('# ${_convertTagToLabel(elementTitle)}',
               style: _buildTextStyle()),
