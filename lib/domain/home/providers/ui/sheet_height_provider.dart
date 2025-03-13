@@ -8,8 +8,6 @@ class SheetHeightNotifier extends _$SheetHeightNotifier {
   @override
   BottomSheetHeightState build() {
     return BottomSheetHeightState(
-      containerHeight: 0,
-      minHeight: 0,
       maxHeight: 0,
     );
   }
@@ -17,8 +15,6 @@ class SheetHeightNotifier extends _$SheetHeightNotifier {
   void initialize(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     state = BottomSheetHeightState(
-      containerHeight: height / 2.5,
-      minHeight: height / 2.5,
       maxHeight: height * (4 / 5),
     );
   }
@@ -36,8 +32,8 @@ class BottomSheetHeightState {
   final double maxHeight;
 
   BottomSheetHeightState({
-    required this.containerHeight,
-    required this.minHeight,
+    this.containerHeight = 330,
+    this.minHeight = 330,
     required this.maxHeight,
   });
 
