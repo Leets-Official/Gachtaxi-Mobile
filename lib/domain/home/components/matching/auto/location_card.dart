@@ -69,16 +69,20 @@ class _LocationField extends StatelessWidget {
     return SizedBox(
       height: 32,
       child: TextFormField(
-          initialValue: label,
-          readOnly: true,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: AppTypography.fontWeightSemibold,
+        initialValue: label,
+        readOnly: true,
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: AppTypography.fontWeightSemibold,
+        ),
+        decoration: InputDecoration(
+          isDense: true,
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 10,
           ),
-          decoration: InputDecoration(
-              isDense: true,
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(vertical: 10))),
+        ),
+      ),
     );
   }
 }

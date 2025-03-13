@@ -24,18 +24,23 @@ class ExpandedSettingCard extends StatelessWidget {
         color: AppColors.neutralComponent,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.spaceCommon),
+        padding: const EdgeInsets.all(
+          AppSpacing.spaceCommon,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               cardTitle,
               style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: AppTypography.fontWeightRegular,
-                  fontSize: AppTypography.fontSizeMedium),
+                color: Colors.white,
+                fontWeight: AppTypography.fontWeightRegular,
+                fontSize: AppTypography.fontSizeMedium,
+              ),
             ),
-            Expanded(child: SizedBox()),
+            Expanded(
+              child: SizedBox(),
+            ),
             Expanded(
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
