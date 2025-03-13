@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
@@ -23,13 +24,24 @@ class AutoMatchingScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              '바로 매칭',
-              style: TextStyle(
-                fontSize: AppTypography.fontSizeExtraLarge,
-                color: Colors.white,
-                fontWeight: AppTypography.fontWeightBold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  '바로 매칭',
+                  style: TextStyle(
+                    fontSize: AppTypography.fontSizeExtraLarge,
+                    color: Colors.white,
+                    fontWeight: AppTypography.fontWeightBold,
+                  ),
+                ),
+                SvgPicture.asset(
+                  'assets/icons/taxi_on_icon.svg',
+                  width: 40,
+                  height: 24,
+                )
+              ],
             ),
             SizedBox(
               height: isExpanded
