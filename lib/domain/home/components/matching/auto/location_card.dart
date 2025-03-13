@@ -12,7 +12,7 @@ class LocationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 101.h,
+      height: 106.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: AppColors.neutralComponent,
