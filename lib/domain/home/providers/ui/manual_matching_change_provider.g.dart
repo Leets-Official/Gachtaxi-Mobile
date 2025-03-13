@@ -7,12 +7,12 @@ part of 'manual_matching_change_provider.dart';
 // **************************************************************************
 
 String _$manualMatchingChangeNotifierHash() =>
-    r'71a2cc4c900e8b45a564e456f460923aaeef2047';
+    r'd49a498cb20e44d4aa6e35f66e92fc00751ff407';
 
 /// See also [ManualMatchingChangeNotifier].
 @ProviderFor(ManualMatchingChangeNotifier)
-final manualMatchingChangeNotifierProvider =
-    AutoDisposeNotifierProvider<ManualMatchingChangeNotifier, String>.internal(
+final manualMatchingChangeNotifierProvider = AutoDisposeNotifierProvider<
+    ManualMatchingChangeNotifier, MatchingCategory>.internal(
   ManualMatchingChangeNotifier.new,
   name: r'manualMatchingChangeNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final manualMatchingChangeNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$ManualMatchingChangeNotifier = AutoDisposeNotifier<String>;
+typedef _$ManualMatchingChangeNotifier = AutoDisposeNotifier<MatchingCategory>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

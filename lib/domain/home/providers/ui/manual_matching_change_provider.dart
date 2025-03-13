@@ -1,3 +1,4 @@
+import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'manual_matching_change_provider.g.dart';
@@ -5,11 +6,13 @@ part 'manual_matching_change_provider.g.dart';
 @riverpod
 class ManualMatchingChangeNotifier extends _$ManualMatchingChangeNotifier {
   @override
-  String build() {
-    return 'manual_matching';
+  MatchingCategory build() {
+    return MatchingCategory.manual;
   }
 
   void toggleCategory() {
-    state = state == 'manual_matching' ? 'my_matching' : 'manual_matching';
+    state = state == MatchingCategory.manual
+        ? MatchingCategory.my
+        : MatchingCategory.manual;
   }
 }
