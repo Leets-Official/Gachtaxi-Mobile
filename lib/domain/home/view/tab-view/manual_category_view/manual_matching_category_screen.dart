@@ -5,12 +5,48 @@ import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_match
 import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 
-class ManualMatchingCategoryScreen extends ConsumerWidget {
-  final bool isManualMatching; // 이 값을 통해 두 화면을 구분
+class ManualMatchingCategoryScreen extends ConsumerStatefulWidget {
+  final bool isManualMatching;
+
   const ManualMatchingCategoryScreen(this.isManualMatching, {super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _ManualMatchingCategoryScreenState createState() =>
+      _ManualMatchingCategoryScreenState();
+}
+
+class _ManualMatchingCategoryScreenState
+    extends ConsumerState<ManualMatchingCategoryScreen> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void didUpdateWidget(covariant ManualMatchingCategoryScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // 카테고리 변경 시 스크롤을 최상위로 올리도록 변경
+    if (oldWidget.isManualMatching != widget.isManualMatching) {
+      _scrollController.animateTo(
+        0.0,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final manualListData = ref.watch(manualMatchingDataNotifierProvider);
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
@@ -22,20 +58,19 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
           ? MediaQuery.of(context).size.height * 0.7
           : MediaQuery.of(context).size.height * 0.25,
       child: ListView.separated(
-          padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
-          itemBuilder: (context, index) {
-            final room = manualListData.data.rooms[index];
-            return ManualMatchingCard(
-              matchingRoom: room,
-              isManualMatching: isManualMatching,
-            );
-          },
-          separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: AppSpacing.spaceCommon,
-            );
-          },
-          itemCount: manualListData.data.rooms.length),
+        controller: _scrollController,
+        padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
+        itemBuilder: (context, index) {
+          final room = manualListData.data.rooms[index];
+          return ManualMatchingCard(
+            matchingRoom: room,
+            isManualMatching: widget.isManualMatching,
+          );
+        },
+        separatorBuilder: (context, index) =>
+            const SizedBox(height: AppSpacing.spaceCommon),
+        itemCount: manualListData.data.rooms.length,
+      ),
     );
   }
 }
