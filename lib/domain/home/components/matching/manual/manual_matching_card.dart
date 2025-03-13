@@ -23,18 +23,20 @@ class ManualMatchingCard extends StatefulWidget {
 
 class _ManualMatchingCardState extends State<ManualMatchingCard> {
   late bool isExpand;
+  late bool showExpandedContent;
 
   @override
   void initState() {
     super.initState();
     isExpand = false; // 초기값 설정
+    showExpandedContent = false;
   }
 
   @override
   void didUpdateWidget(covariant ManualMatchingCard oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     isExpand = false;
+    showExpandedContent = false;
   }
 
   @override
@@ -46,10 +48,21 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
           onTap: () {
             setState(() {
               isExpand = !isExpand; // 상태 변경
+              if (!isExpand) {
+                showExpandedContent = false;
+              }
             });
           },
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 0),
+            curve: Curves.easeInOut,
+            duration: const Duration(milliseconds: 250),
+            onEnd: () {
+              if (isExpand) {
+                setState(() {
+                  showExpandedContent = true;
+                });
+              }
+            },
             width: double.infinity,
             constraints: BoxConstraints(
               minHeight: 164.h,
@@ -78,11 +91,11 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
                 children: [
                   _MatchingInfo(
                     matchingRoom: widget.matchingRoom,
-                    isExpand: isExpand,
+                    isExpand: showExpandedContent,
                   ),
                   _Route(
                     matchingRoom: widget.matchingRoom,
-                    isExpand: isExpand,
+                    isExpand: showExpandedContent,
                   ),
                   _TagList(
                     tags: widget.matchingRoom.tags,
@@ -92,7 +105,7 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
             ),
           ),
         ),
-        if (isExpand && widget.isManualMatching)
+        if (showExpandedContent && widget.isManualMatching)
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.spaceCommon),
             child: Button(buttonText: '참여하기'),
