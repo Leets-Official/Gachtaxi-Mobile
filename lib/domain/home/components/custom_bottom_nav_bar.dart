@@ -32,7 +32,6 @@ class CustomBottomNavBar extends StatelessWidget {
         ),
         _buildTab(
           activeIcon: 'assets/icons/manual_matching_icon.svg',
-          inactiveIcon: 'assets/icons/manual_matching_icon.svg',
           label: '수동매칭',
           index: 1,
           width: 23,
@@ -41,7 +40,6 @@ class CustomBottomNavBar extends StatelessWidget {
         ),
         _buildTab(
           activeIcon: 'assets/icons/friend_icon.svg',
-          inactiveIcon: 'assets/icons/friend_icon.svg',
           label: '친구',
           index: 2,
           width: 23,
@@ -49,8 +47,7 @@ class CustomBottomNavBar extends StatelessWidget {
           applyColorFilter: true,
         ),
         _buildTab(
-          activeIcon: 'assets/icons/profile_icon.svg',
-          inactiveIcon: 'assets/icons/profile_icon.svg',
+          activeIcon: 'assets/icons/profile_on_icon.svg',
           label: '프로필',
           index: 3,
           width: 24,

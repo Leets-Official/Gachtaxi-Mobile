@@ -19,12 +19,18 @@ class DefaultLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.neutralDark,
-      appBar: renderAppBar(context),
-      body: child,
-      bottomNavigationBar: bottomNavigationBar,
-      floatingActionButton: floatingActionButton,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColors.neutralDark,
+        appBar: renderAppBar(context),
+        body: child,
+        bottomNavigationBar: bottomNavigationBar,
+        floatingActionButton: floatingActionButton,
+      ),
     );
   }
 
