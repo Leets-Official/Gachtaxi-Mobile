@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
-import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/constants/spacing.dart';
 
 class Button extends StatelessWidget {
   final String buttonText;
   final Color? backgroundColor;
   final Color? textColor;
   final VoidCallback? onPressed;
-  final bool isLoading; // 추가된 변수
+  final bool isLoading;
+  final Widget? icon;
 
   const Button({
     super.key,
@@ -18,16 +19,17 @@ class Button extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.isLoading = false,
+    this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-          fixedSize: Size(double.infinity, 54.h),
+          fixedSize: Size(double.infinity, 50.h),
           backgroundColor: backgroundColor ?? AppColors.primary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(15),
           )),
       onPressed: onPressed ?? () {},
       child: isLoading
@@ -39,14 +41,24 @@ class Button extends StatelessWidget {
                 strokeWidth: 4.0,
               ),
             )
-          : Text(
-              buttonText,
-              style: TextStyle(
-                color: textColor ?? AppColors.neutralDark,
-                fontWeight: AppTypography.fontWeightBold,
-                fontSize: AppTypography.fontSizeLarge,
-              ),
+          : Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (icon != null) ...[
+            icon!,
+            const SizedBox(width: AppSpacing.spaceExtraMedium),
+          ],
+
+          Text(
+            buttonText,
+            style: TextStyle(
+              color: textColor ?? AppColors.neutralDark,
+              fontWeight: AppTypography.fontWeightBold,
+              fontSize: AppTypography.fontSizeMedium,
             ),
+          ),
+        ],
+      ),
     );
   }
 }
