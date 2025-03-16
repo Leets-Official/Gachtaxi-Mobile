@@ -1,38 +1,31 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class TimerManager extends ChangeNotifier {
-  int remainingTime = 300; // 5분 (초 단위)
+class TimerManager with ChangeNotifier {
+  bool isFirstClick = true;
+  int remainingSeconds = 300;
+  bool isCodeInputVisible = false;
   Timer? _timer;
-  bool isCodeInputVisible = false; // ✅ 인증번호 입력 필드 표시 여부
-  bool isFirstClick = true; // ✅ 처음에는 "인증번호 받기"로 표시
+
+  String get formattedTime => "${(remainingSeconds ~/ 60).toString().padLeft(2, '0')}:${(remainingSeconds % 60).toString().padLeft(2, '0')}";
 
   void startTimer() {
-    _timer?.cancel();
-    remainingTime = 300;
-    isCodeInputVisible = true; // ✅ 인증번호 입력 필드 표시
-    isFirstClick = false; // ✅ 버튼 텍스트 변경
+    if (!isFirstClick) return;
+
+    isFirstClick = false;
+    isCodeInputVisible = true;
+    remainingSeconds = 300;
     notifyListeners();
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (remainingTime > 0) {
-        remainingTime--;
+      if (remainingSeconds > 0) {
+        remainingSeconds--;
         notifyListeners();
       } else {
         timer.cancel();
+        isFirstClick = true;
+        notifyListeners();
       }
     });
-  }
-
-  String get formattedTime {
-    int minutes = remainingTime ~/ 60;
-    int seconds = remainingTime % 60;
-    return "$minutes:${seconds.toString().padLeft(2, '0')}";
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 }
