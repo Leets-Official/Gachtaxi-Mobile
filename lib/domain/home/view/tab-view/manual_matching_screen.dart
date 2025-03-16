@@ -4,6 +4,7 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
+import 'package:gachtaxi_app/common/layout/default_padding.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/manual_category_view/manual_matching_category_screen.dart';
@@ -22,45 +23,41 @@ class ManualMatchingScreen extends ConsumerWidget {
 
     return Stack(
       children: [
-        SingleChildScrollView(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: AppSpacing.spaceCommon),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      isManual ? '수동 매칭' : '나의 매칭',
+        DefaultPadding(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    isManual ? '수동 매칭' : '나의 매칭',
+                    style: TextStyle(
+                      fontSize: AppTypography.fontSizeExtraLarge,
+                      color: Colors.white,
+                      fontWeight: AppTypography.fontWeightBold,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.spaceSmall),
+                  TextButton(
+                    onPressed: () {
+                      ref
+                          .read(manualMatchingChangeNotifierProvider.notifier)
+                          .toggleCategory();
+                    },
+                    child: Text(
+                      isManual ? '나의 매칭' : '수동 매칭',
                       style: TextStyle(
-                        fontSize: AppTypography.fontSizeExtraLarge,
-                        color: Colors.white,
-                        fontWeight: AppTypography.fontWeightBold,
+                        color: AppColors.darkGray,
+                        decorationColor: AppColors.darkGray,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.spaceSmall),
-                    TextButton(
-                      onPressed: () {
-                        ref
-                            .read(manualMatchingChangeNotifierProvider.notifier)
-                            .toggleCategory();
-                      },
-                      child: Text(
-                        isManual ? '나의 매칭' : '수동 매칭',
-                        style: TextStyle(
-                          color: AppColors.darkGray,
-                          decorationColor: AppColors.darkGray,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppSpacing.spaceLarge),
-                ManualMatchingCategoryScreen(isManual)
-              ],
-            ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.spaceLarge),
+              ManualMatchingCategoryScreen(isManual)
+            ],
           ),
         ),
         if (isExpanded)
