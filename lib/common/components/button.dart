@@ -45,8 +45,8 @@ class Button extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (icon != null) ...[
-            icon!, // ✅ 아이콘이 있으면 추가
-            const SizedBox(width: 10), // 아이콘과 텍스트 간격 조정
+            icon!,
+            const SizedBox(height: AppSpacing.spaceExtraMedium),
           ],
           Text(
             buttonText,
