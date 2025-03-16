@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gachtaxi_app/domain/landing/view/first_landing_screen.dart';
-import 'package:gachtaxi_app/domain/landing/view/second_landing_screen.dart';
-import 'package:gachtaxi_app/domain/landing/view/third_landing_screen.dart';
-import 'package:gachtaxi_app/common/widgets/custom_button.dart';
+import 'package:gachtaxi_app/domain/landing/components/first_landing_screen.dart';
+import 'package:gachtaxi_app/domain/landing/components/second_landing_screen.dart';
+import 'package:gachtaxi_app/domain/landing/components/third_landing_screen.dart';
+import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/domain/sign-up/view/email_verification_screen.dart';
+import 'package:gachtaxi_app/common/constants/spacing.dart';
+import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -21,9 +23,7 @@ class _HomeScreenState extends State<LandingScreen> {
   void _navigateToEmailVerification() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const EmailVerificationScreen(),
-      ),
+      SlidePageRoute(screen: const EmailVerificationScreen()),
     );
   }
 
@@ -57,26 +57,26 @@ class _HomeScreenState extends State<LandingScreen> {
             ),
           ),
 
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSpacing.spaceExtraMedium),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
             child: Column(
               children: [
-                CustomButton(
-                  text: "카카오로 시작하기",
-                  backgroundColor: Color(0xFFFFE001),
+                Button(
+                  buttonText: "카카오로 시작하기",
+                  backgroundColor: const Color(0xFFFFE001),
                   textColor: Colors.black,
-                  onPressed: _navigateToEmailVerification,
                   icon: SvgPicture.asset('assets/icons/kakao_icon.svg', width: 20),
+                  onPressed: _navigateToEmailVerification,
                 ),
-                const SizedBox(height: 10),
-                CustomButton(
-                  text: "구글로 시작하기",
+                SizedBox(height: AppSpacing.spaceCommon),
+                Button(
+                  buttonText: "구글로 시작하기",
                   backgroundColor: Colors.white,
                   textColor: Colors.black,
-                  onPressed: () {},
                   icon: SvgPicture.asset('assets/icons/google_icon.svg', width: 20),
+                  onPressed: () {},
                 ),
               ],
             ),
