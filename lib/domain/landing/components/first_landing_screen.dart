@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FirstLandingScreen extends StatelessWidget {
   const FirstLandingScreen({Key? key}) : super(key: key);
@@ -10,11 +11,11 @@ class FirstLandingScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.neutralDark,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 20),
+            SizedBox(height: 25.h),
             const Text(
               "지금 바로 매칭하기",
               style: TextStyle(
@@ -24,7 +25,7 @@ class FirstLandingScreen extends StatelessWidget {
               ),
 
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
             const Text(
               "자동 매칭 기능을 통해\n현재 위치에서 매칭하기",
               textAlign: TextAlign.center,
@@ -34,7 +35,7 @@ class FirstLandingScreen extends StatelessWidget {
                 fontWeight: AppTypography.fontWeightMedium,
               ),
             ),
-            const SizedBox(height: 50),
+            SizedBox(height: 50.h),
 
             Image.asset(
               'assets/icons/first_landing.png',
