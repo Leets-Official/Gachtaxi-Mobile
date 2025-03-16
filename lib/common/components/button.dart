@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
-import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/constants/spacing.dart';
 
 class Button extends StatelessWidget {
   final String buttonText;
@@ -46,8 +46,9 @@ class Button extends StatelessWidget {
         children: [
           if (icon != null) ...[
             icon!,
-            const SizedBox(height: AppSpacing.spaceExtraMedium),
+            const SizedBox(width: AppSpacing.spaceExtraMedium),
           ],
+
           Text(
             buttonText,
             style: TextStyle(
