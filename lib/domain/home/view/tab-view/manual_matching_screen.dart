@@ -8,6 +8,7 @@ import 'package:gachtaxi_app/common/layout/default_padding.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/manual_category_view/manual_matching_category_screen.dart';
+import 'package:gachtaxi_app/domain/home/view/tab-view/manual_category_view/my_matching_category_screen.dart';
 
 class ManualMatchingScreen extends ConsumerWidget {
   const ManualMatchingScreen({super.key});
@@ -56,11 +57,13 @@ class ManualMatchingScreen extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: AppSpacing.spaceLarge),
-              ManualMatchingCategoryScreen(isManual)
+              isManual
+                  ? ManualMatchingCategoryScreen(isManual)
+                  : MyMatchingCategoryScreen(isManual),
             ],
           ),
         ),
-        if (isExpanded)
+        if (isExpanded && isManual)
           Positioned(
             right: 20,
             bottom: 20,
@@ -69,6 +72,10 @@ class ManualMatchingScreen extends ConsumerWidget {
               style: IconButton.styleFrom(
                 fixedSize: Size(48, 48),
                 backgroundColor: AppColors.primary,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: AppColors.neutralAccent, width: 1.5),
+                  borderRadius: BorderRadius.all(Radius.circular(100)),
+                ),
               ),
               onPressed: () {},
               icon: Icon(Icons.add),
