@@ -1,29 +1,25 @@
-import '../enums/chat_message_type.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gachtaxi_app/domain/chat/data/enums/chat_message_type.dart';
 
-class ChatMessageModel {
-  final String? messageId;
-  final int? roomId;
-  final int senderId;
-  final String senderName;
-  final String? message;
-  final String? profilePicture;
-  int? unreadCount;
-  final DateTime timeStamp;
-  final MessageType messageType;
-  final String? startMessageId;
-  final String? endMessageId;
+part 'chat_message_model.freezed.dart';
+part 'chat_message_model.g.dart';
 
-  ChatMessageModel({
-    this.messageId,
-    this.roomId,
-    required this.senderId,
-    required this.senderName,
-    this.message,
-    this.profilePicture,
-    this.unreadCount,
-    required this.timeStamp,
-    required this.messageType,
-    this.startMessageId,
-    this.endMessageId,
-  });
+@freezed
+class ChatMessageModel with _$ChatMessageModel {
+  const factory ChatMessageModel({
+    String? messageId,
+    int? roomId,
+    required int senderId,
+    required String senderName,
+    String? message,
+    String? profilePicture,
+    int? unreadCount,
+    required DateTime timeStamp,
+    required MessageType messageType,
+    String? startMessageId,
+    String? endMessageId,
+  }) = _ChatMessageModel;
+
+  factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>
+      _$ChatMessageModelFromJson(json);
 }
