@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
 import 'package:intl/intl.dart';
 
 class ChatMessage extends StatelessWidget {
@@ -39,7 +40,7 @@ class ChatMessage extends StatelessWidget {
         children: [
           // 상대방 메시지일 경우 프로필과 이름 표시
           if (!isMine && showProfileAndName)... [
-            _buildProfileAndName()
+            _buildProfileAndName(context)
           ] else SizedBox(width: 48.w), // 프로필이 없는 경우에도 간격 유지
 
           Column(
@@ -68,18 +69,23 @@ class ChatMessage extends StatelessWidget {
   }
 
   // 프로필 이미지 및 이름 표시 메서드
-  Widget _buildProfileAndName() {
-    return Padding(
-      padding: EdgeInsets.only(right: 8.w),
-      child: CircleAvatar(
-        radius: 19.r,
-        backgroundColor: AppColors.darkGray,
-        foregroundImage: (message.profilePicture != null && message.profilePicture!.isNotEmpty)
-            ? NetworkImage(message.profilePicture!)
-            : null,
-        child: (message.profilePicture == null || message.profilePicture!.isEmpty)
-            ? SvgPicture.asset("assets/icons/unknown.svg")
-            : null,
+  Widget _buildProfileAndName(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _showProfileModal(context);
+      },
+      child: Padding(
+        padding: EdgeInsets.only(right: 8.w),
+        child: CircleAvatar(
+          radius: 19.r,
+          backgroundColor: AppColors.darkGray,
+          foregroundImage: (message.profilePicture != null && message.profilePicture!.isNotEmpty)
+              ? NetworkImage(message.profilePicture!)
+              : null,
+          child: (message.profilePicture == null || message.profilePicture!.isEmpty)
+              ? SvgPicture.asset("assets/icons/unknown.svg")
+              : null,
+        ),
       ),
     );
   }
@@ -153,4 +159,34 @@ class ChatMessage extends StatelessWidget {
       ),
     );
   }
+
+  void _showProfileModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      isDismissible: true,
+      barrierColor: Colors.black.withAlpha(100),
+      builder: (context) {
+        return Stack(
+          children: [
+            GestureDetector(
+              onTap: () => Navigator.pop(context),
+              behavior: HitTestBehavior.opaque,
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+
+            Center(
+              child: ChatProfileModal(message: message),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }
+
+
