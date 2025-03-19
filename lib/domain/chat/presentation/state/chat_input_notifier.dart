@@ -1,19 +1,31 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_input_notifier.g.dart';
 
 @riverpod
-class ChatInputNotifier extends _$ChatInputNotifier {
+class ChatInputActionNotifier extends AutoDisposeNotifier<ActionToggleState> {
   @override
-  TextEditingController build() => TextEditingController();
+  ActionToggleState build() {
+    return ActionToggleState(
+      isExpanded: false,
+    );
+  }
 
-  void submitMessage() {
-    if (state.text.isNotEmpty) {
-      // TODO: API 연결
-      state.clear();
-    }
+  void toggleExpanded() {
+    state = state.copyWith(isExpanded: !state.isExpanded);
   }
 }
 
+class ActionToggleState {
+  final bool isExpanded;
+
+  ActionToggleState({
+    required this.isExpanded,
+  });
+
+  ActionToggleState copyWith({bool? isExpanded}) {
+    return ActionToggleState(
+      isExpanded: isExpanded ?? this.isExpanded,
+    );
+  }
+}
