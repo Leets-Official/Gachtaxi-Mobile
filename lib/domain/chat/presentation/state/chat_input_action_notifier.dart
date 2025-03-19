@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'chat_input_notifier.g.dart';
+part 'chat_input_action_notifier.g.dart';
 
 @riverpod
 class ChatInputActionNotifier extends AutoDisposeNotifier<ActionToggleState> {
