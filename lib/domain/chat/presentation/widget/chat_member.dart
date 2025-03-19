@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/util/modal_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user_dummy.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
 
 class ChatMember extends StatefulWidget {
@@ -109,9 +111,20 @@ class ChatMemberState extends State<ChatMember> {
           Stack(
             clipBehavior: Clip.none,
             children: [
-              ProfileImage.circleAvatar(
-                imageUrl: user.profilePicture,
-                size: 18,
+              GestureDetector(
+                onTap: () {
+                  showCustomModal(
+                    context: context,
+                    child: ChatProfileModal(
+                      profilePicture: user.profilePicture,
+                      nickName: user.name,
+                    ),
+                  );
+                },
+                child: ProfileImage.circleAvatar(
+                  imageUrl: user.profilePicture,
+                  size: 18,
+                ),
               ),
               if (user.isOwner)
                 Positioned(

@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/components/modal.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
-import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
 
 class ChatProfileModal extends StatefulWidget {
-  final ChatMessageModel message;
+  final String profilePicture;
+  final String nickName;
 
-  const ChatProfileModal({super.key, required this.message});
+  const ChatProfileModal({super.key, required this.profilePicture, required this.nickName});
 
   @override
   _ChatProfileModalState createState() => _ChatProfileModalState();
@@ -29,14 +29,14 @@ class _ChatProfileModalState extends State<ChatProfileModal> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ProfileImage.circleAvatar(
-            imageUrl: widget.message.profilePicture.toString(),
+            imageUrl: widget.profilePicture.toString(),
             size: 21,
           ),
 
           SizedBox(width: 10.w),
 
           Text(
-            widget.message.senderName,
+            widget.nickName,
             style: TextStyle(
               color: AppColors.white,
               fontSize: 20.sp,

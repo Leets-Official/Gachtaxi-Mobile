@@ -159,7 +159,10 @@ class ChatMessage extends StatelessWidget {
   void _showProfileModal(BuildContext context) {
     showCustomModal(
       context: context,
-      child: ChatProfileModal(message: message),
+      child: ChatProfileModal(
+        profilePicture: message.profilePicture.toString(),
+        nickName: message.senderName,
+      ),
     );
   }
 }
