@@ -6,9 +6,11 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/layout/default_padding.dart';
+import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/auto/expanded_setting_card.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/auto/location_card.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
+import 'package:gachtaxi_app/domain/matching-waiting/view/matching_waiting_screen.dart';
 
 class AutoMatchingScreen extends ConsumerWidget {
   const AutoMatchingScreen({super.key});
@@ -64,7 +66,7 @@ class AutoMatchingScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.spaceCommon),
             ExpandedSettingCard(
               cardTitle: '키워드 선택',
-              cardListElement: ['금연', '동성'],
+              cardListElement: ['금연', '남자만', '여자만'],
               isTag: true,
             ),
             const SizedBox(height: AppSpacing.spaceLarge),
@@ -78,7 +80,16 @@ class AutoMatchingScreen extends ConsumerWidget {
             ),
             const SizedBox(height: AppSpacing.spaceCommon),
           ],
-          Button(buttonText: '매칭 시작'),
+          Button(
+            buttonText: '매칭 시작',
+            onPressed: () {
+              Navigator.of(context).push(
+                SlidePageRoute(
+                  screen: MatchingWaitingScreen(),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
