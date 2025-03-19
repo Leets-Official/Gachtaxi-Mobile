@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/components/modal.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
 
 class ChatProfileModal extends StatefulWidget {
   final ChatMessageModel message;
@@ -27,17 +28,9 @@ class _ChatProfileModalState extends State<ChatProfileModal> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            radius: 22.r,
-            backgroundColor: AppColors.darkGray,
-            foregroundImage: (widget.message.profilePicture != null &&
-                widget.message.profilePicture!.isNotEmpty)
-                ? NetworkImage(widget.message.profilePicture!)
-                : null,
-            child: (widget.message.profilePicture == null ||
-                widget.message.profilePicture!.isEmpty)
-                ? SvgPicture.asset("assets/icons/unknown.svg")
-                : null,
+          ProfileImage.circleAvatar(
+            imageUrl: widget.message.profilePicture.toString(),
+            size: 21,
           ),
 
           SizedBox(width: 10.w),

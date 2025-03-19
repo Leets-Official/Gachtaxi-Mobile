@@ -6,6 +6,7 @@ import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/util/modal_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
 import 'package:intl/intl.dart';
 
 class ChatMessage extends StatelessWidget {
@@ -77,16 +78,10 @@ class ChatMessage extends StatelessWidget {
       },
       child: Padding(
         padding: EdgeInsets.only(right: 8.w),
-        child: CircleAvatar(
-          radius: 19.r,
-          backgroundColor: AppColors.darkGray,
-          foregroundImage: (message.profilePicture != null && message.profilePicture!.isNotEmpty)
-              ? NetworkImage(message.profilePicture!)
-              : null,
-          child: (message.profilePicture == null || message.profilePicture!.isEmpty)
-              ? SvgPicture.asset("assets/icons/unknown.svg")
-              : null,
-        ),
+        child: ProfileImage.circleAvatar(
+          imageUrl: message.profilePicture.toString(),
+          size: 19,
+        )
       ),
     );
   }
