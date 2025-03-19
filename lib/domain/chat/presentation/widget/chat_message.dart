@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/util/modal_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
 import 'package:intl/intl.dart';
@@ -161,32 +162,11 @@ class ChatMessage extends StatelessWidget {
   }
 
   void _showProfileModal(BuildContext context) {
-    showModalBottomSheet(
+    showCustomModal(
       context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      isDismissible: true,
-      barrierColor: Colors.black.withAlpha(100),
-      builder: (context) {
-        return Stack(
-          children: [
-            GestureDetector(
-              onTap: () => Navigator.pop(context),
-              behavior: HitTestBehavior.opaque,
-              child: Container(
-                color: Colors.transparent,
-              ),
-            ),
-
-            Center(
-              child: ChatProfileModal(message: message),
-            ),
-          ],
-        );
-      },
+      child: ChatProfileModal(message: message),
     );
   }
-
 }
 
 
