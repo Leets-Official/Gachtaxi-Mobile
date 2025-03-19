@@ -106,79 +106,79 @@ class ChatMemberState extends State<ChatMember> {
   Widget _buildUserTile(ChatUserModel user) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 10.h),
-      child: Row(
-        children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  showCustomModal(
-                    context: context,
-                    child: ChatProfileModal(
-                      profilePicture: user.profilePicture,
-                      nickName: user.name,
-                    ),
-                  );
-                },
-                child: ProfileImage.circleAvatar(
+      child: GestureDetector(
+        onTap: () {
+          showCustomModal(
+            context: context,
+            child: ChatProfileModal(
+              profilePicture: user.profilePicture,
+              nickName: user.name,
+            ),
+          );
+        },
+        child: Row(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                ProfileImage.circleAvatar(
                   imageUrl: user.profilePicture,
                   size: 18,
                 ),
-              ),
-              if (user.isOwner)
-                Positioned(
-                  right: -6.w,
-                  bottom: -1.h,
-                  child: Container(
-                    width: 16.w,
-                    height: 16.h,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.black,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(2.w),
-                      child: SvgPicture.asset(
-                        "assets/icons/crown.svg",
-                        width: 16.w,
-                        height: 16.h,
+                if (user.isOwner)
+                  Positioned(
+                    right: -6.w,
+                    bottom: -1.h,
+                    child: Container(
+                      width: 16.w,
+                      height: 16.h,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.black,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(2.w),
+                        child: SvgPicture.asset(
+                          "assets/icons/crown.svg",
+                          width: 16.w,
+                          height: 16.h,
+                        ),
                       ),
                     ),
                   ),
-                ),
-            ],
-          ),
-          SizedBox(width: 12.w),
-          Text(
-            user.name,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: AppTypography.fontSizeMedium.sp,
-              fontWeight: AppTypography.fontWeightMedium,
-              decoration: TextDecoration.none,
+              ],
             ),
-          ),
-          if (user.isMe)
-            Padding(
-              padding: EdgeInsets.only(left: 6.w),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(13.r),
-                ),
-                child: Text(
-                  '나',
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: AppTypography.fontSizeExtraSmall.sp,
-                    fontWeight: AppTypography.fontWeightSemibold,
+            SizedBox(width: 12.w),
+            Text(
+              user.name,
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: AppTypography.fontSizeMedium.sp,
+                fontWeight: AppTypography.fontWeightMedium,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            if (user.isMe)
+              Padding(
+                padding: EdgeInsets.only(left: 6.w),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(13.r),
+                  ),
+                  child: Text(
+                    '나',
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: AppTypography.fontSizeExtraSmall.sp,
+                      fontWeight: AppTypography.fontWeightSemibold,
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
