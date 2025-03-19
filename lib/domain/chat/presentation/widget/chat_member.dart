@@ -161,18 +161,18 @@ class ChatMemberState extends State<ChatMember> {
             if (user.isMe)
               Padding(
                 padding: EdgeInsets.only(left: 6.w),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(13.r),
-                  ),
-                  child: Text(
-                    '나',
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontSize: AppTypography.fontSizeExtraSmall.sp,
-                      fontWeight: AppTypography.fontWeightSemibold,
+                child: CircleAvatar(
+                  radius: 8.r,
+                  backgroundColor: AppColors.primary,
+                  child: Center(
+                    child: Text(
+                      '나',
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: AppTypography.fontSizeExtraSmall.sp,
+                        fontWeight: AppTypography.fontWeightSemibold,
+                        height: 1.0, // 텍스트 중앙 배치 조정
+                      ),
                     ),
                   ),
                 ),
