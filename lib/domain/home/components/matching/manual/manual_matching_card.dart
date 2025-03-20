@@ -33,13 +33,6 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
   }
 
   @override
-  void didUpdateWidget(covariant ManualMatchingCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    isExpand = false;
-    showExpandedContent = false;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -145,7 +138,7 @@ class _MatchingInfo extends StatelessWidget {
                 width: AppSpacing.spaceSmall,
               ),
               Text(
-                '${matchingRoom.nickname}의 매칭',
+                '${matchingRoom.nickname}님의 매칭',
                 style: _buildTextStyle(),
               ),
             ],
