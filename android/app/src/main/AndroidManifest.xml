@@ -43,5 +43,25 @@
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>
+        <!-- 카카오 T -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="kakaot" />
+        </intent>
+        <!-- 티머니 GO -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tmoneygo" />
+        </intent>
+        <!-- 우버 -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="uber" />
+        </intent>
+        <!-- 타다 -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tada" />
+        </intent>
     </queries>
 </manifest>

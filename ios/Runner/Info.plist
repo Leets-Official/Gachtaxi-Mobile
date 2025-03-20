@@ -53,5 +53,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>kakaot</string>
+        <string>tmoneygo</string>
+        <string>uber</string>
+        <string>tada</string>
+    </array>
 </dict>
 </plist>

@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
-import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_notifier.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_action_notifier.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_text_notifier.dart';
 
 class ChatInputField extends ConsumerStatefulWidget {
   const ChatInputField({super.key});
@@ -17,8 +18,11 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
 
   @override
   Widget build(BuildContext context) {
-    final chatController = ref.watch(chatInputNotifierProvider);
-    final chatNotifier = ref.read(chatInputNotifierProvider.notifier);
+    final chatController = ref.watch(chatInputTextNotifierProvider);
+    final chatNotifier = ref.read(chatInputTextNotifierProvider.notifier);
+
+    final actionState = ref.watch(chatInputActionNotifierProvider);
+    final actionNotifier = ref.read(chatInputActionNotifierProvider.notifier);
 
     return Container(
       decoration: const BoxDecoration(
@@ -37,11 +41,13 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
                 shape: BoxShape.circle,
               ),
               child: IconButton(
-                icon: Icon(Icons.add, color: Colors.black),
+                icon: Icon(
+                  actionState.isExpanded ? Icons.close : Icons.add,
+                  color: Colors.black,
+                ),
+                color: AppColors.black,
                 padding: EdgeInsets.zero,
-                onPressed: () {
-                  // TODO: 추가 액션
-                },
+                onPressed: actionNotifier.toggleExpanded,
               ),
             ),
 
