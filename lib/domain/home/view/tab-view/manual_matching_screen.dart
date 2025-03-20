@@ -31,7 +31,9 @@ class ManualMatchingScreen extends ConsumerWidget {
               Row(
                 children: [
                   Text(
-                    isManual ? '수동 매칭' : '나의 매칭',
+                    isManual
+                        ? MatchingCategory.manual.label
+                        : MatchingCategory.my.label,
                     style: TextStyle(
                       fontSize: AppTypography.fontSizeExtraLarge,
                       color: Colors.white,
@@ -46,7 +48,9 @@ class ManualMatchingScreen extends ConsumerWidget {
                           .toggleCategory();
                     },
                     child: Text(
-                      isManual ? '나의 매칭' : '수동 매칭',
+                      isManual
+                          ? MatchingCategory.my.label
+                          : MatchingCategory.manual.label,
                       style: TextStyle(
                         color: AppColors.darkGray,
                         decorationColor: AppColors.darkGray,
