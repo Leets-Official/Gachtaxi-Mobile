@@ -22,7 +22,7 @@ class MatchingWaitingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '가치 탈 사람\n 찾는 중...',
+                      '가치 탈 인원을\n 찾는 중이에요!',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
