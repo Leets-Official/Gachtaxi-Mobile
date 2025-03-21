@@ -9,7 +9,6 @@ class MapLocationNotifier extends _$MapLocationNotifier {
   LocationState build() {
     return LocationState(
       departure: Location.basicDeparture,
-      center: Location.centerOfgachon,
       destination: Location.basicDestination,
     );
   }
@@ -24,19 +23,21 @@ class MapLocationNotifier extends _$MapLocationNotifier {
 
 class LocationState {
   final Location departure;
-  final Location center;
   final Location destination;
 
-  LocationState(
-      {required this.departure,
-      required this.destination,
-      required this.center});
+  LocationState({required this.departure, required this.destination});
 
-  LocationState copyWith(
-      {Location? departure, Location? center, Location? destination}) {
+  Location get center {
+    double centerLat =
+        (departure.position.latitude + destination.position.latitude) / 2;
+    double centerLng =
+        (departure.position.longitude + destination.position.longitude) / 2;
+    return Location('구글맵 중앙값', centerLat, centerLng);
+  }
+
+  LocationState copyWith({Location? departure, Location? destination}) {
     return LocationState(
       departure: departure ?? this.departure,
-      center: center ?? this.center,
       destination: destination ?? this.destination,
     );
   }
