@@ -4,6 +4,7 @@ import 'package:gachtaxi_app/domain/chat/presentation/view/chat_screen.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/auto_matching_screen.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/friend_list_screen.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/manual_matching_screen.dart';
+import 'package:gachtaxi_app/domain/my-page/view/my_page_screen.dart';
 
 class TabView extends StatefulWidget {
   const TabView({
@@ -39,7 +40,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
       Future.microtask(() {
         if (!mounted) return;
         Navigator.of(context).push(
-          SlidePageRoute(screen: ChatScreen()),
+          SlidePageRoute(screen: MyPageScreen()),
         );
         if (mounted) {
           setState(() {
