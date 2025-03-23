@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/components/modal.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
 
 class ChatProfileModal extends StatefulWidget {
@@ -39,8 +40,8 @@ class _ChatProfileModalState extends State<ChatProfileModal> {
             widget.nickName,
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w700,
+              fontSize: AppTypography.fontSizeExtraLarge.sp,
+              fontWeight: AppTypography.fontWeightBold,
             ),
           ),
 
