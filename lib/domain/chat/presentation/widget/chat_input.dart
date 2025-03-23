@@ -7,7 +7,9 @@ import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_action_no
 import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_text_notifier.dart';
 
 class ChatInputField extends ConsumerStatefulWidget {
-  const ChatInputField({super.key});
+  final FocusNode focusNode;
+
+  const ChatInputField({required this.focusNode, super.key});
 
   @override
   ChatInputFieldState createState() => ChatInputFieldState();
@@ -67,6 +69,7 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
                 ),
                 child: TextField(
                   controller: chatController,
+                  focusNode: widget.focusNode,
                   style: TextStyle(color: Colors.white, fontSize: 14.sp),
                   cursorColor: AppColors.lightGray,
                   cursorWidth: 1.5.w,

@@ -24,10 +24,12 @@ class ChatScreenState extends ConsumerState<ChatScreen>
   late AnimationController _animationController;
   late Animation<double> _animation;
   final ScrollController _scrollController = ScrollController();
+  late FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
+    _focusNode = FocusNode();
 
     // ChatActionBar 열림/닫힘 제어용 애니메이션 컨트롤러
     _animationController = AnimationController(
@@ -45,6 +47,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
   void dispose() {
     _animationController.dispose();
     _scrollController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -84,7 +87,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    FocusScope.of(context).unfocus();
+                    _focusNode.unfocus();
                     if (chatState.isExpanded) {
                       chatNotifier.toggleExpanded();
                     }
@@ -121,7 +124,9 @@ class ChatScreenState extends ConsumerState<ChatScreen>
               Container(
                 color: AppColors.neutralComponent,
                 child: SafeArea(
-                  child: ChatInputField(),
+                  child: ChatInputField(
+                    focusNode: _focusNode,
+                  ),
                 ),
               ),
               AbsorbPointer(
