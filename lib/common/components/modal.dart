@@ -8,7 +8,6 @@ class Modal extends StatelessWidget {
   final double height;
   final String buttonText;
   final VoidCallback? onPress;
-  final VoidCallback? onClose;
 
   const Modal({
     super.key,
@@ -16,7 +15,6 @@ class Modal extends StatelessWidget {
     required this.height,
     required this.buttonText,
     this.onPress,
-    this.onClose,
   });
 
   @override
@@ -52,7 +50,7 @@ class Modal extends StatelessWidget {
             top: 8.h,
             right: 8.w,
             child: IconButton(
-              onPressed: onClose ?? () => Navigator.pop(context),
+              onPressed: () => Navigator.pop(context),
               icon: Icon(
                 Icons.close,
                 color: AppColors.white,
