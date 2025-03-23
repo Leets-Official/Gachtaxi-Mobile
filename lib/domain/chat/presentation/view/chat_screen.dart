@@ -124,8 +124,8 @@ class ChatScreenState extends ConsumerState<ChatScreen>
                   child: ChatInputField(),
                 ),
               ),
-              IgnorePointer(
-                ignoring: false,
+              AbsorbPointer(
+                absorbing: !chatState.isExpanded,
                 child: SizeTransition(
                   sizeFactor: _animation,
                   axisAlignment: 1.0,
