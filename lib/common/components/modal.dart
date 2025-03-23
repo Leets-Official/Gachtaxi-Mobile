@@ -22,45 +22,47 @@ class Modal extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: height,
-            padding: EdgeInsets.all(16.w),
-            decoration: BoxDecoration(
-              color: AppColors.neutralComponent,
-              borderRadius: BorderRadius.circular(24.r),
+      child: Container(
+        width: double.infinity,
+        height: height,
+        decoration: BoxDecoration(
+          color: AppColors.neutralComponent,
+          borderRadius: BorderRadius.circular(24.r),
+        ),
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 70.h),
+              child: content,
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                content,
 
-                SizedBox(height: 16.h),
-                Button(
-                  buttonText: buttonText,
-                  onPressed: onPress ?? () {},
-                ),
-              ],
-            ),
-          ),
-
-          Positioned(
-            top: 8.h,
-            right: 8.w,
-            child: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(
-                Icons.close,
-                color: AppColors.white,
-                size: 20.w,
+            Positioned(
+              left: 16.w,
+              right: 16.w,
+              bottom: 16.h,
+              child: Button(
+                buttonText: buttonText,
+                onPressed: onPress ?? () {},
               ),
-              splashRadius: 18.r,
             ),
-          ),
-        ],
+
+            Positioned(
+              top: 8.h,
+              right: 8.w,
+              child: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: Icon(
+                  Icons.close,
+                  color: AppColors.white,
+                  size: 20.w,
+                ),
+                splashRadius: 18.r,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
 }
