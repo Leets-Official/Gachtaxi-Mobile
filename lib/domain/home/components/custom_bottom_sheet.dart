@@ -13,14 +13,6 @@ class CustomBottomSheet extends ConsumerStatefulWidget {
 
 class _CustomBottomSheetState extends ConsumerState<CustomBottomSheet> {
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(sheetHeightNotifierProvider.notifier).initialize(context);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final sheetHeightNotifier = ref.read(sheetHeightNotifierProvider.notifier);

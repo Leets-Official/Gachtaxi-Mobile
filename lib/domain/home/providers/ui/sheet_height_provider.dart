@@ -7,14 +7,12 @@ part 'sheet_height_provider.g.dart';
 class SheetHeightNotifier extends _$SheetHeightNotifier {
   @override
   BottomSheetHeightState build() {
-    return BottomSheetHeightState(
-      maxHeight: 0,
-    );
-  }
+    final height = MediaQueryData.fromView(
+            WidgetsBinding.instance.platformDispatcher.views.first)
+        .size
+        .height;
 
-  void initialize(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    state = BottomSheetHeightState(
+    return BottomSheetHeightState(
       maxHeight: height * (4 / 5),
     );
   }
