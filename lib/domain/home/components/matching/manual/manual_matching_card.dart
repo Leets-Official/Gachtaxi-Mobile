@@ -6,6 +6,7 @@ import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_room_model.dart';
+import 'package:intl/intl.dart';
 
 class ManualMatchingCard extends StatefulWidget {
   final MatchingRoom matchingRoom;
@@ -101,7 +102,9 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
         if (showExpandedContent && widget.isManualMatching)
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.spaceCommon),
-            child: Button(buttonText: '참여하기'),
+            child: Button(
+              buttonText: '참여하기',
+            ),
           ),
       ],
     );
@@ -122,7 +125,7 @@ class _MatchingInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildRow(
-          '${matchingRoom.departureDate}${matchingRoom.departureTime.hour}:${matchingRoom.departureTime.minute}',
+          _formatDateTime(matchingRoom.departureTime),
           '${matchingRoom.currentMembers}/${matchingRoom.maxCapacity}',
         ),
         if (isExpand) ...[
@@ -190,6 +193,14 @@ class _MatchingInfo extends StatelessWidget {
           )
         : SvgPicture.asset('assets/icons/profile_on_icon.svg',
             width: 32.w, height: 32.h);
+  }
+
+  String _formatDateTime(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString).toLocal();
+    String weekDay = DateFormat('E', 'ko_KR').format(dateTime);
+    String formattedTime = DateFormat('a hh:mm', 'ko_KR').format(dateTime);
+
+    return '${DateFormat('MM-dd', 'ko_KR').format(dateTime)}($weekDay) $formattedTime';
   }
 }
 
