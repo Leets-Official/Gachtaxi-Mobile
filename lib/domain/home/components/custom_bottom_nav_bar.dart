@@ -14,9 +14,12 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final platform = Theme.of(context).platform;
     return TabBar(
       controller: _tabController,
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: platform == TargetPlatform.iOS
+          ? const EdgeInsets.only(bottom: 20)
+          : null,
       indicatorColor: Colors.transparent,
       dividerColor: Colors.transparent,
       splashFactory: NoSplash.splashFactory,
