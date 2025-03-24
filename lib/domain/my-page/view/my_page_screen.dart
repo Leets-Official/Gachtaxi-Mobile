@@ -3,7 +3,7 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
-import 'package:gachtaxi_app/common/layout/default_padding.dart';
+import 'package:gachtaxi_app/domain/home/components/default_padding.dart';
 import 'package:gachtaxi_app/domain/my-page/components/profile.dart';
 
 class MyPageScreen extends StatelessWidget {

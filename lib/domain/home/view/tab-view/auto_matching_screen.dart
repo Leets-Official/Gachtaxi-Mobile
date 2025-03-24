@@ -5,7 +5,7 @@ import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
-import 'package:gachtaxi_app/common/layout/default_padding.dart';
+import 'package:gachtaxi_app/domain/home/components/default_padding.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/auto/expanded_setting_card.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/auto/location_card.dart';

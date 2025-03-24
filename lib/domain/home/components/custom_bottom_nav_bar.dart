@@ -19,6 +19,7 @@ class CustomBottomNavBar extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 20),
       indicatorColor: Colors.transparent,
       dividerColor: Colors.transparent,
+      splashFactory: NoSplash.splashFactory,
       labelColor: Colors.white,
       unselectedLabelColor: Colors.white54,
       tabs: [
