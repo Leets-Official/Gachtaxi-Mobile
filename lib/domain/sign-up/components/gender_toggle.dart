@@ -3,9 +3,22 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+enum Gender { male, female }
+
+extension GenderExtension on Gender {
+  String get label {
+    switch (this) {
+      case Gender.male:
+        return "남";
+      case Gender.female:
+        return "여";
+    }
+  }
+}
+
 class GenderToggle extends StatelessWidget {
-  final String selectedGender;
-  final Function(String) onGenderChanged;
+  final Gender selectedGender;
+  final ValueChanged<Gender> onGenderChanged;
 
   const GenderToggle({
     Key? key,
@@ -25,11 +38,13 @@ class GenderToggle extends StatelessWidget {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () => onGenderChanged("남"),
+              onTap: () => onGenderChanged(Gender.male),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: selectedGender == "남" ? AppColors.primary : Colors.transparent,
+                  color: selectedGender == Gender.male
+                      ? AppColors.primary
+                      : Colors.transparent,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(32),
                     bottomLeft: Radius.circular(32),
@@ -40,11 +55,13 @@ class GenderToggle extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "남",
+                    Gender.male.label,
                     style: TextStyle(
                       fontSize: AppTypography.fontSizeExtraLarge,
                       fontWeight: AppTypography.fontWeightSemibold,
-                      color: selectedGender == "남" ? Colors.black : Colors.white,
+                      color: selectedGender == Gender.male
+                          ? Colors.black
+                          : Colors.white,
                     ),
                   ),
                 ),
@@ -54,11 +71,13 @@ class GenderToggle extends StatelessWidget {
 
           Expanded(
             child: GestureDetector(
-              onTap: () => onGenderChanged("여"),
+              onTap: () => onGenderChanged(Gender.female),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: selectedGender == "여" ? AppColors.primary : Colors.transparent,
+                  color: selectedGender == Gender.female
+                      ? AppColors.primary
+                      : Colors.transparent,
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(32),
                     bottomRight: Radius.circular(32),
@@ -66,11 +85,13 @@ class GenderToggle extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "여",
+                    Gender.female.label,
                     style: TextStyle(
                       fontSize: AppTypography.fontSizeExtraLarge,
                       fontWeight: AppTypography.fontWeightSemibold,
-                      color: selectedGender == "여" ? Colors.black : Colors.white,
+                      color: selectedGender == Gender.female
+                          ? Colors.black
+                          : Colors.white,
                     ),
                   ),
                 ),
