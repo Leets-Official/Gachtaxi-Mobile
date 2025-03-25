@@ -8,6 +8,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/domain/sign-up/utils/timer_manager.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
+import 'package:gachtaxi_app/common/modal/term_agreement_modal.dart';
+import 'package:gachtaxi_app/common/util/modal_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({Key? key}) : super(key: key);
@@ -68,7 +71,7 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
           Padding(
             padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
                   "가치 택시에 오신 것을\n환영합니다!",
@@ -78,7 +81,8 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.spaceExtraMedium),                const Text(
+                const SizedBox(height: AppSpacing.spaceExtraMedium),
+                const Text(
                   "가천대학교 이메일로 인증할게요",
                   style: TextStyle(
                     color: Colors.white,
@@ -96,9 +100,7 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
                   focusNode: emailFocusNode,
                   autoFocus: true,
                 ),
-
-                const SizedBox(height: AppSpacing.spaceExtraMedium),
-
+                SizedBox(height: 16.h),
                 Button(
                   buttonText: timerManager.isFirstClick
                       ? "인증번호 받기"
@@ -121,16 +123,18 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
                     keyboardType: TextInputType.number,
                     focusNode: codeFocusNode,
                   ),
-                  const SizedBox(height: AppSpacing.spaceExtraMedium),                  SizedBox(
-                    width: double.infinity,
-                    child: Button(
-                      buttonText: "인증확인",
-                      backgroundColor: AppColors.primary,
-                      textColor: Colors.black,
-                      onPressed: () {
-                        // TODO: 인증번호 검증 로직 추가
-                      },
-                    ),
+                  SizedBox(height: 16.h),
+                  Button(
+                    buttonText: "인증확인",
+                    backgroundColor: AppColors.primary,
+                    textColor: Colors.black,
+                    onPressed: () {
+                      // TODO: 인증번호 검증 로직 추가
+                      ModalUtils.showCommonBottomSheet(
+                        context: context,
+                        content: const TermsAgreementModal(),
+                      );
+                    },
                   ),
                 ],
               ],
