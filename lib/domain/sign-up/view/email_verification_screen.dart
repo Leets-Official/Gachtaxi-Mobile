@@ -10,6 +10,7 @@ import 'package:gachtaxi_app/common/layout/default_layout.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/modal/term_agreement_modal.dart';
 import 'package:gachtaxi_app/common/util/modal_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
           Padding(
             padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
                   "가치 택시에 오신 것을\n환영합니다!",
@@ -99,6 +100,7 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
                   focusNode: emailFocusNode,
                   autoFocus: true,
                 ),
+                SizedBox(height: 16.h),
                 Button(
                   buttonText: timerManager.isFirstClick
                       ? "인증번호 받기"
@@ -121,20 +123,18 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
                     keyboardType: TextInputType.number,
                     focusNode: codeFocusNode,
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Button(
-                      buttonText: "인증확인",
-                      backgroundColor: AppColors.primary,
-                      textColor: Colors.black,
-                      onPressed: () {
-                        // TODO: 인증번호 검증 로직 추가
-                        ModalUtils.showCommonBottomSheet(
-                          context: context,
-                          content: const TermsAgreementModal(),
-                        );
-                      },
-                    ),
+                  SizedBox(height: 16.h),
+                  Button(
+                    buttonText: "인증확인",
+                    backgroundColor: AppColors.primary,
+                    textColor: Colors.black,
+                    onPressed: () {
+                      // TODO: 인증번호 검증 로직 추가
+                      ModalUtils.showCommonBottomSheet(
+                        context: context,
+                        content: const TermsAgreementModal(),
+                      );
+                    },
                   ),
                 ],
               ],
