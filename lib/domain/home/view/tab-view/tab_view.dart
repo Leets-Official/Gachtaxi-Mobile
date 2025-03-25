@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
-import 'package:gachtaxi_app/domain/chat/presentation/view/chat_screen.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/auto_matching_screen.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/friend_list_screen.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/manual_matching_screen.dart';

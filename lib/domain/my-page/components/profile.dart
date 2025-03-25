@@ -14,7 +14,7 @@ class Pofile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          'assets/icons/profile_on_icon.svg',
+          'assets/icons/profile_icon.svg',
           width: 56,
           height: 56,
         ),
