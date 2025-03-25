@@ -40,11 +40,11 @@ class LocationCard extends ConsumerWidget {
           children: [
             SvgPicture.asset(
               'assets/icons/start_to_end_icon.svg',
-              width: 15.w,
-              height: 57.h,
+              width: 25.w,
+              height: 66.h,
             ),
             SizedBox(
-              width: 15.w,
+              width: 10.w,
             ),
             Expanded(
               child: Column(

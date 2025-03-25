@@ -222,7 +222,7 @@ class _Route extends StatelessWidget {
           Row(
             children: [
               SvgPicture.asset('assets/icons/start_to_end_icon.svg',
-                  width: 11.w, height: 38.h),
+                  width: 11.w, height: 48.h),
               SizedBox(width: 10.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,7 +233,7 @@ class _Route extends StatelessWidget {
                       color: AppColors.darkGray,
                     ),
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 10.h),
                   Text(
                     matchingRoom.destination,
                     style: _buildTextStyle(
