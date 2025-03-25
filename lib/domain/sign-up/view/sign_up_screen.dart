@@ -12,7 +12,7 @@ import 'package:gachtaxi_app/domain/sign-up/components/gender_toggle.dart';
 import 'package:gachtaxi_app/domain/sign-up/components/profile_upload.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -53,11 +53,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.spaceExtraLarge),
-
                 ProfileAvatar(),
-
                 const SizedBox(height: AppSpacing.spaceExtraLarge),
-
                 InputField(
                   label: "닉네임",
                   hintText: "닉네임을 입력해주세요",
@@ -66,7 +63,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 SizedBox(height: 16.h),
                 const SizedBox(height: AppSpacing.spaceExtraMedium),
-
                 InputField(
                   label: "본명",
                   hintText: "본명을 입력해주세요",
@@ -75,7 +71,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 SizedBox(height: 16.h),
                 const SizedBox(height: AppSpacing.spaceExtraMedium),
-
                 InputField(
                   label: "학번",
                   hintText: "ex) 202433333",
@@ -84,7 +79,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 SizedBox(height: 16.h),
                 const SizedBox(height: AppSpacing.spaceExtraMedium),
-
                 const Text(
                   "성별",
                   style: TextStyle(
@@ -103,7 +97,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 const SizedBox(height: AppSpacing.spaceCommon),
-
                 const Text(
                   "* 프로필 정보는 회원 식별, 서비스 이용의 목적으로만\n  활용되며, 개인정보 수집 약관내용에 따라 보관됩니다.",
                   style: TextStyle(
@@ -114,16 +107,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: AppSpacing.spaceExtraLarge),
                 const SizedBox(height: AppSpacing.spaceExtraLarge),
-
                 Button(
                   buttonText: "시작하기",
                   backgroundColor: AppColors.primary,
                   textColor: Colors.black,
                   onPressed: () {
                     //회원가입 완료 로직 추가
-                    Navigator.pushReplacement(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       SlidePageRoute(screen: const HomeScreen()),
+                      (route) => false,
                     );
                   },
                 ),
