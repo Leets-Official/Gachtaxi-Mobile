@@ -20,7 +20,7 @@ class ManualMatchingScreen extends ConsumerWidget {
     final isManual = currentMatchingCategory == MatchingCategory.manual;
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
-    final isExpanded = containerHeight > sheetHeightState.minHeight * 1.5;
+    final isExpanded = containerHeight > sheetHeightState.basicHeight * 1.5;
 
     return Stack(
       children: [

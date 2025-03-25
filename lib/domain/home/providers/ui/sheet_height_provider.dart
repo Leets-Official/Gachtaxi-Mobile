@@ -26,22 +26,26 @@ class SheetHeightNotifier extends _$SheetHeightNotifier {
 
 class BottomSheetHeightState {
   final double containerHeight;
+  final double basicHeight;
   final double minHeight;
   final double maxHeight;
 
   BottomSheetHeightState({
     this.containerHeight = 330,
-    this.minHeight = 330,
+    this.basicHeight = 330,
+    this.minHeight = 80,
     required this.maxHeight,
   });
 
   BottomSheetHeightState copyWith({
     double? containerHeight,
+    double? basicHeight,
     double? minHeight,
     double? maxHeight,
   }) {
     return BottomSheetHeightState(
       containerHeight: containerHeight ?? this.containerHeight,
+      basicHeight: basicHeight ?? this.basicHeight,
       minHeight: minHeight ?? this.minHeight,
       maxHeight: maxHeight ?? this.maxHeight,
     );

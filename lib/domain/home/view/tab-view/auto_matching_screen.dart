@@ -19,7 +19,7 @@ class AutoMatchingScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
-    final isExpanded = containerHeight > sheetHeightState.minHeight * 1.3;
+    final isExpanded = containerHeight > sheetHeightState.basicHeight * 1.3;
 
     return DefaultPadding(
       child: Column(
