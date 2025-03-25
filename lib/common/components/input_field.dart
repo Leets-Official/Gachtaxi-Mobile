@@ -80,8 +80,6 @@ class _InputFieldState extends State<InputField> {
             ),
           ),
         ),
-        SizedBox(height: 16.h),
-
       ],
     );
   }
