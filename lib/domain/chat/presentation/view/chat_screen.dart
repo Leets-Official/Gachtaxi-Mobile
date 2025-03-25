@@ -1,72 +1,196 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
-import 'package:gachtaxi_app/common/layout/default_layout.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/chat/application/factory/chat_message_factory.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_dummy.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_action_notifier.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_action_bar.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_member.dart';
 
 import '../widget/chat_input.dart';
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+class ChatScreen extends ConsumerStatefulWidget {
+  const ChatScreen({Key? key}) : super(key: key);
+
+  @override
+  ChatScreenState createState() => ChatScreenState();
+}
+
+class ChatScreenState extends ConsumerState<ChatScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+  final ScrollController _scrollController = ScrollController();
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+
+    // ChatActionBar 열림/닫힘 제어용 애니메이션 컨트롤러
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 230),
+    );
+
+    _animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _scrollController.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    // 하단 네비게이션바 색/아이콘 밝기 세팅
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors.chatInputField,
-        systemNavigationBarIconBrightness: Brightness.light,
-      ));
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          systemNavigationBarColor: AppColors.chatInputField,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
     });
 
-    // 더미데이터
+    final chatState = ref.watch(chatInputActionNotifierProvider);
+    final chatNotifier = ref.read(chatInputActionNotifierProvider.notifier);
+
+    // 액션 바 열고 닫을 때 애니메이션 재생
+    if (chatState.isExpanded) {
+      _animationController.forward();
+    } else {
+      _animationController.reverse();
+    }
+
+    // 더미 데이터
     final List<ChatMessageModel> messages = ChatDummy.generateDummyMessages();
     final int myUserId = 1;
 
     return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-
-        child: DefaultLayout(
-          hasAppBar: true,
-
-          child: Column(
+      appBar: renderAppBar(context),
+      backgroundColor: AppColors.neutralDark,
+      body: Stack(
+        children: [
+          Column(
             children: [
               Expanded(
-                child: Container(
-                  color: Colors.black,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-                    itemCount: messages.length,
-                    itemBuilder: (context, index) {
-                      final message = messages[index];
-                      final isMine = (message.senderId == myUserId);
-                      final showProfile = true;
-                      final showTime = true;
-                      return MessageUIFactory.getMessageWidget(
-                        message: message,
-                        isMine: isMine,
-                        showProfile: showProfile,
-                        showTime: showTime,
+                child: GestureDetector(
+                  onTap: () {
+                    _focusNode.unfocus();
+                    if (chatState.isExpanded) {
+                      chatNotifier.toggleExpanded();
+                    }
+                  },
+                  behavior: HitTestBehavior.translucent,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        controller: _scrollController,
+                        physics: const BouncingScrollPhysics(),
+                        reverse: true,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: messages.map((message) {
+                              final isMine = (message.senderId == myUserId);
+                              return MessageUIFactory.getMessageWidget(
+                                message: message,
+                                isMine: isMine,
+                                showProfile: true,
+                                showTime: true,
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       );
                     },
                   ),
                 ),
               ),
-
               Container(
                 color: AppColors.neutralComponent,
                 child: SafeArea(
-                  child: const ChatInputField(),
+                  child: ChatInputField(
+                    focusNode: _focusNode,
+                  ),
+                ),
+              ),
+              AbsorbPointer(
+                absorbing: !chatState.isExpanded,
+                child: SizeTransition(
+                  sizeFactor: _animation,
+                  axisAlignment: 1.0,
+                  child: ChatActionBar(),
                 ),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
+}
+
+AppBar? renderAppBar(BuildContext context) {
+  var memberCount = 3;
+  return AppBar(
+    backgroundColor: AppColors.neutralDark,
+    foregroundColor: Colors.white,
+    elevation: 0,
+    titleSpacing: 0,
+    title: Row(
+      children: [
+        SizedBox(width: 16.w),
+        Text(
+          "채팅방",
+          style: TextStyle(
+            fontSize: AppTypography.fontSizeExtraLarge.sp,
+            fontWeight: AppTypography.fontWeightSemibold,
+          ),
+        ),
+        SizedBox(width: 6.w),
+        Text(
+          "$memberCount",
+          style: TextStyle(
+            fontSize: AppTypography.fontSizeMedium.sp,
+            fontWeight: AppTypography.fontWeightMedium,
+            color: Colors.grey,
+          ),
+        ),
+      ],
+    ),
+    leading: IconButton(
+      icon: const Icon(Icons.arrow_back_ios),
+      onPressed: () => Navigator.pop(context),
+    ),
+    actions: [
+      IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: () {
+          showDialog(
+            context: context,
+            barrierColor: Colors.transparent,
+            builder: (context) {
+              return ChatMember();
+            },
+          );
+        },
+      ),
+    ],
+  );
 }
