@@ -19,7 +19,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String selectedGender = "남"; // 성별 선택 상태
+  Gender selectedGender = Gender.male;
   final TextEditingController nicknameController = TextEditingController();
   final TextEditingController realNameController = TextEditingController();
   final TextEditingController studentIdController = TextEditingController();
@@ -64,6 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: nicknameController,
                   autoFocus: true,
                 ),
+                SizedBox(height: 16.h),
                 const SizedBox(height: AppSpacing.spaceExtraMedium),
 
                 InputField(
@@ -72,6 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: realNameController,
                   autoFocus: true,
                 ),
+                SizedBox(height: 16.h),
                 const SizedBox(height: AppSpacing.spaceExtraMedium),
 
                 InputField(
@@ -80,6 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: studentIdController,
                   autoFocus: true,
                 ),
+                SizedBox(height: 16.h),
                 const SizedBox(height: AppSpacing.spaceExtraMedium),
 
                 const Text(
@@ -93,7 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 16.h),
                 GenderToggle(
                   selectedGender: selectedGender,
-                  onGenderChanged: (String gender) {
+                  onGenderChanged: (Gender gender) {
                     setState(() {
                       selectedGender = gender;
                     });
