@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/chat/application/factory/chat_message_factory.dart';
@@ -154,15 +155,22 @@ AppBar? renderAppBar(BuildContext context) {
     titleSpacing: 0,
     title: Row(
       children: [
-        SizedBox(width: 16),
-        const Text(
+        SizedBox(width: 16.w),
+        Text(
           "채팅방",
-          style: TextStyle(fontSize: 20, fontWeight: AppTypography.fontWeightSemibold),
+          style: TextStyle(
+            fontSize: AppTypography.fontSizeExtraLarge.sp,
+            fontWeight: AppTypography.fontWeightSemibold,
+          ),
         ),
-        const SizedBox(width: 6),
+        SizedBox(width: 6.w),
         Text(
           "$memberCount",
-          style: const TextStyle(fontSize: 16, fontWeight: AppTypography.fontWeightMedium ,color: Colors.grey),
+          style: TextStyle(
+            fontSize: AppTypography.fontSizeMedium.sp,
+            fontWeight: AppTypography.fontWeightMedium,
+            color: Colors.grey,
+          ),
         ),
       ],
     ),
@@ -181,7 +189,8 @@ AppBar? renderAppBar(BuildContext context) {
               return ChatMember();
             },
           );
-        },      ),
+        },
+      ),
     ],
   );
 }
