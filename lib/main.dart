@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
+import 'package:gachtaxi_app/domain/landing/view/landing_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
@@ -39,7 +39,7 @@ void main() async {
             theme: ThemeData(
               fontFamily: 'NotoSansKR',
             ),
-            home: HomeScreen(),
+            home: LandingScreen(),
             debugShowCheckedModeBanner: false,
           );
         },
