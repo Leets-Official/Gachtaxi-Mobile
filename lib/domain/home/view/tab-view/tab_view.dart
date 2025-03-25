@@ -39,7 +39,10 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
       Future.microtask(() {
         if (!mounted) return;
         Navigator.of(context).push(
-          SlidePageRoute(screen: ChatScreen()),
+          SlidePageRoute(
+              screen: ChatScreen(
+            roomId: 11,
+          )),
         );
         if (mounted) {
           setState(() {
