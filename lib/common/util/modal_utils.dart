@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gachtaxi_app/common/modal/custom_modal.dart';
+import 'package:gachtaxi_app/common/constants/spacing.dart';
 
 class ModalUtils {
   static void showCommonBottomSheet({
@@ -9,15 +9,29 @@ class ModalUtils {
   }) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent, // 배경 투명 유지
-      isScrollControlled: true, // 높이 조정 가능하게 설정
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)), // 둥근 모서리 적용
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (BuildContext context) {
-        return CommonBottomSheet(
-          child: content,
+        return FractionallySizedBox(
           heightFactor: heightFactor,
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFF20271E),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: AppSpacing.spaceExtraLarge,
+                left: AppSpacing.spaceExtraCommon,
+                right: AppSpacing.spaceExtraCommon,
+                bottom: AppSpacing.spaceExtraCommon,
+              ),
+              child: content,
+            ),
+          ),
         );
       },
     );
