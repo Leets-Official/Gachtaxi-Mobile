@@ -45,10 +45,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             GoogleMaps(),
             AnimatedPositioned(
               duration: const Duration(milliseconds: 300),
-              top:
-                  bottomSheetState.containerHeight == bottomSheetState.minHeight
-                      ? 20
-                      : -80,
+              top: bottomSheetState.containerHeight <=
+                      bottomSheetState.basicHeight * 1.2
+                  ? 20
+                  : -80,
               left: 20,
               right: 20,
               child: CustomTopBar(),

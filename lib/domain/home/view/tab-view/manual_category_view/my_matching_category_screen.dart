@@ -6,10 +6,10 @@ import 'package:gachtaxi_app/domain/home/components/matching/manual/no_matching_
 import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 
-class ManualMatchingCategoryScreen extends ConsumerWidget {
+class MyMatchingCategoryScreen extends ConsumerWidget {
   final bool isManualMatching;
 
-  const ManualMatchingCategoryScreen(this.isManualMatching, {super.key});
+  const MyMatchingCategoryScreen(this.isManualMatching, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
