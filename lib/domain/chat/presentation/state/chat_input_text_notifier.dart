@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:gachtaxi_app/domain/chat/presentation/view_model/chat_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_input_text_notifier.g.dart';
@@ -11,7 +12,7 @@ class ChatInputTextNotifier extends _$ChatInputTextNotifier {
 
   void submitMessage() {
     if (state.text.isNotEmpty) {
-      // TODO: API 연결
+      ref.read(chatViewModelProvider.notifier).sendMessage(state.text);
       state.clear();
     }
   }
