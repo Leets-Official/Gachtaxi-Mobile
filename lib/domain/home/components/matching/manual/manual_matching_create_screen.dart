@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
@@ -8,8 +9,17 @@ import 'package:gachtaxi_app/domain/home/components/matching/auto/expanded_setti
 import 'package:gachtaxi_app/domain/home/components/matching/auto/location_card.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/TimePickerCard.dart';
 
-class ManualMatchingCreateScreen extends StatelessWidget {
+class ManualMatchingCreateScreen extends StatefulWidget {
   const ManualMatchingCreateScreen({super.key});
+
+  @override
+  State<ManualMatchingCreateScreen> createState() =>
+      _ManualMatchingCreateScreenState();
+}
+
+class _ManualMatchingCreateScreenState
+    extends State<ManualMatchingCreateScreen> {
+  bool isSummited = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,45 +28,78 @@ class ManualMatchingCreateScreen extends StatelessWidget {
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSpacing.spaceCommon),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              Text(
-                '수동매칭 등록',
-                style: TextStyle(
-                  fontSize: AppTypography.fontSizeExtraLarge * 1.2,
-                  fontWeight: AppTypography.fontWeightBold,
-                  color: AppColors.white,
-                ),
-              ),
-              const SizedBox(height: AppSpacing.spaceExtraLarge),
-              Expanded(
-                child: ListView(
-                  children: [
-                    LocationCard(),
-                    const SizedBox(height: AppSpacing.spaceCommon),
-                    TimePickerCard(),
-                    const SizedBox(height: AppSpacing.spaceCommon),
-                    ExpandedSettingCard(
-                      cardTitle: '친구 초대',
-                      cardListElement: [
-                        '봉식이',
-                        '길구봉구',
-                        '상놈',
-                        '봉식이',
-                        '길구봉구',
-                        '상놈',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '수동매칭 등록',
+                    style: TextStyle(
+                      fontSize: AppTypography.fontSizeExtraLarge * 1.2,
+                      fontWeight: AppTypography.fontWeightBold,
+                      color: AppColors.white,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.spaceExtraLarge),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        LocationCard(),
+                        const SizedBox(height: AppSpacing.spaceCommon),
+                        TimePickerCard(),
+                        const SizedBox(height: AppSpacing.spaceCommon),
+                        ExpandedSettingCard(
+                          cardTitle: '친구 초대',
+                          cardListElement: [
+                            '봉식이',
+                            '길구봉구',
+                            '상놈',
+                            '봉식이',
+                            '길구봉구',
+                            '상놈',
+                          ],
+                        ),
+                        const SizedBox(height: AppSpacing.spaceCommon),
+                        ExpandedSettingCard(
+                          cardTitle: '키워드 선택',
+                          cardListElement: ['금연', '동성'],
+                          isTag: true,
+                        ),
+                        const SizedBox(height: AppSpacing.spaceCommon),
+                        _buildDescription(context),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.spaceCommon),
-                    ExpandedSettingCard(
-                      cardTitle: '키워드 선택',
-                      cardListElement: ['금연', '동성'],
-                      isTag: true,
+                  ),
+                  const SizedBox(height: AppSpacing.spaceCommon * 4.5),
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  height: 50.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.neutralDark,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.neutralDark,
+                        blurRadius: 15,
+                        offset: Offset(0, -27),
+                      ),
+                    ],
+                  ),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Button(
+                      buttonText: isSummited ? "등록완료" : "매칭등록",
+                      onPressed: () {
+                        setState(() {
+                          isSummited = true;
+                        });
+                      },
                     ),
-                    const SizedBox(height: AppSpacing.spaceCommon),
-                    _buildDescription(context),
-                  ],
+                  ),
                 ),
               ),
             ],
