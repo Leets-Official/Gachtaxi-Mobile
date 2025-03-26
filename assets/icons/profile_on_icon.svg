@@ -1,10 +1,5 @@
-<svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect y="0.183594" width="32" height="32" rx="16" fill="#B0B0B0"/> <!-- 기존 #838383 → 밝은 회색 #B0B0B0 -->
-  <mask id="mask0_2036_463" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="33">
-    <rect y="0.183594" width="32" height="32" rx="16" fill="#FFAFAF"/> <!-- 기존 #FF6969 → 밝은 핑크 #FFAFAF -->
-  </mask>
-  <g mask="url(#mask0_2036_463)">
-    <circle cx="16.0022" cy="11.1311" r="5.89474" fill="#FFFFFF"/> <!-- 기존 #D9D9D9 → 흰색 #FFFFFF -->
-    <circle cx="15.9981" cy="32.1835" r="13.4737" fill="#F0F0F0"/> <!-- 기존 #D9D9D9 → 더 밝은 회색 #F0F0F0 -->
-  </g>
+<svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.874023 6.99468C0.874023 3.13163 4.00559 0 7.86857 0H25.8788C29.7418 0 32.8734 3.13163 32.8734 6.99469V25.0053C32.8734 28.8684 29.7418 32 25.8788 32H7.86857C4.00559 32 0.874023 28.8684 0.874023 25.0053V6.99468Z" fill="#05D976"/>
+<path d="M6.46387 28.0138C6.46387 22.2642 11.1248 17.6033 16.8744 17.6033C22.624 17.6033 27.2849 22.2642 27.2849 28.0138V31.9999H6.46387V28.0138Z" fill="#FAFFFD"/>
+<ellipse cx="16.8737" cy="10.5264" rx="5.17937" ry="5.17948" fill="#FAFFFD"/>
 </svg>

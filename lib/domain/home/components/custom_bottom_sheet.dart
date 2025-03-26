@@ -13,14 +13,6 @@ class CustomBottomSheet extends ConsumerStatefulWidget {
 
 class _CustomBottomSheetState extends ConsumerState<CustomBottomSheet> {
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(sheetHeightNotifierProvider.notifier).initialize(context);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final sheetHeightNotifier = ref.read(sheetHeightNotifierProvider.notifier);
@@ -43,7 +35,6 @@ class _CustomBottomSheetState extends ConsumerState<CustomBottomSheet> {
         children: [
           GestureDetector(
             onVerticalDragUpdate: (details) {
-              // details.primaryDelta는 null일 수 있기 때문에, null 체크를 안전하게 처리합니다.
               final delta = details.primaryDelta ?? 0;
               final newHeight =
                   sheetHeightState.containerHeight - (delta * 1.2);
@@ -51,19 +42,31 @@ class _CustomBottomSheetState extends ConsumerState<CustomBottomSheet> {
             },
             onVerticalDragEnd: (details) {
               final velocity = details.primaryVelocity ?? 0;
-              final threshold =
-                  (sheetHeightState.minHeight + sheetHeightState.maxHeight) / 2;
-
-              // 드래그 끝난 후 높이 결정
               double newHeight = sheetHeightState.containerHeight;
+
               if (velocity.abs() > 50) {
-                newHeight = velocity < 0
-                    ? sheetHeightState.maxHeight
-                    : sheetHeightState.minHeight;
+                if (velocity < 0) {
+                  newHeight = (sheetHeightState.containerHeight >=
+                          sheetHeightState.basicHeight)
+                      ? sheetHeightState.maxHeight
+                      : sheetHeightState.basicHeight;
+                } else {
+                  newHeight = (sheetHeightState.containerHeight <=
+                          sheetHeightState.basicHeight)
+                      ? sheetHeightState.minHeight
+                      : sheetHeightState.basicHeight;
+                }
               } else {
-                newHeight = (sheetHeightState.containerHeight > threshold)
-                    ? sheetHeightState.maxHeight
-                    : sheetHeightState.minHeight;
+                if (sheetHeightState.containerHeight >
+                    sheetHeightState.basicHeight * 1.1) {
+                  newHeight = sheetHeightState.maxHeight;
+                } else if (sheetHeightState.containerHeight <
+                    sheetHeightState.basicHeight * 0.9) {
+                  newHeight = sheetHeightState.minHeight;
+                } else if (sheetHeightState.containerHeight >
+                    sheetHeightState.basicHeight * 0.5) {
+                  newHeight = sheetHeightState.basicHeight;
+                }
               }
 
               sheetHeightNotifier.updateHeight(newHeight);
