@@ -98,6 +98,11 @@ class _ManualMatchingCreateScreenState
                           isSummited = true;
                         });
                       },
+                      borderColor: isSummited ? AppColors.primary : null,
+                      textColor: isSummited ? AppColors.primary : null,
+                      backgroundColor: isSummited
+                          ? AppColors.neutralDark
+                          : AppColors.primary,
                     ),
                   ),
                 ),
