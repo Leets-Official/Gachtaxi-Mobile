@@ -8,7 +8,7 @@ part 'friend_response_model.g.dart';
 @freezed
 class FriendResponse with _$FriendResponse {
   const factory FriendResponse({
-    required List<Friend> friends,
+    required List<Friend> response,
     required Pageable pageable,
   }) = _FriendResponse;
 

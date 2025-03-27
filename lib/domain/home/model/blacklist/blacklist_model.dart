@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gachtaxi_app/common/model/gender_model.dart';
+import 'package:gachtaxi_app/common/enums/gender_model.dart';
 
 part 'blacklist_model.freezed.dart';
 part 'blacklist_model.g.dart';

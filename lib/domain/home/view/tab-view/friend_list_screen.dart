@@ -6,6 +6,7 @@ import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/friend_category.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/friend_changer_notifier.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
+import 'package:gachtaxi_app/domain/home/view/tab-view/friend_category_view/friend_category_screen.dart';
 
 class FriendListScreen extends ConsumerWidget {
   const FriendListScreen({super.key});
@@ -56,7 +57,7 @@ class FriendListScreen extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: AppSpacing.spaceLarge),
-                // ManualMatchingCategoryScreen(isManual)
+                if (isFriend) FriendCategoryScreen(isFriend: isFriend)
               ],
             ),
           ),

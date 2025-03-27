@@ -7,7 +7,7 @@ part 'blacklist_data_notifier.g.dart';
 @riverpod
 class BlacklistDataNotifier extends _$BlacklistDataNotifier {
   @override
-  Future<BlacklistResponse> build() async {
+  BlacklistResponse build() {
     return BlacklistResponse(
         blacklist: [],
         pageable: Pageable(
