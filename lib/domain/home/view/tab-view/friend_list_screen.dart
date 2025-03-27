@@ -63,7 +63,7 @@ class FriendListScreen extends ConsumerWidget {
                 if (isFriend)
                   FriendCategoryScreen(isFriend: isFriend)
                 else
-                  BlacklistCategoryScreen(isBlacklist: isFriend)
+                  BlacklistCategoryScreen(isBlacklist: !isFriend)
               ],
             ),
           ),
