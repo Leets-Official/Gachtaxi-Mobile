@@ -19,6 +19,34 @@ class BlacklistDataNotifier extends _$BlacklistDataNotifier {
             receiverProfilePicture:
                 'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
           ),
+          Blacklist(
+            receiverId: 1,
+            receiverNickname: '이지훈',
+            gender: Gender.MALE,
+            receiverProfilePicture:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+          ),
+          Blacklist(
+            receiverId: 1,
+            receiverNickname: '이지훈',
+            gender: Gender.MALE,
+            receiverProfilePicture:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+          ),
+          Blacklist(
+            receiverId: 1,
+            receiverNickname: '이지훈',
+            gender: Gender.MALE,
+            receiverProfilePicture:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+          ),
+          Blacklist(
+            receiverId: 1,
+            receiverNickname: '이지훈',
+            gender: Gender.MALE,
+            receiverProfilePicture:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+          ),
         ],
         pageable: Pageable(
             pageNumber: 0, pageSize: 0, numberOfElements: 0, isLast: false));

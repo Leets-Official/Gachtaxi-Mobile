@@ -35,6 +35,46 @@ class FriendDataNotifier extends _$FriendDataNotifier {
             gender: Gender.MALE,
             chatRoomId: 1,
           ),
+          Friend(
+            friendsId: 3,
+            friendsNickName: '이지훈',
+            friendsProfileUrl:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+            gender: Gender.MALE,
+            chatRoomId: 1,
+          ),
+          Friend(
+            friendsId: 3,
+            friendsNickName: '이지훈',
+            friendsProfileUrl:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+            gender: Gender.MALE,
+            chatRoomId: 1,
+          ),
+          Friend(
+            friendsId: 3,
+            friendsNickName: '이지훈',
+            friendsProfileUrl:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+            gender: Gender.MALE,
+            chatRoomId: 1,
+          ),
+          Friend(
+            friendsId: 3,
+            friendsNickName: '이지훈',
+            friendsProfileUrl:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+            gender: Gender.MALE,
+            chatRoomId: 1,
+          ),
+          Friend(
+            friendsId: 3,
+            friendsNickName: '이지훈',
+            friendsProfileUrl:
+                'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+            gender: Gender.MALE,
+            chatRoomId: 1,
+          ),
         ],
         pageable: Pageable(
             pageNumber: 0, pageSize: 0, numberOfElements: 0, isLast: false));
