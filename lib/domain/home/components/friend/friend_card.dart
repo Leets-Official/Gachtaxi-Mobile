@@ -7,7 +7,12 @@ import 'package:gachtaxi_app/domain/home/model/friend/friend_model.dart';
 
 class FriendCard extends StatelessWidget {
   final Friend friend;
-  const FriendCard({super.key, required this.friend});
+  final VoidCallback onAdditionalTap;
+  const FriendCard({
+    super.key,
+    required this.friend,
+    required this.onAdditionalTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +62,11 @@ class FriendCard extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SvgPicture.asset('assets/icons/additional_icon.svg',
-                    width: 24.w, height: 24.h),
+                GestureDetector(
+                  onTap: onAdditionalTap,
+                  child: SvgPicture.asset('assets/icons/additional_icon.svg',
+                      width: 24.w, height: 24.h),
+                ),
                 Container(
                   width: 24.w,
                   height: 24.h,
