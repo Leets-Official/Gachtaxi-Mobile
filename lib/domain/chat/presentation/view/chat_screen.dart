@@ -73,7 +73,13 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     final chatViewModel = ref.watch(chatViewModelProvider);
     final chatViewModelNotifier = ref.read(chatViewModelProvider.notifier);
 
-    const int myUserId = 2;
+    if (chatActionState.isExpanded) {
+      _animationController.forward();
+    } else {
+      _animationController.reverse();
+    }
+
+    const int myUserId = 1;
     final messages = chatViewModel.messageState.messages;
 
     final messageWidgets = chatViewModelNotifier.buildMessageList(
