@@ -13,7 +13,7 @@ class MatchingRoom with _$MatchingRoom {
     required String description,
     required String departure,
     required String destination,
-    required DateTime departureTime,
+    required String departureTime,
     required String departureDate,
     required int maxCapacity,
     required int currentMembers,

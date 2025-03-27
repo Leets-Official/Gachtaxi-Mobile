@@ -1,6 +1,6 @@
 enum MatchingCategory {
-  my('my_matching'),
-  manual('manual_matching');
+  my('나의 매칭'),
+  manual('수동 매칭');
 
   final String label;
 
