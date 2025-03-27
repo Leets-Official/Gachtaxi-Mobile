@@ -1,47 +1,54 @@
+import 'package:gachtaxi_app/domain/chat/data/enums/chat_message_type.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
 
 class MessageGroupingUtil {
   static Map<String, bool> getProfileVisibility(List<ChatMessageModel> messages) {
-    Map<String, bool> visibilityMap = {};
-    ChatMessageModel? previousMessage;
+    final visibilityMap = <String, bool>{};
+    ChatMessageModel? previous;
 
     for (int i = 0; i < messages.length; i++) {
-      final currentMessage = messages[i];
+      final current = messages[i];
 
-      if (previousMessage == null) {
-        visibilityMap[currentMessage.messageId ?? "0"] = true;
-      } else {
-        final isSameSender = currentMessage.senderId == previousMessage.senderId;
-        final isSameMinute = _isSameMinute(currentMessage.timeStamp, previousMessage.timeStamp);
-
-        // 같은 발신자가 1분 이내에 보낸 경우 → 숨기고, 새로운 그룹이면 표시
-        visibilityMap[currentMessage.messageId ?? "0"] = !(isSameSender && isSameMinute);
+      // ENTER나 EXIT는 항상 프로필 숨김 (아예 UI에서 따로 처리할 수도 있음)
+      if (current.messageType != MessageType.MESSAGE) {
+        visibilityMap[current.messageId ?? "0"] = false;
+        continue;
       }
 
-      // 현재 메시지를 `previousMessage`로 업데이트하여 다음 비교에 활용
-      previousMessage = currentMessage;
+      if (previous == null || previous.messageType != MessageType.MESSAGE) {
+        // 이전 메시지가 없거나, 이전 메시지가 ENTER/EXIT이면 무조건 표시
+        visibilityMap[current.messageId ?? "0"] = true;
+      } else {
+        final isSameSender = current.senderId == previous.senderId;
+        final isSameMinute = _isSameMinute(current.timeStamp, previous.timeStamp);
+        visibilityMap[current.messageId ?? "0"] = !(isSameSender && isSameMinute);
+      }
+
+      previous = current;
     }
 
     return visibilityMap;
   }
 
   static Map<String, bool> getTimeVisibility(List<ChatMessageModel> messages) {
-    Map<String, bool> timeVisibilityMap = {};
+    final timeVisibilityMap = <String, bool>{};
 
     for (int i = 0; i < messages.length; i++) {
-      final currentMessage = messages[i];
-      final nextMessage = (i < messages.length - 1) ? messages[i + 1] : null;
+      final current = messages[i];
 
-      if (nextMessage == null) {
-        timeVisibilityMap[currentMessage.messageId ?? "0"] = true;
+      if (current.messageType != MessageType.MESSAGE) {
+        timeVisibilityMap[current.messageId ?? "0"] = false;
+        continue;
+      }
+
+      final next = (i < messages.length - 1) ? messages[i + 1] : null;
+
+      if (next == null || next.messageType != MessageType.MESSAGE) {
+        timeVisibilityMap[current.messageId ?? "0"] = true;
       } else {
-        final nextTime = nextMessage.timeStamp;
-        final isSameSender = currentMessage.senderId == nextMessage.senderId;
-        final isSameMinute = _isSameMinute(currentMessage.timeStamp, nextMessage.timeStamp);
-
-        // 같은 발신자가 1분 이내에 보낸 경우, 마지막 메시지에서만 시간 표시
-        timeVisibilityMap[currentMessage.messageId ?? "0"] = !(isSameSender && isSameMinute);
-
+        final isSameSender = current.senderId == next.senderId;
+        final isSameMinute = _isSameMinute(current.timeStamp, next.timeStamp);
+        timeVisibilityMap[current.messageId ?? "0"] = !(isSameSender && isSameMinute);
       }
     }
 
