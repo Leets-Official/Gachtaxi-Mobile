@@ -94,7 +94,9 @@ class FriendCard extends StatelessWidget {
   }
 
   Widget _buildProfileImage(String? profilePicture) {
-    return profilePicture != null
+    final bool hasProfilePicture =
+        profilePicture != null && profilePicture.isNotEmpty;
+    return hasProfilePicture
         ? CircleAvatar(
             backgroundImage: NetworkImage(
               profilePicture,
