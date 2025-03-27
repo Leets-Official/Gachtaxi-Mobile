@@ -8,6 +8,7 @@ import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/components/friend/friend_request_screen.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/friend_changer_notifier.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
+import 'package:gachtaxi_app/domain/home/view/tab-view/friend_category_view/blacklist_category_screen.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/friend_category_view/friend_category_screen.dart';
 
 class FriendListScreen extends ConsumerWidget {
@@ -59,12 +60,15 @@ class FriendListScreen extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: AppSpacing.spaceLarge),
-                if (isFriend) FriendCategoryScreen(isFriend: isFriend)
+                if (isFriend)
+                  FriendCategoryScreen(isFriend: isFriend)
+                else
+                  BlacklistCategoryScreen(isBlacklist: isFriend)
               ],
             ),
           ),
         ),
-        if (isExpanded)
+        if (isExpanded && isFriend)
           Positioned(
             right: 20,
             bottom: 20,
