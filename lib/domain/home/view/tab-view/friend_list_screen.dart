@@ -16,8 +16,8 @@ class FriendListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentMatchingCategory = ref.watch(friendChangerNotifierProvider);
-    final isFriend = currentMatchingCategory == FriendCategory.friend;
+    final currentFriendCategory = ref.watch(friendChangerNotifierProvider);
+    final isFriend = currentFriendCategory == FriendCategory.friend;
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
     final isExpanded = containerHeight > sheetHeightState.minHeight * 1.5;
