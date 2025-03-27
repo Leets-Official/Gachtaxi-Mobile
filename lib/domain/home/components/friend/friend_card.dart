@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/home/model/friend/friend_model.dart';
 
 class FriendCard extends StatelessWidget {
@@ -40,8 +41,8 @@ class FriendCard extends StatelessWidget {
                 Text(
                   friend.friendsNickName,
                   style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: AppTypography.fontSizeLarge,
+                    fontWeight: AppTypography.fontWeightBold,
                     color: AppColors.white,
                   ),
                 ),
@@ -51,7 +52,7 @@ class FriendCard extends StatelessWidget {
                   child: Text(
                     friend.gender.value,
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: AppTypography.fontSizeSmall,
                       color: AppColors.darkGray,
                     ),
                   ),

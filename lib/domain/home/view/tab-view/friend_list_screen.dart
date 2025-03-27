@@ -4,6 +4,8 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/friend_category.dart';
+import 'package:gachtaxi_app/common/util/slide_page_route.dart';
+import 'package:gachtaxi_app/domain/home/components/friend/friend_request_screen.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/friend_changer_notifier.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/friend_category_view/friend_category_screen.dart';
@@ -73,9 +75,9 @@ class FriendListScreen extends ConsumerWidget {
                 backgroundColor: AppColors.primary,
               ),
               onPressed: () {
-                // Navigator.of(context).push(
-                //   SlidePageRoute(screen: ManualMatchingCreateScreen()),
-                // );
+                Navigator.of(context).push(
+                  SlidePageRoute(screen: FriendRequestScreen()),
+                );
               },
               icon: Icon(Icons.add),
             ),
