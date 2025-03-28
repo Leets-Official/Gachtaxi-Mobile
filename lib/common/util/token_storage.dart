@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class TokenStorage {
@@ -7,8 +8,7 @@ class TokenStorage {
 
   // 개발용 토큰 저장
   static Future<void> saveDevToken() async {
-    const devToken =
-        'Bearer 여기에 사용하는 토큰을 넣어주세요';
+    String devToken = dotenv.env['DEV_ACCESS_TOKEN'] ?? "Bearer null";
     await _storage.write(key: _accessTokenKey, value: devToken);
   }
 

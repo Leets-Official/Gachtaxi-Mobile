@@ -6,6 +6,7 @@ import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_room_model.dart';
+import 'package:intl/intl.dart';
 
 class ManualMatchingCard extends StatefulWidget {
   final MatchingRoom matchingRoom;
@@ -29,13 +30,6 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
   void initState() {
     super.initState();
     isExpand = false; // 초기값 설정
-    showExpandedContent = false;
-  }
-
-  @override
-  void didUpdateWidget(covariant ManualMatchingCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    isExpand = false;
     showExpandedContent = false;
   }
 
@@ -108,7 +102,9 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
         if (showExpandedContent && widget.isManualMatching)
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.spaceCommon),
-            child: Button(buttonText: '참여하기'),
+            child: Button(
+              buttonText: '참여하기',
+            ),
           ),
       ],
     );
@@ -129,7 +125,7 @@ class _MatchingInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildRow(
-          '${matchingRoom.departureDate}${matchingRoom.departureTime.hour}:${matchingRoom.departureTime.minute}',
+          _formatDateTime(matchingRoom.departureTime),
           '${matchingRoom.currentMembers}/${matchingRoom.maxCapacity}',
         ),
         if (isExpand) ...[
@@ -145,7 +141,7 @@ class _MatchingInfo extends StatelessWidget {
                 width: AppSpacing.spaceSmall,
               ),
               Text(
-                '${matchingRoom.nickname}의 매칭',
+                '${matchingRoom.nickname}님의 매칭',
                 style: _buildTextStyle(),
               ),
             ],
@@ -198,6 +194,14 @@ class _MatchingInfo extends StatelessWidget {
         : SvgPicture.asset('assets/icons/profile_on_icon.svg',
             width: 32.w, height: 32.h);
   }
+
+  String _formatDateTime(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString).toLocal();
+    String weekDay = DateFormat('E', 'ko_KR').format(dateTime);
+    String formattedTime = DateFormat('a hh:mm', 'ko_KR').format(dateTime);
+
+    return '${DateFormat('MM-dd', 'ko_KR').format(dateTime)}($weekDay) $formattedTime';
+  }
 }
 
 // 매칭 카드의 경로, 확장시 설명까지 렌더링하는 UI
@@ -218,7 +222,7 @@ class _Route extends StatelessWidget {
           Row(
             children: [
               SvgPicture.asset('assets/icons/start_to_end_icon.svg',
-                  width: 11.w, height: 38.h),
+                  width: 11.w, height: 48.h),
               SizedBox(width: 10.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +233,7 @@ class _Route extends StatelessWidget {
                       color: AppColors.darkGray,
                     ),
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 10.h),
                   Text(
                     matchingRoom.destination,
                     style: _buildTextStyle(

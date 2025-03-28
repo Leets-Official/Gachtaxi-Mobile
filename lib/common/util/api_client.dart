@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:gachtaxi_app/common/model/api_response.dart';
 import 'package:gachtaxi_app/common/util/logger.dart';
 import 'package:gachtaxi_app/common/util/token_storage.dart';
 
@@ -42,45 +43,55 @@ class ApiClient {
   );
 
   // GET
-  static Future<Response> get(String path, {Map<String, dynamic>? params}) async {
+  static Future<ApiResponse> get(String path, {Map<String, dynamic>? params}) async {
     try {
-      return await _dio.get(path, queryParameters: params);
+      final response = await _dio.get(path, queryParameters: params);
+
+      return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
       rethrow;
     }
   }
 
   // POST
-  static Future<Response> post(String path, {Map<String, dynamic>? body}) async {
+  static Future<ApiResponse> post(String path, {Map<String, dynamic>? body}) async {
     try {
-      return await _dio.post(path, data: body);
+      final response =  await _dio.post(path, data: body);
+
+      return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
       rethrow;
     }
   }
 
   // PATCH
-  static Future<Response> patch(String path, {Map<String, dynamic>? body}) async {
+  static Future<ApiResponse> patch(String path, {Map<String, dynamic>? body}) async {
     try {
-      return await _dio.patch(path, data: body);
+      final response =  await _dio.patch(path, data: body);
+
+      return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
       rethrow;
     }
   }
 
   // PUT
-  static Future<Response> put(String path, {Map<String, dynamic>? body}) async {
+  static Future<ApiResponse> put(String path, {Map<String, dynamic>? body}) async {
     try {
-      return await _dio.put(path, data: body);
+      final response =  await _dio.put(path, data: body);
+
+      return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
       rethrow;
     }
   }
 
   // DELETE
-  static Future<Response> delete(String path, {Map<String, dynamic>? body}) async {
+  static Future<ApiResponse> delete(String path, {Map<String, dynamic>? body}) async {
     try {
-      return await _dio.delete(path, data: body);
+      final response =  await _dio.delete(path, data: body);
+
+      return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
       rethrow;
     }

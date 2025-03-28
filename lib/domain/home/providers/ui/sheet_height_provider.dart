@@ -7,14 +7,12 @@ part 'sheet_height_provider.g.dart';
 class SheetHeightNotifier extends _$SheetHeightNotifier {
   @override
   BottomSheetHeightState build() {
-    return BottomSheetHeightState(
-      maxHeight: 0,
-    );
-  }
+    final height = MediaQueryData.fromView(
+            WidgetsBinding.instance.platformDispatcher.views.first)
+        .size
+        .height;
 
-  void initialize(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    state = BottomSheetHeightState(
+    return BottomSheetHeightState(
       maxHeight: height * (4 / 5),
     );
   }
@@ -28,22 +26,26 @@ class SheetHeightNotifier extends _$SheetHeightNotifier {
 
 class BottomSheetHeightState {
   final double containerHeight;
+  final double basicHeight;
   final double minHeight;
   final double maxHeight;
 
   BottomSheetHeightState({
     this.containerHeight = 330,
-    this.minHeight = 330,
+    this.basicHeight = 330,
+    this.minHeight = 80,
     required this.maxHeight,
   });
 
   BottomSheetHeightState copyWith({
     double? containerHeight,
+    double? basicHeight,
     double? minHeight,
     double? maxHeight,
   }) {
     return BottomSheetHeightState(
       containerHeight: containerHeight ?? this.containerHeight,
+      basicHeight: basicHeight ?? this.basicHeight,
       minHeight: minHeight ?? this.minHeight,
       maxHeight: maxHeight ?? this.maxHeight,
     );

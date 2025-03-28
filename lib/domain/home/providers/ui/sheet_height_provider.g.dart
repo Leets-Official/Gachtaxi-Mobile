@@ -7,7 +7,7 @@ part of 'sheet_height_provider.dart';
 // **************************************************************************
 
 String _$sheetHeightNotifierHash() =>
-    r'dd1d724f60d78c542a3b2d48f856025e302f9dbb';
+    r'6a531d7a9903f3db091722280a7581406901e4a5';
 
 /// See also [SheetHeightNotifier].
 @ProviderFor(SheetHeightNotifier)

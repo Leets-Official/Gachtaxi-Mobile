@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class NotifierIcon extends StatelessWidget {
   const NotifierIcon({super.key});
@@ -9,16 +10,17 @@ class NotifierIcon extends StatelessWidget {
       children: [
         IconButton(
             onPressed: () {},
-            icon: Icon(
-              Icons.notifications,
-              color: Color(0xFF08F283),
+            icon: SvgPicture.asset(
+              'assets/icons/notification_icon.svg',
+              width: 20,
+              height: 24,
             )),
         Positioned(
           top: 10,
           right: 12,
           child: Container(
-            width: 12,
-            height: 12,
+            width: 10,
+            height: 10,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
