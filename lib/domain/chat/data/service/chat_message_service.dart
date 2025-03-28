@@ -26,8 +26,8 @@ class ChatMessageService {
             "lastMessageTimeStamp": lastMessageTimeStamp,
           });
 
-      if (response.statusCode == 200) {
-        final data = response.data['data'];
+      if (response.code == 200) {
+        final data = response.data;
 
         return ChatMessageResponse.fromJson(data);
       } else {

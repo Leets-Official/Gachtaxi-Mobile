@@ -17,8 +17,8 @@ class ChatMemberService {
           FETCH_CHAT_MEMBER_COUNT_PATH + roomId.toString()
       );
 
-      if (response.statusCode == 200) {
-        final data = response.data['data'];
+      if (response.code == 200) {
+        final data = response.data;
 
         return ChatMemberCountResponse.fromJson(data);
       } else {
