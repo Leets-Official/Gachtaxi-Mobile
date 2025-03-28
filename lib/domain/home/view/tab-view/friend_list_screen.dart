@@ -80,7 +80,9 @@ class FriendListScreen extends ConsumerWidget {
               ),
               onPressed: () {
                 Navigator.of(context).push(
-                  SlidePageRoute(screen: FriendRequestScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => FriendRequestScreen(),
+                  ),
                 );
               },
               icon: Icon(Icons.add),

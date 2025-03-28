@@ -85,7 +85,9 @@ class ManualMatchingScreen extends ConsumerWidget {
               ),
               onPressed: () {
                 Navigator.of(context).push(
-                  SlidePageRoute(screen: ManualMatchingCreateScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => ManualMatchingCreateScreen(),
+                  ),
                 );
               },
               icon: Icon(Icons.add),

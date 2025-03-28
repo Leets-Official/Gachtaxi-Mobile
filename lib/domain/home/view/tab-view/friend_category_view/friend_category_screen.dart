@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/home/providers/response/friend_data_notifier.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/home/components/friend/friend_card.dart';
@@ -100,7 +101,7 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
                   '친구를 삭제할까요?',
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 22,
+                    fontSize: AppTypography.fontSizeExtraLarge,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -109,7 +110,7 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
                   '친구를 삭제하거나 블랙리스트로 이동할 수 있어요',
                   style: TextStyle(
                     color: AppColors.darkGray,
-                    fontSize: 14,
+                    fontSize: AppTypography.fontSizeSmall,
                   ),
                 ),
                 const Spacer(),
