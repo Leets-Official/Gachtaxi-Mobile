@@ -8,7 +8,7 @@ part 'manual_matching_data_provider.g.dart';
 @riverpod
 class ManualMatchingDataNotifier extends _$ManualMatchingDataNotifier {
   @override
-  ManualMatchingResponse build() {
+  ManualMatchingResponse build() { 
     return _getDummyMatchingResponse();
   }
 

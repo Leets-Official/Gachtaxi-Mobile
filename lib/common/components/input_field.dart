@@ -11,9 +11,10 @@ class InputField extends StatefulWidget {
   final FocusNode? focusNode;
   final bool autoFocus;
   final Function(String)? onSubmitted;
+  final double? labelFontSize;
 
   const InputField({
-    Key? key,
+    super.key,
     required this.label,
     required this.hintText,
     required this.controller,
@@ -21,7 +22,8 @@ class InputField extends StatefulWidget {
     this.focusNode,
     this.autoFocus = false,
     this.onSubmitted,
-  }) : super(key: key);
+    this.labelFontSize,
+  });
 
   @override
   _InputFieldState createState() => _InputFieldState();
@@ -37,12 +39,11 @@ class _InputFieldState extends State<InputField> {
           widget.label,
           style: TextStyle(
             color: Colors.white,
-            fontSize: AppTypography.fontSizeSmall,
+            fontSize: widget.labelFontSize ?? AppTypography.fontSizeSmall,
             fontWeight: AppTypography.fontWeightMedium,
           ),
         ),
         SizedBox(height: 16.h),
-
         SizedBox(
           height: 50.h,
           child: TextField(
@@ -61,7 +62,7 @@ class _InputFieldState extends State<InputField> {
               fillColor: AppColors.neutralDark,
               hintText: widget.hintText,
               hintStyle: TextStyle(
-                color:  AppColors.inputGrey,
+                color: AppColors.inputGrey,
                 fontSize: AppTypography.fontSizeSmall,
                 fontWeight: AppTypography.fontWeightMedium,
               ),

@@ -1,0 +1,4 @@
+enum FriendCategory {
+  friend,
+  blackList,
+}
