@@ -46,8 +46,8 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final notifier = ref.read(chatViewModelProvider.notifier);
       await notifier.connectWebSocket(roomId: widget.roomId);
-      notifier.fetchMemberCount(roomId: widget.roomId);
-      notifier.loadInitialMessages(widget.roomId);
+      await notifier.fetchMemberCount(roomId: widget.roomId);
+      await notifier.loadInitialMessages(widget.roomId);
     });
   }
 
@@ -79,7 +79,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
       _animationController.reverse();
     }
 
-    const int myUserId = 1;
+    const int myUserId = 2;
     final messages = chatViewModel.messageState.messages;
 
     final messageWidgets = chatViewModelNotifier.buildMessageList(
