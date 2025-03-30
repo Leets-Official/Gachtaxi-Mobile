@@ -22,6 +22,8 @@ class ChatRepository {
   final ChatMessageService _messageService;
   final ChatWebsocketService _websocketService;
 
+  final int pageSize = 15;
+
   const ChatRepository({
     required ChatMemberService memberService,
     required ChatMessageService messageService,
@@ -44,7 +46,7 @@ class ChatRepository {
     return _messageService.fetchMessages(
       roomId,
       pageNumber,
-      15,
+      pageSize,
       lastMessageTimeStamp: lastMessageTimeStamp,
     );
   }
