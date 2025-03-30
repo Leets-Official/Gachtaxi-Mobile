@@ -27,17 +27,7 @@ class ChatViewModel extends _$ChatViewModel {
     return const ChatState();
   }
 
-
   late final ChatRepository _repository;
-
-  Future<void> connectWebSocket({
-    required int roomId,
-  }) async {
-    await _repository.connect(
-      roomId: roomId,
-      onMessageReceived: _handleIncomingMessage,
-    );
-  }
 
   void _handleIncomingMessage(dynamic message) {
     try {
@@ -59,7 +49,7 @@ class ChatViewModel extends _$ChatViewModel {
 
       if (newMessage.messageType == MessageType.ENTER ||
           newMessage.messageType == MessageType.EXIT) {
-        fetchMemberCount(roomId: message.roomId);
+        fetchMemberCount(roomId: newMessage.roomId!);
       }
     } catch (e) {
       logger.e("❌ WebSocket 메시지 파싱 실패: $e");
@@ -117,7 +107,7 @@ class ChatViewModel extends _$ChatViewModel {
         messageState: state.messageState.copyWith(
           messages: reversed,
           pageNum: 0,
-          hasMoreData: !data.pageable.last,
+          hasMoreData: !data.pageable.isLast,
           lastMessageTimeStamp: reversed.isNotEmpty
               ? reversed.first.timeStamp.toIso8601String()
               : null,
@@ -157,7 +147,7 @@ class ChatViewModel extends _$ChatViewModel {
         messageState: state.messageState.copyWith(
           messages: [...reversedNew, ...state.messageState.messages],
           pageNum: state.messageState.pageNum + 1,
-          hasMoreData: !data.pageable.last,
+          hasMoreData: !data.pageable.isLast,
         ),
         uiState: state.uiState.copyWith(isFetchingMore: false),
       );
@@ -203,6 +193,14 @@ class ChatViewModel extends _$ChatViewModel {
     return messageWidgets;
   }
 
+  Future<void> connectWebSocket({
+    required int roomId,
+  }) async {
+    await _repository.connect(
+      roomId: roomId,
+      onMessageReceived: _handleIncomingMessage,
+    );
+  }
 
   void sendMessage(String text) {
     _repository.sendMessage(text);
