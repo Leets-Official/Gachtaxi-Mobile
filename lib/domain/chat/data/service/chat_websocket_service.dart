@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/util/logger.dart';
 import 'package:gachtaxi_app/common/util/token_storage.dart';
@@ -39,7 +40,7 @@ class ChatWebsocketService {
 
     _stompClient = StompClient(
       config: StompConfig(
-        url: 'ws://localhost:8080/ws', //ws://10.0.2.2:8080/ws  | 안드로이드는 localhost를 에뮬레이터로 알기 때문에 이렇게 해줘야함
+        url: dotenv.env['WEBSOCKET_URL'] ?? 'ws://localhost:8080/ws', //ws://10.0.2.2:8080/ws  | 안드로이드는 localhost를 에뮬레이터로 알기 때문에 이렇게 해줘야함
         // 서버 주소
         stompConnectHeaders: finalHeaders,
 
