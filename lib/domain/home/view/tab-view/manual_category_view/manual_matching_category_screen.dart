@@ -13,22 +13,35 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final manualListData =
-        ref.watch(manualMatchingDataNotifierProvider).data.rooms;
+    final manualMatchingState = ref.watch(manualMatchingDataNotifierProvider);
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
-    final isExpanded = containerHeight > sheetHeightState.minHeight * 1.3;
+    final isExpanded = containerHeight > sheetHeightState.basicHeight * 1.3;
 
     return SizedBox(
-      width: double.infinity,
-      height: isExpanded
-          ? MediaQuery.of(context).size.height * 0.7
-          : MediaQuery.of(context).size.height * 0.25,
-      child: manualListData.isNotEmpty
-          ? ListView.separated(
+        width: double.infinity,
+        height: isExpanded
+            ? MediaQuery.of(context).size.height * 0.7
+            : MediaQuery.of(context).size.height * 0.25,
+        child: manualMatchingState.when(
+          data: (response) {
+            final manualMatchingData = response.data;
+            if (manualMatchingData == null ||
+                manualMatchingData.rooms.isEmpty) {
+              return const NoMatchingViewer();
+            }
+
+            return ListView.separated(
               padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
               itemBuilder: (context, index) {
-                final room = manualListData[index];
+                final room = manualMatchingData.rooms[index];
+
+                if (index == manualMatchingData.rooms.length - 1 &&
+                    !manualMatchingData.pageable.last) {
+                  Future(() => ref
+                      .read(manualMatchingDataNotifierProvider.notifier)
+                      .fetchMoreData());
+                }
                 return ManualMatchingCard(
                   matchingRoom: room,
                   isManualMatching: isManualMatching,
@@ -36,9 +49,11 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
               },
               separatorBuilder: (context, index) =>
                   const SizedBox(height: AppSpacing.spaceCommon),
-              itemCount: manualListData.length,
-            )
-          : NoMatchingViewer(),
-    );
+              itemCount: manualMatchingData.rooms.length,
+            );
+          },
+          error: (error, stackTrace) => Center(child: Text('데이터 로드 실패')),
+          loading: () => Center(child: CircularProgressIndicator()),
+        ));
   }
 }
