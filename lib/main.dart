@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
+import 'package:gachtaxi_app/common/util/token_storage.dart';
+import 'package:gachtaxi_app/domain/landing/view/landing_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
@@ -14,6 +15,9 @@ void main() async {
 
   // .env 파일 로드
   await dotenv.load();
+
+  // 개발용 토큰 저장
+  await TokenStorage.saveDevToken();
 
   // Google Maps API 키를 .env 파일에서 가져와 네이티브 코드로 전달
   final methodChannel = MethodChannel('com.gachtaxi.app/maps');
@@ -39,7 +43,7 @@ void main() async {
             theme: ThemeData(
               fontFamily: 'NotoSansKR',
             ),
-            home: HomeScreen(),
+            home: LandingScreen(),
             debugShowCheckedModeBanner: false,
           );
         },
