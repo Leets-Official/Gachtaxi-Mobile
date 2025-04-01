@@ -24,7 +24,7 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
 
     return SizedBox(
         width: double.infinity,
-        height: isExpanded ? MediaQuery.of(context).size.height * 0.65 : 220,
+        height: isExpanded ? MediaQuery.of(context).size.height * 0.7 : 220,
         child: RefreshIndicator(
           onRefresh: () async {
             await ref
@@ -42,7 +42,7 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
               }
 
               return ListView.separated(
-                padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
+                padding: EdgeInsets.only(bottom: AppSpacing.spaceLarge),
                 itemBuilder: (context, index) {
                   final room = manualMatchingData.rooms[index];
 
@@ -67,7 +67,7 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
               );
             },
             error: (error, stackTrace) {
-              final errorMessage = error.toString().split(':')[1].trim();
+              final errorMessage = error.toString();
               return Center(
                   child: Text(
                 errorMessage,

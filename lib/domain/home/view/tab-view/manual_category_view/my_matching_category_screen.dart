@@ -24,7 +24,7 @@ class MyMatchingCategoryScreen extends ConsumerWidget {
 
     return SizedBox(
         width: double.infinity,
-        height: isExpanded ? MediaQuery.of(context).size.height * 0.65 : 220,
+        height: isExpanded ? MediaQuery.of(context).size.height * 0.7 : 220,
         child: RefreshIndicator(
           onRefresh: () async {
             await ref
@@ -67,7 +67,7 @@ class MyMatchingCategoryScreen extends ConsumerWidget {
               );
             },
             error: (error, stackTrace) {
-              final errorMessage = error.toString().split(':')[1].trim();
+              final errorMessage = error.toString();
               return Center(
                   child: Text(
                 errorMessage,
