@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_matching_card.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/no_matching_viewer.dart';
 import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
+import 'package:gachtaxi_app/domain/home/services/manual_matching_room_service.dart';
 
 class ManualMatchingCategoryScreen extends ConsumerWidget {
   final bool isManualMatching;
@@ -13,7 +16,8 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final manualMatchingState = ref.watch(manualMatchingDataNotifierProvider);
+    final manualMatchingState = ref.watch(matchingDataNotifierProvider(
+        ManualMatchingRoomService.fetchMatchingRooms));
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
     final isExpanded = containerHeight > sheetHeightState.basicHeight * 1.3;
@@ -38,9 +42,13 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
 
                 if (index == manualMatchingData.rooms.length - 1 &&
                     !manualMatchingData.pageable.last) {
-                  Future(() => ref
-                      .read(manualMatchingDataNotifierProvider.notifier)
-                      .fetchMoreData());
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ref
+                        .read(matchingDataNotifierProvider(
+                                ManualMatchingRoomService.fetchMatchingRooms)
+                            .notifier)
+                        .fetchMoreData();
+                  });
                 }
                 return ManualMatchingCard(
                   matchingRoom: room,
@@ -52,8 +60,21 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
               itemCount: manualMatchingData.rooms.length,
             );
           },
-          error: (error, stackTrace) => Center(child: Text('데이터 로드 실패')),
-          loading: () => Center(child: CircularProgressIndicator()),
+          error: (error, stackTrace) {
+            final errorMessage = error.toString().split(':')[1].trim();
+            return Center(
+                child: Text(
+              errorMessage,
+              style: TextStyle(
+                color: AppColors.lightGray,
+                fontSize: AppTypography.fontSizeLarge,
+              ),
+            ));
+          },
+          loading: () => Center(
+              child: CircularProgressIndicator(
+            color: AppColors.lightGray,
+          )),
         ));
   }
 }
