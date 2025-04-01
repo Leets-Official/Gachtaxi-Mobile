@@ -24,57 +24,64 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
 
     return SizedBox(
         width: double.infinity,
-        height: isExpanded
-            ? MediaQuery.of(context).size.height * 0.7
-            : MediaQuery.of(context).size.height * 0.25,
-        child: manualMatchingState.when(
-          data: (response) {
-            final manualMatchingData = response.data;
-            if (manualMatchingData == null ||
-                manualMatchingData.rooms.isEmpty) {
-              return const NoMatchingViewer();
-            }
-
-            return ListView.separated(
-              padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
-              itemBuilder: (context, index) {
-                final room = manualMatchingData.rooms[index];
-
-                if (index == manualMatchingData.rooms.length - 1 &&
-                    !manualMatchingData.pageable.last) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    ref
-                        .read(matchingDataNotifierProvider(
-                                ManualMatchingRoomService.fetchMatchingRooms)
-                            .notifier)
-                        .fetchMoreData();
-                  });
-                }
-                return ManualMatchingCard(
-                  matchingRoom: room,
-                  isManualMatching: isManualMatching,
-                );
-              },
-              separatorBuilder: (context, index) =>
-                  const SizedBox(height: AppSpacing.spaceCommon),
-              itemCount: manualMatchingData.rooms.length,
-            );
+        height: isExpanded ? MediaQuery.of(context).size.height * 0.65 : 220,
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await ref
+                .read(matchingDataNotifierProvider(
+                        ManualMatchingRoomService.fetchMatchingRooms)
+                    .notifier)
+                .refresh();
           },
-          error: (error, stackTrace) {
-            final errorMessage = error.toString().split(':')[1].trim();
-            return Center(
-                child: Text(
-              errorMessage,
-              style: TextStyle(
-                color: AppColors.lightGray,
-                fontSize: AppTypography.fontSizeLarge,
-              ),
-            ));
-          },
-          loading: () => Center(
-              child: CircularProgressIndicator(
-            color: AppColors.lightGray,
-          )),
+          child: manualMatchingState.when(
+            data: (response) {
+              final manualMatchingData = response.data;
+              if (manualMatchingData == null ||
+                  manualMatchingData.rooms.isEmpty) {
+                return const NoMatchingViewer();
+              }
+
+              return ListView.separated(
+                padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
+                itemBuilder: (context, index) {
+                  final room = manualMatchingData.rooms[index];
+
+                  if (index == manualMatchingData.rooms.length - 1 &&
+                      !manualMatchingData.pageable.last) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      ref
+                          .read(matchingDataNotifierProvider(
+                                  ManualMatchingRoomService.fetchMatchingRooms)
+                              .notifier)
+                          .fetchMoreData();
+                    });
+                  }
+                  return ManualMatchingCard(
+                    matchingRoom: room,
+                    isManualMatching: isManualMatching,
+                  );
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: AppSpacing.spaceCommon),
+                itemCount: manualMatchingData.rooms.length,
+              );
+            },
+            error: (error, stackTrace) {
+              final errorMessage = error.toString().split(':')[1].trim();
+              return Center(
+                  child: Text(
+                errorMessage,
+                style: TextStyle(
+                  color: AppColors.lightGray,
+                  fontSize: AppTypography.fontSizeLarge,
+                ),
+              ));
+            },
+            loading: () => Center(
+                child: CircularProgressIndicator(
+              color: AppColors.lightGray,
+            )),
+          ),
         ));
   }
 }

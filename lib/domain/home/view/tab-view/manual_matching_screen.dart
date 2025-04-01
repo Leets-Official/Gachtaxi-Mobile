@@ -60,7 +60,7 @@ class ManualMatchingScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.spaceLarge),
+              const SizedBox(height: AppSpacing.spaceCommon),
               isManual
                   ? ManualMatchingCategoryScreen(isManual)
                   : MyMatchingCategoryScreen(isManual),
