@@ -252,7 +252,9 @@ class _Route extends StatelessWidget {
               height: 80.h,
               child: SingleChildScrollView(
                 child: Text(
-                  matchingRoom.description,
+                  matchingRoom.description.isEmpty
+                      ? '추가된 내용이 없습니다.'
+                      : matchingRoom.description,
                   style: _buildTextStyle(
                     color: Colors.white,
                   ),

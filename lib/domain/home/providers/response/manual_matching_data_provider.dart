@@ -66,9 +66,13 @@ class MatchingDataNotifier extends _$MatchingDataNotifier {
     state = const AsyncLoading();
     try {
       final response = await _fetchData(0);
+
+      if (state.valueOrNull != response) {
+        state = AsyncData(response);
+      }
+
       _currentPage = 0;
       _hasMoreData = true;
-      state = AsyncData(response);
     } catch (e, stackTrace) {
       state = AsyncError(e, stackTrace);
     }
