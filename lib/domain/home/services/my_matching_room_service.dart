@@ -2,7 +2,7 @@ import 'package:gachtaxi_app/common/model/api_response.dart';
 import 'package:gachtaxi_app/common/util/api_client.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_response_model.dart';
 
-class ManualMatchingRoomService {
+class MyMatchingRoomService {
   static final Map<int, MatchingData> _cache = {};
   static DateTime? _lastFetchTime;
   static const Duration cacheDuration = Duration(minutes: 3);
@@ -21,7 +21,7 @@ class ManualMatchingRoomService {
       );
     }
 
-    const String fetchMatchingRoomPath = '/api/matching/manual/list';
+    const String fetchMatchingRoomPath = '/api/matching/manual/my-list';
     final uri = Uri.parse(fetchMatchingRoomPath).replace(
       queryParameters: {
         "pageNumber": pageNumber.toString(),
@@ -48,7 +48,7 @@ class ManualMatchingRoomService {
         throw Exception("응답 데이터가 올바르지 않음");
       }
     } else {
-      throw Exception("수동 매칭방 조회 실패");
+      throw Exception("나의 매칭방 조회 실패");
     }
   }
 
