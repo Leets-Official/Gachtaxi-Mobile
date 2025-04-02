@@ -1,37 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gachtaxi_app/common/util/token_storage.dart';
-import 'package:gachtaxi_app/domain/landing/view/landing_screen.dart';
-import 'package:intl/date_symbol_data_local.dart';
+import 'package:gachtaxi_app/splash_screen.dart';
+
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
-  // Flutter 바인딩 초기화
   WidgetsFlutterBinding.ensureInitialized();
 
-  await initializeDateFormatting();
+  await Firebase.initializeApp(); // ✅ 앱 시작 전 Firebase 먼저 초기화
 
-  // .env 파일 로드
-  await dotenv.load();
 
-  // 개발용 토큰 저장
-  await TokenStorage.saveDevToken();
-
-  // Google Maps API 키를 .env 파일에서 가져와 네이티브 코드로 전달
-  final methodChannel = MethodChannel('com.gachtaxi.app/maps');
-  try {
-    final googleMapsApiKey = dotenv.env['GOOGLE_MAPS_API_KEY'];
-    if (googleMapsApiKey != null && googleMapsApiKey.isNotEmpty) {
-      await methodChannel.invokeMethod('setGoogleMapsApiKey', googleMapsApiKey);
-    } else {
-      print('❌ .env 파일에 GOOGLE_MAPS_API_KEY가 설정되지 않았습니다.');
-    }
-  } catch (e) {
-    print('❌ Google Maps API 키 설정 오류: $e');
-  }
-
+  // 앱 실행
   runApp(
     ProviderScope(
       child: ScreenUtilInit(
@@ -40,10 +23,9 @@ void main() async {
         splitScreenMode: true,
         builder: (context, child) {
           return MaterialApp(
-            theme: ThemeData(
-              fontFamily: 'NotoSansKR',
-            ),
-            home: LandingScreen(),
+            navigatorKey: navigatorKey,
+            theme: ThemeData(fontFamily: 'NotoSansKR'),
+            home: const SplashScreen(),
             debugShowCheckedModeBanner: false,
           );
         },
