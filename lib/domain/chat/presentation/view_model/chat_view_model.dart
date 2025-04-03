@@ -134,10 +134,12 @@ class ChatViewModel extends _$ChatViewModel {
       uiState: state.uiState.copyWith(isFetchingMore: true),
     );
 
+    final nextPage = state.messageState.pageNum + 1;
+
     try {
       final data = await _repository.fetchMessages(
         roomId: roomId,
-        pageNumber: state.messageState.pageNum + 1,
+        pageNumber: nextPage,
         lastMessageTimeStamp: state.messageState.lastMessageTimeStamp,
       );
 
