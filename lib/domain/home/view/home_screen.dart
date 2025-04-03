@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
 import 'package:gachtaxi_app/domain/home/components/custom_bottom_nav_bar.dart';
@@ -36,10 +37,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   Widget build(BuildContext context) {
     final bottomSheetState = ref.watch(sheetHeightNotifierProvider);
 
-    return DefaultLayout(
-      bottomNavigationBar: CustomBottomNavBar(
-          tabController: _tabController, selectedIndex: _selectedIndex),
-      child: SafeArea(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      child: DefaultLayout(
+        bottomNavigationBar: CustomBottomNavBar(
+            tabController: _tabController, selectedIndex: _selectedIndex),
         child: Stack(
           children: [
             GoogleMaps(),
@@ -47,7 +52,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               duration: const Duration(milliseconds: 300),
               top: bottomSheetState.containerHeight <=
                       bottomSheetState.basicHeight * 1.2
-                  ? 20
+                  ? 40
                   : -80,
               left: 20,
               right: 20,
