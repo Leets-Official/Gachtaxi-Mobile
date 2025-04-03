@@ -4,6 +4,8 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
+import 'package:gachtaxi_app/common/util/slide_page_route.dart';
+import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_matching_create_screen.dart';
 import 'package:gachtaxi_app/domain/home/components/default_padding.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
@@ -85,7 +87,13 @@ class ManualMatchingScreen extends ConsumerWidget {
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ManualMatchingCreateScreen(),
+                  ),
+                );
+              },
               icon: Icon(Icons.add),
             ),
           ),
