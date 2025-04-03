@@ -55,8 +55,8 @@ class ChatRepository {
   Future<void> connect({
     required int roomId,
     required Function(dynamic) onMessageReceived,
-  }) {
-    return _websocketService.connect(
+  }) async {
+    return await _websocketService.connect(
       roomId: roomId,
       onMessageReceived: onMessageReceived,
     );
