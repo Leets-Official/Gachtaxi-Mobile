@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/util/modal_util.dart';
@@ -42,7 +41,7 @@ class ChatMessage extends StatelessWidget {
         children: [
           // 상대방 메시지일 경우 프로필과 이름 표시
           if (!isMine && showProfileAndName)... [
-            _buildProfileAndName(context)
+            _buildProfileImage(context)
           ] else SizedBox(width: 48.w), // 프로필이 없는 경우에도 간격 유지
 
           Column(
@@ -71,7 +70,7 @@ class ChatMessage extends StatelessWidget {
   }
 
   // 프로필 이미지 및 이름 표시 메서드
-  Widget _buildProfileAndName(BuildContext context) {
+  Widget _buildProfileImage(BuildContext context) {
     return GestureDetector(
       onTap: () {
         _showProfileModal(context);
@@ -136,21 +135,22 @@ class ChatMessage extends StatelessWidget {
         crossAxisAlignment: alignment,
         children: [
           if (showTime) ...[
-            if (message.unreadCount! > 0) ...[
+            if (message.unreadCount != null && message.unreadCount! > 0)
               Text(
                 message.unreadCount.toString(),
                 style: TextStyle(
-                    color: AppColors.primaryTag,
-                    fontSize: AppTypography.fontSizeExtraExtraSmall.sp),
+                  color: AppColors.primaryTag,
+                  fontSize: AppTypography.fontSizeExtraExtraSmall.sp,
+                ),
               ),
-              Text(
-                formattedTime,
-                style: TextStyle(
-                    color: timeColor,
-                    fontSize: AppTypography.fontSizeExtraExtraSmall.sp),
+            Text(
+              formattedTime,
+              style: TextStyle(
+                color: timeColor,
+                fontSize: AppTypography.fontSizeExtraExtraSmall.sp,
               ),
-            ]
-          ],
+            ),
+          ]
         ],
       ),
     );
