@@ -11,7 +11,7 @@ class Button extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final Widget? icon;
-
+  final Color? borderColor;
   const Button({
     super.key,
     required this.buttonText,
@@ -20,6 +20,7 @@ class Button extends StatelessWidget {
     this.textColor,
     this.isLoading = false,
     this.icon,
+    this.borderColor,
   });
 
   @override
@@ -30,6 +31,7 @@ class Button extends StatelessWidget {
           backgroundColor: backgroundColor ?? AppColors.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
+            side: BorderSide(color: borderColor ?? Colors.transparent),
           )),
       onPressed: onPressed ?? () {},
       child: isLoading
@@ -42,23 +44,22 @@ class Button extends StatelessWidget {
               ),
             )
           : Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (icon != null) ...[
-            icon!,
-            const SizedBox(width: AppSpacing.spaceExtraMedium),
-          ],
-
-          Text(
-            buttonText,
-            style: TextStyle(
-              color: textColor ?? AppColors.neutralDark,
-              fontWeight: AppTypography.fontWeightBold,
-              fontSize: AppTypography.fontSizeMedium,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (icon != null) ...[
+                  icon!,
+                  const SizedBox(width: AppSpacing.spaceExtraMedium),
+                ],
+                Text(
+                  buttonText,
+                  style: TextStyle(
+                    color: textColor ?? AppColors.neutralDark,
+                    fontWeight: AppTypography.fontWeightBold,
+                    fontSize: AppTypography.fontSizeMedium,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
