@@ -9,7 +9,7 @@ part 'chat_message_service.g.dart';
 ChatMessageService chatMessageService(Ref ref) => ChatMessageService();
 
 class ChatMessageService {
-  static final String FETCH_CHAT_MESSAGE_PATH = "/api/chat/";
+  static const String FETCH_CHAT_MESSAGE_PATH = "/api/chat/";
 
   Future<ChatMessageResponse> fetchMessages(
     int roomId,

@@ -9,7 +9,7 @@ part 'chat_member_service.g.dart';
 ChatMemberService chatMemberService(Ref ref) => ChatMemberService();
 
 class ChatMemberService {
-  final String FETCH_CHAT_MEMBER_COUNT_PATH = "/api/chat/count/";
+  static const String FETCH_CHAT_MEMBER_COUNT_PATH = "/api/chat/count/";
 
   Future<ChatMemberCountResponse> fetchMemberCount(int roomId) async {
     try {
