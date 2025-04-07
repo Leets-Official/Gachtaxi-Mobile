@@ -18,13 +18,15 @@ class ChatMessageRepository {
     String? lastMessageTimeStamp,
   }) async {
     try {
-      final response = await ApiClient.get(
-          FETCH_CHAT_MESSAGE_PATH + roomId.toString(),
-          params: {
-            "pageNumber": pageNumber,
-            "pageSize": pageSize,
-            "lastMessageTimeStamp": lastMessageTimeStamp,
-          });
+      final uri = Uri(
+        path: '$FETCH_CHAT_MESSAGE_PATH$roomId',
+        queryParameters: {
+          "pageNumber": pageNumber.toString(),
+          "pageSize": pageSize.toString(),
+          "lastMessageTimeStamp": lastMessageTimeStamp,
+        },
+      );
+      final response = await ApiClient.get(uri);
 
       if (response.code == 200) {
         final data = response.data;

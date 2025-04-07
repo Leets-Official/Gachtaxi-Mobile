@@ -14,7 +14,7 @@ class ChatMemberRepository {
   Future<ChatMemberCountResponse> fetchMemberCount(int roomId) async {
     try {
       final response = await ApiClient.get(
-          FETCH_CHAT_MEMBER_COUNT_PATH + roomId.toString()
+          Uri.parse('$FETCH_CHAT_MEMBER_COUNT_PATH$roomId')
       );
 
       if (response.code == 200) {
