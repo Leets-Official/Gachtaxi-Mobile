@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
 
 class ChatState {
@@ -5,11 +7,11 @@ class ChatState {
   final ChatUiState uiState;
   final ChatMetaState metaState;
 
-  const ChatState({
-    this.messageState = const ChatMessageState(),
+  ChatState({
+    ChatMessageState? messageState,
     this.uiState = const ChatUiState(),
     this.metaState = const ChatMetaState(),
-  });
+  }) : messageState = messageState ?? ChatMessageState();
 
   ChatState copyWith({
     ChatMessageState? messageState,
@@ -25,20 +27,20 @@ class ChatState {
 }
 
 class ChatMessageState {
-  final List<ChatMessageModel> messages;
+  final ListQueue<ChatMessageModel> messages;
   final bool hasMoreData;
   final int pageNum;
   final String? lastMessageTimeStamp;
 
-  const ChatMessageState({
-    this.messages = const [],
+  ChatMessageState({
+    ListQueue<ChatMessageModel>? messages,
     this.hasMoreData = true,
     this.pageNum = 0,
     this.lastMessageTimeStamp,
-  });
+  }) : messages = messages ?? ListQueue();
 
   ChatMessageState copyWith({
-    List<ChatMessageModel>? messages,
+    ListQueue<ChatMessageModel>? messages,
     bool? hasMoreData,
     int? pageNum,
     String? lastMessageTimeStamp,

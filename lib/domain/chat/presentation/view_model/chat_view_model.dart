@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -24,7 +25,7 @@ class ChatViewModel extends _$ChatViewModel {
       _repository.disconnect();
     });
 
-    return const ChatState();
+    return ChatState();
   }
 
   late final ChatRepository _repository;
@@ -37,7 +38,7 @@ class ChatViewModel extends _$ChatViewModel {
       if (newMessage.messageType == MessageType.MESSAGE ||
           newMessage.messageType == MessageType.ENTER ||
           newMessage.messageType == MessageType.EXIT) {
-        final updatedMessages = [...state.messageState.messages, newMessage];
+        final updatedMessages = ListQueue.of(state.messageState.messages)..addLast(newMessage);
         state = state.copyWith(
           messageState: state.messageState.copyWith(
             messages: updatedMessages,
@@ -63,7 +64,7 @@ class ChatViewModel extends _$ChatViewModel {
     if (startMessageId == "NO_MESSAGES" || endMessageId == "NO_MESSAGES")
       return;
 
-    final updated = state.messageState.messages.map((msg) {
+    final updated = ListQueue.of(state.messageState.messages.map((msg) {
       if (msg.messageId == startMessageId) {
         return msg.copyWith(unreadCount: (msg.unreadCount ?? 0) - 1);
       } else if (msg.messageId == endMessageId) {
@@ -71,7 +72,7 @@ class ChatViewModel extends _$ChatViewModel {
       } else {
         return msg;
       }
-    }).toList();
+    }));
 
     state = state.copyWith(
       messageState: state.messageState.copyWith(messages: updated),
@@ -101,7 +102,7 @@ class ChatViewModel extends _$ChatViewModel {
         roomId: roomId,
         pageNumber: 0,
       );
-      final reversed = data.chattingMessage.reversed.toList();
+      final reversed = ListQueue.of(data.chattingMessage.reversed);
 
       state = state.copyWith(
         messageState: state.messageState.copyWith(
@@ -143,11 +144,12 @@ class ChatViewModel extends _$ChatViewModel {
         lastMessageTimeStamp: state.messageState.lastMessageTimeStamp,
       );
 
-      final reversedNew = data.chattingMessage.reversed.toList();
+      final reversedNew = ListQueue.of(data.chattingMessage.reversed);
+      final combined = ListQueue.of(reversedNew)..addAll(state.messageState.messages);
 
       state = state.copyWith(
         messageState: state.messageState.copyWith(
-          messages: [...reversedNew, ...state.messageState.messages],
+          messages: combined,
           pageNum: state.messageState.pageNum + 1,
           hasMoreData: !data.pageable.isLast,
         ),
@@ -162,18 +164,19 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   List<Widget> buildMessageList({
-    required List<ChatMessageModel> messages,
+    required ListQueue<ChatMessageModel> messages,
     required DateTime? disconnectedAt,
     required bool showNewMessagesIndicator,
     required int myUserId,
   }) {
-    final profileVisibilityMap = MessageGroupingUtil.getProfileVisibility(messages);
-    final timeVisibilityMap = MessageGroupingUtil.getTimeVisibility(messages);
+    final messageList = messages.toList();
+    final profileVisibilityMap = MessageGroupingUtil.getProfileVisibility(messageList);
+    final timeVisibilityMap = MessageGroupingUtil.getTimeVisibility(messageList);
 
     final List<Widget> messageWidgets = [];
     bool newMessagesInserted = false;
 
-    for (final message in messages) {
+    for (final message in messageList) {
       final isAfterDisconnect =
           disconnectedAt != null && message.timeStamp.isAfter(disconnectedAt);
 
