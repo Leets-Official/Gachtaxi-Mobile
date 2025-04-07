@@ -8,12 +8,12 @@ import 'package:gachtaxi_app/common/util/token_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
 
-part 'chat_websocket_service.g.dart';
+part 'chat_websocket_repository.g.dart';
 
 @riverpod
-ChatWebsocketService chatWebsocketService(Ref ref) => ChatWebsocketService();
+ChatWebsocketRepository chatWebsocketRepository(Ref ref) => ChatWebsocketRepository();
 
-class ChatWebsocketService {
+class ChatWebsocketRepository {
 
   StompClient? _stompClient;
 

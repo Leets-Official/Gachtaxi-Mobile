@@ -7,7 +7,7 @@ import 'package:gachtaxi_app/domain/chat/application/factory/chat_message_factor
 import 'package:gachtaxi_app/domain/chat/application/util/message_grouping_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/enums/chat_message_type.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
-import 'package:gachtaxi_app/domain/chat/data/repository/chat_repository.dart';
+import 'package:gachtaxi_app/domain/chat/data/repository/chat_service.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/state/chat_state.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_new_message.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,17 +18,17 @@ part 'chat_view_model.g.dart';
 class ChatViewModel extends _$ChatViewModel {
   @override
   ChatState build() {
-    final repository = ref.watch(chatRepositoryProvider);
-    _repository = repository;
+    final service = ref.watch(chatServiceProvider);
+    _service = service;
 
     ref.onDispose(() {
-      _repository.disconnect();
+      _service.disconnect();
     });
 
     return ChatState();
   }
 
-  late final ChatRepository _repository;
+  late final ChatService _service;
 
   void _handleIncomingMessage(dynamic message) {
     try {
@@ -81,7 +81,7 @@ class ChatViewModel extends _$ChatViewModel {
 
   Future<void> fetchMemberCount({required int roomId}) async {
     try {
-      final response = await _repository.fetchMemberCount(roomId);
+      final response = await _service.fetchMemberCount(roomId);
       state = state.copyWith(
         metaState: state.metaState.copyWith(
           memberCount: response.totalParticipantCount,
@@ -98,7 +98,7 @@ class ChatViewModel extends _$ChatViewModel {
     );
 
     try {
-      final data = await _repository.fetchMessages(
+      final data = await _service.fetchMessages(
         roomId: roomId,
         pageNumber: 0,
       );
@@ -138,7 +138,7 @@ class ChatViewModel extends _$ChatViewModel {
     final nextPage = state.messageState.pageNum + 1;
 
     try {
-      final data = await _repository.fetchMessages(
+      final data = await _service.fetchMessages(
         roomId: roomId,
         pageNumber: nextPage,
         lastMessageTimeStamp: state.messageState.lastMessageTimeStamp,
@@ -201,17 +201,17 @@ class ChatViewModel extends _$ChatViewModel {
   Future<void> connectWebSocket({
     required int roomId,
   }) async {
-    await _repository.connect(
+    await _service.connect(
       roomId: roomId,
       onMessageReceived: _handleIncomingMessage,
     );
   }
 
   void sendMessage(String text) {
-    _repository.sendMessage(text);
+    _service.sendMessage(text);
   }
 
   void disconnect() {
-    _repository.disconnect();
+    _service.disconnect();
   }
 }

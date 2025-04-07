@@ -3,12 +3,12 @@ import 'package:gachtaxi_app/common/util/api_client.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/response/chat_message_response.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'chat_message_service.g.dart';
+part 'chat_message_repository.g.dart';
 
 @riverpod
-ChatMessageService chatMessageService(Ref ref) => ChatMessageService();
+ChatMessageRepository chatMessageRepository(Ref ref) => ChatMessageRepository();
 
-class ChatMessageService {
+class ChatMessageRepository {
   static const String FETCH_CHAT_MESSAGE_PATH = "/api/chat/";
 
   Future<ChatMessageResponse> fetchMessages(
