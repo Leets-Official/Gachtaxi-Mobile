@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
 import 'package:gachtaxi_app/domain/home/components/custom_bottom_nav_bar.dart';
@@ -37,39 +36,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   Widget build(BuildContext context) {
     final bottomSheetState = ref.watch(sheetHeightNotifierProvider);
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-      ),
-      child: DefaultLayout(
-        bottomNavigationBar: CustomBottomNavBar(
-            tabController: _tabController, selectedIndex: _selectedIndex),
-        child: Stack(
-          children: [
-            GoogleMaps(),
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 300),
-              top: bottomSheetState.containerHeight <=
-                      bottomSheetState.basicHeight * 1.2
-                  ? 40
-                  : -80,
-              left: 20,
-              right: 20,
-              child: CustomTopBar(),
+    return DefaultLayout(
+      bottomNavigationBar: CustomBottomNavBar(
+          tabController: _tabController, selectedIndex: _selectedIndex),
+      child: Stack(
+        children: [
+          GoogleMaps(),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            top: bottomSheetState.containerHeight <=
+                    bottomSheetState.basicHeight * 1.2
+                ? 40
+                : -80,
+            left: 20,
+            right: 20,
+            child: CustomTopBar(),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeOut,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CustomBottomSheet(
+              child: TabView(tabController: _tabController!),
             ),
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.easeOut,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: CustomBottomSheet(
-                child: TabView(tabController: _tabController!),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

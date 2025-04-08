@@ -16,27 +16,43 @@ class _GoogleMapsState extends ConsumerState<GoogleMaps> {
   BitmapDescriptor? _departureIcon;
   BitmapDescriptor? _destinationIcon;
 
+  String? _mapStyle;
+
   @override
   void initState() {
     super.initState();
     _loadCustomMarkers();
+    _loadMapStyle();
   }
 
   Future<void> _loadCustomMarkers() async {
-    final departureIcon = await BitmapDescriptor.asset(
+    final departureIconFuture = BitmapDescriptor.asset(
       const ImageConfiguration(size: Size(50, 50)),
       'assets/icons/departure_marker.png',
     );
 
-    final destinationIcon = await BitmapDescriptor.asset(
+    final destinationIconFuture = BitmapDescriptor.asset(
       const ImageConfiguration(size: Size(50, 50)),
       'assets/icons/destination_marker.png',
     );
 
+    final results =
+        await Future.wait([departureIconFuture, destinationIconFuture]);
+
     setState(() {
-      _departureIcon = departureIcon;
-      _destinationIcon = destinationIcon;
+      _departureIcon = results[0];
+      _destinationIcon = results[1];
     });
+  }
+
+  Future<void> _loadMapStyle() async {
+    try {
+      _mapStyle = await DefaultAssetBundle.of(context)
+          .loadString('assets/images/google_map_style_dark.json');
+      setState(() {});
+    } catch (e) {
+      debugPrint('맵 스타일 로딩 실패: $e');
+    }
   }
 
   Future<void> _adjustCenterForBottomSheet() async {
@@ -58,11 +74,10 @@ class _GoogleMapsState extends ConsumerState<GoogleMaps> {
 
   @override
   Widget build(BuildContext context) {
-    LatLng center = ref.watch(mapLocationNotifierProvider).center.position;
-    LatLng departure =
-        ref.watch(mapLocationNotifierProvider).departure.position;
-    LatLng destination =
-        ref.watch(mapLocationNotifierProvider).destination.position;
+    final location = ref.watch(mapLocationNotifierProvider);
+    final center = location.center.position;
+    final departure = location.departure.position;
+    final destination = location.destination.position;
 
     if (_departureIcon == null || _destinationIcon == null) {
       return const Center(child: CircularProgressIndicator());
@@ -71,6 +86,7 @@ class _GoogleMapsState extends ConsumerState<GoogleMaps> {
     return GoogleMap(
       zoomControlsEnabled: false,
       mapType: MapType.normal,
+      style: _mapStyle,
       initialCameraPosition: CameraPosition(
         target: center,
         zoom: 15.8,
