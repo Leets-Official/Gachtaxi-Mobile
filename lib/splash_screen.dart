@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/app_initializer.dart';
 import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
+import 'package:gachtaxi_app/domain/landing/view/landing_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -20,17 +21,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Future<void> _startApp() async {
     try {
       await AppInitializer.initialize(ref);
-      print("✅ AppInitializer 완료");
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        MaterialPageRoute(builder: (_) => LandingScreen()),
       );
     } catch (e, stack) {
       print('❌ 초기화 중 에러: $e\n$stack');
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
