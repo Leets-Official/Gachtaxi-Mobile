@@ -122,7 +122,7 @@ class _NotificationOverlayBannerState extends State<NotificationOverlayBanner>
   Widget _buildBannerContent() {
     return Container(
       width: double.infinity.w,
-      constraints: BoxConstraints(minHeight: 64.h),
+      constraints: BoxConstraints(minHeight: 100.h),
       padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 12.h, bottom: 4.h),
       decoration: BoxDecoration(
         color: AppColors.graphite,
@@ -131,7 +131,7 @@ class _NotificationOverlayBannerState extends State<NotificationOverlayBanner>
         ),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           // 내용
           Row(

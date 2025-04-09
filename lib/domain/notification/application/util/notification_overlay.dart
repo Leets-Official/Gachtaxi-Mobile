@@ -23,10 +23,9 @@ class NotificationOverlay {
 
     _entry = OverlayEntry(
       builder: (context) {
-        final paddingTop = MediaQuery.of(context).padding.top;
 
         return Positioned(
-          top: paddingTop,
+          top: 0,
           left: 0,
           right: 0,
           child: NotificationOverlayBanner(
