@@ -13,7 +13,7 @@ class FirebaseRepository {
   Future<void> updateFcmToken(String token) async {
     try {
       final response = await ApiClient.patch(
-        FCM_TOKEN_PATCH_PATH,
+        Uri.parse(FCM_TOKEN_PATCH_PATH),
         body: {"fcmToken": token},
       );
 
