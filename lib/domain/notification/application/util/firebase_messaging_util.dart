@@ -33,10 +33,13 @@ Future<void> getFcmToken() async {
   print("📌 내 디바이스 토큰: $token");
 }
 
-// 후에 관련 로직은 스플래시 이미지에서 등록하거나 하기
-void registerTokenRefreshListener(FirebaseTokenService service) {
-  final token = FirebaseMessaging.instance.getToken().toString();
-  service.updateFcmToken(token);
+// FCM device token 등록
+Future<void> registerTokenRefreshListener(FirebaseTokenService service) async {
+  final token = await FirebaseMessaging.instance.getToken();
+
+  if (token != null) {
+    await service.updateFcmToken(token);
+  }
 
   FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
     await service.updateFcmToken(newToken);
