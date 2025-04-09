@@ -46,7 +46,7 @@ class MyMatchingCategoryScreen extends ConsumerWidget {
                   final room = myMatchingData.rooms[index];
 
                   if (index == myMatchingData.rooms.length - 1 &&
-                      !myMatchingData.pageable.last) {
+                      !myMatchingData.pageable.isLast) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       ref
                           .read(matchingDataNotifierProvider(

@@ -47,7 +47,7 @@ class ManualMatchingCategoryScreen extends ConsumerWidget {
                   final room = manualMatchingData.rooms[index];
 
                   if (index == manualMatchingData.rooms.length - 1 &&
-                      !manualMatchingData.pageable.last) {
+                      !manualMatchingData.pageable.isLast) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       ref
                           .read(matchingDataNotifierProvider(

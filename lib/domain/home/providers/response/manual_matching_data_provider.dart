@@ -40,7 +40,7 @@ class MatchingDataNotifier extends _$MatchingDataNotifier {
       ];
 
       _currentPage = nextPage;
-      _hasMoreData = !nextResponse.data!.pageable.last;
+      _hasMoreData = !nextResponse.data!.pageable.isLast;
 
       final updatedMatchingData = MatchingData(
         rooms: updatedRooms,
