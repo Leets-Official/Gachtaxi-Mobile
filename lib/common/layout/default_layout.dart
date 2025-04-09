@@ -44,6 +44,7 @@ class DefaultLayout extends StatelessWidget {
       backgroundColor: AppColors.neutralDark,
       foregroundColor: AppColors.white,
       elevation: 0,
+      scrolledUnderElevation: 0,
     );
   }
 }
