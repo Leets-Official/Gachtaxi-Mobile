@@ -24,7 +24,7 @@ class MyMatchingCategoryScreen extends ConsumerWidget {
 
     return SizedBox(
         width: double.infinity,
-        height: isExpanded ? MediaQuery.of(context).size.height * 0.7 : 220,
+        height: isExpanded ? MediaQuery.of(context).size.height * 0.68 : 220,
         child: RefreshIndicator(
           onRefresh: () async {
             await ref
