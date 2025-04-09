@@ -120,10 +120,13 @@ class _NotificationOverlayBannerState extends State<NotificationOverlayBanner>
   }
 
   Widget _buildBannerContent() {
+    final double topSafePadding = MediaQuery.of(context).padding.top;
+    final double totalHeight = topSafePadding + 64.h;
+
     return Container(
       width: double.infinity.w,
-      constraints: BoxConstraints(minHeight: 100.h),
-      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 12.h, bottom: 4.h),
+      height: totalHeight,
+      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: topSafePadding, bottom: 4.h),
       decoration: BoxDecoration(
         color: AppColors.graphite,
         borderRadius: BorderRadius.vertical(
