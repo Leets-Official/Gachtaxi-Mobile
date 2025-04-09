@@ -13,7 +13,6 @@ class NotificationOverlay {
   }) {
     final overlay = navigatorKey.currentState?.overlay;
     if (overlay == null) {
-      debugPrint('❌ overlay is null (navigatorKey.currentState?.overlay)');
       return;
     }
 
