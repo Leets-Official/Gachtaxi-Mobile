@@ -45,10 +45,9 @@ class ApiClient {
     );
 
   // GET
-  static Future<ApiResponse> get(String path,
-      {Map<String, dynamic>? params}) async {
+  static Future<ApiResponse> get(Uri uri) async {
     try {
-      final response = await _dio.get(path, queryParameters: params);
+      final response = await _dio.getUri(uri);
 
       return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
@@ -57,10 +56,9 @@ class ApiClient {
   }
 
   // POST
-  static Future<ApiResponse> post(String path,
-      {Map<String, dynamic>? body}) async {
+  static Future<ApiResponse> post(Uri uri, {Map<String, dynamic>? body}) async {
     try {
-      final response = await _dio.post(path, data: body);
+      final response = await _dio.postUri(uri, data: body);
 
       return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
@@ -69,10 +67,10 @@ class ApiClient {
   }
 
   // PATCH
-  static Future<ApiResponse> patch(String path,
+  static Future<ApiResponse> patch(Uri uri,
       {Map<String, dynamic>? body}) async {
     try {
-      final response = await _dio.patch(path, data: body);
+      final response = await _dio.patchUri(uri, data: body);
 
       return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
@@ -81,10 +79,9 @@ class ApiClient {
   }
 
   // PUT
-  static Future<ApiResponse> put(String path,
-      {Map<String, dynamic>? body}) async {
+  static Future<ApiResponse> put(Uri uri, {Map<String, dynamic>? body}) async {
     try {
-      final response = await _dio.put(path, data: body);
+      final response = await _dio.putUri(uri, data: body);
 
       return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
@@ -93,10 +90,10 @@ class ApiClient {
   }
 
   // DELETE
-  static Future<ApiResponse> delete(String path,
+  static Future<ApiResponse> delete(Uri uri,
       {Map<String, dynamic>? body}) async {
     try {
-      final response = await _dio.delete(path, data: body);
+      final response = await _dio.deleteUri(uri, data: body);
 
       return ApiResponse<dynamic>.fromJson(response.data, (json) => json);
     } catch (e) {
