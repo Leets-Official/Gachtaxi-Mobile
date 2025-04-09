@@ -10,7 +10,6 @@ import 'package:intl/date_symbol_data_local.dart';
 
 class AppInitializer {
   static Future<void> initialize(WidgetRef ref) async {
-    print("어플 초기화 시작");
     await initializeDateFormatting();
     await TokenStorage.saveDevToken();
 
@@ -19,7 +18,7 @@ class AppInitializer {
     await requestNotificationPermission();
     await initializeNotification();
 
-    if (Platform.isAndroid) { //아이폰은 개발자 계정 없이 사용 불가
+    if (Platform.isAndroid) { //아이폰은 개발자 계정 없이 사용 불가. 계정 생성 후 조건문 해제
       final service = ref.read(firebaseTokenServiceProvider);
       registerTokenRefreshListener(service);
     }

@@ -27,7 +27,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         MaterialPageRoute(builder: (_) => LandingScreen()),
       );
     } catch (e, stack) {
-      print('❌ 초기화 중 에러: $e\n$stack');
+      print('초기화 중 에러: $e\n$stack');
     }
   }
 
