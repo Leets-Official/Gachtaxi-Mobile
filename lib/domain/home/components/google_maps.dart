@@ -91,6 +91,13 @@ class _GoogleMapsState extends ConsumerState<GoogleMaps> {
         target: center,
         zoom: 15.8,
       ),
+      minMaxZoomPreference: const MinMaxZoomPreference(7.0, 18.0),
+      cameraTargetBounds: CameraTargetBounds(
+        LatLngBounds(
+          southwest: LatLng(33.0, 124.0),
+          northeast: LatLng(39.5, 131.0),
+        ),
+      ),
       onMapCreated: (GoogleMapController controller) {
         _controller = controller;
         _adjustCenterForBottomSheet();

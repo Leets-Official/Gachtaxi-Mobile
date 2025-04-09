@@ -12,7 +12,8 @@
     "stylers": [
       {
         "color": "#5c5c5c"
-      }
+      },
+      { "visibility": "on" }
     ]
   },
   {
@@ -20,7 +21,8 @@
     "stylers": [
       {
         "color": "#5e6f77"
-      }
+      },
+      { "visibility": "on" }
     ]
   },
   {
