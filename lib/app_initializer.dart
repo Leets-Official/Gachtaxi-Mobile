@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +12,6 @@ class AppInitializer {
   static Future<void> initialize(WidgetRef ref) async {
     print("어플 초기화 시작");
     await initializeDateFormatting();
-    await dotenv.load();
     await TokenStorage.saveDevToken();
 
     await _setGoogleMapsApiKey();
