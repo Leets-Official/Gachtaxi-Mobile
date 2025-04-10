@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_room_model.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
+import 'package:gachtaxi_app/domain/home/services/manual_matching_join_service.dart';
 import 'package:intl/intl.dart';
 
 class ManualMatchingCard extends ConsumerStatefulWidget {
@@ -106,9 +107,19 @@ class _ManualMatchingCardState extends ConsumerState<ManualMatchingCard> {
             padding: const EdgeInsets.only(top: AppSpacing.spaceCommon),
             child: Button(
               buttonText: '참여하기',
-              onPressed: () {
-                // API 로직 확인 후 적용 예정
-                _goMyMatchingScreenTap();
+              onPressed: () async {
+                final res =
+                    await ManualMatchingJoinService.joinManualMatchingRoom(
+                        widget.matchingRoom.roomId);
+                try {
+                  if (res.code == 200) {
+                    _goMyMatchingScreenTap();
+                  } else {
+                    debugPrint('매칭방 참여 실패 : ${res.message}');
+                  }
+                } catch (e) {
+                  debugPrint('매칭방 참여 실패 : $e');
+                }
               },
             ),
           ),
