@@ -29,7 +29,7 @@ class MyMatchingRoomService {
       },
     );
 
-    final response = await ApiClient.get(uri.toString());
+    final response = await ApiClient.get(uri);
 
     if (response.code == 200) {
       final data = response.data;
