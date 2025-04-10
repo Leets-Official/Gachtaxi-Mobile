@@ -15,15 +15,3 @@ class MatchingData with _$MatchingData {
   factory MatchingData.fromJson(Map<String, dynamic> json) =>
       _$MatchingDataFromJson(json);
 }
-
-@freezed
-class ManualMatchingResponse with _$ManualMatchingResponse {
-  const factory ManualMatchingResponse({
-    required int code,
-    required String message,
-    required MatchingData data,
-  }) = _ManualMatchingResponse;
-
-  factory ManualMatchingResponse.fromJson(Map<String, dynamic> json) =>
-      _$ManualMatchingResponseFromJson(json);
-}
