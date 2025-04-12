@@ -11,6 +11,7 @@ class AppColors {
   static const Color neutralAccent = Color(0xFF4F624A);
   static const Color neutralBorder = Color(0xFF4B5E46);
   static const Color inputGrey = Color(0xFF787272);
+  static const Color toastBackground = Color(0xFF555555);
 
   // 세컨더리 색상
   static const Color secondary = Color(0xFF2A3328);
