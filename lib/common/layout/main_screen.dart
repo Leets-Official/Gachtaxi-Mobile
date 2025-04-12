@@ -11,45 +11,59 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-  late final _homeScreen = HomeScreen(
-    tabController: _tabController,
-  );
+class _MainScreenState extends State<MainScreen> {
+  final PageController _pageController = PageController();
   int _selectedIndex = 0;
+  int previousIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 4, vsync: this);
-    _tabController.addListener(_handleTabChange);
-  }
+  void _onNavItemTapped(int index) {
+    final wasInMyPage = _selectedIndex == 3;
 
-  void _handleTabChange() {
-    if (_tabController.index == 3) {
-      setState(() {
-        _selectedIndex = 3;
-      });
-    } else {
-      setState(() {
-        _selectedIndex = _tabController.index;
-      });
+    setState(() {
+      if (_selectedIndex != 3) {
+        previousIndex = _selectedIndex;
+      }
+      _selectedIndex = index;
+    });
+
+    if (index != 3) {
+      wasInMyPage
+          ? _pageController.jumpToPage(index)
+          : _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
     }
   }
 
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   Widget _buildBody() {
-    return Stack(
-      children: [
-        Offstage(
-          offstage: _selectedIndex == 3,
-          child: _homeScreen,
-        ),
-        Offstage(
-          offstage: _selectedIndex != 3,
-          child: const MyPageScreen(),
-        ),
-      ],
+    return PopScope(
+      canPop: _selectedIndex != 3,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop && _selectedIndex == 3) {
+          setState(() => _selectedIndex = previousIndex);
+        }
+      },
+      child: Stack(
+        children: [
+          Offstage(
+            offstage: _selectedIndex == 3,
+            child: RepaintBoundary(
+                child: HomeScreen(pageController: _pageController)),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 3,
+            child: const RepaintBoundary(child: MyPageScreen()),
+          ),
+        ],
+      ),
     );
   }
 
@@ -57,8 +71,8 @@ class _MainScreenState extends State<MainScreen>
   Widget build(BuildContext context) {
     return DefaultLayout(
       bottomNavigationBar: CustomBottomNavBar(
-        tabController: _tabController,
         selectedIndex: _selectedIndex,
+        onTap: _onNavItemTapped,
       ),
       child: _buildBody(),
     );

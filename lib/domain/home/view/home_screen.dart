@@ -7,9 +7,9 @@ import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart
 import 'package:gachtaxi_app/domain/home/view/tab-view/tab_view.dart';
 
 class HomeScreen extends ConsumerWidget {
-  final TabController tabController;
+  final PageController pageController;
 
-  const HomeScreen({super.key, required this.tabController});
+  const HomeScreen({super.key, required this.pageController});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +36,7 @@ class HomeScreen extends ConsumerWidget {
             left: 0,
             right: 0,
             child: CustomBottomSheet(
-              child: TabView(tabController: tabController),
+              child: TabView(pageController: pageController),
             ),
           )
         ],
