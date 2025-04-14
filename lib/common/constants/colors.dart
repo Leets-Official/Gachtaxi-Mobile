@@ -6,7 +6,7 @@ class AppColors {
   static const Color primaryTag = Color(0xFF05D976);
 
   // 배경 및 컴포넌트 색상
-  static const Color neutralDark = Color(0xFF141513);
+  static const Color neutralDark = Color(0xFF0F0F0F);
   static const Color neutralComponent = Color(0xFF20271E);
   static const Color neutralAccent = Color(0xFF4F624A);
   static const Color neutralBorder = Color(0xFF4B5E46);
@@ -21,7 +21,6 @@ class AppColors {
   static const Color darkGray = Color(0xFF838383);
   static const Color lightGray = Color(0xFFD9D9D9);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color graphite = Color(0xFF0F0F0F);
 
   // 채팅
   static const Color chatInputField = Color(0xFF465443);
