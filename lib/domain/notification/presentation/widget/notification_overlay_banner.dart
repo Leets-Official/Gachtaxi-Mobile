@@ -128,7 +128,7 @@ class _NotificationOverlayBannerState extends State<NotificationOverlayBanner>
       height: totalHeight,
       padding: EdgeInsets.only(left: 20.w, right: 20.w, top: topSafePadding, bottom: 4.h),
       decoration: BoxDecoration(
-        color: AppColors.graphite,
+        color: AppColors.neutralDark,
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(10.r),
         ),
