@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:gachtaxi_app/domain/notification/application/util/notification_overlay.dart';
 import 'package:gachtaxi_app/domain/notification/data/service/firebase_token_service.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:vibration/vibration.dart';
 
 // 백그라운드 메시지 핸들러
 @pragma('vm:entry-point')
@@ -12,9 +13,13 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> initializeNotification() async {
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-  FirebaseMessaging.onMessage.listen((message) {
+  FirebaseMessaging.onMessage.listen((message) async {
     final title = message.notification?.title ?? message.data['title'] ?? '알림';
     final body = message.notification?.body ?? message.data['body'] ?? '내용';
+
+    if (await Vibration.hasVibrator() ?? false) {
+    Vibration.vibrate(duration: 300);
+    }
 
     NotificationOverlay.show(title: title, body: body);
   });
