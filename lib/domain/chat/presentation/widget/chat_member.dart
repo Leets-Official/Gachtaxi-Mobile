@@ -210,7 +210,7 @@ class ChatMemberState extends ConsumerState<ChatMember> {
             ),
             onPressed: () async {
               final bool success = await chatMatchingService.exitMatching(widget.category, widget.matchingRoomId);
-              if (success) {
+              if (success && mounted) {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_) => const HomeScreen()),
                       (route) => false,
