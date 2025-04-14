@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/common/util/modal_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user_dummy.dart';
+import 'package:gachtaxi_app/domain/chat/data/service/chat_matching_service.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
+import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
 
-class ChatMember extends StatefulWidget {
-  const ChatMember({super.key});
+class ChatMember extends ConsumerStatefulWidget {
+  final MatchingCategory category;
+  final int matchingRoomId;
+
+  const ChatMember({super.key, required this.category, required this.matchingRoomId});
 
   @override
   ChatMemberState createState() => ChatMemberState();
 }
 
-class ChatMemberState extends State<ChatMember> {
+class ChatMemberState extends ConsumerState<ChatMember> {
   double _positionX = -1.0; // 처음엔 오른쪽 끝에 배치
 
   @override
@@ -39,6 +46,7 @@ class ChatMemberState extends State<ChatMember> {
   }
 
   final List<ChatUserModel> users = ChatUserDummy.generateUserDummy();
+
 
   @override
   Widget build(BuildContext context) {
@@ -184,6 +192,8 @@ class ChatMemberState extends State<ChatMember> {
   }
 
   Widget _buildExitButton() {
+    final chatMatchingService = ref.read(chatMatchingServiceProvider);
+
     return Container(
       width: double.infinity,
       height: 50.h,
@@ -198,7 +208,15 @@ class ChatMemberState extends State<ChatMember> {
               width: 30.w,
               height: 30.h,
             ),
-            onPressed: _close,
+            onPressed: () async {
+              final bool success = await chatMatchingService.exitMatching(widget.category, widget.matchingRoomId);
+              if (success) {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => const HomeScreen()),
+                      (route) => false,
+                );
+              }
+            },
           ),
         ],
       ),
