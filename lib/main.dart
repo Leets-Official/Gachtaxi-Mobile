@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/util/token_storage.dart';
 import 'package:gachtaxi_app/domain/landing/view/landing_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -41,7 +42,17 @@ void main() async {
         builder: (context, child) {
           return MaterialApp(
             theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  systemNavigationBarColor: AppColors.neutralDark,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarDividerColor: Colors.transparent,
+                ),
+              ),
               fontFamily: 'NotoSansKR',
+              splashFactory: NoSplash.splashFactory,
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
             ),
             home: LandingScreen(),
             debugShowCheckedModeBanner: false,

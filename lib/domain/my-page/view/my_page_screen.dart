@@ -22,7 +22,7 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen>
     final List<Map<String, dynamic>> menuItems = [
       {'text': '공지 사항', 'onTap': () => debugPrint('공지 사항 클릭')},
       {'text': '문의 사항', 'onTap': () => debugPrint('문의 사항 클릭')},
-      {'text': '계좌번호 설정', 'onTap': () => debugPrint('계좌번호 설정')},
+      {'text': '이용 약관', 'onTap': () => debugPrint('이용 약관 클릭')},
       {'text': '로그아웃 및 탈퇴', 'onTap': () => debugPrint('로그아웃 및 탈퇴')},
     ];
 
@@ -55,7 +55,7 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen>
                     Navigator.push(
                         context,
                         SlidePageRoute(
-                          screen: const ProfileModifyScreen(),
+                          screen: ProfileModifyScreen(),
                         ));
                   },
                   icon: Icon(
@@ -92,9 +92,9 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen>
                 ),
                 const Expanded(child: SizedBox()),
                 Text(
-                  '0000 0000 0000',
+                  '계좌번호 설정이 필요해요!',
                   style: const TextStyle(
-                    color: Colors.white70, // 약간 흐린 색상
+                    color: Colors.white70,
                     fontSize: AppTypography.fontSizeMedium,
                   ),
                 )
