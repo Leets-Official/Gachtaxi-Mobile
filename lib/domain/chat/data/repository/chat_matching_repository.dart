@@ -29,11 +29,11 @@ class ChatMatchingRepository {
     }
   }
 
-  // 수동 마감 (현재 수동만 마감이 있으므로 수동인 경우에만 호출하도록 하기)
+  // 자동+수동 모두 manual로 API 요청
   Future<bool> completeMatching(MatchingCategory category, int matchingRoomId) async {
     try {
       final response = await ApiClient.patch(
-          Uri.parse('$MATCHING_ROOM_PATH/${category.name}/$matchingRoomId/complete'));
+          Uri.parse('$MATCHING_ROOM_PATH/manual/$matchingRoomId/complete'));
 
       return response.code == 200;
     } catch (e) {
