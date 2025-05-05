@@ -6,7 +6,7 @@ class AppColors {
   static const Color primaryTag = Color(0xFF05D976);
 
   // 배경 및 컴포넌트 색상
-  static const Color neutralDark = Color(0xFF141513);
+  static const Color neutralDark = Color(0xFF0F0F0F);
   static const Color neutralComponent = Color(0xFF20271E);
   static const Color neutralAccent = Color(0xFF4F624A);
   static const Color neutralBorder = Color(0xFF4B5E46);

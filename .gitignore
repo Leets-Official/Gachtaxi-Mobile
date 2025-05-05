@@ -26,6 +26,10 @@ migrate_working_dir/
 **/android/cmake-build-debug/
 **/android/app/build/
 **/android/build/
+**/android/app/google-services.json
+
+# ios
+**/ios/Runner/GoogleService-Info.plist
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -59,3 +63,6 @@ app.*.map.json
 /android/app/release
 
 .env
+
+# ios
+!/ios/Runner/GoogleService-Info.plist
