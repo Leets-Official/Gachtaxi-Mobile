@@ -56,6 +56,7 @@ dependencies:
   firebase_messaging: ^15.2.4
   permission_handler: ^11.4.0
   vibration: ^3.1.3
+  flutter_native_splash: ^2.4.4
 
 dev_dependencies:
   flutter_test:
@@ -133,3 +134,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_native_splash:
+  color: "#0F0F0F"
+  image: assets/icons/taxi.png
+  android_12:
+    image: assets/icons/taxi.png
+    icon_background_color: "#0F0F0F"
+  fullscreen: true
