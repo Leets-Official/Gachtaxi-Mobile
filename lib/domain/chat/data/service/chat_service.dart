@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/response/chat_member_count_response.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/response/chat_message_response.dart';
-import 'package:gachtaxi_app/domain/chat/data/service/chat_member_repository.dart';
-import 'package:gachtaxi_app/domain/chat/data/service/chat_message_repository.dart';
-import 'package:gachtaxi_app/domain/chat/data/service/chat_websocket_repository.dart';
+import 'package:gachtaxi_app/domain/chat/data/repository/chat_member_repository.dart';
+import 'package:gachtaxi_app/domain/chat/data/repository/chat_message_repository.dart';
+import 'package:gachtaxi_app/domain/chat/data/repository/chat_websocket_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_service.g.dart';
@@ -11,9 +11,9 @@ part 'chat_service.g.dart';
 @riverpod
 ChatService chatService(Ref ref) {
   return ChatService(
-    memberService: ref.watch(chatMemberRepositoryProvider),
-    messageService: ref.watch(chatMessageRepositoryProvider),
-    websocketService: ref.watch(chatWebsocketRepositoryProvider),
+    memberRepository: ref.watch(chatMemberRepositoryProvider),
+    messageRepository: ref.watch(chatMessageRepositoryProvider),
+    websocketRepository: ref.watch(chatWebsocketRepositoryProvider),
   );
 }
 
@@ -25,12 +25,12 @@ class ChatService {
   final int pageSize = 15;
 
   const ChatService({
-    required ChatMemberRepository memberService,
-    required ChatMessageRepository messageService,
-    required ChatWebsocketRepository websocketService,
-  })  : _memberRepository = memberService,
-        _messageRepository = messageService,
-        _websocketRepository = websocketService;
+    required ChatMemberRepository memberRepository,
+    required ChatMessageRepository messageRepository,
+    required ChatWebsocketRepository websocketRepository,
+  })  : _memberRepository = memberRepository,
+        _messageRepository = messageRepository,
+        _websocketRepository = websocketRepository;
 
   // 멤버
   Future<ChatMemberCountResponse> fetchMemberCount(int roomId) {
