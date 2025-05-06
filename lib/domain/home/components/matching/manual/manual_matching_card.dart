@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/util/modal_utils.dart';
+import 'package:gachtaxi_app/domain/home/components/matching/manual/send_my_matching_screen_modal.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_room_model.dart';
+import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
+import 'package:gachtaxi_app/domain/home/services/manual_matching_join_service.dart';
 import 'package:intl/intl.dart';
 
-class ManualMatchingCard extends StatefulWidget {
+class ManualMatchingCard extends ConsumerStatefulWidget {
   final MatchingRoom matchingRoom;
   final bool isManualMatching;
 
@@ -19,10 +24,10 @@ class ManualMatchingCard extends StatefulWidget {
   });
 
   @override
-  _ManualMatchingCardState createState() => _ManualMatchingCardState();
+  ConsumerState<ManualMatchingCard> createState() => _ManualMatchingCardState();
 }
 
-class _ManualMatchingCardState extends State<ManualMatchingCard> {
+class _ManualMatchingCardState extends ConsumerState<ManualMatchingCard> {
   late bool isExpand;
   late bool showExpandedContent;
 
@@ -104,6 +109,21 @@ class _ManualMatchingCardState extends State<ManualMatchingCard> {
             padding: const EdgeInsets.only(top: AppSpacing.spaceCommon),
             child: Button(
               buttonText: '참여하기',
+              onPressed: () async {
+                final res =
+                    await ManualMatchingJoinService.joinManualMatchingRoom(
+                        widget.matchingRoom.roomId);
+                try {
+                  if (res.code == 200 && context.mounted) {
+                    ModalUtils.showCommonBottomSheet(
+                        context: context, content: SendMyMatchingScreenModal());
+                  } else {
+                    debugPrint('매칭방 참여 실패 : ${res.message}');
+                  }
+                } catch (e) {
+                  debugPrint('매칭방 참여 실패 : $e');
+                }
+              },
             ),
           ),
       ],
@@ -252,7 +272,9 @@ class _Route extends StatelessWidget {
               height: 80.h,
               child: SingleChildScrollView(
                 child: Text(
-                  matchingRoom.description,
+                  matchingRoom.description.isEmpty
+                      ? '추가된 내용이 없습니다.'
+                      : matchingRoom.description,
                   style: _buildTextStyle(
                     color: Colors.white,
                   ),
