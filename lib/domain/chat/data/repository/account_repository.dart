@@ -12,9 +12,6 @@ AccountRepository accountRepository(Ref ref) =>
 class AccountRepository {
   static const String ACCOUNT_PATH = "/api/accounts";
 
-  /*
-  아래 API 코드 테스트 필요
-   */
   // 계좌 조회
   Future<AccountResponse> getAccount() async {
     try {
