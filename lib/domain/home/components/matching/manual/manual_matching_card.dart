@@ -9,7 +9,6 @@ import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/util/modal_utils.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/send_my_matching_screen_modal.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_room_model.dart';
-import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
 import 'package:gachtaxi_app/domain/home/services/manual_matching_join_service.dart';
 import 'package:intl/intl.dart';
 
@@ -40,6 +39,9 @@ class _ManualMatchingCardState extends ConsumerState<ManualMatchingCard> {
 
   @override
   Widget build(BuildContext context) {
+    final joinState = ref.watch(manualMatchingJoinServiceProvider);
+    final isLoading = joinState is AsyncLoading;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -108,21 +110,29 @@ class _ManualMatchingCardState extends ConsumerState<ManualMatchingCard> {
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.spaceCommon),
             child: Button(
+              isLoading: isLoading,
               buttonText: '참여하기',
               onPressed: () async {
-                final res =
-                    await ManualMatchingJoinService.joinManualMatchingRoom(
-                        widget.matchingRoom.roomId);
-                try {
-                  if (res.code == 200 && context.mounted) {
-                    ModalUtils.showCommonBottomSheet(
-                        context: context, content: SendMyMatchingScreenModal());
-                  } else {
-                    debugPrint('매칭방 참여 실패 : ${res.message}');
-                  }
-                } catch (e) {
-                  debugPrint('매칭방 참여 실패 : $e');
-                }
+                final notifier =
+                    ref.read(manualMatchingJoinServiceProvider.notifier);
+                await notifier.join(widget.matchingRoom.roomId);
+
+                final response = ref.read(manualMatchingJoinServiceProvider);
+
+                response.when(
+                  data: (data) {
+                    if (data?.code == 200 && context.mounted) {
+                      ModalUtils.showCommonBottomSheet(
+                        context: context,
+                        content: SendMyMatchingScreenModal(),
+                      );
+                    } else {
+                      debugPrint('매칭방 참여 실패 : ${data?.message}');
+                    }
+                  },
+                  loading: () => debugPrint("참여 중..."),
+                  error: (e, _) => debugPrint('매칭방 참여 실패 : $e'),
+                );
               },
             ),
           ),
