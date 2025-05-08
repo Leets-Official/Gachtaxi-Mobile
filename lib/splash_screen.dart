@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/app_initializer.dart';
-import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
+import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/domain/landing/view/landing_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -33,6 +33,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    return Scaffold(
+      backgroundColor: AppColors.neutralDark,
+    );
   }
 }
