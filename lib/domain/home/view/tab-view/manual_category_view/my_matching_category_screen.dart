@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_matching_card.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/no_matching_viewer.dart';
 import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
-import 'package:gachtaxi_app/domain/home/services/my_matching_room_service.dart';
 
 class MyMatchingCategoryScreen extends ConsumerWidget {
   final bool isManualMatching;
@@ -16,8 +16,8 @@ class MyMatchingCategoryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final myMatchingState = ref.watch(
-        matchingDataNotifierProvider(MyMatchingRoomService.fetchMatchingRooms));
+    final myMatchingState =
+        ref.watch(matchingDataNotifierProvider(MatchingCategory.my));
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
     final isExpanded = containerHeight > sheetHeightState.basicHeight * 1.3;
@@ -28,9 +28,8 @@ class MyMatchingCategoryScreen extends ConsumerWidget {
         child: RefreshIndicator(
           onRefresh: () async {
             await ref
-                .read(matchingDataNotifierProvider(
-                        MyMatchingRoomService.fetchMatchingRooms)
-                    .notifier)
+                .read(
+                    matchingDataNotifierProvider(MatchingCategory.my).notifier)
                 .refresh();
           },
           child: myMatchingState.when(
@@ -49,10 +48,10 @@ class MyMatchingCategoryScreen extends ConsumerWidget {
                       !myMatchingData.pageable.isLast) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       ref
-                          .read(matchingDataNotifierProvider(
-                                  MyMatchingRoomService.fetchMatchingRooms)
-                              .notifier)
-                          .fetchMoreData();
+                          .read(
+                              matchingDataNotifierProvider(MatchingCategory.my)
+                                  .notifier)
+                          .fetchMore();
                     });
                   }
 

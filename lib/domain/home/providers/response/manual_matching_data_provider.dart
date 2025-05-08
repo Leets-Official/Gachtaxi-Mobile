@@ -1,5 +1,7 @@
+import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/common/model/api_response.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_response_model.dart';
+import 'package:gachtaxi_app/domain/home/services/matching_room_service_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'manual_matching_data_provider.g.dart';
@@ -7,56 +9,53 @@ part 'manual_matching_data_provider.g.dart';
 @riverpod
 class MatchingDataNotifier extends _$MatchingDataNotifier {
   final int _pageSize = 5;
-  bool _isFetchingMore = false;
-  late Future<ApiResponse<MatchingData>> Function(int, int) _fetchService;
   int _currentPage = 0;
-  bool _hasMoreData = true;
+  bool _hasMore = true;
+  bool _isFetchingMore = false;
+  late MatchingCategory _roomType;
 
   @override
-  Future<ApiResponse<MatchingData>> build(
-      Future<ApiResponse<MatchingData>> Function(int, int) fetchService) async {
-    _fetchService = fetchService;
+  Future<ApiResponse<MatchingData>> build(MatchingCategory type) async {
+    _roomType = type;
     _currentPage = 0;
-    _hasMoreData = true;
-    return _fetchData(_currentPage);
+    _hasMore = true;
+    return await _fetchPage(_currentPage);
   }
 
-  Future<ApiResponse<MatchingData>> _fetchData(int pageNumber) async {
-    return await _fetchService(pageNumber, _pageSize);
+  Future<ApiResponse<MatchingData>> _fetchPage(int page) async {
+    final service = ref.read(matchingRoomServiceProvider);
+    return await service.fetchMatchingRooms(_roomType, page, _pageSize);
   }
 
-  Future<void> fetchMoreData() async {
-    if (_isFetchingMore || !_hasMoreData) return;
+  Future<void> fetchMore() async {
+    if (_isFetchingMore || !_hasMore) return;
     _isFetchingMore = true;
 
     try {
       final nextPage = _currentPage + 1;
-      final nextResponse = await _fetchData(nextPage);
+      final nextResponse = await _fetchPage(nextPage);
+      final current = state.valueOrNull;
 
-      final currentData = state.valueOrNull;
       final updatedRooms = [
-        ...?currentData?.data?.rooms,
+        ...?current?.data?.rooms,
         ...?nextResponse.data?.rooms,
       ];
 
+      _hasMore = !nextResponse.data!.pageable.isLast;
       _currentPage = nextPage;
-      _hasMoreData = !nextResponse.data!.pageable.isLast;
 
-      final updatedMatchingData = MatchingData(
-        rooms: updatedRooms,
-        pageable: nextResponse.data!.pageable,
-      );
-
-      final mergedApiResponse = ApiResponse(
+      final merged = ApiResponse(
         code: nextResponse.code,
         message: nextResponse.message,
-        data: updatedMatchingData,
+        data: MatchingData(
+          rooms: updatedRooms,
+          pageable: nextResponse.data!.pageable,
+        ),
       );
 
-      state = AsyncData(mergedApiResponse);
-    } catch (e, stackTrace) {
-      state = AsyncError<ApiResponse<MatchingData>>(e, stackTrace)
-          .copyWithPrevious(state);
+      state = AsyncData(merged);
+    } catch (e, stack) {
+      state = AsyncError(e, stack);
     } finally {
       _isFetchingMore = false;
     }
@@ -64,17 +63,14 @@ class MatchingDataNotifier extends _$MatchingDataNotifier {
 
   Future<void> refresh() async {
     state = const AsyncLoading();
+    _currentPage = 0;
+    _hasMore = true;
+
     try {
-      final response = await _fetchData(0);
-
-      if (state.valueOrNull != response) {
-        state = AsyncData(response);
-      }
-
-      _currentPage = 0;
-      _hasMoreData = true;
-    } catch (e, stackTrace) {
-      state = AsyncError(e, stackTrace);
+      final response = await _fetchPage(0);
+      state = AsyncData(response);
+    } catch (e, stack) {
+      state = AsyncError(e, stack);
     }
   }
 }
