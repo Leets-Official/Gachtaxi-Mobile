@@ -5,9 +5,9 @@ import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_r
 class ManualMatchingRoomService {
   static final Map<int, MatchingData> _cache = {};
   static DateTime? _lastFetchTime;
-  static const Duration cacheDuration = Duration(minutes: 3);
+  static const Duration cacheDuration = Duration(seconds: 30);
 
-  static Future<ApiResponse<MatchingData>> fetchMatchingRooms(
+  Future<ApiResponse<MatchingData>> fetchMatchingRooms(
       int pageNumber, int pageSize) async {
     final now = DateTime.now();
 
@@ -52,7 +52,7 @@ class ManualMatchingRoomService {
     }
   }
 
-  static void clearCache() {
+  void clearCache() {
     _cache.clear();
     _lastFetchTime = null;
   }

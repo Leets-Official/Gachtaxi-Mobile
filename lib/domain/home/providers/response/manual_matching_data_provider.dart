@@ -61,8 +61,9 @@ class MatchingDataNotifier extends _$MatchingDataNotifier {
     }
   }
 
-  Future<void> refresh() async {
-    state = const AsyncLoading();
+  Future<void> refresh(MatchingCategory type) async {
+    final service = ref.read(matchingRoomServiceProvider);
+    service.clearCache(type);
     _currentPage = 0;
     _hasMore = true;
 
