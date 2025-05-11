@@ -17,16 +17,10 @@ class CustomPullToRefresh extends StatefulWidget {
 
 class _CustomPullToRefreshState extends State<CustomPullToRefresh>
     with SingleTickerProviderStateMixin {
-  double _dragOffset = 0;
-  bool _isRefreshing = false;
-  bool _hasTriggeredRefresh = false;
-
-  static const double triggerOffset = 100;
-
   late final AnimationController _controller;
   late final Animation<double> _refreshDropAnimation;
 
-  bool get _shouldShowIcon => _dragOffset > 0 || _isRefreshing;
+  double? _dragStartY; // 드래그 시작 위치 저장
 
   @override
   void initState() {
@@ -41,27 +35,12 @@ class _CustomPullToRefreshState extends State<CustomPullToRefresh>
     );
   }
 
-  bool _canTriggerRefresh(ScrollMetrics metrics) {
-    return metrics.pixels <= metrics.minScrollExtent;
-  }
-
-  void _startRefresh() {
-    _isRefreshing = true;
-    _hasTriggeredRefresh = true;
-
-    _controller.forward(); // 아이콘 내려오는 애니메이션
-
-    widget.onRefresh().then((_) {
-      if (!mounted) return;
-
-      _controller.reverse(); // 아이콘 다시 올라감
-
-      setState(() {
-        _dragOffset = 0;
-        _isRefreshing = false;
-        _hasTriggeredRefresh = false;
-      });
-    });
+  Future<void> _startDropAnimation() async {
+    if (_controller.isAnimating) return;
+    await _controller.forward();
+    widget.onRefresh();
+    await Future.delayed(const Duration(milliseconds: 300));
+    await _controller.reverse();
   }
 
   @override
@@ -72,54 +51,42 @@ class _CustomPullToRefreshState extends State<CustomPullToRefresh>
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener<ScrollNotification>(
-      onNotification: (notification) {
-        if (notification is OverscrollNotification &&
-            notification.metrics.axis == Axis.vertical &&
-            _canTriggerRefresh(notification.metrics)) {
-          setState(() {
-            if (!_isRefreshing) {
-              _dragOffset = (_dragOffset + notification.overscroll)
-                  .clamp(0, triggerOffset);
-
-              if (_dragOffset >= triggerOffset && !_hasTriggeredRefresh) {
-                _startRefresh(); // 한 번만 호출됨
-              }
-            }
-          });
+    return Listener(
+      onPointerDown: (event) {
+        _dragStartY = event.position.dy;
+      },
+      onPointerMove: (event) {
+        if (_dragStartY != null) {
+          final dragDistance = event.position.dy - _dragStartY!;
+          if (dragDistance > 20) {
+            _dragStartY = null; // 한 번만 실행
+            _startDropAnimation();
+          }
         }
-
-        if (notification is ScrollEndNotification && !_isRefreshing) {
-          setState(() {
-            _dragOffset = 0;
-          });
-        }
-
-        return false;
+      },
+      onPointerUp: (_) {
+        _dragStartY = null;
       },
       child: Stack(
         children: [
           widget.child,
-          if (_shouldShowIcon)
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (context, child) {
-                final offsetY = _isRefreshing
-                    ? _refreshDropAnimation.value
-                    : (_dragOffset / 2).clamp(0, triggerOffset / 2) + 10;
-
-                return Positioned(
-                  top: offsetY.toDouble(),
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: SvgPicture.asset(
-                      'assets/icons/refresh_icon.svg',
-                    ),
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              double value = _refreshDropAnimation.value;
+              if (value < 0) return const SizedBox.shrink();
+              return Positioned(
+                top: value <= 10 ? value : 10,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/icons/refresh_icon.svg',
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
