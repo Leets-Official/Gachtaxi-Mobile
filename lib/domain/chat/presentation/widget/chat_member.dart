@@ -61,7 +61,7 @@ class ChatMemberState extends State<ChatMember> {
             width: 300.w,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: AppColors.neutralComponent,
+              color: AppColors.charcoalGray, //아직 미정
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,9 +121,9 @@ class ChatMemberState extends State<ChatMember> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                ProfileImage.circleAvatar(
+                ProfileImage.squareAvatar(
                   imageUrl: user.profilePicture,
-                  size: 18,
+                  size: 36.r,
                 ),
                 if (user.isOwner)
                   Positioned(
@@ -171,7 +171,7 @@ class ChatMemberState extends State<ChatMember> {
                         color: AppColors.black,
                         fontSize: AppTypography.fontSizeExtraSmall.sp,
                         fontWeight: AppTypography.fontWeightSemibold,
-                        height: 1.0, // 텍스트 중앙 배치 조정
+                        height: 1.0.h,
                       ),
                     ),
                   ),
