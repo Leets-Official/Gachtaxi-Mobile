@@ -23,7 +23,7 @@ class ChatMessage extends StatelessWidget {
   });
 
   // 읽기 전용
-  Color get bubbleColor => isMine ? AppColors.primaryTag : AppColors.neutralComponent;
+  Color get bubbleColor => isMine ? AppColors.primaryTag : AppColors.charcoalGray;
   Color get messageTextColor => isMine ? AppColors.black : AppColors.white;
   Color get timeColor => AppColors.darkGray;
 
@@ -77,9 +77,9 @@ class ChatMessage extends StatelessWidget {
       },
       child: Padding(
         padding: EdgeInsets.only(right: 8.w),
-        child: ProfileImage.circleAvatar(
+        child: ProfileImage.squareAvatar(
           imageUrl: message.profilePicture.toString(),
-          size: 19,
+          size: 36,
         )
       ),
     );
