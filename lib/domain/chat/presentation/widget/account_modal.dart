@@ -12,8 +12,7 @@ class AccountModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Modal(
-      height: 144.h,
-      buttonText: "전송하기",
+      height: 108.h,
       onPress: () {},
       content: Padding(
         padding: EdgeInsets.only(bottom: 15.h),
