@@ -17,7 +17,7 @@ class ChatActionBar extends StatelessWidget {
       width: double.infinity,
       height: 144.h,
       decoration: BoxDecoration(
-        color: AppColors.neutralComponent,
+        color: AppColors.charcoalGray,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,7 +63,7 @@ class ChatActionBar extends StatelessWidget {
             width: 50.w,
             height: 50.w,
             decoration: BoxDecoration(
-              color: AppColors.neutralDark,
+              color: AppColors.neutralDark, // 아직 미정
               shape: BoxShape.circle,
             ),
             child: Center(
