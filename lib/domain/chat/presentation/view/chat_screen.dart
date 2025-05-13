@@ -63,7 +63,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors.chatInputField,
+        systemNavigationBarColor: AppColors.singleGray,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
@@ -138,7 +138,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
                 ),
               ),
               Container(
-                color: AppColors.neutralComponent,
+                color: AppColors.charcoalGray,
                 child: SafeArea(
                   child: ChatInputField(focusNode: _focusNode),
                 ),
