@@ -23,7 +23,7 @@ class HomeScreen extends ConsumerWidget {
             duration: const Duration(milliseconds: 300),
             top: bottomSheetState.containerHeight <=
                     bottomSheetState.basicHeight * 1.2
-                ? 20
+                ? MediaQuery.of(context).padding.top
                 : -80,
             left: 20,
             right: 20,
