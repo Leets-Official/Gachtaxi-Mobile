@@ -4,11 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomPullToRefresh extends StatefulWidget {
   final Widget child;
   final Future<void> Function() onRefresh;
+  final ScrollController scrollController;
 
   const CustomPullToRefresh({
     super.key,
     required this.child,
     required this.onRefresh,
+    required this.scrollController,
   });
 
   @override
@@ -21,6 +23,8 @@ class _CustomPullToRefreshState extends State<CustomPullToRefresh>
   late final Animation<double> _refreshDropAnimation;
 
   double? _dragStartY; // 드래그 시작 위치 저장
+  bool _refreshing = false; // 새로고침 중 플래그
+  bool _pullHandled = false;
 
   @override
   void initState() {
@@ -37,10 +41,16 @@ class _CustomPullToRefreshState extends State<CustomPullToRefresh>
 
   Future<void> _startDropAnimation() async {
     if (_controller.isAnimating) return;
+    setState(() {
+      _refreshing = true;
+    });
     await _controller.forward();
-    widget.onRefresh();
+    await widget.onRefresh();
     await Future.delayed(const Duration(milliseconds: 300));
     await _controller.reverse();
+    setState(() {
+      _refreshing = false;
+    });
   }
 
   @override
@@ -53,19 +63,30 @@ class _CustomPullToRefreshState extends State<CustomPullToRefresh>
   Widget build(BuildContext context) {
     return Listener(
       onPointerDown: (event) {
-        _dragStartY = event.position.dy;
+        if (widget.scrollController.hasClients &&
+            widget.scrollController.offset <= 0 &&
+            !_refreshing) {
+          _dragStartY = event.position.dy;
+          _pullHandled = false; // 새 드래그 시작
+        } else {
+          _dragStartY = null;
+        }
       },
       onPointerMove: (event) {
-        if (_dragStartY != null) {
+        if (_dragStartY != null && !_refreshing && !_pullHandled) {
           final dragDistance = event.position.dy - _dragStartY!;
-          if (dragDistance > 20) {
-            _dragStartY = null; // 한 번만 실행
+          if (widget.scrollController.hasClients &&
+              widget.scrollController.offset <= 0 &&
+              dragDistance > 20) {
+            _pullHandled = true; // 한 번만 실행
+            _dragStartY = null;
             _startDropAnimation();
           }
         }
       },
       onPointerUp: (_) {
         _dragStartY = null;
+        _pullHandled = false; // 손가락을 뗄 때 다시 허용
       },
       child: Stack(
         children: [
