@@ -51,7 +51,7 @@ class LocationCard extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _LocationField(controller: departureController),
-                  Divider(color: AppColors.neutralAccent),
+                  Divider(color: AppColors.darkGray),
                   _LocationField(controller: destinationController),
                 ],
               ),

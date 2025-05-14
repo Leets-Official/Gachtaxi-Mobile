@@ -39,32 +39,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     return DefaultLayout(
       bottomNavigationBar: CustomBottomNavBar(
           tabController: _tabController, selectedIndex: _selectedIndex),
-      child: SafeArea(
-        child: Stack(
-          children: [
-            GoogleMaps(),
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 300),
-              top: bottomSheetState.containerHeight <=
-                      bottomSheetState.basicHeight * 1.2
-                  ? 20
-                  : -80,
-              left: 20,
-              right: 20,
-              child: CustomTopBar(),
+      child: Stack(
+        children: [
+          GoogleMaps(),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            top: bottomSheetState.containerHeight <=
+                    bottomSheetState.basicHeight * 1.2
+                ? MediaQuery.of(context).padding.top
+                : -80,
+            left: 20,
+            right: 20,
+            child: CustomTopBar(),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeOut,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CustomBottomSheet(
+              child: TabView(tabController: _tabController!),
             ),
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.easeOut,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: CustomBottomSheet(
-                child: TabView(tabController: _tabController!),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
