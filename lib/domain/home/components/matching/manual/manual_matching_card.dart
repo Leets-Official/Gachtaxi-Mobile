@@ -67,7 +67,7 @@ class _ManualMatchingCardState extends ConsumerState<ManualMatchingCard> {
             width: double.infinity,
             constraints: BoxConstraints(
               minHeight: 164.h,
-              maxHeight: isExpand ? 310.h : 164.h,
+              maxHeight: isExpand ? 352.h : 164.h,
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
@@ -94,48 +94,56 @@ class _ManualMatchingCardState extends ConsumerState<ManualMatchingCard> {
                     matchingRoom: widget.matchingRoom,
                     isExpand: showExpandedContent,
                   ),
+                  SizedBox(
+                    height: 16.0,
+                  ),
                   _Route(
                     matchingRoom: widget.matchingRoom,
                     isExpand: showExpandedContent,
                   ),
-                  _TagList(
-                    tags: widget.matchingRoom.tags,
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: _TagList(
+                      tags: widget.matchingRoom.tags,
+                    ),
                   ),
+                  if (showExpandedContent && widget.isManualMatching)
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: AppSpacing.spaceCommon),
+                      child: Button(
+                        isLoading: isLoading,
+                        buttonText: '참여하기',
+                        onPressed: () async {
+                          final notifier = ref
+                              .read(manualMatchingJoinServiceProvider.notifier);
+                          await notifier.join(widget.matchingRoom.roomId);
+
+                          final response =
+                              ref.read(manualMatchingJoinServiceProvider);
+
+                          response.when(
+                            data: (data) {
+                              if (data?.code == 200 && context.mounted) {
+                                ModalUtils.showCommonBottomSheet(
+                                  context: context,
+                                  content: SendMyMatchingScreenModal(),
+                                );
+                              } else {
+                                debugPrint('매칭방 참여 실패 : ${data?.message}');
+                              }
+                            },
+                            loading: () => debugPrint("참여 중..."),
+                            error: (e, _) => debugPrint('매칭방 참여 실패 : $e'),
+                          );
+                        },
+                      ),
+                    ),
                 ],
               ),
             ),
           ),
         ),
-        if (showExpandedContent && widget.isManualMatching)
-          Padding(
-            padding: const EdgeInsets.only(top: AppSpacing.spaceCommon),
-            child: Button(
-              isLoading: isLoading,
-              buttonText: '참여하기',
-              onPressed: () async {
-                final notifier =
-                    ref.read(manualMatchingJoinServiceProvider.notifier);
-                await notifier.join(widget.matchingRoom.roomId);
-
-                final response = ref.read(manualMatchingJoinServiceProvider);
-
-                response.when(
-                  data: (data) {
-                    if (data?.code == 200 && context.mounted) {
-                      ModalUtils.showCommonBottomSheet(
-                        context: context,
-                        content: SendMyMatchingScreenModal(),
-                      );
-                    } else {
-                      debugPrint('매칭방 참여 실패 : ${data?.message}');
-                    }
-                  },
-                  loading: () => debugPrint("참여 중..."),
-                  error: (e, _) => debugPrint('매칭방 참여 실패 : $e'),
-                );
-              },
-            ),
-          ),
       ],
     );
   }
@@ -154,55 +162,60 @@ class _MatchingInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildRow(
-          _formatDateTime(matchingRoom.departureTime),
-          '${matchingRoom.currentMembers}/${matchingRoom.maxCapacity}',
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildProfileImage(
+              matchingRoom.profilePicture,
+            ),
+            SizedBox(
+              width: AppSpacing.spaceMedium,
+            ),
+            _buildRow(
+              _formatDateTime(matchingRoom.departureTime),
+              '${matchingRoom.currentMembers}/${matchingRoom.maxCapacity}',
+            ),
+          ],
         ),
-        if (isExpand) ...[
-          const SizedBox(
-            height: AppSpacing.spaceCommon,
-          ),
-          Row(
-            children: [
-              _buildProfileImage(
-                matchingRoom.profilePicture,
-              ),
-              SizedBox(
-                width: AppSpacing.spaceSmall,
-              ),
-              Text(
-                '${matchingRoom.nickname}님의 매칭',
-                style: _buildTextStyle(),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: AppSpacing.spaceCommon,
-          ),
-        ],
       ],
     );
   }
 
-  Row _buildRow(String leftText, String rightText) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          leftText,
-          style: _buildTextStyle(
-            fontSize: AppTypography.fontSizeLarge,
-            fontWeight: AppTypography.fontWeightBold,
+  Expanded _buildRow(String leftText, String rightText) {
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                leftText,
+                style: _buildTextStyle(
+                  fontSize: AppTypography.fontSizeMedium,
+                  fontWeight: AppTypography.fontWeightBold,
+                ),
+              ),
+              if (isExpand) ...[
+                Text(
+                  '${matchingRoom.nickname}',
+                  style: _buildTextStyle(
+                    fontSize: AppTypography.fontSizeExtraSmall,
+                  ),
+                ),
+              ]
+            ],
           ),
-        ),
-        Text(
-          rightText,
-          style: _buildTextStyle(
-            fontSize: AppTypography.fontSizeSmall,
-            fontWeight: AppTypography.fontWeightSemibold,
+          Text(
+            rightText,
+            style: _buildTextStyle(
+              fontSize: AppTypography.fontSizeSmall,
+              fontWeight: AppTypography.fontWeightSemibold,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -227,27 +240,32 @@ class _MatchingInfo extends StatelessWidget {
 
   String _formatDateTime(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString).toLocal();
-    String weekDay = DateFormat('E', 'ko_KR').format(dateTime);
     String formattedTime = DateFormat('a hh:mm', 'ko_KR').format(dateTime);
 
-    return '${DateFormat('MM-dd', 'ko_KR').format(dateTime)}($weekDay) $formattedTime';
+    return formattedTime;
   }
 }
 
 // 매칭 카드의 경로, 확장시 설명까지 렌더링하는 UI
-class _Route extends StatelessWidget {
+class _Route extends StatefulWidget {
   final MatchingRoom matchingRoom;
   final bool isExpand;
 
   const _Route({super.key, required this.matchingRoom, required this.isExpand});
 
   @override
+  State<_Route> createState() => _RouteState();
+}
+
+class _RouteState extends State<_Route> {
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment:
-            isExpand ? MainAxisAlignment.start : MainAxisAlignment.center,
+        mainAxisAlignment: widget.isExpand
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -258,14 +276,14 @@ class _Route extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    matchingRoom.departure,
+                    widget.matchingRoom.departure,
                     style: _buildTextStyle(
                       color: AppColors.darkGray,
                     ),
                   ),
                   SizedBox(height: 10.h),
                   Text(
-                    matchingRoom.destination,
+                    widget.matchingRoom.destination,
                     style: _buildTextStyle(
                       color: AppColors.darkGray,
                     ),
@@ -274,17 +292,17 @@ class _Route extends StatelessWidget {
               ),
             ],
           ),
-          if (isExpand) ...[
+          if (widget.isExpand) ...[
             const SizedBox(
               height: AppSpacing.spaceCommon,
             ),
             SizedBox(
-              height: 80.h,
+              height: 60.h,
               child: SingleChildScrollView(
                 child: Text(
-                  matchingRoom.description.isEmpty
+                  widget.matchingRoom.description.isEmpty
                       ? '추가된 내용이 없습니다.'
-                      : matchingRoom.description,
+                      : widget.matchingRoom.description,
                   style: _buildTextStyle(
                     color: Colors.white,
                   ),
@@ -319,16 +337,24 @@ class _TagList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 28.h,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: tags.length,
-        itemBuilder: (context, index) => ListElement(
-          elementTitle: tags[index],
-        ),
-        separatorBuilder: (context, index) => SizedBox(
-          width: 10.w,
-        ),
-      ),
+      child: tags.isNotEmpty
+          ? ListView.separated(
+              reverse: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: tags.length,
+              itemBuilder: (context, index) => ListElement(
+                elementTitle: tags[index],
+              ),
+              separatorBuilder: (context, index) => SizedBox(
+                width: 10.w,
+              ),
+            )
+          : Text(
+              '태그가 없습니다',
+              style: TextStyle(
+                color: AppColors.darkGray,
+              ),
+            ),
     );
   }
 }
