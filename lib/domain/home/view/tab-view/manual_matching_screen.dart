@@ -7,6 +7,7 @@ import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_matching_create_screen.dart';
 import 'package:gachtaxi_app/domain/home/components/default_padding.dart';
+import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/manual_category_view/manual_matching_category_screen.dart';
@@ -44,10 +45,24 @@ class ManualMatchingScreen extends ConsumerWidget {
                   ),
                   const SizedBox(width: AppSpacing.spaceSmall),
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       ref
                           .read(manualMatchingChangeNotifierProvider.notifier)
                           .toggleCategory();
+
+                      if (isManual) {
+                        await ref
+                            .read(matchingDataNotifierProvider(
+                                    MatchingCategory.my)
+                                .notifier)
+                            .refresh(MatchingCategory.my);
+                      } else {
+                        await ref
+                            .read(matchingDataNotifierProvider(
+                                    MatchingCategory.manual)
+                                .notifier)
+                            .refresh(MatchingCategory.manual);
+                      }
                     },
                     child: Text(
                       isManual

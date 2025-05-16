@@ -4,7 +4,6 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
-import 'package:gachtaxi_app/domain/home/components/matching/custom_pull_to_refresh.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_matching_card.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/no_matching_viewer.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_room_model.dart';
