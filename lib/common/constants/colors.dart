@@ -11,7 +11,7 @@ class AppColors {
   static const Color neutralAccent = Color(0xFF4F624A);
   static const Color neutralBorder = Color(0xFF4B5E46);
   static const Color inputGrey = Color(0xFF787272);
-  static const Color toastBackground = Color(0xFF555555);
+  static const Color toastBackground = Color(0xFF2E2F2F);
 
   // 세컨더리 색상
   static const Color secondary = Color(0xFF2A3328);
@@ -26,4 +26,6 @@ class AppColors {
   // 채팅
   static const Color chatInputField = Color(0xFF465443);
   static const Color chatInputFieldHintText = Color(0xFF2A3328);
+
+  // 토스트
 }
