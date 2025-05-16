@@ -5,7 +5,9 @@ import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/components/default_padding.dart';
+import 'package:gachtaxi_app/domain/my-page/components/logout_or_withdraw_modal.dart';
 import 'package:gachtaxi_app/domain/my-page/components/profile.dart';
+import 'package:gachtaxi_app/domain/my-page/view/notices_screen.dart';
 import 'package:gachtaxi_app/domain/my-page/view/profile_modify_screen.dart';
 
 class MyPageScreen extends ConsumerStatefulWidget {
@@ -20,10 +22,25 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen>
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> menuItems = [
-      {'text': '공지 사항', 'onTap': () => debugPrint('공지 사항 클릭')},
+      {
+        'text': '공지 사항',
+        'onTap': () => Navigator.push(
+            context,
+            SlidePageRoute(
+              screen: NoticesScreen(),
+            ))
+      },
       {'text': '문의 사항', 'onTap': () => debugPrint('문의 사항 클릭')},
       {'text': '이용 약관', 'onTap': () => debugPrint('이용 약관 클릭')},
-      {'text': '로그아웃 및 탈퇴', 'onTap': () => debugPrint('로그아웃 및 탈퇴')},
+      {
+        'text': '로그아웃 및 탈퇴',
+        'onTap': () => showModalBottomSheet(
+            context: context,
+            backgroundColor: Colors.transparent,
+            builder: (BuildContext context) {
+              return LogoutOrWithdrawModal();
+            })
+      },
     ];
 
     return SafeArea(
