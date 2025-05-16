@@ -26,7 +26,7 @@ class ToastShowUtils {
           color: AppColors.toastBackground,
         ),
         showIcon: false,
-        autoCloseDuration: const Duration(seconds: 30),
+        autoCloseDuration: const Duration(seconds: 3),
         alignment: Alignment.bottomCenter,
         closeButton: ToastCloseButton(
           showType: CloseButtonShowType.onHover,
