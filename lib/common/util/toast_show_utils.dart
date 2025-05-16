@@ -10,46 +10,26 @@ class ToastShowUtils {
 
   void showSuccess(String message) {
     toastification.show(
-      context: context,
-      title: Text(
-        message,
-        style: const TextStyle(
-          color: Colors.white70,
-          fontSize: AppTypography.fontSizeSmall,
-          fontWeight: AppTypography.fontWeightBold,
+        context: context,
+        title: Text(
+          message,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: AppTypography.fontSizeMedium,
+            fontWeight: AppTypography.fontWeightMedium,
+          ),
         ),
-      ),
-      type: ToastificationType.success,
-      style: ToastificationStyle.flat,
-      backgroundColor: AppColors.toastBackground,
-      borderSide: BorderSide(
-        color: AppColors.toastBackground,
-      ),
-      showIcon: false,
-      autoCloseDuration: const Duration(seconds: 3),
-      alignment: Alignment.bottomCenter,
-    );
-  }
-
-  void showError(String message) {
-    toastification.show(
-      context: context,
-      title: Text(message),
-      type: ToastificationType.error,
-      style: ToastificationStyle.fillColored,
-      autoCloseDuration: const Duration(seconds: 3),
-      alignment: Alignment.bottomCenter,
-    );
-  }
-
-  void showInfo(String message) {
-    toastification.show(
-      context: context,
-      title: Text(message),
-      type: ToastificationType.info,
-      style: ToastificationStyle.fillColored,
-      autoCloseDuration: const Duration(seconds: 3),
-      alignment: Alignment.bottomCenter,
-    );
+        type: ToastificationType.success,
+        style: ToastificationStyle.flat,
+        backgroundColor: AppColors.toastBackground,
+        borderSide: BorderSide(
+          color: AppColors.toastBackground,
+        ),
+        showIcon: false,
+        autoCloseDuration: const Duration(seconds: 30),
+        alignment: Alignment.bottomCenter,
+        closeButton: ToastCloseButton(
+          showType: CloseButtonShowType.onHover,
+        ));
   }
 }
