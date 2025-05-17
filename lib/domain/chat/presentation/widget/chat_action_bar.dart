@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/common/util/modal_util.dart';
+import 'package:gachtaxi_app/domain/chat/data/service/chat_matching_service.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/view/taxi_call_screen.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/account_modal.dart';
 
-class ChatActionBar extends StatelessWidget {
-  const ChatActionBar({super.key});
+class ChatActionBar extends ConsumerWidget {
+  final MatchingCategory category;
+  final int matchingRoomId;
+
+  const ChatActionBar({super.key, required this.category, required this.matchingRoomId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final chatMatchingService = ref.read(chatMatchingServiceProvider);
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16.h),
       width: double.infinity,
@@ -46,6 +54,12 @@ class ChatActionBar extends StatelessWidget {
           _buildActionItem(
             icon: "assets/icons/matching_stop_icon.svg",
             label: "매칭 마감",
+            onTap: () async {
+              final bool success = await chatMatchingService.completeMatching(category, matchingRoomId);
+              if (success) {
+                // 모달? 토스트? 띄우기
+              }
+            }
           ),
         ],
       ),

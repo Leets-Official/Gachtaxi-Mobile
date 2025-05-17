@@ -7,7 +7,7 @@ import 'package:gachtaxi_app/domain/chat/application/factory/chat_message_factor
 import 'package:gachtaxi_app/domain/chat/application/util/message_grouping_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/enums/chat_message_type.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
-import 'package:gachtaxi_app/domain/chat/data/repository/chat_service.dart';
+import 'package:gachtaxi_app/domain/chat/data/service/chat_service.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/state/chat_state.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_new_message.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
