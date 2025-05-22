@@ -31,8 +31,8 @@ class BottomSheetHeightState {
   final double maxHeight;
 
   BottomSheetHeightState({
-    this.containerHeight = 330,
-    this.basicHeight = 330,
+    this.containerHeight = 350,
+    this.basicHeight = 350,
     this.minHeight = 80,
     required this.maxHeight,
   });
