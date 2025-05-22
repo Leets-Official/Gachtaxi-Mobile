@@ -35,14 +35,6 @@ class ProfileModifyScreen extends StatelessWidget {
                 hintText: '닉네임을 입력해주세요',
                 controller: nicknameController,
               ),
-              const SizedBox(
-                height: AppSpacing.spaceExtraLarge,
-              ),
-              InputField(
-                label: '계좌번호',
-                hintText: '계좌번호을 입력해주세요',
-                controller: accountController,
-              ),
               const Expanded(
                 child: SizedBox(),
               ),
