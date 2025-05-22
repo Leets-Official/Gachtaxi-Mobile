@@ -97,25 +97,36 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen>
             const SizedBox(
               height: AppSpacing.spaceExtraLarge,
             ),
-            Row(
-              children: [
-                Text(
-                  "계좌번호",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: AppTypography.fontSizeLarge,
-                    fontWeight: AppTypography.fontWeightMedium,
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (BuildContext context) {
+                      return LogoutOrWithdrawModal();
+                    });
+              },
+              behavior: HitTestBehavior.opaque,
+              child: Row(
+                children: [
+                  Text(
+                    "계좌번호",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: AppTypography.fontSizeLarge,
+                      fontWeight: AppTypography.fontWeightMedium,
+                    ),
                   ),
-                ),
-                const Expanded(child: SizedBox()),
-                Text(
-                  '계좌번호 설정이 필요해요!',
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: AppTypography.fontSizeMedium,
-                  ),
-                )
-              ],
+                  const Expanded(child: SizedBox()),
+                  Text(
+                    '계좌번호 설정이 필요해요!',
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: AppTypography.fontSizeMedium,
+                    ),
+                  )
+                ],
+              ),
             ),
             const SizedBox(
               height: AppSpacing.spaceExtraLarge,
