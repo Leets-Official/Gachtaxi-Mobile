@@ -32,6 +32,7 @@ class ManualMatchingScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     isManual
@@ -43,8 +44,12 @@ class ManualMatchingScreen extends ConsumerWidget {
                       fontWeight: AppTypography.fontWeightBold,
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.spaceSmall),
+                  const SizedBox(width: AppSpacing.spaceMedium),
                   TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
                     onPressed: () async {
                       ref
                           .read(manualMatchingChangeNotifierProvider.notifier)
@@ -70,6 +75,7 @@ class ManualMatchingScreen extends ConsumerWidget {
                           : MatchingCategory.manual.label,
                       style: TextStyle(
                         color: AppColors.darkGray,
+                        fontSize: AppTypography.fontSizeMedium,
                         decorationColor: AppColors.darkGray,
                         decoration: TextDecoration.underline,
                       ),
