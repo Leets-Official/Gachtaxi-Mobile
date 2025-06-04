@@ -1,178 +1,77 @@
-import 'package:gachtaxi_app/common/model/pageable_model.dart';
+import 'package:gachtaxi_app/common/enums/matching_category.dart';
+import 'package:gachtaxi_app/common/model/api_response.dart';
 import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_response_model.dart';
-import 'package:gachtaxi_app/domain/home/model/manual-matching/manual_matching_room_model.dart';
+import 'package:gachtaxi_app/domain/home/services/matching_room_service_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'manual_matching_data_provider.g.dart';
 
 @riverpod
-class ManualMatchingDataNotifier extends _$ManualMatchingDataNotifier {
+class MatchingDataNotifier extends _$MatchingDataNotifier {
+  final int _pageSize = 5;
+  int _currentPage = 0;
+  bool _hasMore = true;
+  bool _isFetchingMore = false;
+  late MatchingCategory _roomType;
+
   @override
-  ManualMatchingResponse build() { 
-    return _getDummyMatchingResponse();
+  Future<ApiResponse<MatchingData>> build(MatchingCategory type) async {
+    _roomType = type;
+    _currentPage = 0;
+    _hasMore = true;
+    return await _fetchPage(_currentPage);
   }
 
-  void fetchMatchingRooms() {
-    state = _getDummyMatchingResponse();
+  Future<ApiResponse<MatchingData>> _fetchPage(int page) async {
+    final service = ref.read(matchingRoomServiceProvider);
+    return await service.fetchMatchingRooms(_roomType, page, _pageSize);
   }
 
-  ManualMatchingResponse _getDummyMatchingResponse() {
-    return ManualMatchingResponse(
-      code: 200,
-      message: "수동 매칭방 조회에 성공했습니다.",
-      data: MatchingData(
-        rooms: [
-          MatchingRoom(
-            roomId: 1,
-            chattingRoomId: 1,
-            nickname: "이지훈",
-            profilePicture:
-                "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-            description:
-                "가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동",
-            departure: "가천대학교 1번 출구",
-            destination: "기숙사 정문",
-            departureTime: "2024-02-14T15:30:00",
-            departureDate: "2024-02-14",
-            maxCapacity: 4,
-            currentMembers: 1,
-            tags: ["NO_SMOKE"],
-          ),
-          MatchingRoom(
-            roomId: 2,
-            chattingRoomId: 2,
-            nickname: "김주영",
-            profilePicture:
-                "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-            description: "가천대학교 1번 출구에서 기숙사 정문까지 이동",
-            departure: "가천대학교 1번 출구",
-            destination: "기숙사 정문",
-            departureTime: "2024-02-16T17:30:00",
-            departureDate: "2024-02-16",
-            maxCapacity: 4,
-            currentMembers: 1,
-            tags: ["ONLY_MALE"],
-          ),
-          MatchingRoom(
-            roomId: 1,
-            chattingRoomId: 1,
-            nickname: "이지훈",
-            profilePicture:
-                "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-            description:
-                "가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동",
-            departure: "가천대학교 1번 출구",
-            destination: "기숙사 정문",
-            departureTime: "2024-02-14T15:30:00",
-            departureDate: "2024-02-14",
-            maxCapacity: 4,
-            currentMembers: 1,
-            tags: ["NO_SMOKE"],
-          ),
-          MatchingRoom(
-            roomId: 1,
-            chattingRoomId: 1,
-            nickname: "이지훈",
-            profilePicture:
-                "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-            description:
-                "가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동",
-            departure: "가천대학교 1번 출구",
-            destination: "기숙사 정문",
-            departureTime: "2024-02-14T15:30:00",
-            departureDate: "2024-02-14",
-            maxCapacity: 4,
-            currentMembers: 1,
-            tags: ["NO_SMOKE"],
-          ),
-          // MatchingRoom(
-          //   roomId: 1,
-          //   chattingRoomId: 1,
-          //   nickname: "이지훈",
-          //   profilePicture:
-          //       "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-          //   description:
-          //       "가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동",
-          //   departure: "가천대학교 1번 출구",
-          //   destination: "기숙사 정문",
-          //   departureTime: DateTime.parse("2024-02-14T15:30:00"),
-          //   departureDate: "2024-02-14",
-          //   maxCapacity: 4,
-          //   currentMembers: 1,
-          //   tags: ["NO_SMOKE"],
-          // ),
-          // MatchingRoom(
-          //   roomId: 1,
-          //   chattingRoomId: 1,
-          //   nickname: "이지훈",
-          //   profilePicture:
-          //       "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-          //   description:
-          //       "가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동",
-          //   departure: "가천대학교 1번 출구",
-          //   destination: "기숙사 정문",
-          //   departureTime: DateTime.parse("2024-02-14T15:30:00"),
-          //   departureDate: "2024-02-14",
-          //   maxCapacity: 4,
-          //   currentMembers: 1,
-          //   tags: ["NO_SMOKE"],
-          // ),
-          // MatchingRoom(
-          //   roomId: 1,
-          //   chattingRoomId: 1,
-          //   nickname: "이지훈",
-          //   profilePicture:
-          //       "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-          //   description:
-          //       "가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동",
-          //   departure: "가천대학교 1번 출구",
-          //   destination: "기숙사 정문",
-          //   departureTime: DateTime.parse("2024-02-14T15:30:00"),
-          //   departureDate: "2024-02-14",
-          //   maxCapacity: 4,
-          //   currentMembers: 1,
-          //   tags: ["NO_SMOKE"],
-          // ),
-          // MatchingRoom(
-          //   roomId: 1,
-          //   chattingRoomId: 1,
-          //   nickname: "이지훈",
-          //   profilePicture:
-          //       "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-          //   description:
-          //       "가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동",
-          //   departure: "가천대학교 1번 출구",
-          //   destination: "기숙사 정문",
-          //   departureTime: DateTime.parse("2024-02-14T15:30:00"),
-          //   departureDate: "2024-02-14",
-          //   maxCapacity: 4,
-          //   currentMembers: 1,
-          //   tags: ["NO_SMOKE"],
-          // ),
-          // MatchingRoom(
-          //   roomId: 1,
-          //   chattingRoomId: 1,
-          //   nickname: "이지훈",
-          //   profilePicture:
-          //       "https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4",
-          //   description:
-          //       "가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동가천대학교 1번 출구에서 기숙사 정문까지 이동",
-          //   departure: "가천대학교 1번 출구",
-          //   destination: "기숙사 정문",
-          //   departureTime: DateTime.parse("2024-02-14T15:30:00"),
-          //   departureDate: "2024-02-14",
-          //   maxCapacity: 4,
-          //   currentMembers: 1,
-          //   tags: ["NO_SMOKE"],
-          // ),
-        ],
-        pageable: Pageable(
-          pageNumber: 0,
-          pageSize: 5,
-          numberOfElements: 2,
-          isLast: true,
+  Future<void> fetchMore() async {
+    if (_isFetchingMore || !_hasMore) return;
+    _isFetchingMore = true;
+
+    try {
+      final nextPage = _currentPage + 1;
+      final nextResponse = await _fetchPage(nextPage);
+      final current = state.valueOrNull;
+
+      final updatedRooms = [
+        ...?current?.data?.rooms,
+        ...?nextResponse.data?.rooms,
+      ];
+
+      _hasMore = !nextResponse.data!.pageable.isLast;
+      _currentPage = nextPage;
+
+      final merged = ApiResponse(
+        code: nextResponse.code,
+        message: nextResponse.message,
+        data: MatchingData(
+          rooms: updatedRooms,
+          pageable: nextResponse.data!.pageable,
         ),
-      ),
-    );
+      );
+
+      state = AsyncData(merged);
+    } catch (e, stack) {
+      state = AsyncError(e, stack);
+    } finally {
+      _isFetchingMore = false;
+    }
+  }
+
+  Future<void> refresh(MatchingCategory type) async {
+    final service = ref.read(matchingRoomServiceProvider);
+    service.clearCache(type);
+    _currentPage = 0;
+    _hasMore = true;
+
+    try {
+      final response = await _fetchPage(0);
+      state = AsyncData(response);
+    } catch (e, stack) {
+      state = AsyncError(e, stack);
+    }
   }
 }
