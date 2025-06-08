@@ -1,65 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/auto_matching_screen.dart';
-import 'package:gachtaxi_app/domain/home/view/tab-view/friend_list_screen.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/manual_matching_screen.dart';
-import 'package:gachtaxi_app/domain/my-page/view/my_page_screen.dart';
+import 'package:gachtaxi_app/domain/home/view/tab-view/friend_list_screen.dart';
 
-class TabView extends StatefulWidget {
+class TabView extends StatelessWidget {
   const TabView({
     super.key,
-    required this.tabController,
+    required this.pageController,
   });
 
-  final TabController tabController;
-
-  @override
-  State<TabView> createState() => _TabViewState();
-}
-
-class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
-  int _previousIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.tabController.addListener(_handleTabChange);
-  }
-
-  @override
-  void dispose() {
-    widget.tabController.removeListener(_handleTabChange);
-    super.dispose();
-  }
-
-  void _handleTabChange() {
-    if (widget.tabController.index == 3) {
-      _previousIndex =
-          _previousIndex != 3 ? widget.tabController.previousIndex : 0;
-      Future.microtask(() {
-        if (!mounted) return;
-        Navigator.of(context).push(
-          SlidePageRoute(screen: MyPageScreen()),
-        );
-        if (mounted) {
-          setState(() {
-            widget.tabController.index = _previousIndex; // 이전 탭으로 복귀
-          });
-        }
-      });
-    }
-  }
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      controller: widget.tabController,
+    return PageView(
+      controller: pageController,
       physics: const NeverScrollableScrollPhysics(),
-      children: [
+      children: const [
         AutoMatchingScreen(),
         ManualMatchingScreen(),
         FriendListScreen(),
-        Container(),
       ],
     );
   }

@@ -70,6 +70,7 @@ class _ManualMatchingCategoryScreenState
               if (manualMatchingData == null ||
                   manualMatchingData.rooms.isEmpty) {
                 return ListView(
+                  controller: _scrollController,
                   padding: EdgeInsets.zero,
                   reverse: true,
                   scrollDirection: Axis.vertical,

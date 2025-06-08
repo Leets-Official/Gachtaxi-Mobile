@@ -14,7 +14,7 @@ class Pofile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          'assets/icons/profile_icon.svg',
+          'assets/icons/profile_on_icon.svg',
           width: 56,
           height: 56,
         ),
@@ -25,37 +25,19 @@ class Pofile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Text(
-                  '닉네임',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: AppTypography.fontSizeLarge,
-                  ),
-                ),
-                IconButton(
-                  style: IconButton.styleFrom(
-                    iconSize: 20,
-                    foregroundColor: Colors.white,
-                  ),
-                  visualDensity: VisualDensity.compact,
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.create_rounded,
-                  ),
-                )
-              ],
+            Text(
+              '닉네임',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: AppTypography.fontSizeLarge,
+              ),
             ),
             Text(
-              '202020200',
+              '학번 : 202020200',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: AppTypography.fontWeightSemibold),
             ),
-            const SizedBox(
-              height: 10,
-            )
           ],
         )
       ],
