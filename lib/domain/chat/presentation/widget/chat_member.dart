@@ -88,14 +88,29 @@ class ChatMemberState extends ConsumerState<ChatMember> {
   Widget _buildHeader() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      child: Text(
-        '대화 상대',
-        style: TextStyle(
-          color: AppColors.white,
-          fontSize: AppTypography.fontSizeExtraLarge.sp,
-          fontWeight: AppTypography.fontWeightBold,
-          decoration: TextDecoration.none,
-        ),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: _close,
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.white,
+              size: 20.w,
+            ),
+          ),
+
+          SizedBox(width: 8.w),
+
+          Text(
+            '대화 상대',
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: AppTypography.fontSizeExtraLarge.sp,
+              fontWeight: AppTypography.fontWeightBold,
+              decoration: TextDecoration.none,
+            ),
+          ),
+        ],
       ),
     );
   }
