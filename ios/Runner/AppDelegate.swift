@@ -1,6 +1,7 @@
 import Flutter
 import UIKit
 import GoogleMaps
+import Firebase
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -8,6 +9,9 @@ import GoogleMaps
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+    // Firebase 초기화
+      FirebaseApp.configure()
+
     // Flutter 엔진 초기화
     let controller = self.window?.rootViewController as! FlutterViewController
     let channel = FlutterMethodChannel(name: "com.gachtaxi.app/maps", binaryMessenger: controller.binaryMessenger)
