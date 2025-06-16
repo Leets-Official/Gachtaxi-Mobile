@@ -20,7 +20,7 @@ class ChatEnterExitMessage extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
           decoration: BoxDecoration(
-            color: AppColors.neutralComponent,
+            color: AppColors.charcoalGray,
             borderRadius: BorderRadius.circular(32.r),
           ),
           alignment: Alignment.center,

@@ -20,9 +20,10 @@ class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color darkGray = Color(0xFF838383);
   static const Color lightGray = Color(0xFFD9D9D9);
+  static const Color charcoalGray = Color(0xFF2E2F2F);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color singleGray = Color(0xFF555555);
 
   // 채팅
-  static const Color chatInputField = Color(0xFF465443);
   static const Color chatInputFieldHintText = Color(0xFF2A3328);
 }

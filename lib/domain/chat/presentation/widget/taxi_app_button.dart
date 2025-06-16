@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TaxiAppButton extends StatelessWidget {
@@ -39,7 +41,7 @@ class TaxiAppButton extends StatelessWidget {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF20271E),
+            backgroundColor: AppColors.charcoalGray,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
@@ -47,29 +49,45 @@ class TaxiAppButton extends StatelessWidget {
           ),
           onPressed: _launchApp,
           child: SizedBox(
-            width: 112.w,
-            height: 112.h,
-            child: Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  iconPath,
-                  width: 56.w,
-                  height: 56.h,
-                ),
+            width: 328.w,
+            height: 78.h,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SvgPicture.asset(
+                      iconPath,
+                      width: 48.w,
+                      height: 48.h,
+                    ),
+                  ),
+
+                  SizedBox(width: 14.w),
+
+                  Expanded(
+                    child: Text(
+                      appName,
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: AppTypography.fontSizeLarge.sp,
+                        fontWeight: AppTypography.fontWeightBold,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: AppColors.primaryTag,
+                  )
+                ],
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Text(
-          appName,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: AppColors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
+        SizedBox(
+          height: 16.h,
         ),
       ],
     );
