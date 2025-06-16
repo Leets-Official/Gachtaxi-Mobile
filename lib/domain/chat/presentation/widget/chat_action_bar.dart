@@ -26,10 +26,13 @@ class ChatActionBar extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16.h),
       width: double.infinity,
-      height: 144.h,
+      height: 110.h,
       decoration: BoxDecoration(
         color: AppColors.charcoalGray,
-      ),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15.r),
+          topRight: Radius.circular(15.r),
+        ),      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,

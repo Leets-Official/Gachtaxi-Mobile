@@ -31,6 +31,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+  late final Animation<Offset> _slideAnimation;
   final ScrollController _scrollController = ScrollController();
   late FocusNode _focusNode;
 
@@ -42,13 +43,21 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     // ChatActionBar 열림/닫힘 제어용 애니메이션 컨트롤러
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 230),
+      duration: const Duration(milliseconds: 200),
     );
 
     _animation = CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
     );
+
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 1), // 아래에서 시작
+      end: Offset.zero,          // 제자리
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final notifier = ref.read(chatViewModelProvider.notifier);
@@ -147,21 +156,22 @@ class ChatScreenState extends ConsumerState<ChatScreen>
                   ),
                 ),
               ),
+              GestureDetector(
+                child: AbsorbPointer(
+                  absorbing: !chatActionState.isExpanded,
+                  child: SlideTransition(
+                    position: _slideAnimation,
+                    child: ChatActionBar(
+                      category: widget.category,
+                      matchingRoomId: widget.matchingRoomId,
+                    ),
+                  ),
+                ),
+              ),
               Container(
                 color: AppColors.charcoalGray,
                 child: SafeArea(
                   child: ChatInputField(focusNode: _focusNode),
-                ),
-              ),
-              AbsorbPointer(
-                absorbing: !chatActionState.isExpanded,
-                child: SizeTransition(
-                  sizeFactor: _animation,
-                  axisAlignment: 1.0,
-                  child: ChatActionBar(
-                    category: widget.category,
-                    matchingRoomId: widget.matchingRoomId,
-                  ),
                 ),
               ),
             ],
