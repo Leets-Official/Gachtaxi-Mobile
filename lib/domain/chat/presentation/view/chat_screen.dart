@@ -53,7 +53,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 1), // 아래에서 시작
-      end: Offset.zero,          // 제자리
+      end: Offset.zero, // 제자리
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
@@ -156,15 +156,15 @@ class ChatScreenState extends ConsumerState<ChatScreen>
                   ),
                 ),
               ),
-              GestureDetector(
-                child: AbsorbPointer(
-                  absorbing: !chatActionState.isExpanded,
-                  child: SlideTransition(
-                    position: _slideAnimation,
-                    child: ChatActionBar(
-                      category: widget.category,
-                      matchingRoomId: widget.matchingRoomId,
-                    ),
+
+              SizeTransition(
+                sizeFactor: _animation,
+                axisAlignment: -1.0,
+                child: SizedBox(
+                  height: 110.h,
+                  child: ChatActionBar(
+                    category: widget.category,
+                    matchingRoomId: widget.matchingRoomId,
                   ),
                 ),
               ),
