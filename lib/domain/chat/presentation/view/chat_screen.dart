@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_action_notifier.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/view_model/chat_view_model.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_action_bar.dart';
@@ -13,8 +14,14 @@ import '../widget/chat_input.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
   final int roomId;
+  final MatchingCategory category;
+  final int matchingRoomId;
 
-  const ChatScreen({super.key, required this.roomId});
+  const ChatScreen(
+      {super.key,
+      required this.roomId,
+      required this.category,
+      required this.matchingRoomId});
 
   @override
   ChatScreenState createState() => ChatScreenState();
@@ -69,7 +76,8 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     );
 
     final chatActionState = ref.watch(chatInputActionNotifierProvider);
-    final chatActionNotifier = ref.read(chatInputActionNotifierProvider.notifier);
+    final chatActionNotifier =
+        ref.read(chatInputActionNotifierProvider.notifier);
     final chatViewModel = ref.watch(chatViewModelProvider);
     final chatViewModelNotifier = ref.read(chatViewModelProvider.notifier);
 
@@ -90,7 +98,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     );
 
     return Scaffold(
-      appBar: renderAppBar(context, chatViewModel.metaState.memberCount),
+      appBar: renderAppBar(context, chatViewModel.metaState.memberCount, widget.category, widget.matchingRoomId),
       backgroundColor: AppColors.neutralDark,
       body: Stack(
         children: [
@@ -113,7 +121,9 @@ class ChatScreenState extends ConsumerState<ChatScreen>
                             final metrics = scrollInfo.metrics;
                             if (metrics.pixels >=
                                 metrics.maxScrollExtent - 10) {
-                              ref.read(chatViewModelProvider.notifier).loadMoreMessages(widget.roomId);
+                              ref
+                                  .read(chatViewModelProvider.notifier)
+                                  .loadMoreMessages(widget.roomId);
                             }
                           }
                           return false;
@@ -148,7 +158,10 @@ class ChatScreenState extends ConsumerState<ChatScreen>
                 child: SizeTransition(
                   sizeFactor: _animation,
                   axisAlignment: 1.0,
-                  child: ChatActionBar(),
+                  child: ChatActionBar(
+                    category: widget.category,
+                    matchingRoomId: widget.matchingRoomId,
+                  ),
                 ),
               ),
             ],
@@ -159,7 +172,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
   }
 }
 
-AppBar? renderAppBar(BuildContext context, int memberCount) {
+AppBar? renderAppBar(BuildContext context, int memberCount, MatchingCategory category, int matchingRoomId) {
   return AppBar(
     backgroundColor: AppColors.neutralDark,
     foregroundColor: Colors.white,
@@ -198,7 +211,10 @@ AppBar? renderAppBar(BuildContext context, int memberCount) {
             context: context,
             barrierColor: Colors.transparent,
             builder: (context) {
-              return ChatMember();
+              return ChatMember(
+                category: category,
+                matchingRoomId: matchingRoomId,
+              );
             },
           );
         },
