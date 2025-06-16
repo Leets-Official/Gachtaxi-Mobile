@@ -68,14 +68,14 @@ class ChatActionBar extends ConsumerWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("계좌번호가 복사되었습니다."),
-                      duration: Duration(seconds: 2),
+                      duration: Duration(seconds: 1),
                     ),
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("계좌번호를 불러올 수 없습니다."),
-                      duration: Duration(seconds: 2),
+                      duration: Duration(seconds: 1),
                     ),
                   );
                 }
