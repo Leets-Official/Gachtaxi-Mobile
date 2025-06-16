@@ -84,7 +84,7 @@ class ChatViewModel extends _$ChatViewModel {
       final response = await _service.fetchMemberCount(roomId);
       state = state.copyWith(
         metaState: state.metaState.copyWith(
-          memberCount: response.totalParticipantCount,
+          chatMemberCountResponse: response,
         ),
       );
     } catch (e) {

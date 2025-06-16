@@ -7,7 +7,7 @@ import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/common/util/modal_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user.dart';
-import 'package:gachtaxi_app/domain/chat/data/models/chat_user_dummy.dart';
+import 'package:gachtaxi_app/domain/chat/data/models/response/chat_member_count_response.dart';
 import 'package:gachtaxi_app/domain/chat/data/service/chat_matching_service.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
@@ -16,8 +16,9 @@ import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
 class ChatMember extends ConsumerStatefulWidget {
   final MatchingCategory category;
   final int matchingRoomId;
+  final ChatMemberCountResponse chatMemberCountResponse;
 
-  const ChatMember({super.key, required this.category, required this.matchingRoomId});
+  const ChatMember({super.key, required this.category, required this.matchingRoomId, required this.chatMemberCountResponse});
 
   @override
   ChatMemberState createState() => ChatMemberState();
@@ -25,6 +26,7 @@ class ChatMember extends ConsumerStatefulWidget {
 
 class ChatMemberState extends ConsumerState<ChatMember> {
   double _positionX = -1.0; // 처음엔 오른쪽 끝에 배치
+  late final List<ChatUserModel> users;
 
   @override
   void initState() {
@@ -34,6 +36,25 @@ class ChatMemberState extends ConsumerState<ChatMember> {
         _positionX = 0.0; // 오른쪽에서 슬라이드 인
       });
     });
+
+    // 실제 참여자 리스트 변환
+    final data = widget.chatMemberCountResponse;
+    users = [
+      ChatUserModel(
+        name: data.roomMaster.nickName,
+        profilePicture: data.roomMaster.profilePicture,
+        isOwner: true,
+        isMe: data.roomMaster.memberId == 2, // 실제 내 ID로 대체
+      ),
+      ...data.participants
+          .where((p) => p.memberId != data.roomMaster.memberId) // 중복 방지
+          .map((p) => ChatUserModel(
+        name: p.nickName,
+        profilePicture: p.profilePicture,
+        isOwner: false,
+        isMe: p.memberId == 2, // 실제 내 ID로 대체
+      )),
+    ];
   }
 
   void _close() {
@@ -44,9 +65,6 @@ class ChatMemberState extends ConsumerState<ChatMember> {
       Navigator.pop(context);
     });
   }
-
-  final List<ChatUserModel> users = ChatUserDummy.generateUserDummy();
-
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
+import 'package:gachtaxi_app/domain/chat/data/models/response/chat_member_count_response.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_action_notifier.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/view_model/chat_view_model.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_action_bar.dart';
@@ -107,7 +108,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     );
 
     return Scaffold(
-      appBar: renderAppBar(context, chatViewModel.metaState.memberCount, widget.category, widget.matchingRoomId),
+      appBar: renderAppBar(context, chatViewModel.metaState.chatMemberCountResponse, widget.category, widget.matchingRoomId),
       backgroundColor: AppColors.neutralDark,
       body: Stack(
         children: [
@@ -182,7 +183,9 @@ class ChatScreenState extends ConsumerState<ChatScreen>
   }
 }
 
-AppBar? renderAppBar(BuildContext context, int memberCount, MatchingCategory category, int matchingRoomId) {
+AppBar? renderAppBar(BuildContext context, ChatMemberCountResponse? response, MatchingCategory category, int matchingRoomId) {
+  final memberCount = response?.totalParticipantCount ?? 0;
+
   return AppBar(
     backgroundColor: AppColors.neutralDark,
     foregroundColor: Colors.white,
@@ -224,6 +227,7 @@ AppBar? renderAppBar(BuildContext context, int memberCount, MatchingCategory cat
               return ChatMember(
                 category: category,
                 matchingRoomId: matchingRoomId,
+                chatMemberCountResponse: response!,
               );
             },
           );
