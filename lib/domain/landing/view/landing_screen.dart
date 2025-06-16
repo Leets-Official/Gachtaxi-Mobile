@@ -9,6 +9,9 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/domain/sign-up/view/email_verification_screen.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
+import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
+import 'package:gachtaxi_app/domain/landing/services/kakao_auth_service.dart';
+import 'package:gachtaxi_app/domain/landing/services/google_auth_service.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -20,11 +23,37 @@ class LandingScreen extends StatefulWidget {
 class _HomeScreenState extends State<LandingScreen> {
   final PageController _pageController = PageController();
 
-  void _navigateToEmailVerification() {
-    Navigator.push(
-      context,
-      SlidePageRoute(screen: const EmailVerificationScreen()),
-    );
+  void _startKakaoLogin() async {
+    final result = await KakaoAuthService.loginWithKakao();
+    if (result == null) return;
+
+    if (result.isUnregistered) {
+      Navigator.push(
+        context,
+        SlidePageRoute(screen: const EmailVerificationScreen()),
+      );
+    } else
+      Navigator.push(
+        context,
+        SlidePageRoute(screen: const HomeScreen()),
+      );
+  }
+
+  void _startGoogleLogin() async {
+    final result = await GoogleAuthService.loginWithGoogle();
+    if (result == null) return;
+
+    if (result.isUnregistered) {
+      Navigator.push(
+        context,
+        SlidePageRoute(screen: const EmailVerificationScreen()),
+      );
+    } else {
+      Navigator.push(
+        context,
+        SlidePageRoute(screen: const HomeScreen()),
+      );
+    }
   }
 
   @override
@@ -68,7 +97,7 @@ class _HomeScreenState extends State<LandingScreen> {
                   backgroundColor: const Color(0xFFFFE001),
                   textColor: Colors.black,
                   icon: SvgPicture.asset('assets/icons/kakao_icon.svg', width: 20),
-                  onPressed: _navigateToEmailVerification,
+                  onPressed: _startKakaoLogin,
                 ),
                 SizedBox(height: AppSpacing.spaceCommon),
                 Button(
@@ -76,7 +105,7 @@ class _HomeScreenState extends State<LandingScreen> {
                   backgroundColor: Colors.white,
                   textColor: Colors.black,
                   icon: SvgPicture.asset('assets/icons/google_icon.svg', width: 20),
-                  onPressed: () {},
+                  onPressed: _startGoogleLogin,
                 ),
               ],
             ),
