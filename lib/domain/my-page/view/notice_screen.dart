@@ -57,7 +57,7 @@ class NoticeScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.spaceCommon),
+                  const SizedBox(height: AppSpacing.spaceSmall),
                   const Divider(
                     thickness: 0.5,
                   ),

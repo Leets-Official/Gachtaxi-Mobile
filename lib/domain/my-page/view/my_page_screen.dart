@@ -7,6 +7,7 @@ import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/components/default_padding.dart';
 import 'package:gachtaxi_app/domain/my-page/components/logout_or_withdraw_modal.dart';
 import 'package:gachtaxi_app/domain/my-page/components/profile.dart';
+import 'package:gachtaxi_app/domain/my-page/view/account_number_modify_screen.dart';
 import 'package:gachtaxi_app/domain/my-page/view/notices_screen.dart';
 import 'package:gachtaxi_app/domain/my-page/view/profile_modify_screen.dart';
 
@@ -99,12 +100,12 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen>
             ),
             GestureDetector(
               onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (BuildContext context) {
-                      return LogoutOrWithdrawModal();
-                    });
+                Navigator.push(
+                  context,
+                  SlidePageRoute(
+                    screen: AccountNumberModifyScreen(),
+                  ),
+                );
               },
               behavior: HitTestBehavior.opaque,
               child: Row(
