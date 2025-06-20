@@ -26,6 +26,7 @@ class MatchingRoomService {
     final path = switch (type) {
       MatchingCategory.manual => '/api/matching/manual/list',
       MatchingCategory.my => '/api/matching/manual/my-list',
+      _ => '',
     };
 
     final uri = Uri.parse(path).replace(queryParameters: {
