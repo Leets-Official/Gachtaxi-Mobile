@@ -7,6 +7,7 @@ import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/manual/manual_matching_create_screen.dart';
 import 'package:gachtaxi_app/domain/home/components/default_padding.dart';
+import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/manual_matching_change_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/manual_category_view/manual_matching_category_screen.dart';
@@ -31,6 +32,7 @@ class ManualMatchingScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     isManual
@@ -42,12 +44,30 @@ class ManualMatchingScreen extends ConsumerWidget {
                       fontWeight: AppTypography.fontWeightBold,
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.spaceSmall),
+                  const SizedBox(width: AppSpacing.spaceMedium),
                   TextButton(
-                    onPressed: () {
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    onPressed: () async {
                       ref
                           .read(manualMatchingChangeNotifierProvider.notifier)
                           .toggleCategory();
+
+                      if (isManual) {
+                        await ref
+                            .read(matchingDataNotifierProvider(
+                                    MatchingCategory.my)
+                                .notifier)
+                            .refresh(MatchingCategory.my);
+                      } else {
+                        await ref
+                            .read(matchingDataNotifierProvider(
+                                    MatchingCategory.manual)
+                                .notifier)
+                            .refresh(MatchingCategory.manual);
+                      }
                     },
                     child: Text(
                       isManual
@@ -55,6 +75,7 @@ class ManualMatchingScreen extends ConsumerWidget {
                           : MatchingCategory.manual.label,
                       style: TextStyle(
                         color: AppColors.darkGray,
+                        fontSize: AppTypography.fontSizeMedium,
                         decorationColor: AppColors.darkGray,
                         decoration: TextDecoration.underline,
                       ),
