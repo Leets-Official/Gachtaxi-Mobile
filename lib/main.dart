@@ -15,7 +15,10 @@ void main() async {
   await dotenv.load();
   await Firebase.initializeApp();
 
-  KakaoSdk.init(nativeAppKey: dotenv.env['KAKAO_NATIVE_APP_KEY']);
+  KakaoSdk.init(
+    nativeAppKey: dotenv.env['KAKAO_NATIVE_APP_KEY']!,
+    javaScriptAppKey: dotenv.env['KAKAO_REST_API_KEY']!,
+  );
 
   // 앱 실행
   runApp(

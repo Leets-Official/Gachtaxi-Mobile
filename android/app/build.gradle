@@ -9,6 +9,8 @@ plugins {
 dependencies {
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:33.9.0')
+    implementation "com.kakao.sdk:v2-user:2.19.0"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 }
 
 def dotenv = new Properties()
@@ -37,12 +39,12 @@ android {
     ndkVersion = "27.0.12077973"
     
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     defaultConfig {
@@ -50,7 +52,7 @@ android {
         applicationId = "site.gachtaxi.gachtaxi_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -59,7 +61,22 @@ android {
             if (googleMapKey == null) {
                 throw new GradleException("GOOGLE_MAPS_API_KEY not found in .env file")
             }
-            manifestPlaceholders += [GOOGLE_MAPS_API_KEY: googleMapKey]
+
+        def kakaoNativeAppKey = dotenv['KAKAO_NATIVE_APP_KEY']
+        if (kakaoNativeAppKey == null) {
+            throw new GradleException("KAKAO_NATIVE_APP_KEY not found in .env file")
+        }
+
+        def googleClientId = dotenv['GOOGLE_CLIENT_ID']
+        if (googleClientId == null) {
+            throw new GradleException("GOOGLE_CLIENT_ID not found in .env file")
+        }
+
+        manifestPlaceholders += [
+                GOOGLE_MAPS_API_KEY: googleMapKey,
+                KAKAO_NATIVE_APP_KEY  : kakaoNativeAppKey,
+                GOOGLE_CLIENT_ID: googleClientId
+        ]
     }
 
     buildTypes {
