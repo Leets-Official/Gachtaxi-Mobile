@@ -67,3 +67,5 @@ app.*.map.json
 
 .env
 
+ios/build/
+**/*.xcbuilddata/
