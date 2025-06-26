@@ -1,0 +1,45 @@
+{
+  "" : {
+    "const-values" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMAppAuth-master.swiftconstvalues",
+    "dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMAppAuth-master.d",
+    "diagnostics" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMAppAuth-master.dia",
+    "emit-module-dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMAppAuth-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMAppAuth-master-emit-module.dia",
+    "swift-dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMAppAuth-master.swiftdeps"
+  },
+  "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/AuthSession.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSession.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSession.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSession.o"
+  },
+  "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/AuthSessionDelegate.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSessionDelegate.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSessionDelegate.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSessionDelegate.o"
+  },
+  "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/AuthSessionStore.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSessionStore.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSessionStore.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/AuthSessionStore.o"
+  },
+  "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/KeychainStore/GTMOAuth2Compatibility.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMOAuth2Compatibility.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMOAuth2Compatibility.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/GTMOAuth2Compatibility.o"
+  },
+  "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/KeychainStore/KeychainAttribute.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainAttribute.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainAttribute.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainAttribute.o"
+  },
+  "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/KeychainStore/KeychainHelper.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainHelper.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainHelper.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainHelper.o"
+  },
+  "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/KeychainStore/KeychainStore.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainStore.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainStore.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/GTMAppAuth.build/Objects-normal/arm64/KeychainStore.o"
+  }
+}

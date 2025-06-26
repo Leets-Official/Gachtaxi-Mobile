@@ -52,6 +52,7 @@ migrate_working_dir/
 
 # pubspec.lock
 pubspec.lock
+devtools_options.yaml
 
 # Symbolication related
 app.*.symbols

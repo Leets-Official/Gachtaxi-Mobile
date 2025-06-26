@@ -1,0 +1,20 @@
+{
+  "" : {
+    "const-values" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/flutter_secure_storage-master.swiftconstvalues",
+    "dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/flutter_secure_storage-master.d",
+    "diagnostics" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/flutter_secure_storage-master.dia",
+    "emit-module-dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/flutter_secure_storage-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/flutter_secure_storage-master-emit-module.dia",
+    "swift-dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/flutter_secure_storage-master.swiftdeps"
+  },
+  "/Users/kimjiwon/.pub-cache/hosted/pub.dev/flutter_secure_storage-9.2.4/ios/Classes/FlutterSecureStorage.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/FlutterSecureStorage.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/FlutterSecureStorage.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/FlutterSecureStorage.o"
+  },
+  "/Users/kimjiwon/.pub-cache/hosted/pub.dev/flutter_secure_storage-9.2.4/ios/Classes/SwiftFlutterSecureStoragePlugin.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/SwiftFlutterSecureStoragePlugin.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/SwiftFlutterSecureStoragePlugin.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/flutter_secure_storage.build/Objects-normal/arm64/SwiftFlutterSecureStoragePlugin.o"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "" : {
+    "const-values" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/vibration-master.swiftconstvalues",
+    "dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/vibration-master.d",
+    "diagnostics" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/vibration-master.dia",
+    "emit-module-dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/vibration-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/vibration-master-emit-module.dia",
+    "swift-dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/vibration-master.swiftdeps"
+  },
+  "/Users/kimjiwon/.pub-cache/hosted/pub.dev/vibration-3.1.3/ios/Classes/VibrationPluginSwift.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/VibrationPluginSwift.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/VibrationPluginSwift.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/vibration.build/Objects-normal/arm64/VibrationPluginSwift.o"
+  }
+}

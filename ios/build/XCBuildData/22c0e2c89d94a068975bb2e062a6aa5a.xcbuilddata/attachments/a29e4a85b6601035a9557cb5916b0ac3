@@ -1,0 +1,30 @@
+{
+  "" : {
+    "const-values" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/kakao_flutter_sdk_common-master.swiftconstvalues",
+    "dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/kakao_flutter_sdk_common-master.d",
+    "diagnostics" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/kakao_flutter_sdk_common-master.dia",
+    "emit-module-dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/kakao_flutter_sdk_common-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/kakao_flutter_sdk_common-master-emit-module.dia",
+    "swift-dependencies" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/kakao_flutter_sdk_common-master.swiftdeps"
+  },
+  "/Users/kimjiwon/.pub-cache/hosted/pub.dev/kakao_flutter_sdk_common-1.9.7+3/ios/Classes/Common.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Common.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Common.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Common.o"
+  },
+  "/Users/kimjiwon/.pub-cache/hosted/pub.dev/kakao_flutter_sdk_common-1.9.7+3/ios/Classes/Constants.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Constants.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Constants.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Constants.o"
+  },
+  "/Users/kimjiwon/.pub-cache/hosted/pub.dev/kakao_flutter_sdk_common-1.9.7+3/ios/Classes/SwiftKakaoFlutterSdkPlugin.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/SwiftKakaoFlutterSdkPlugin.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/SwiftKakaoFlutterSdkPlugin.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/SwiftKakaoFlutterSdkPlugin.o"
+  },
+  "/Users/kimjiwon/.pub-cache/hosted/pub.dev/kakao_flutter_sdk_common-1.9.7+3/ios/Classes/Utility.swift" : {
+    "index-unit-output-path" : "/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Utility.o",
+    "llvm-bc" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Utility.bc",
+    "object" : "/Users/kimjiwon/Desktop/Gachtaxi-Mobile/ios/build/Pods.build/Release-iphoneos/kakao_flutter_sdk_common.build/Objects-normal/arm64/Utility.o"
+  }
+}
