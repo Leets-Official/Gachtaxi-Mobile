@@ -28,7 +28,6 @@ class GoogleAuthService {
       print('GOOGLE_WEB_CLIENT_ID: ${dotenv.env['GOOGLE_WEB_CLIENT_ID']}');
 
       await googleSignIn.signOut();
-      await googleSignIn.disconnect();
 
       final GoogleSignInAccount? account = await googleSignIn.signIn();
       print('GoogleSignInAccount: $account');

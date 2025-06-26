@@ -22,7 +22,12 @@ class KakaoAuthService {
       OAuthToken token;
 
       if (await isKakaoTalkInstalled()) {
-        token = await UserApi.instance.loginWithKakaoTalk();
+        try {
+          token = await UserApi.instance.loginWithKakaoTalk();
+        } catch (e) {
+          logger.w('카카오톡 로그인 실패, 이메일 로그인 시도: $e');
+          token = await UserApi.instance.loginWithKakaoAccount();
+        }
       } else {
         token = await UserApi.instance.loginWithKakaoAccount();
       }
@@ -33,6 +38,8 @@ class KakaoAuthService {
         Uri.parse('${dotenv.env['API_URL']}/auth/login/mobile/kakao'),
         body: {'accessToken': token.accessToken},
       );
+
+      logger.i('API 요청 응답 도착');
 
       final headers = response.headers;
       final accessToken = headers['Authorization']?.first;

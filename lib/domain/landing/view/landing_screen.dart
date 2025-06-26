@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gachtaxi_app/common/util/logger.dart';
 import 'package:gachtaxi_app/domain/landing/components/first_landing_screen.dart';
 import 'package:gachtaxi_app/domain/landing/components/second_landing_screen.dart';
 import 'package:gachtaxi_app/domain/landing/components/third_landing_screen.dart';
@@ -25,7 +26,12 @@ class _HomeScreenState extends State<LandingScreen> {
 
   void _startKakaoLogin() async {
     final result = await KakaoAuthService.loginWithKakao();
-    if (result == null) return;
+    logger.i('로그인 결과: $result');
+
+    if (result == null) {
+      logger.e('카카오 로그인 결과가 null임');
+      return;
+    }
 
     if (result.isUnregistered) {
       Navigator.push(
