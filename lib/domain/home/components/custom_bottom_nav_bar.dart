@@ -60,8 +60,8 @@ class CustomBottomNavBar extends StatelessWidget {
           ),
           _buildItem(
             label: '프로필',
-            activeIcon: 'assets/icons/profile_icon.svg',
-            inactiveIcon: null,
+            activeIcon: 'assets/icons/profile_on_icon.svg',
+            inactiveIcon: 'assets/icons/profile_icon.svg',
             index: 3,
           ),
         ],

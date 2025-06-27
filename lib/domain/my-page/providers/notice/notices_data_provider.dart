@@ -22,34 +22,8 @@ class NoticesDataNotifier extends _$NoticesDataNotifier {
   }
 
   Future<ApiResponse<NoticesData>> _fetchPage(int page) async {
-    // final service = ref.read(noticesServiceProvider);
-    // return await service.fetchNotices(page, _pageSize);
-
-    final mockNotices = List.generate(5, (index) {
-      final noticeId = page * 5 + index + 1;
-      return Notice(
-        noticeId: noticeId,
-        title: '공지사항 제목 $noticeId',
-        content: '공지사항 내용 $noticeId',
-        createDate: '2024-05-17',
-      );
-    });
-
-    final mockData = NoticesData(
-      notices: mockNotices,
-      pageable: Pageable(
-        pageNumber: 0,
-        pageSize: 5,
-        numberOfElements: 2,
-        isLast: true,
-      ),
-    );
-
-    return ApiResponse(
-      code: 200,
-      message: '목데이터 조회 성공',
-      data: mockData,
-    );
+    final service = ref.read(noticesServiceProvider);
+    return await service.fetchNotices(page, _pageSize);
   }
 
   Future<void> fetchMore() async {
