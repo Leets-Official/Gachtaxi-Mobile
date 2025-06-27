@@ -5,19 +5,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
+import 'package:gachtaxi_app/common/layout/main_screen.dart';
 import 'package:gachtaxi_app/common/util/modal_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user_dummy.dart';
 import 'package:gachtaxi_app/domain/chat/data/service/chat_matching_service.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
-import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
 
 class ChatMember extends ConsumerStatefulWidget {
   final MatchingCategory category;
   final int matchingRoomId;
 
-  const ChatMember({super.key, required this.category, required this.matchingRoomId});
+  const ChatMember(
+      {super.key, required this.category, required this.matchingRoomId});
 
   @override
   ChatMemberState createState() => ChatMemberState();
@@ -46,7 +47,6 @@ class ChatMemberState extends ConsumerState<ChatMember> {
   }
 
   final List<ChatUserModel> users = ChatUserDummy.generateUserDummy();
-
 
   @override
   Widget build(BuildContext context) {
@@ -209,11 +209,12 @@ class ChatMemberState extends ConsumerState<ChatMember> {
               height: 30.h,
             ),
             onPressed: () async {
-              final bool success = await chatMatchingService.exitMatching(widget.category, widget.matchingRoomId);
+              final bool success = await chatMatchingService.exitMatching(
+                  widget.category, widget.matchingRoomId);
               if (success && mounted) {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => const HomeScreen()),
-                      (route) => false,
+                  MaterialPageRoute(builder: (_) => const MainScreen()),
+                  (route) => false,
                 );
               }
             },

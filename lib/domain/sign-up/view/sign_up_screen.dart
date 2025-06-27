@@ -4,7 +4,7 @@ import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
-import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
+import 'package:gachtaxi_app/common/layout/main_screen.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/common/components/input_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -115,7 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     //회원가입 완료 로직 추가
                     Navigator.pushAndRemoveUntil(
                       context,
-                      SlidePageRoute(screen: const HomeScreen()),
+                      SlidePageRoute(screen: const MainScreen()),
                       (route) => false,
                     );
                   },
