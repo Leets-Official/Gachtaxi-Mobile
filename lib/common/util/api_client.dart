@@ -66,6 +66,16 @@ class ApiClient {
     }
   }
 
+  // Post with headers
+  static Future<Response> postWithHeaders(Uri uri, {Map<String, dynamic>? body}) async {
+    try {
+      final response = await _dio.postUri(uri, data: body);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   // PATCH
   static Future<ApiResponse> patch(Uri uri,
       {Map<String, dynamic>? body}) async {
