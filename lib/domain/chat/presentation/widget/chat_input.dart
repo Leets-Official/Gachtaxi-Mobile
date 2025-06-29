@@ -28,7 +28,7 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
 
     return Container(
       decoration: const BoxDecoration(
-        color: AppColors.neutralComponent,
+        color: AppColors.charcoalGray,
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 7.h),
@@ -39,15 +39,14 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
               width: 32.w,
               height: 32.h,
               decoration: BoxDecoration(
-                color: AppColors.secondaryLight,
+                color: AppColors.singleGray,
                 shape: BoxShape.circle,
               ),
               child: IconButton(
                 icon: Icon(
                   actionState.isExpanded ? Icons.close : Icons.add,
-                  color: Colors.black,
+                  color: Color(0xFFD9D9D9),
                 ),
-                color: AppColors.black,
                 padding: EdgeInsets.zero,
                 onPressed: actionNotifier.toggleExpanded,
               ),
@@ -64,7 +63,7 @@ class ChatInputFieldState extends ConsumerState<ChatInputField> {
                   maxHeight: 100.h,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.chatInputField,
+                  color: AppColors.singleGray,
                   borderRadius: BorderRadius.circular(18.r),
                 ),
                 child: TextField(

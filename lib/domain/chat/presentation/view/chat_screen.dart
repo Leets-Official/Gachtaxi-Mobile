@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
+import 'package:gachtaxi_app/domain/chat/data/models/response/chat_member_count_response.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/state/chat_input_action_notifier.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/view_model/chat_view_model.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_action_bar.dart';
@@ -31,6 +32,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+  late final Animation<Offset> _slideAnimation;
   final ScrollController _scrollController = ScrollController();
   late FocusNode _focusNode;
 
@@ -42,13 +44,21 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     // ChatActionBar 열림/닫힘 제어용 애니메이션 컨트롤러
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 230),
+      duration: const Duration(milliseconds: 200),
     );
 
     _animation = CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
     );
+
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 1), // 아래에서 시작
+      end: Offset.zero, // 제자리
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final notifier = ref.read(chatViewModelProvider.notifier);
@@ -70,7 +80,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors.chatInputField,
+        systemNavigationBarColor: AppColors.singleGray,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
@@ -98,7 +108,7 @@ class ChatScreenState extends ConsumerState<ChatScreen>
     );
 
     return Scaffold(
-      appBar: renderAppBar(context, chatViewModel.metaState.memberCount, widget.category, widget.matchingRoomId),
+      appBar: renderAppBar(context, chatViewModel.metaState.chatMemberCountResponse, widget.category, widget.matchingRoomId),
       backgroundColor: AppColors.neutralDark,
       body: Stack(
         children: [
@@ -147,21 +157,22 @@ class ChatScreenState extends ConsumerState<ChatScreen>
                   ),
                 ),
               ),
-              Container(
-                color: AppColors.neutralComponent,
-                child: SafeArea(
-                  child: ChatInputField(focusNode: _focusNode),
-                ),
-              ),
-              AbsorbPointer(
-                absorbing: !chatActionState.isExpanded,
-                child: SizeTransition(
-                  sizeFactor: _animation,
-                  axisAlignment: 1.0,
+
+              SizeTransition(
+                sizeFactor: _animation,
+                axisAlignment: -1.0,
+                child: SizedBox(
+                  height: 110.h,
                   child: ChatActionBar(
                     category: widget.category,
                     matchingRoomId: widget.matchingRoomId,
                   ),
+                ),
+              ),
+              Container(
+                color: AppColors.charcoalGray,
+                child: SafeArea(
+                  child: ChatInputField(focusNode: _focusNode),
                 ),
               ),
             ],
@@ -172,7 +183,9 @@ class ChatScreenState extends ConsumerState<ChatScreen>
   }
 }
 
-AppBar? renderAppBar(BuildContext context, int memberCount, MatchingCategory category, int matchingRoomId) {
+AppBar? renderAppBar(BuildContext context, ChatMemberCountResponse? response, MatchingCategory category, int matchingRoomId) {
+  final memberCount = response?.totalParticipantCount ?? 0;
+
   return AppBar(
     backgroundColor: AppColors.neutralDark,
     foregroundColor: Colors.white,
@@ -214,6 +227,7 @@ AppBar? renderAppBar(BuildContext context, int memberCount, MatchingCategory cat
               return ChatMember(
                 category: category,
                 matchingRoomId: matchingRoomId,
+                chatMemberCountResponse: response!,
               );
             },
           );

@@ -4,19 +4,32 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 
 class ProfileImage {
-  static Widget circleAvatar({
+  static Widget squareAvatar({
     required String imageUrl,
-    double size = 18.0,
+    double size = 36, // 기본 사이즈
   }) {
-    return CircleAvatar(
-      radius: size.r,
-      backgroundColor: AppColors.darkGray,
-      foregroundImage: imageUrl.isNotEmpty ? NetworkImage(imageUrl) : null,
-      child: imageUrl.isEmpty
-          ? SvgPicture.asset(
+    if (imageUrl.isNotEmpty) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(10.r),
+        child: Container(
+          width: size.w,
+          height: size.w,
+          color: AppColors.darkGray,
+          child: Image.network(
+            imageUrl,
+            width: size.w,
+            height: size.w,
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    } else { // 기본 프사는 svg 형태로 출력
+      return SvgPicture.asset(
         "assets/icons/unknown.svg",
-      )
-          : null,
-    );
+        width: size.w,
+        height: size.w,
+      );
+    }
   }
 }
+
