@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/splash_screen.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
@@ -29,8 +30,20 @@ void main() async {
         splitScreenMode: true,
         builder: (context, child) {
           return MaterialApp(
+            theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  systemNavigationBarColor: AppColors.neutralDark,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarDividerColor: Colors.transparent,
+                ),
+              ),
+              fontFamily: 'NotoSansKR',
+              splashFactory: NoSplash.splashFactory,
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
+            ),
             navigatorKey: navigatorKey,
-            theme: ThemeData(fontFamily: 'NotoSansKR'),
             home: const SplashScreen(),
             debugShowCheckedModeBanner: false,
           );

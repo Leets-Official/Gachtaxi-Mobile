@@ -6,7 +6,7 @@ import 'package:gachtaxi_app/common/util/api_client.dart';
 class MatchingRoomService {
   static final Map<String, Map<int, MatchingData>> _cache = {};
   static final Map<String, DateTime> _lastFetchTimes = {};
-  static const Duration cacheDuration = Duration(seconds: 30);
+  static const Duration cacheDuration = Duration(seconds: 300);
 
   Future<ApiResponse<MatchingData>> fetchMatchingRooms(
       MatchingCategory type, int pageNumber, int pageSize) async {
@@ -26,6 +26,7 @@ class MatchingRoomService {
     final path = switch (type) {
       MatchingCategory.manual => '/api/matching/manual/list',
       MatchingCategory.my => '/api/matching/manual/my-list',
+      _ => '',
     };
 
     final uri = Uri.parse(path).replace(queryParameters: {

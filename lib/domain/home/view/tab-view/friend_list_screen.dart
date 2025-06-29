@@ -32,6 +32,7 @@ class FriendListScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       isFriend ? '친구 목록' : '블랙리스트',
@@ -41,8 +42,12 @@ class FriendListScreen extends ConsumerWidget {
                         fontWeight: AppTypography.fontWeightBold,
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.spaceSmall),
+                    const SizedBox(width: AppSpacing.spaceMedium),
                     TextButton(
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
                       onPressed: () {
                         ref
                             .read(friendChangerNotifierProvider.notifier)
@@ -52,6 +57,7 @@ class FriendListScreen extends ConsumerWidget {
                         isFriend ? '블랙리스트' : '친구 목록',
                         style: TextStyle(
                           color: AppColors.darkGray,
+                          fontSize: AppTypography.fontSizeMedium,
                           decorationColor: AppColors.darkGray,
                           decoration: TextDecoration.underline,
                         ),
