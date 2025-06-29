@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:gachtaxi_app/domain/chat/data/models/chat_message_model.dart';
+import 'package:gachtaxi_app/domain/chat/data/models/response/chat_member_count_response.dart';
 
 class ChatState {
   final ChatMessageState messageState;
@@ -85,13 +86,13 @@ class ChatUiState {
 
 // 인원 수 + 참여자 정보 저장
 class ChatMetaState {
-  final int memberCount;
+  final ChatMemberCountResponse? chatMemberCountResponse;
 
-  const ChatMetaState({this.memberCount = 0});
+  const ChatMetaState({this.chatMemberCountResponse});
 
-  ChatMetaState copyWith({int? memberCount}) {
+  ChatMetaState copyWith({ChatMemberCountResponse? chatMemberCountResponse}) {
     return ChatMetaState(
-      memberCount: memberCount ?? this.memberCount,
+      chatMemberCountResponse: chatMemberCountResponse ?? this.chatMemberCountResponse,
     );
   }
 }
