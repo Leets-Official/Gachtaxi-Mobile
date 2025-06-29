@@ -5,9 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
+import 'package:gachtaxi_app/common/layout/main_screen.dart';
 import 'package:gachtaxi_app/common/util/modal_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user_dummy.dart';
+import 'package:gachtaxi_app/domain/chat/data/models/response/chat_member_count_response.dart';
 import 'package:gachtaxi_app/domain/chat/data/service/chat_matching_service.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
@@ -245,7 +247,7 @@ class ChatMemberState extends ConsumerState<ChatMember> {
               final bool success = await chatMatchingService.exitMatching(widget.category, widget.matchingRoomId);
               if (success && mounted) {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => const HomeScreen()),
+                  MaterialPageRoute(builder: (_) => const MainScreen()),
                       (route) => false,
                 );
               }
