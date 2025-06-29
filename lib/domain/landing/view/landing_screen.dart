@@ -5,6 +5,7 @@ import 'package:gachtaxi_app/domain/landing/components/first_landing_screen.dart
 import 'package:gachtaxi_app/domain/landing/components/second_landing_screen.dart';
 import 'package:gachtaxi_app/domain/landing/components/third_landing_screen.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
+import 'package:gachtaxi_app/domain/landing/model/auth_result.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/domain/sign-up/view/email_verification_screen.dart';
@@ -22,32 +23,17 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<LandingScreen> {
-  final PageController _pageController = PageController();
+  final PageController pageController = PageController();
 
-  void _startKakaoLogin() async {
-    final result = await KakaoAuthService.loginWithKakao();
-    logger.i('로그인 결과: $result');
+  void _startSocialLogin({
+    required Future<AuthResult?> Function(BuildContext) loginFunction,
+  }) async {
+    final result = await loginFunction(context);
 
     if (result == null) {
-      logger.e('카카오 로그인 결과가 null임');
+      logger.e('로그인 결과가 null임');
       return;
     }
-
-    if (result.isUnregistered) {
-      Navigator.push(
-        context,
-        SlidePageRoute(screen: const EmailVerificationScreen()),
-      );
-    } else
-      Navigator.push(
-        context,
-        SlidePageRoute(screen: const HomeScreen()),
-      );
-  }
-
-  void _startGoogleLogin() async {
-    final result = await GoogleAuthService.loginWithGoogle();
-    if (result == null) return;
 
     if (result.isUnregistered) {
       Navigator.push(
@@ -57,7 +43,9 @@ class _HomeScreenState extends State<LandingScreen> {
     } else {
       Navigator.push(
         context,
-        SlidePageRoute(screen: const HomeScreen()),
+        SlidePageRoute(
+          screen: HomeScreen(pageController: pageController),
+        ),
       );
     }
   }
@@ -71,7 +59,7 @@ class _HomeScreenState extends State<LandingScreen> {
         children: [
           Expanded(
             child: PageView(
-              controller: _pageController,
+              controller: pageController,
               children: const [
                 FirstLandingScreen(),
                 SecondLandingScreen(),
@@ -81,7 +69,7 @@ class _HomeScreenState extends State<LandingScreen> {
           ),
 
           SmoothPageIndicator(
-            controller: _pageController,
+            controller: pageController,
             count: 3,
             effect: const ScrollingDotsEffect(
               activeDotColor: AppColors.primary,
@@ -103,7 +91,9 @@ class _HomeScreenState extends State<LandingScreen> {
                   backgroundColor: const Color(0xFFFFE001),
                   textColor: Colors.black,
                   icon: SvgPicture.asset('assets/icons/kakao_icon.svg', width: 20),
-                  onPressed: _startKakaoLogin,
+                  onPressed: () => _startSocialLogin(
+                    loginFunction: KakaoAuthService.loginWithKakao,
+                  ),
                 ),
                 SizedBox(height: AppSpacing.spaceCommon),
                 Button(
@@ -111,7 +101,9 @@ class _HomeScreenState extends State<LandingScreen> {
                   backgroundColor: Colors.white,
                   textColor: Colors.black,
                   icon: SvgPicture.asset('assets/icons/google_icon.svg', width: 20),
-                  onPressed: _startGoogleLogin,
+                  onPressed: () => _startSocialLogin(
+                    loginFunction: GoogleAuthService.loginWithGoogle,
+                  ),
                 ),
               ],
             ),
