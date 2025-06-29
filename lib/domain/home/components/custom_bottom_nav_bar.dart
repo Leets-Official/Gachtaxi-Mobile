@@ -1,88 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
     super.key,
-    required TabController? tabController,
-    required int selectedIndex,
-  })  : _tabController = tabController,
-        _selectedIndex = selectedIndex;
+    required this.selectedIndex,
+    required this.onTap,
+  });
 
-  final TabController? _tabController;
-  final int _selectedIndex;
+  final int selectedIndex;
+  final ValueChanged<int> onTap;
 
   @override
   Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
-    return TabBar(
-      controller: _tabController,
-      padding: platform == TargetPlatform.iOS
-          ? const EdgeInsets.only(bottom: 20)
-          : null,
-      indicatorColor: Colors.transparent,
-      dividerColor: Colors.transparent,
-      splashFactory: NoSplash.splashFactory,
-      labelColor: AppColors.primary,
-      labelStyle: TextStyle(
-        fontSize: AppTypography.fontSizeExtraSmall,
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 8.0,
       ),
-      unselectedLabelColor: Colors.white54,
-      tabs: [
-        _buildTab(
-          activeIcon: 'assets/icons/taxi_on_icon.svg',
-          inactiveIcon: 'assets/icons/taxi_off_icon.svg',
-          label: '홈',
-          index: 0,
-          width: 34,
-          height: 20,
+      decoration: const BoxDecoration(
+          border: Border(
+              top: BorderSide(
+        color: AppColors.neutralBorder,
+      ))),
+      child: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: onTap,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: Colors.white54,
+        selectedLabelStyle: TextStyle(
+          fontSize: AppTypography.fontSizeExtraSmall,
         ),
-        _buildTab(
-          activeIcon: 'assets/icons/matching_on_icon.svg',
-          inactiveIcon: 'assets/icons/manual_matching_icon.svg',
-          label: '수동매칭',
-          index: 1,
-          width: 23,
-          height: 23,
+        unselectedLabelStyle: TextStyle(
+          fontSize: AppTypography.fontSizeExtraSmall,
         ),
-        _buildTab(
-          activeIcon: 'assets/icons/friend_on_icon.svg',
-          inactiveIcon: 'assets/icons/friend_icon.svg',
-          label: '친구',
-          index: 2,
-          width: 23,
-          height: 23,
-        ),
-        _buildTab(
-          activeIcon: 'assets/icons/profile_icon.svg',
-          label: '프로필',
-          index: 3,
-          width: 24,
-          height: 24,
-        ),
-      ],
+        backgroundColor: AppColors.neutralDark,
+        elevation: 0,
+        items: [
+          _buildItem(
+            label: '홈',
+            activeIcon: 'assets/icons/taxi_on_icon.svg',
+            inactiveIcon: 'assets/icons/taxi_off_icon.svg',
+            index: 0,
+          ),
+          _buildItem(
+            label: '수동매칭',
+            activeIcon: 'assets/icons/matching_on_icon.svg',
+            inactiveIcon: 'assets/icons/manual_matching_icon.svg',
+            index: 1,
+          ),
+          _buildItem(
+            label: '친구',
+            activeIcon: 'assets/icons/friend_on_icon.svg',
+            inactiveIcon: 'assets/icons/friend_icon.svg',
+            index: 2,
+          ),
+          _buildItem(
+            label: '프로필',
+            activeIcon: 'assets/icons/profile_on_icon.svg',
+            inactiveIcon: 'assets/icons/profile_icon.svg',
+            index: 3,
+          ),
+        ],
+      ),
     );
   }
 
-  Tab _buildTab({
+  BottomNavigationBarItem _buildItem({
+    required String label,
     required String activeIcon,
     String? inactiveIcon,
-    required String label,
     required int index,
-    double width = 24,
-    double height = 24,
   }) {
-    return Tab(
-      icon: SvgPicture.asset(
-        _selectedIndex == index || inactiveIcon == null
-            ? activeIcon
-            : inactiveIcon,
-        width: width,
-        height: height,
+    final isSelected = selectedIndex == index;
+
+    return BottomNavigationBarItem(
+      icon: Padding(
+        padding: const EdgeInsets.only(bottom: 4.0),
+        child: SvgPicture.asset(
+          isSelected ? activeIcon : (inactiveIcon ?? activeIcon),
+          width: 24,
+          height: 24,
+        ),
       ),
-      text: label,
+      label: label,
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/matching_category.dart';
 import 'package:gachtaxi_app/common/util/modal_util.dart';
 import 'package:gachtaxi_app/domain/chat/data/models/chat_user.dart';
-import 'package:gachtaxi_app/domain/chat/data/models/response/chat_member_count_response.dart';
+import 'package:gachtaxi_app/domain/chat/data/models/chat_user_dummy.dart';
 import 'package:gachtaxi_app/domain/chat/data/service/chat_matching_service.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/chat_profile_modal.dart';
 import 'package:gachtaxi_app/domain/chat/presentation/widget/profile_image.dart';
