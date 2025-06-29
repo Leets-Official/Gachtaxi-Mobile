@@ -1,45 +1,29 @@
-import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:gachtaxi_app/common/util/api_client.dart';
 import 'package:gachtaxi_app/common/util/token_storage.dart';
 import 'package:gachtaxi_app/common/util/logger.dart';
-
-class GoogleAuthResult {
-  final String? status;
-  final Map<String, dynamic>? user;
-  final bool isUnregistered;
-
-  GoogleAuthResult({
-    required this.status,
-    required this.user,
-    required this.isUnregistered,
-  });
-}
+import 'package:gachtaxi_app/domain/landing/model/auth_result.dart';
 
 class GoogleAuthService {
-  static Future<GoogleAuthResult?> loginWithGoogle() async {
+  static Future<AuthResult?> loginWithGoogle(BuildContext context) async {
     try {
       final googleSignIn = GoogleSignIn(
         scopes: ['email', 'profile'],
         serverClientId: dotenv.env['GOOGLE_WEB_CLIENT_ID'],
       );
-      print('GOOGLE_WEB_CLIENT_ID: ${dotenv.env['GOOGLE_WEB_CLIENT_ID']}');
 
       await googleSignIn.signOut();
-
-      final GoogleSignInAccount? account = await googleSignIn.signIn();
-      print('GoogleSignInAccount: $account');
+      final account = await googleSignIn.signIn();
 
       if (account == null) {
-        logger.e('사용자가 로그인 취소함');
+        ToastShowUtils(context: context).showSuccess('로그인을 취소했어요.');
         return null;
       }
 
       final authCode = account.serverAuthCode;
-
-      print("authCode: $authCode");
 
       if (authCode == null) {
         logger.e('authCode is null');
@@ -51,9 +35,8 @@ class GoogleAuthService {
         body: {'authCode': authCode},
       );
 
-      final headers = response.headers;
-      final accessToken = headers['Authorization']?.first;
-      final refreshToken = headers['RefreshToken']?.first;
+      final accessToken = response.headers['Authorization']?.first;
+      final refreshToken = response.headers['RefreshToken']?.first;
 
       if (accessToken != null && refreshToken != null) {
         await TokenStorage.saveTokens(
@@ -74,13 +57,14 @@ class GoogleAuthService {
         return null;
       }
 
-      return GoogleAuthResult(
+      return AuthResult(
         status: status,
         user: user,
         isUnregistered: status == 'UN_REGISTER',
       );
     } catch (e) {
       logger.e('구글 로그인 실패: $e');
+      ToastShowUtils(context: context).showSuccess('Google 로그인 중 문제가 발생했어요.');
       return null;
     }
   }

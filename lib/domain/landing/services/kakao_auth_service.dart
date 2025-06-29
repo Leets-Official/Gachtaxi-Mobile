@@ -1,23 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:gachtaxi_app/common/util/api_client.dart';
 import 'package:gachtaxi_app/common/util/token_storage.dart';
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:gachtaxi_app/common/util/logger.dart';
-
-class KakaoAuthResult {
-  final String? status;
-  final Map<String, dynamic>? user;
-  final bool isUnregistered;
-
-  KakaoAuthResult({
-    required this.status,
-    required this.user,
-    required this.isUnregistered,
-  });
-}
+import 'package:gachtaxi_app/domain/landing/model/auth_result.dart';
 
 class KakaoAuthService {
-  static Future<KakaoAuthResult?> loginWithKakao() async {
+  static Future<AuthResult?> loginWithKakao(BuildContext context) async {
     try {
       OAuthToken token;
 
@@ -25,25 +16,19 @@ class KakaoAuthService {
         try {
           token = await UserApi.instance.loginWithKakaoTalk();
         } catch (e) {
-          logger.w('카카오톡 로그인 실패, 이메일 로그인 시도: $e');
           token = await UserApi.instance.loginWithKakaoAccount();
         }
       } else {
         token = await UserApi.instance.loginWithKakaoAccount();
       }
 
-      logger.i('카카오 로그인 성공: ${token.accessToken}');
-
       final response = await ApiClient.postWithHeaders(
         Uri.parse('${dotenv.env['API_URL']}/auth/login/mobile/kakao'),
         body: {'accessToken': token.accessToken},
       );
 
-      logger.i('API 요청 응답 도착');
-
-      final headers = response.headers;
-      final accessToken = headers['Authorization']?.first;
-      final refreshToken = headers['RefreshToken']?.first;
+      final accessToken = response.headers['Authorization']?.first;
+      final refreshToken = response.headers['RefreshToken']?.first;
 
       if (accessToken != null && refreshToken != null) {
         await TokenStorage.saveTokens(
@@ -59,13 +44,14 @@ class KakaoAuthService {
       final status = data['status'];
       final user = data['memberResponseDto'];
 
-      return KakaoAuthResult(
+      return AuthResult(
         status: status,
         user: user,
         isUnregistered: status == 'UN_REGISTER',
       );
     } catch (e) {
       logger.e('카카오 로그인 실패: $e');
+      ToastShowUtils(context: context).showSuccess('Kakao 로그인 중 문제가 발생했어요.');
       return null;
     }
   }
