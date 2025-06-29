@@ -29,7 +29,7 @@ class Modal extends StatelessWidget {
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 16.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
               child: content,
             ),
             Positioned(
