@@ -14,6 +14,7 @@ class InputField extends StatefulWidget {
   final Function(String)? onSubmitted;
   final double? labelFontSize;
   final bool? hasSearchIcon;
+  final Function()? onSearchIconPressed;
 
   const InputField({
     super.key,
@@ -26,6 +27,7 @@ class InputField extends StatefulWidget {
     this.onSubmitted,
     this.labelFontSize,
     this.hasSearchIcon = false,
+    this.onSearchIconPressed,
   });
 
   @override
@@ -91,7 +93,7 @@ class _InputFieldState extends State<InputField> {
                 right: 0.h,
                 top: 3.h,
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: widget.onSearchIconPressed,
                   icon: SvgPicture.asset(
                     'assets/icons/search_on_icon.svg',
                     width: 24.w,

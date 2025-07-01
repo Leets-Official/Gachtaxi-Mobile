@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/domain/friend/application/friend_constant.dart';
 import 'package:gachtaxi_app/domain/friend/data/models/friend_model.dart';
+import 'package:gachtaxi_app/domain/friend/data/models/member_summary.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:gachtaxi_app/domain/friend/data/repository/friend_repository.dart';
 
@@ -18,5 +19,16 @@ class FriendService {
     final response =
         await _friendRepository.getFriends(pageNum, FriendConstant.PAGE_SIZE);
     return response.response;
+  }
+
+  Future<List<MemberSummary>> searchFriends(
+      String nickname, int pageNum) async {
+    final response = await _friendRepository.searchFriends(
+        nickname, pageNum, FriendConstant.PAGE_SIZE);
+    return response.memberList;
+  }
+
+  Future<void> requestFriend(String nickname) async {
+    await _friendRepository.requestFriend(nickname);
   }
 }
