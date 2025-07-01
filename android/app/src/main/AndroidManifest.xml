@@ -26,9 +26,13 @@
         <meta-data
             android:name="com.google.android.gms.client_id"
             android:value="${GOOGLE_CLIENT_ID}" />
+        
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_native_app_key" />
 
         <activity
-            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:name="com.kakao.sdk.auth.AuthCodeCustomTabsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:replace="android:theme"
             android:exported="true">
