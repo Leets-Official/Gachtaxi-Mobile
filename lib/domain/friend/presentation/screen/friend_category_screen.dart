@@ -6,6 +6,7 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/domain/friend/data/service/friend_service.dart';
+import 'package:gachtaxi_app/domain/friend/presentation/state/friend_list_pagination_state.dart';
 import 'package:gachtaxi_app/domain/friend/presentation/state/friends_list_state.dart';
 import 'package:gachtaxi_app/domain/friend/presentation/widget/friend_card.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
@@ -31,7 +32,10 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
     final friendList = ref.read(friendsListStateProvider);
     if (friendList.isEmpty) {
       ref.read(friendServiceProvider).getFriends(0).then((value) {
-        ref.read(friendsListStateProvider.notifier).addFriends(value);
+        ref.read(friendsListStateProvider.notifier).addFriends(value.response);
+        ref
+            .read(friendListPaginationStateProvider.notifier)
+            .setPageable(value.pageable);
       });
     }
   }

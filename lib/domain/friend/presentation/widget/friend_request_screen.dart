@@ -6,6 +6,7 @@ import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
 import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
 import 'package:gachtaxi_app/domain/friend/data/service/friend_service.dart';
+import 'package:gachtaxi_app/domain/friend/presentation/state/friend_search_pagination_state.dart';
 import 'package:gachtaxi_app/domain/friend/presentation/state/friend_search_state.dart';
 import 'package:gachtaxi_app/domain/friend/presentation/widget/friend_search_card.dart';
 
@@ -16,7 +17,6 @@ class FriendRequestScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final friendSearchState = ref.watch(friendSearchStateProvider);
-    print(friendSearchState);
     return DefaultLayout(
       hasAppBar: true,
       title: '친구 요청',
@@ -41,13 +41,17 @@ class FriendRequestScreen extends ConsumerWidget {
                           .searchFriends(
                             controller.text,
                             ref
-                                .read(friendSearchStateProvider.notifier)
+                                .read(friendSearchPaginationStateProvider
+                                    .notifier)
                                 .getCurrentPageNum(),
                           )
                           .then((value) {
                         ref
                             .read(friendSearchStateProvider.notifier)
-                            .addFriends(value);
+                            .addFriends(value.memberList);
+                        ref
+                            .read(friendSearchPaginationStateProvider.notifier)
+                            .setPageable(value.pageable);
                       });
                     },
                   ),
