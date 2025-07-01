@@ -7,17 +7,22 @@ import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/friend_category.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
-import 'package:gachtaxi_app/domain/home/components/friend/friend_request_screen.dart';
+import 'package:gachtaxi_app/domain/friend/presentation/screen/friend_category_screen.dart';
+import 'package:gachtaxi_app/domain/friend/presentation/widget/friend_request_screen.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/friend_changer_notifier.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/home/view/tab-view/friend_category_view/blacklist_category_screen.dart';
-import 'package:gachtaxi_app/domain/home/view/tab-view/friend_category_view/friend_category_screen.dart';
 
-class FriendListScreen extends ConsumerWidget {
+class FriendListScreen extends ConsumerStatefulWidget {
   const FriendListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<FriendListScreen> createState() => _FriendListScreenState();
+}
+
+class _FriendListScreenState extends ConsumerState<FriendListScreen> {
+  @override
+  Widget build(BuildContext context) {
     final currentFriendCategory = ref.watch(friendChangerNotifierProvider);
     final isFriend = currentFriendCategory == FriendCategory.friend;
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);

@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
-import 'package:gachtaxi_app/domain/home/model/friend/friend_model.dart';
+import 'package:gachtaxi_app/domain/friend/data/models/friend_model.dart';
 
 class FriendCard extends StatelessWidget {
   final Friend friend;

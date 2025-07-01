@@ -5,9 +5,10 @@ import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
-import 'package:gachtaxi_app/domain/home/providers/response/friend_data_notifier.dart';
+import 'package:gachtaxi_app/domain/friend/data/service/friend_service.dart';
+import 'package:gachtaxi_app/domain/friend/presentation/state/friends_list_state.dart';
+import 'package:gachtaxi_app/domain/friend/presentation/widget/friend_card.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
-import 'package:gachtaxi_app/domain/home/components/friend/friend_card.dart';
 
 class FriendCategoryScreen extends ConsumerStatefulWidget {
   final bool isFriend;
@@ -26,6 +27,13 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+
+    final friendList = ref.read(friendsListStateProvider);
+    if (friendList.isEmpty) {
+      ref.read(friendServiceProvider).getFriends(0).then((value) {
+        ref.read(friendsListStateProvider.notifier).addFriends(value);
+      });
+    }
   }
 
   @override
@@ -49,7 +57,7 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final friendListData = ref.watch(friendDataNotifierProvider);
+    final friendListData = ref.watch(friendsListStateProvider);
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
     final isExpanded = containerHeight > sheetHeightState.minHeight * 1.3;
@@ -63,7 +71,7 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
         controller: _scrollController,
         padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
         itemBuilder: (context, index) {
-          final friend = friendListData.response[index];
+          final friend = friendListData[index];
           return FriendCard(
             friend: friend,
             onAdditionalTap: () => _onFriendAdditionalTap(friend.friendsId),
@@ -71,7 +79,7 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
         },
         separatorBuilder: (context, index) =>
             const SizedBox(height: AppSpacing.spaceCommon),
-        itemCount: friendListData.response.length,
+        itemCount: friendListData.length,
       ),
     );
   }
