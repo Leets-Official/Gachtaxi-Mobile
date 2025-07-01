@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gachtaxi_app/common/model/pageable_model.dart';
-import 'package:gachtaxi_app/domain/home/model/friend/friend_model.dart';
+import 'package:gachtaxi_app/domain/friend/data/models/friend_model.dart';
 
 part 'friend_response_model.freezed.dart';
 part 'friend_response_model.g.dart';
