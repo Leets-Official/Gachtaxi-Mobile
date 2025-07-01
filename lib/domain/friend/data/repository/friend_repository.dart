@@ -89,9 +89,285 @@ class FriendRepository {
               gender: Gender.MALE,
               chatRoomId: 1,
             ),
+            Friend(
+              friendsId: 9,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 10,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 11,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 12,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 13,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 14,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 15,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 16,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 17,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 18,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 19,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 20,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 5,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 6,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 7,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 8,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 1,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 2,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 3,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 4,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 5,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 6,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 7,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 8,
+              friendsNickName: '이지훈',
+              friendsProfileUrl:
+                  'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 9,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 10,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 11,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 12,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 13,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 14,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 16,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 15,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 17,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 20,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 18,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
+            Friend(
+              friendsId: 19,
+              friendsNickName: '김주영',
+              friendsProfileUrl: '',
+              gender: Gender.MALE,
+              chatRoomId: 1,
+            ),
           ],
           pageable: Pageable(
-              pageNumber: 0, pageSize: 20, numberOfElements: 8, isLast: true));
+              pageNumber: 0,
+              pageSize: 20,
+              numberOfElements: 40,
+              isLast: false));
       // rethrow;
     }
   }

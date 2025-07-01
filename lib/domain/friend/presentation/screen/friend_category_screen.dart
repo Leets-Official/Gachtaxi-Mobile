@@ -23,11 +23,15 @@ class FriendCategoryScreen extends ConsumerStatefulWidget {
 
 class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
   late ScrollController _scrollController;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+
+    // 스크롤 리스너 추가
+    _scrollController.addListener(_scrollListener);
 
     final friendList = ref.read(friendsListStateProvider);
     if (friendList.isEmpty) {
@@ -37,6 +41,51 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
             .read(friendListPaginationStateProvider.notifier)
             .setPageable(value.pageable);
       });
+    }
+  }
+
+  void _scrollListener() {
+    // 스크롤이 끝에서 200픽셀 전에 도달하면 다음 페이지 로드
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
+      _loadNextPage();
+    }
+  }
+
+  Future<void> _loadNextPage() async {
+    // 이미 로딩 중이거나 마지막 페이지면 리턴
+    final paginationState = ref.read(friendListPaginationStateProvider);
+    if (_isLoading || paginationState.isLast) return;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final nextPage = paginationState.pageNumber + 1;
+      final response =
+          await ref.read(friendServiceProvider).getFriends(nextPage);
+
+      // 친구 목록에 추가
+      ref.read(friendsListStateProvider.notifier).addFriends(response.response);
+
+      // 페이지네이션 정보 업데이트
+      ref
+          .read(friendListPaginationStateProvider.notifier)
+          .setPageable(response.pageable);
+    } catch (e) {
+      // 에러 처리
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('친구 목록을 불러오는데 실패했습니다.')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -55,8 +104,9 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
 
   @override
   void dispose() {
-    super.dispose();
+    _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -75,6 +125,19 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
         controller: _scrollController,
         padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
         itemBuilder: (context, index) {
+          // 마지막 아이템이고 로딩 중인 경우 로딩 인디케이터 표시
+          if (index == friendListData.length) {
+            return Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: AppSpacing.spaceCommon),
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primary,
+                ),
+              ),
+            );
+          }
+
           final friend = friendListData[index];
           return FriendCard(
             friend: friend,
@@ -83,7 +146,7 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
         },
         separatorBuilder: (context, index) =>
             const SizedBox(height: AppSpacing.spaceCommon),
-        itemCount: friendListData.length,
+        itemCount: friendListData.length + (_isLoading ? 1 : 0),
       ),
     );
   }
