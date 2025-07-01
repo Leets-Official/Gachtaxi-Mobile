@@ -31,7 +31,6 @@ class _MatchingWaitingScreenState extends ConsumerState<MatchingWaitingScreen> {
     _subscription = ref.listenManual<AsyncValue<ApiResponse?>>(
       autoMatchingProvider,
       (prev, next) {
-        debugPrint('listen triggered: $next');
         if (next is AsyncData && next.value != null) {
           if (mounted) {
             Navigator.of(context).pushReplacement(
@@ -40,6 +39,7 @@ class _MatchingWaitingScreenState extends ConsumerState<MatchingWaitingScreen> {
           }
         } else if (next is AsyncError) {
           ToastShowUtils(context: context).showSuccess('자동매칭 요청에 실패했어요.');
+          Navigator.of(context).pop();
         }
       },
     );
@@ -70,6 +70,7 @@ class _MatchingWaitingScreenState extends ConsumerState<MatchingWaitingScreen> {
       destination: null,
       startName: matchingState.departure.name,
     );
+    debugPrint('자동 매칭 요청: $requestBody');
 
     await autoMatchingService.requestAutoMatching(requestBody);
   }
