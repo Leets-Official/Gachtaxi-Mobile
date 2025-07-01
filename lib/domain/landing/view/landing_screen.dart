@@ -95,7 +95,7 @@ class _HomeScreenState extends State<LandingScreen> {
                 ),
                 SizedBox(height: AppSpacing.spaceCommon),
                 Button(
-                  buttonText: "구글로 시작하기기",
+                  buttonText: "구글로 시작하기",
                   backgroundColor: Colors.white,
                   textColor: Colors.black,
                   icon: SvgPicture.asset('assets/icons/google_icon.svg',
