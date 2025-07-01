@@ -15,6 +15,11 @@ class ApiClient {
   )..interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
+          if (options.extra["skipAuth"] == true) {
+            logger.i("🔓 Authorization 헤더 없이 요청 진행됨 (skipAuth: true)");
+            return handler.next(options);
+          }
+
           final token = await TokenStorage.loadAccessToken();
 
           if (token != null) {
@@ -67,9 +72,21 @@ class ApiClient {
   }
 
   // Post with headers
-  static Future<Response> postWithHeaders(Uri uri, {Map<String, dynamic>? body}) async {
+  static Future<Response> postWithHeaders(Uri uri,
+      {Map<String, dynamic>? body}) async {
     try {
-      final response = await _dio.postUri(uri, data: body);
+      final response = await _dio.postUri(
+        uri,
+        data: body,
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+          },
+          extra: {
+            "skipAuth": true,
+          },
+        ),
+      );
       return response;
     } catch (e) {
       rethrow;
