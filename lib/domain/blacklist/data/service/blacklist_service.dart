@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gachtaxi_app/domain/blacklist/data/models/blacklist_model.dart';
+import 'package:gachtaxi_app/domain/blacklist/data/models/blacklist_response.dart';
 import 'package:gachtaxi_app/domain/blacklist/data/repository/blacklist_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -14,9 +14,9 @@ class BlacklistService {
 
   BlacklistService(this._blacklistRepository);
 
-  Future<List<Blacklist>> getBlacklists(int pageNum) async {
+  Future<BlacklistResponse> getBlacklists(int pageNum) async {
     final response = await _blacklistRepository.getBlacklists(pageNum);
-    return response.blacklist;
+    return response;
   }
 
   Future<void> deleteBlacklist(int receiverId) async {

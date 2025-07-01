@@ -1,4 +1,3 @@
-import 'package:gachtaxi_app/domain/blacklist/application/blacklist_constant.dart';
 import 'package:gachtaxi_app/domain/blacklist/data/models/blacklist_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -23,7 +22,7 @@ class BlacklistsListState extends _$BlacklistsListState {
     state = state.where((element) => element.receiverId != receiverId).toList();
   }
 
-  int getCurrentPageNum() {
-    return state.length % BlacklistConstant.PAGE_SIZE;
+  void clear() {
+    state = [];
   }
 }
