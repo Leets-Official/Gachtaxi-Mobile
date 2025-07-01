@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'friend_search_pagination_state.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class FriendSearchPaginationState extends _$FriendSearchPaginationState {
   @override
   Pageable build() {
@@ -22,5 +22,14 @@ class FriendSearchPaginationState extends _$FriendSearchPaginationState {
 
   void setPageable(Pageable pageable) {
     state = pageable;
+  }
+
+  void clear() {
+    state = Pageable(
+      pageNumber: 0,
+      pageSize: FriendConstant.PAGE_SIZE,
+      numberOfElements: -1,
+      isLast: false,
+    );
   }
 }

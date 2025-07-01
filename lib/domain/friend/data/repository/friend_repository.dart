@@ -393,9 +393,108 @@ class FriendRepository {
               profilePicture: '',
               gender: Gender.MALE,
             ),
+            MemberSummary(
+              userId: 1,
+              nickname: '김주영',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 2,
+              nickname: '이지훈',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 1,
+              nickname: '김주영',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 2,
+              nickname: '이지훈',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 1,
+              nickname: '김주영',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 2,
+              nickname: '이지훈',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 1,
+              nickname: '김주영',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 2,
+              nickname: '이지훈',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 1,
+              nickname: '김주영',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 2,
+              nickname: '이지훈',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 1,
+              nickname: '김주영',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 2,
+              nickname: '이지훈',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 1,
+              nickname: '김주영',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 2,
+              nickname: '이지훈',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 1,
+              nickname: '김주영',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
+            MemberSummary(
+              userId: 2,
+              nickname: '이지훈',
+              profilePicture: '',
+              gender: Gender.MALE,
+            ),
           ],
           pageable: Pageable(
-              pageNumber: 0, pageSize: 20, numberOfElements: 2, isLast: true));
+              pageNumber: 0,
+              pageSize: 20,
+              numberOfElements: 40,
+              isLast: false));
       // rethrow;
     }
   }

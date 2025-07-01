@@ -13,4 +13,8 @@ class FriendSearchState extends _$FriendSearchState {
   void addFriends(List<MemberSummary> friends) {
     state = [...state, ...friends];
   }
+
+  void clear() {
+    state = [];
+  }
 }

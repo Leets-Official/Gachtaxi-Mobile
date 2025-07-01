@@ -30,7 +30,6 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
     super.initState();
     _scrollController = ScrollController();
 
-    // 스크롤 리스너 추가
     _scrollController.addListener(_scrollListener);
 
     final friendList = ref.read(friendsListStateProvider);
@@ -45,15 +44,13 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
   }
 
   void _scrollListener() {
-    // 스크롤이 끝에서 200픽셀 전에 도달하면 다음 페이지 로드
     if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 200) {
+        _scrollController.position.maxScrollExtent - 200.h) {
       _loadNextPage();
     }
   }
 
   Future<void> _loadNextPage() async {
-    // 이미 로딩 중이거나 마지막 페이지면 리턴
     final paginationState = ref.read(friendListPaginationStateProvider);
     if (_isLoading || paginationState.isLast) return;
 
@@ -66,15 +63,12 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
       final response =
           await ref.read(friendServiceProvider).getFriends(nextPage);
 
-      // 친구 목록에 추가
       ref.read(friendsListStateProvider.notifier).addFriends(response.response);
 
-      // 페이지네이션 정보 업데이트
       ref
           .read(friendListPaginationStateProvider.notifier)
           .setPageable(response.pageable);
     } catch (e) {
-      // 에러 처리
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('친구 목록을 불러오는데 실패했습니다.')),
@@ -125,7 +119,6 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
         controller: _scrollController,
         padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
         itemBuilder: (context, index) {
-          // 마지막 아이템이고 로딩 중인 경우 로딩 인디케이터 표시
           if (index == friendListData.length) {
             return Padding(
               padding:
