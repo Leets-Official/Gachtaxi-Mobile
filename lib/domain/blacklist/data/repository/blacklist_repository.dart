@@ -32,28 +32,28 @@ class BlacklistRepository {
                 'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
           ),
           Blacklist(
-            receiverId: 1,
+            receiverId: 2,
             receiverNickname: '이지훈',
             gender: Gender.MALE,
             receiverProfilePicture:
                 'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
           ),
           Blacklist(
-            receiverId: 1,
+            receiverId: 3,
             receiverNickname: '이지훈',
             gender: Gender.MALE,
             receiverProfilePicture:
                 'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
           ),
           Blacklist(
-            receiverId: 1,
+            receiverId: 4,
             receiverNickname: '이지훈',
             gender: Gender.MALE,
             receiverProfilePicture:
                 'https://avatars.githubusercontent.com/u/163561527?s=400&u=c5f25ee3bf9162818aad262703e7d406dc548e8b&v=4',
           ),
           Blacklist(
-            receiverId: 1,
+            receiverId: 5,
             receiverNickname: '이지훈',
             gender: Gender.MALE,
             receiverProfilePicture:
@@ -67,6 +67,14 @@ class BlacklistRepository {
           isLast: true,
         ),
       );
+      // rethrow;
+    }
+  }
+
+  Future<void> deleteBlacklist(int receiverId) async {
+    try {
+      await ApiClient.delete(Uri.parse(BLACKLIST_PATH + '/$receiverId'));
+    } catch (e) {
       // rethrow;
     }
   }

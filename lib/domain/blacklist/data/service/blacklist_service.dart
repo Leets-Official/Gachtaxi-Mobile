@@ -18,4 +18,8 @@ class BlacklistService {
     final response = await _blacklistRepository.getBlacklists(pageNum);
     return response.blacklist;
   }
+
+  Future<void> deleteBlacklist(int receiverId) async {
+    await _blacklistRepository.deleteBlacklist(receiverId);
+  }
 }

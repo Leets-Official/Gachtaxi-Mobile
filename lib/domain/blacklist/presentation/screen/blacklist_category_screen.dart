@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
+import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
 import 'package:gachtaxi_app/domain/blacklist/data/service/blacklist_service.dart';
 import 'package:gachtaxi_app/domain/blacklist/presentation/state/blacklists_list_state.dart';
 import 'package:gachtaxi_app/domain/blacklist/presentation/widget/blacklist_card.dart';
@@ -81,6 +82,16 @@ class _BlacklistCategoryScreenState
   }
 
   void _onBlacklistDeleteTap(int receiverId) {
-    // TODO: 블랙리스트 삭제 로직
+    ref
+        .read(blacklistServiceProvider)
+        .deleteBlacklist(receiverId)
+        .then((value) {
+      ref
+          .read(blacklistsListStateProvider.notifier)
+          .removeBlacklist(receiverId);
+    });
+    ToastShowUtils(context: context).showSuccess(
+      '블랙리스트에서 해제했어요',
+    );
   }
 }

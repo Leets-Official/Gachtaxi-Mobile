@@ -19,10 +19,8 @@ class BlacklistsListState extends _$BlacklistsListState {
     state = [...state, ...blacklist];
   }
 
-  void removeBlacklist(Blacklist blacklist) {
-    state = state
-        .where((element) => element.receiverId != blacklist.receiverId)
-        .toList();
+  void removeBlacklist(int receiverId) {
+    state = state.where((element) => element.receiverId != receiverId).toList();
   }
 
   int getCurrentPageNum() {
