@@ -19,21 +19,25 @@ class FriendCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 101.h,
+      height: 64.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: AppColors.neutralComponent,
+        border: Border(
+          bottom: BorderSide(
+            color: AppColors.singleGray.withValues(alpha: 0.5),
+            width: 1.w,
+          ),
+        ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(
-          AppSpacing.spaceCommon,
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.spaceCommon,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _buildProfileImage(friend.friendsProfileUrl),
-            const SizedBox(width: AppSpacing.spaceMedium),
+            const SizedBox(width: AppSpacing.SpaceExtraExtraMedium),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,17 +50,6 @@ class FriendCard extends StatelessWidget {
                     color: AppColors.white,
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: AppSpacing.spaceExtraSmall),
-                  child: Text(
-                    friend.gender.value,
-                    style: TextStyle(
-                      fontSize: AppTypography.fontSizeSmall,
-                      color: AppColors.darkGray,
-                    ),
-                  ),
-                ),
               ],
             ),
             const Spacer(),
@@ -65,24 +58,15 @@ class FriendCard extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: onAdditionalTap,
-                  child: SvgPicture.asset('assets/icons/additional_icon.svg',
-                      width: 24.w, height: 24.h),
-                ),
-                Container(
-                  width: 24.w,
-                  height: 24.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.send,
-                      color: Colors.black,
-                      size: 16.sp,
+                  child: SizedBox(
+                    width: 32.w,
+                    height: 32.h,
+                    child: Center(
+                      child: SvgPicture.asset(
+                          'assets/icons/modal_next_on_icon.svg',
+                          width: 9.w,
+                          height: 16.h),
                     ),
-                    padding: EdgeInsets.zero,
-                    onPressed: () {},
                   ),
                 ),
               ],
@@ -97,13 +81,19 @@ class FriendCard extends StatelessWidget {
     final bool hasProfilePicture =
         profilePicture != null && profilePicture.isNotEmpty;
     return hasProfilePicture
-        ? CircleAvatar(
-            backgroundImage: NetworkImage(
+        ? ClipRRect(
+            borderRadius: BorderRadius.circular(8.r),
+            child: Image.network(
               profilePicture,
+              width: 36.w,
+              height: 36.h,
+              fit: BoxFit.cover,
             ),
-            radius: 24.r,
           )
-        : SvgPicture.asset('assets/icons/profile_icon.svg',
-            width: 48.w, height: 48.h);
+        : SizedBox(
+            width: 36.w,
+            height: 36.h,
+            child: SvgPicture.asset('assets/icons/profile_on_icon.svg'),
+          );
   }
 }
