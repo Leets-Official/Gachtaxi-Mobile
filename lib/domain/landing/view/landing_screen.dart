@@ -67,7 +67,6 @@ class _HomeScreenState extends State<LandingScreen> {
               ],
             ),
           ),
-
           SmoothPageIndicator(
             controller: pageController,
             count: 3,
@@ -79,9 +78,7 @@ class _HomeScreenState extends State<LandingScreen> {
               fixedCenter: false,
             ),
           ),
-
           const SizedBox(height: AppSpacing.spaceExtraMedium),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
             child: Column(
@@ -90,17 +87,19 @@ class _HomeScreenState extends State<LandingScreen> {
                   buttonText: "카카오로 시작하기",
                   backgroundColor: const Color(0xFFFFE001),
                   textColor: Colors.black,
-                  icon: SvgPicture.asset('assets/icons/kakao_icon.svg', width: 20),
+                  icon: SvgPicture.asset('assets/icons/kakao_icon.svg',
+                      width: 20),
                   onPressed: () => _startSocialLogin(
                     loginFunction: KakaoAuthService.loginWithKakao,
                   ),
                 ),
                 SizedBox(height: AppSpacing.spaceCommon),
                 Button(
-                  buttonText: "구글로 시작하기",
+                  buttonText: "구글로 시작하기기",
                   backgroundColor: Colors.white,
                   textColor: Colors.black,
-                  icon: SvgPicture.asset('assets/icons/google_icon.svg', width: 20),
+                  icon: SvgPicture.asset('assets/icons/google_icon.svg',
+                      width: 20),
                   onPressed: () => _startSocialLogin(
                     loginFunction: GoogleAuthService.loginWithGoogle,
                   ),
