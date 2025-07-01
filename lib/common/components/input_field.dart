@@ -5,7 +5,7 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 
 class InputField extends StatefulWidget {
-  final String label;
+  final String? label;
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
@@ -18,7 +18,7 @@ class InputField extends StatefulWidget {
 
   const InputField({
     super.key,
-    required this.label,
+    this.label,
     required this.hintText,
     required this.controller,
     this.keyboardType = TextInputType.text,
@@ -40,14 +40,15 @@ class _InputFieldState extends State<InputField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.label,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: widget.labelFontSize ?? AppTypography.fontSizeSmall,
-            fontWeight: AppTypography.fontWeightMedium,
+        if (widget.label != null)
+          Text(
+            widget.label!,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: widget.labelFontSize ?? AppTypography.fontSizeSmall,
+              fontWeight: AppTypography.fontWeightMedium,
+            ),
           ),
-        ),
         SizedBox(height: 16.h),
         Stack(
           children: [

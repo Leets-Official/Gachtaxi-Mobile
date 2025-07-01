@@ -5,7 +5,6 @@ import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
-import 'package:gachtaxi_app/common/model/pageable_model.dart';
 import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
 import 'package:gachtaxi_app/domain/friend/data/service/friend_service.dart';
 import 'package:gachtaxi_app/domain/friend/presentation/state/friend_search_pagination_state.dart';

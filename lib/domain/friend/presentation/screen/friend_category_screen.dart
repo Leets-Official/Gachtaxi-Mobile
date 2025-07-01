@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
+import 'package:gachtaxi_app/common/components/input_field.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
@@ -24,7 +25,7 @@ class FriendCategoryScreen extends ConsumerStatefulWidget {
 class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
   late ScrollController _scrollController;
   bool _isLoading = false;
-
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -115,31 +116,48 @@ class _FriendCategoryScreenState extends ConsumerState<FriendCategoryScreen> {
       height: isExpanded
           ? MediaQuery.of(context).size.height * 0.7
           : MediaQuery.of(context).size.height * 0.25,
-      child: ListView.separated(
-        controller: _scrollController,
-        padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
-        itemBuilder: (context, index) {
-          if (index == friendListData.length) {
-            return Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppSpacing.spaceCommon),
-              child: Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
-              ),
-            );
-          }
+      child: Column(
+        children: [
+          InputField(
+            hintText: '닉네임 입력하기',
+            controller: _controller,
+            labelFontSize: AppTypography.fontSizeMedium,
+            hasSearchIcon: true,
+            onSearchIconPressed: () {
+              // TODO: 친구 검색 API가 존재하지 않음
+            },
+          ),
+          const SizedBox(height: AppSpacing.spaceExtraLarge),
+          Expanded(
+            child: ListView.separated(
+              controller: _scrollController,
+              padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
+              itemBuilder: (context, index) {
+                if (index == friendListData.length) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppSpacing.spaceCommon),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  );
+                }
 
-          final friend = friendListData[index];
-          return FriendCard(
-            friend: friend,
-            onAdditionalTap: () => _onFriendAdditionalTap(friend.friendsId),
-          );
-        },
-        separatorBuilder: (context, index) =>
-            const SizedBox(height: AppSpacing.spaceCommon),
-        itemCount: friendListData.length + (_isLoading ? 1 : 0),
+                final friend = friendListData[index];
+                return FriendCard(
+                  friend: friend,
+                  onAdditionalTap: () =>
+                      _onFriendAdditionalTap(friend.friendsId),
+                );
+              },
+              separatorBuilder: (context, index) =>
+                  const SizedBox(height: AppSpacing.spaceCommon),
+              itemCount: friendListData.length + (_isLoading ? 1 : 0),
+            ),
+          ),
+        ],
       ),
     );
   }

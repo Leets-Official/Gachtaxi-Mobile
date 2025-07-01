@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gachtaxi_app/common/components/input_field.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
 import 'package:gachtaxi_app/domain/blacklist/data/service/blacklist_service.dart';
 import 'package:gachtaxi_app/domain/blacklist/presentation/state/blacklist_list_pagination_state.dart';
@@ -23,7 +25,7 @@ class _BlacklistCategoryScreenState
     extends ConsumerState<BlacklistCategoryScreen> {
   late ScrollController _scrollController;
   bool _isLoading = false;
-
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -117,31 +119,48 @@ class _BlacklistCategoryScreenState
       height: isExpanded
           ? MediaQuery.of(context).size.height * 0.7
           : MediaQuery.of(context).size.height * 0.25,
-      child: ListView.separated(
-        controller: _scrollController,
-        padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
-        itemBuilder: (context, index) {
-          if (index == blacklistListData.length) {
-            return Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppSpacing.spaceCommon),
-              child: Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
-              ),
-            );
-          }
+      child: Column(
+        children: [
+          InputField(
+            hintText: '닉네임 입력하기',
+            controller: _controller,
+            labelFontSize: AppTypography.fontSizeMedium,
+            hasSearchIcon: true,
+            onSearchIconPressed: () {
+              // TODO: 블랙리스트 검색 API가 존재하지 않음
+            },
+          ),
+          const SizedBox(height: AppSpacing.spaceExtraLarge),
+          Expanded(
+            child: ListView.separated(
+              controller: _scrollController,
+              padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
+              itemBuilder: (context, index) {
+                if (index == blacklistListData.length) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppSpacing.spaceCommon),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  );
+                }
 
-          final blacklist = blacklistListData[index];
-          return BlacklistCard(
-            blacklist: blacklist,
-            onDeleteTap: () => _onBlacklistDeleteTap(blacklist.receiverId),
-          );
-        },
-        separatorBuilder: (context, index) =>
-            const SizedBox(height: AppSpacing.spaceCommon),
-        itemCount: blacklistListData.length + (_isLoading ? 1 : 0),
+                final blacklist = blacklistListData[index];
+                return BlacklistCard(
+                  blacklist: blacklist,
+                  onDeleteTap: () =>
+                      _onBlacklistDeleteTap(blacklist.receiverId),
+                );
+              },
+              separatorBuilder: (context, index) =>
+                  const SizedBox(height: AppSpacing.spaceCommon),
+              itemCount: blacklistListData.length + (_isLoading ? 1 : 0),
+            ),
+          ),
+        ],
       ),
     );
   }
