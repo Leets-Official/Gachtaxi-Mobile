@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
@@ -76,22 +78,26 @@ class FriendListScreen extends ConsumerWidget {
         ),
         if (isExpanded && isFriend)
           Positioned(
-            right: 20,
-            bottom: 20,
-            child: IconButton(
-              iconSize: 32,
-              style: IconButton.styleFrom(
-                fixedSize: Size(48, 48),
-                backgroundColor: AppColors.primary,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => FriendRequestScreen(),
-                  ),
+            right: 20.w,
+            bottom: 20.h,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  SlidePageRoute(screen: FriendRequestScreen()),
                 );
               },
-              icon: Icon(Icons.add),
+              child: SizedBox(
+                width: 48.w,
+                height: 48.h,
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/icons/plus_fill_icon.svg',
+                    width: 48.w,
+                    height: 48.h,
+                  ),
+                ),
+              ),
             ),
           ),
       ],
