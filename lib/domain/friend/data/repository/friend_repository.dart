@@ -15,6 +15,7 @@ FriendRepository friendRepository(Ref ref) => FriendRepository();
 
 class FriendRepository {
   static const String FRIEND_PATH = "/api/friends";
+  static const String MEMBER_PATH = "/api/members";
 
   Future<FriendListResponse> getFriends(int pageNum, int pageSize) async {
     try {
@@ -99,7 +100,7 @@ class FriendRepository {
       String nickname, int pageNum, int pageSize) async {
     try {
       String query = "?nickname=$nickname&pageNum=$pageNum&pageSize=$pageSize";
-      final response = await ApiClient.get(Uri.parse(FRIEND_PATH + query));
+      final response = await ApiClient.get(Uri.parse(MEMBER_PATH + query));
       return FriendSearchResponse.fromJson(response.data);
     } catch (e) {
       return FriendSearchResponse(
