@@ -5,7 +5,7 @@ import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
-import 'package:gachtaxi_app/domain/home/model/blacklist/blacklist_model.dart';
+import 'package:gachtaxi_app/domain/blacklist/data/models/blacklist_model.dart';
 
 class BlacklistCard extends StatelessWidget {
   final Blacklist blacklist;

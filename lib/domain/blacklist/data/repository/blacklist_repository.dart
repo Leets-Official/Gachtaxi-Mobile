@@ -1,16 +1,28 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/enums/gender_model.dart';
 import 'package:gachtaxi_app/common/model/pageable_model.dart';
-import 'package:gachtaxi_app/domain/home/model/blacklist/blacklist_model.dart';
-import 'package:gachtaxi_app/domain/home/model/blacklist/blacklist_response_model.dart';
+import 'package:gachtaxi_app/common/util/api_client.dart';
+import 'package:gachtaxi_app/domain/blacklist/application/blacklist_constant.dart';
+import 'package:gachtaxi_app/domain/blacklist/data/models/blacklist_model.dart';
+
+import 'package:gachtaxi_app/domain/blacklist/data/models/blacklist_response.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'blacklist_data_notifier.g.dart';
+part 'blacklist_repository.g.dart';
 
-@riverpod
-class BlacklistDataNotifier extends _$BlacklistDataNotifier {
-  @override
-  BlacklistResponse build() {
-    return BlacklistResponse(
+@Riverpod(keepAlive: true)
+BlacklistRepository blacklistRepository(Ref ref) => BlacklistRepository();
+
+class BlacklistRepository {
+  static const String BLACKLIST_PATH = '/api/blacklists';
+
+  Future<BlacklistResponse> getBlacklists(int pageNum) async {
+    String query = '?pageNum=$pageNum&pageSize=${BlacklistConstant.PAGE_SIZE}';
+    try {
+      final response = await ApiClient.get(Uri.parse(BLACKLIST_PATH + query));
+      return BlacklistResponse.fromJson(response.data);
+    } catch (e) {
+      return BlacklistResponse(
         blacklist: [
           Blacklist(
             receiverId: 1,
@@ -49,6 +61,13 @@ class BlacklistDataNotifier extends _$BlacklistDataNotifier {
           ),
         ],
         pageable: Pageable(
-            pageNumber: 0, pageSize: 0, numberOfElements: 0, isLast: false));
+          pageNumber: 0,
+          pageSize: 20,
+          numberOfElements: 5,
+          isLast: true,
+        ),
+      );
+      // rethrow;
+    }
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
-import 'package:gachtaxi_app/domain/home/components/blacklist/blacklist_card.dart';
-import 'package:gachtaxi_app/domain/home/providers/response/blacklist_data_notifier.dart';
+import 'package:gachtaxi_app/domain/blacklist/data/service/blacklist_service.dart';
+import 'package:gachtaxi_app/domain/blacklist/presentation/state/blacklists_list_state.dart';
+import 'package:gachtaxi_app/domain/blacklist/presentation/widget/blacklist_card.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 
 class BlacklistCategoryScreen extends ConsumerStatefulWidget {
@@ -22,6 +23,13 @@ class _BlacklistCategoryScreenState
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    final pageNum =
+        ref.read(blacklistsListStateProvider.notifier).getCurrentPageNum();
+    if (pageNum == 0) {
+      ref.read(blacklistServiceProvider).getBlacklists(pageNum).then((value) {
+        ref.read(blacklistsListStateProvider.notifier).addAllBlacklist(value);
+      });
+    }
   }
 
   @override
@@ -45,7 +53,7 @@ class _BlacklistCategoryScreenState
 
   @override
   Widget build(BuildContext context) {
-    final blacklistListData = ref.watch(blacklistDataNotifierProvider);
+    final blacklistListData = ref.watch(blacklistsListStateProvider);
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
     final isExpanded = containerHeight > sheetHeightState.minHeight * 1.3;
@@ -59,7 +67,7 @@ class _BlacklistCategoryScreenState
         controller: _scrollController,
         padding: EdgeInsets.only(bottom: AppSpacing.spaceCommon * 2.5),
         itemBuilder: (context, index) {
-          final blacklist = blacklistListData.blacklist[index];
+          final blacklist = blacklistListData[index];
           return BlacklistCard(
             blacklist: blacklist,
             onDeleteTap: () => _onBlacklistDeleteTap(blacklist.receiverId),
@@ -67,7 +75,7 @@ class _BlacklistCategoryScreenState
         },
         separatorBuilder: (context, index) =>
             const SizedBox(height: AppSpacing.spaceCommon),
-        itemCount: blacklistListData.blacklist.length,
+        itemCount: blacklistListData.length,
       ),
     );
   }
