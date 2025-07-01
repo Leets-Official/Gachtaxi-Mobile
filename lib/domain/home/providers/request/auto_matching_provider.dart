@@ -15,34 +15,29 @@ class AutoMatching extends _$AutoMatching {
 
   Future<void> requestAutoMatching(AutoMatchingRequest request) async {
     state = const AsyncLoading();
-    //   final service = ref.read(autoMatchingServiceProvider);
-
-    //   state = const AsyncLoading();
-
-    //   try {
-    //     final res = await service.requestAutoMatching(request);
-    //     state = AsyncData(res.data);
-    //   } catch (e, st) {
-    //     state = AsyncError(e, st);
-    //   }
-    // }
-    final dummy = ApiResponse(
-      data: {
-        "autoMatchingStatus": "string",
-        "timestamp":
-            DateTime.now().toIso8601String(), // ✅ 이걸 넣어주면 무조건 새 값으로 처리됨
-      },
-      message: '하이',
-      code: 200,
-    );
+    final service = ref.read(autoMatchingServiceProvider);
 
     try {
-      await Future.delayed(const Duration(seconds: 1));
-
-      debugPrint('$dummy');
-      state = AsyncData(dummy);
+      final res = await service.requestAutoMatching(request);
+      state = AsyncData(res.data);
     } catch (e, st) {
       state = AsyncError(e, st);
     }
+    // final dummy = ApiResponse(
+    //   data: {
+    //     "autoMatchingStatus": "string",
+    //   },
+    //   message: '하이',
+    //   code: 200,
+    // );
+
+    // try {
+    //   await Future.delayed(const Duration(seconds: 1));
+
+    //   debugPrint('$dummy');
+    //   state = AsyncData(dummy);
+    // } catch (e, st) {
+    //   state = AsyncError(e, st);
+    // }
   }
 }
