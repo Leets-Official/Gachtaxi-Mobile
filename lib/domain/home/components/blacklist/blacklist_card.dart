@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
@@ -19,22 +20,29 @@ class BlacklistCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 101.h,
+      height: 64.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: AppColors.neutralComponent,
+        border: Border(
+          bottom: BorderSide(
+            color: AppColors.singleGray.withValues(alpha: 0.5),
+            width: 1.w,
+          ),
+        ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(
-          AppSpacing.spaceCommon,
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.spaceCommon,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset('assets/icons/profile_icon.svg',
-                width: 48.w, height: 48.h),
-            const SizedBox(width: AppSpacing.spaceMedium),
+            SizedBox(
+              width: 36.w,
+              height: 36.h,
+              child: SvgPicture.asset('assets/icons/profile_icon.svg'),
+            ),
+            const SizedBox(width: AppSpacing.SpaceExtraExtraMedium),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,29 +55,16 @@ class BlacklistCard extends StatelessWidget {
                     color: AppColors.white,
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: AppSpacing.spaceExtraSmall),
-                  child: Text(
-                    blacklist.gender.value,
-                    style: TextStyle(
-                      fontSize: AppTypography.fontSizeSmall,
-                      color: AppColors.darkGray,
-                    ),
-                  ),
-                ),
               ],
             ),
             const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: onDeleteTap,
-                  child: SvgPicture.asset('assets/icons/delete_icon.svg',
-                      width: 32.w, height: 32.h),
-                ),
-              ],
+            SizedBox(
+              width: 70.w,
+              height: 34.h,
+              child: Button(
+                buttonText: '해제',
+                onPressed: onDeleteTap,
+              ),
             )
           ],
         ),
