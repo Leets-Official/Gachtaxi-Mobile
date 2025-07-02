@@ -35,7 +35,7 @@ class Pofile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(28), // 둥근 프로필 사진
+              borderRadius: BorderRadius.circular(28),
               child: profilePicture != null && profilePicture.isNotEmpty
                   ? Image.network(
                 profilePicture,
