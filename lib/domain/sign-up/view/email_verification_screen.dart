@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/components/input_field.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
 import 'package:gachtaxi_app/domain/sign-up/utils/timer_manager.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
-import 'package:gachtaxi_app/common/modal/term_agreement_modal.dart';
+import 'package:gachtaxi_app/domain/sign-up/modal/term_agreement_modal.dart';
 import 'package:gachtaxi_app/common/util/modal_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gachtaxi_app/domain/sign-up/services/email_verification_service.dart';
+
+final timerManagerProvider = ChangeNotifierProvider((ref) => TimerManager());
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => TimerManager(),
-      child: const EmailVerificationView(),
-    );
+    return const EmailVerificationView();
   }
 }
 
-class EmailVerificationView extends StatefulWidget {
+class EmailVerificationView extends ConsumerStatefulWidget {
   const EmailVerificationView({Key? key}) : super(key: key);
 
   @override
-  State<EmailVerificationView> createState() => _EmailVerificationViewState();
+  ConsumerState<EmailVerificationView> createState() => _EmailVerificationViewState();
 }
 
-class _EmailVerificationViewState extends State<EmailVerificationView> {
+class _EmailVerificationViewState extends ConsumerState<EmailVerificationView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController codeController = TextEditingController();
   final FocusNode emailFocusNode = FocusNode();
@@ -48,21 +49,29 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
     super.dispose();
   }
 
-  void handleSendCode(TimerManager timerManager) {
-    setState(() {
-      isCodeInputVisible = true;
-    });
+  void handleSendCode() async {
+    final timerManager = ref.read(timerManagerProvider);
 
-    timerManager.startTimer();
+    try {
+      final email = emailController.text.trim();
+      await ref.read(emailVerificationProvider.notifier).sendCode(email);
 
-    Future.delayed(const Duration(milliseconds: 300), () {
-      FocusScope.of(context).requestFocus(codeFocusNode);
-    });
+      setState(() {
+        isCodeInputVisible = true;
+      });
+
+      timerManager.startTimer();
+      Future.delayed(const Duration(milliseconds: 300), () {
+        FocusScope.of(context).requestFocus(codeFocusNode);
+      });
+    } catch (e) {
+      ToastShowUtils(context: context).showSuccess("이메일 인증에 실패하였습니다.");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final timerManager = context.watch<TimerManager>();
+    final timerManager = ref.watch(timerManagerProvider);
 
     return DefaultLayout(
       hasAppBar: true,
@@ -107,9 +116,7 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
                       : "인증번호 다시 받기 (${timerManager.formattedTime})",
                   backgroundColor: AppColors.primary,
                   textColor: Colors.black,
-                  onPressed: () {
-                    handleSendCode(timerManager);
-                  },
+                  onPressed: handleSendCode,
                   icon: const SizedBox(),
                 ),
 
@@ -128,13 +135,22 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
                     buttonText: "인증확인",
                     backgroundColor: AppColors.primary,
                     textColor: Colors.black,
-                    onPressed: () {
-                      // TODO: 인증번호 검증 로직 추가
-                      ModalUtils.showCommonBottomSheet(
-                        context: context,
-                        content: const TermsAgreementModal(),
-                      );
-                    },
+                      onPressed: () async {
+                        final email = emailController.text.trim();
+                        final code = codeController.text.trim();
+                        try {
+                          await ref.read(emailVerificationProvider.notifier).verifyCode(email, code);
+
+                          ModalUtils.showCommonBottomSheet(
+                            context: context,
+                            content: TermsAgreementModal(),
+                          );
+                        } catch (e) {
+                          ToastShowUtils(context: context).showSuccess("인증번호가 올바르지 않습니다.");
+                          return;
+                        }
+                      }
+
                   ),
                 ],
               ],
