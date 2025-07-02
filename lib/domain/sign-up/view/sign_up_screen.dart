@@ -8,8 +8,12 @@ import 'package:gachtaxi_app/common/layout/main_screen.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/common/components/input_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
+import 'package:gachtaxi_app/common/util/token_storage.dart';
+import 'package:gachtaxi_app/common/util/user_storage.dart';
 import 'package:gachtaxi_app/domain/sign-up/components/gender_toggle.dart';
 import 'package:gachtaxi_app/domain/sign-up/components/profile_upload.dart';
+import 'package:gachtaxi_app/domain/sign-up/services/sign_up_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -20,6 +24,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   Gender selectedGender = Gender.male;
+  String? uploadedImageUrl;
   final TextEditingController nicknameController = TextEditingController();
   final TextEditingController realNameController = TextEditingController();
   final TextEditingController studentIdController = TextEditingController();
@@ -53,7 +58,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.spaceExtraLarge),
-                ProfileAvatar(),
+                ProfileAvatar(
+                  onImageUploaded: (url) {
+                    setState(() {
+                      uploadedImageUrl = url;
+                    });
+                  },
+                ),
                 const SizedBox(height: AppSpacing.spaceExtraLarge),
                 InputField(
                   label: "닉네임",
@@ -111,14 +122,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   buttonText: "시작하기",
                   backgroundColor: AppColors.primary,
                   textColor: Colors.black,
-                  onPressed: () {
-                    //회원가입 완료 로직 추가
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      SlidePageRoute(screen: const MainScreen()),
-                      (route) => false,
-                    );
-                  },
+                    onPressed: () async {
+                      try {
+                        final res = await submitSupplement(
+                          profilePicture: uploadedImageUrl ?? '',
+                          nickname: nicknameController.text.trim(),
+                          realName: realNameController.text.trim(),
+                          studentNumber: int.parse(studentIdController.text.trim()),
+                          gender: selectedGender == Gender.male ? "MALE" : "FEMALE",
+                        );
+
+                        final headers = res.headers;
+                        final data = res.data;
+
+                        final accessToken = headers.value('Authorization') ?? '';
+                        final refreshToken = headers.value('RefreshToken') ?? '';
+
+                        await TokenStorage.saveTokens(
+                          accessToken: accessToken,
+                          refreshToken: refreshToken,
+                        );
+
+                        final user = data['data']['memberResponseDto'];
+                        await UserStorage.saveUserInfo(
+                          userId: user['userId'],
+                          studentNumber: user['studentNumber'],
+                          nickname: user['nickName'],
+                          realName: user['realName'],
+                          profilePicture: user['profilePicture'],
+                          email: user['email'],
+                          role: user['role'],
+                          gender: user['gender'],
+                          accountNumber: user['accountNumber']?.toString() ?? '',
+                        );
+
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          SlidePageRoute(screen: const MainScreen()),
+                              (route) => false,
+                        );
+                      } catch (e) {
+                        ToastShowUtils(context: context).showSuccess("회원정보 등록에 실패했어요");
+                      }
+                    }
                 ),
                 const SizedBox(height: AppSpacing.spaceCommon),
               ],
