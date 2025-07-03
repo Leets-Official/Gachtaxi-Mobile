@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gachtaxi_app/domain/home/providers/ui/map_location_provider.dart';
+import 'package:gachtaxi_app/domain/home/providers/ui/matching_setting_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMaps extends ConsumerStatefulWidget {
@@ -60,7 +60,7 @@ class _GoogleMapsState extends ConsumerState<GoogleMaps> {
 
     final screenHeight = MediaQuery.of(context).size.height;
     final bottomSheetHeight = 330.0;
-    final center = ref.read(mapLocationNotifierProvider).center.position;
+    final center = ref.read(matchingSettingNotifierProvider).center.position;
 
     double zoom = await _controller!.getZoomLevel();
     double bottomSheetRatio = bottomSheetHeight / screenHeight;
@@ -74,7 +74,7 @@ class _GoogleMapsState extends ConsumerState<GoogleMaps> {
 
   @override
   Widget build(BuildContext context) {
-    final location = ref.watch(mapLocationNotifierProvider);
+    final location = ref.watch(matchingSettingNotifierProvider);
     final center = location.center.position;
     final departure = location.departure.position;
     final destination = location.destination.position;

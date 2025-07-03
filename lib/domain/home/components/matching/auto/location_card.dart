@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
-import 'package:gachtaxi_app/domain/home/providers/ui/map_location_provider.dart';
+import 'package:gachtaxi_app/domain/home/providers/ui/matching_setting_provider.dart';
 
 class LocationCard extends ConsumerWidget {
   const LocationCard({super.key});
@@ -13,9 +13,9 @@ class LocationCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 상태값을 가져와 텍스트 필드 값으로 사용할 이름 설정
-    final departureName = ref.watch(mapLocationNotifierProvider).departure.name;
+    final departureName = ref.watch(matchingSettingNotifierProvider).departure.name;
     final destinationName =
-        ref.watch(mapLocationNotifierProvider).destination.name;
+        ref.watch(matchingSettingNotifierProvider).destination.name;
 
     // TextEditingController 생성하여 값 실시간 업데이트
     final TextEditingController departureController =
@@ -59,7 +59,7 @@ class LocationCard extends ConsumerWidget {
             IconButton(
               onPressed: () {
                 // 상태 변경 후 값 업데이트
-                ref.read(mapLocationNotifierProvider.notifier).toggleLoaction();
+                ref.read(matchingSettingNotifierProvider.notifier).toggleLocation();
               },
               icon: SvgPicture.asset(
                 'assets/icons/change_location_icon.svg',

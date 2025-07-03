@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
+import 'package:gachtaxi_app/domain/home/providers/response/manual_matching_data_provider.dart';
+import 'package:gachtaxi_app/domain/home/providers/ui/matching_setting_provider.dart';
 
 class ExpandedSettingCard extends StatelessWidget {
   final String cardTitle;
@@ -66,21 +69,36 @@ class ExpandedSettingCard extends StatelessWidget {
 }
 
 // 태그 요소 UI
-class ListElement extends StatelessWidget {
+class ListElement extends ConsumerWidget {
   final String elementTitle;
   final bool isTag;
   const ListElement(
       {super.key, required this.elementTitle, required this.isTag});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final matchingSettingState = ref.watch(matchingSettingNotifierProvider);
+    final matchingSettingNotifier = ref.read(matchingSettingNotifierProvider.notifier);
+
     return GestureDetector(
+      onTap: () {
+        if (isTag) {
+          matchingSettingNotifier.toggleTag(elementTitle);
+        } else {
+          matchingSettingNotifier.toggleFriend(elementTitle);
+        }
+      },
       child: Container(
         height: 28.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(999)),
-          color: AppColors.neutralDark,
-        ),
+          color: isTag
+              ? matchingSettingState.selectedTags.contains(elementTitle)
+                  ? AppColors.primary
+                  : AppColors.neutralDark
+              : matchingSettingState.selectedFriends.contains(elementTitle)
+                  ? AppColors.primary
+                  : AppColors.neutralDark),
         child: Padding(
           padding:
               const EdgeInsets.symmetric(horizontal: AppSpacing.spaceCommon),
@@ -88,7 +106,13 @@ class ListElement extends StatelessWidget {
               child: Text(
             '${isTag ? '#' : ''} $elementTitle',
             style: TextStyle(
-              color: AppColors.darkGray,
+              color: isTag
+                  ? matchingSettingState.selectedTags.contains(elementTitle)
+                      ? AppColors.neutralDark
+                      : Colors.grey
+                  : matchingSettingState.selectedFriends.contains(elementTitle)
+                      ? AppColors.neutralDark
+                      : Colors.grey,
               fontWeight: AppTypography.fontWeightMedium,
               fontSize: AppTypography.fontSizeSmall,
             ),

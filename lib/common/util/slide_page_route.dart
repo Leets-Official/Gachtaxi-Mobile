@@ -5,7 +5,7 @@ class SlidePageRoute<T> extends PageRouteBuilder<T> {
       : super(
           pageBuilder: (context, animation, secondaryAnimation) => screen,
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0.0); // 오른쪽에서 왼쪽으로 슬라이드
+            const begin = Offset(1.0, 0.0);
             const end = Offset.zero;
             const curve = Curves.ease;
 

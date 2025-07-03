@@ -52,19 +52,19 @@ class AutoMatchingScreen extends ConsumerWidget {
           LocationCard(),
           const SizedBox(height: AppSpacing.spaceCommon),
           if (isExpanded) ...[
-            ExpandedSettingCard(
+            const ExpandedSettingCard(
               cardTitle: '친구 초대',
               cardListElement: [
                 '봉식이',
                 '길구봉구',
                 '상놈',
-                '봉식이',
-                '길구봉구',
-                '상놈',
+                '현식이',
+                '똘구봉구',
+                '상상놈',
               ],
             ),
             const SizedBox(height: AppSpacing.spaceCommon),
-            ExpandedSettingCard(
+            const ExpandedSettingCard(
               cardTitle: '키워드 선택',
               cardListElement: ['금연', '남자만', '여자만'],
               isTag: true,
@@ -84,9 +84,7 @@ class AutoMatchingScreen extends ConsumerWidget {
             buttonText: '매칭 시작',
             onPressed: () {
               Navigator.of(context).push(
-                SlidePageRoute(
-                  screen: MatchingWaitingScreen(),
-                ),
+                SlidePageRoute(screen: MatchingWaitingScreen()),
               );
             },
           ),
