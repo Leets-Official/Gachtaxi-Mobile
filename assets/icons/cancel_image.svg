@@ -1,3 +1,5 @@
-<svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="15.2285" cy="15.5776" r="15" fill="white"/>
+<svg width="46" height="47" viewBox="0 0 46 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M34.2566 34.8098C40.5049 28.5614 40.5049 18.4308 34.2566 12.1824C28.0082 5.934 17.8775 5.934 11.6291 12.1824C5.38075 18.4308 5.38075 28.5614 11.6291 34.8098C17.8775 41.0582 28.0082 41.0582 34.2566 34.8098Z" fill="white"/>
+<rect x="15.8721" y="18.3105" width="2.66667" height="17.3333" rx="1.33333" transform="rotate(-45 15.8721 18.3105)" fill="#989B9A"/>
+<rect x="28.1284" y="16.4258" width="2.66667" height="17.3333" rx="1.33333" transform="rotate(45 28.1284 16.4258)" fill="#989B9A"/>
 </svg>
