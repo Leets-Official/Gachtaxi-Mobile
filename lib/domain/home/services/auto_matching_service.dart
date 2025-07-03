@@ -15,7 +15,7 @@ class AutoMatchingService {
       return ApiResponse(
           code: response.code, message: response.message, data: response.data);
     } else {
-      throw Exception("자동매칭 요청 실");
+      throw Exception("자동매칭 요청 실패");
     }
   }
 }
