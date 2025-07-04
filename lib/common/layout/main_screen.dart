@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
 import 'package:gachtaxi_app/domain/home/components/custom_bottom_nav_bar.dart';
 import 'package:gachtaxi_app/domain/home/view/home_screen.dart';
 import 'package:gachtaxi_app/domain/my-page/view/my_page_screen.dart';
+import 'package:gachtaxi_app/domain/notification-list/providers/unread_notification_provider.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   final PageController _pageController = PageController();
   int _selectedIndex = 0;
   int previousIndex = 0;
@@ -48,7 +50,13 @@ class _MainScreenState extends State<MainScreen> {
       canPop: _selectedIndex != 3,
       onPopInvokedWithResult: (didPop, result) {
         if (!didPop && _selectedIndex == 3) {
-          setState(() => _selectedIndex = previousIndex);
+          setState(() {
+            _selectedIndex = previousIndex;
+
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ref.invalidate(unreadNotificationNotifierProvider);
+            });
+          });
         }
       },
       child: Stack(
@@ -56,7 +64,8 @@ class _MainScreenState extends State<MainScreen> {
           Offstage(
             offstage: _selectedIndex == 3,
             child: RepaintBoundary(
-                child: HomeScreen(pageController: _pageController)),
+              child: HomeScreen(pageController: _pageController),
+            ),
           ),
           Offstage(
             offstage: _selectedIndex != 3,
