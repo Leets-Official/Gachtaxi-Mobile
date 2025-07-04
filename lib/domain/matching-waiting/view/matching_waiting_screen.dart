@@ -89,7 +89,7 @@ class _MatchingWaitingScreenState extends ConsumerState<MatchingWaitingScreen> {
 
 Widget _buildLoadingScreen() {
   return DefaultLayout(
-    hasAppBar: true,
+    hasAppBar: false,
     child: SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
