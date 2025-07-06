@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
 import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/enums/friend_category.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
-import 'package:gachtaxi_app/domain/home/components/friend/friend_request_screen.dart';
+import 'package:gachtaxi_app/domain/blacklist/presentation/screen/blacklist_category_screen.dart';
+import 'package:gachtaxi_app/domain/friend/presentation/screen/friend_category_screen.dart';
+import 'package:gachtaxi_app/domain/friend/presentation/widget/friend_request_screen.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/friend_changer_notifier.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
-import 'package:gachtaxi_app/domain/home/view/tab-view/friend_category_view/blacklist_category_screen.dart';
-import 'package:gachtaxi_app/domain/home/view/tab-view/friend_category_view/friend_category_screen.dart';
 
-class FriendListScreen extends ConsumerWidget {
+class FriendListScreen extends ConsumerStatefulWidget {
   const FriendListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<FriendListScreen> createState() => _FriendListScreenState();
+}
+
+class _FriendListScreenState extends ConsumerState<FriendListScreen> {
+  @override
+  Widget build(BuildContext context) {
     final currentFriendCategory = ref.watch(friendChangerNotifierProvider);
     final isFriend = currentFriendCategory == FriendCategory.friend;
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
@@ -76,22 +83,26 @@ class FriendListScreen extends ConsumerWidget {
         ),
         if (isExpanded && isFriend)
           Positioned(
-            right: 20,
-            bottom: 20,
-            child: IconButton(
-              iconSize: 32,
-              style: IconButton.styleFrom(
-                fixedSize: Size(48, 48),
-                backgroundColor: AppColors.primary,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => FriendRequestScreen(),
-                  ),
+            right: 20.w,
+            bottom: 20.h,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  SlidePageRoute(screen: FriendRequestScreen()),
                 );
               },
-              icon: Icon(Icons.add),
+              child: SizedBox(
+                width: 48.w,
+                height: 48.h,
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/icons/plus_fill_icon.svg',
+                    width: 48.w,
+                    height: 48.h,
+                  ),
+                ),
+              ),
             ),
           ),
       ],
