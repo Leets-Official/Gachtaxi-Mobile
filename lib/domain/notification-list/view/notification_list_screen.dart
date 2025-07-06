@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/layout/default_layout.dart';
+import 'package:gachtaxi_app/common/util/toast_show_utils.dart';
 import 'package:gachtaxi_app/domain/notification-list/model/notification_list_model.dart';
 import 'package:gachtaxi_app/domain/notification-list/providers/notification_list_provider.dart';
 import 'package:gachtaxi_app/domain/notification-list/strategy/notification_strategy_factory.dart';
@@ -23,7 +25,7 @@ class NotificationListScreen extends ConsumerWidget {
             if (notificationListData == null ||
                 notificationListData.response.isEmpty) {
               return const Center(
-                child: Text('데이터가 없습니다.'),
+                child: Text('알림이 없습니다.'),
               );
             }
 
@@ -84,16 +86,44 @@ class NotificationListScreen extends ConsumerWidget {
                   final notification = item.notification!;
                   final strategy =
                       NotificationUiStrategyFactory.getStrategy(notification);
-                  return KeyedSubtree(
+                  return Dismissible(
                     key: ValueKey(notification.notificationId),
-                    child: strategy.buildTile(context, notification),
+                    background: Container(
+                      color: AppColors.toastBackground,
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Icon(Icons.delete, color: Colors.white),
+                    ),
+                    onDismissed: (direction) async {
+                      try {
+                        await ref
+                            .read(notificationListNotifierProvider.notifier)
+                            .removeNotification(notification.notificationId);
+                      } catch (e) {
+                        final errorMessage =
+                            e.toString().replaceFirst('Exception: ', '');
+
+                        if (context.mounted) {
+                          ToastShowUtils(context: context)
+                              .showSuccess(errorMessage);
+                        }
+                      }
+                    },
+                    child: KeyedSubtree(
+                      key: ValueKey(notification.notificationId),
+                      child: strategy.buildTile(context, notification),
+                    ),
                   );
                 }
               },
             );
           },
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (e, st) => Center(child: Text('오류가 발생했습니다: $e')),
+          error: (e, st) {
+            return Center(
+              child: Text('오류가 발생했습니다: $e'),
+            );
+          },
         ),
       ),
     );

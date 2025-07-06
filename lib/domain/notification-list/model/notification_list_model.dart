@@ -71,7 +71,7 @@ class MatchPayload with _$MatchPayload {
 @freezed
 class FriendRequestPayload with _$FriendRequestPayload {
   const factory FriendRequestPayload({
-    required String status, // You can use an enum if desired
+    required String status,
     required int senderId,
   }) = _FriendRequestPayload;
 
