@@ -23,7 +23,7 @@ class ManualMatchingInviteNotifier extends _$ManualMatchingInviteNotifier {
           ? e.response?.data['message'] ?? '알 수 없는 서버 오류'
           : e.toString();
       state = AsyncError(Exception(message), st);
-      rethrow; // catch(e)에서 .toString()을 사용 가능하게 하기 위해 rethrow 유지
+      rethrow;
     }
   }
 }
