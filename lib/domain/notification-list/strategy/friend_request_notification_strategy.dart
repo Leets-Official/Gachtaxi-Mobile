@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
@@ -7,7 +8,8 @@ import 'package:gachtaxi_app/domain/notification-list/strategy/notification_list
 
 class FriendRequestNotificationStrategy implements NotificationUiStrategy {
   @override
-  Widget buildTile(BuildContext context, NotificationModel model) {
+  Widget buildTile(
+      BuildContext context, NotificationModel model, WidgetRef ref) {
     final friendRequest = model as FriendRequestNotification;
 
     return Padding(

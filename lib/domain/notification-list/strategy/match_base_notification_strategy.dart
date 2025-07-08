@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
 import 'package:gachtaxi_app/common/enums/match_type.dart';
@@ -12,7 +13,8 @@ class MatchBaseNotificationStrategy implements NotificationUiStrategy {
   MatchBaseNotificationStrategy({required this.matchType});
 
   @override
-  Widget buildTile(BuildContext context, NotificationModel model) {
+  Widget buildTile(
+      BuildContext context, NotificationModel model, WidgetRef ref) {
     final String iconPath;
     final String content;
     final String createdAt;

@@ -111,7 +111,7 @@ class NotificationListScreen extends ConsumerWidget {
                     },
                     child: KeyedSubtree(
                       key: ValueKey(notification.notificationId),
-                      child: strategy.buildTile(context, notification),
+                      child: strategy.buildTile(context, notification, ref),
                     ),
                   );
                 }
