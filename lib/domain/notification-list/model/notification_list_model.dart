@@ -72,6 +72,7 @@ class MatchPayload with _$MatchPayload {
 class FriendRequestPayload with _$FriendRequestPayload {
   const factory FriendRequestPayload({
     required String status,
+    String? profilePicture,
     required int senderId,
   }) = _FriendRequestPayload;
 
@@ -83,6 +84,7 @@ class FriendRequestPayload with _$FriendRequestPayload {
 class MatchingRequestPayload with _$MatchingRequestPayload {
   const factory MatchingRequestPayload({
     required String senderNickname,
+    String? profilePicture,
     required int matchingRoomId,
   }) = _MatchingRequestPayload;
 

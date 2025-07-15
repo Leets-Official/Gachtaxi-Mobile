@@ -30,11 +30,21 @@ class FriendRequestNotificationStrategy implements NotificationUiStrategy {
         ),
         child: ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: SvgPicture.asset(
-            'assets/icons/profile_on_icon.svg',
-            width: 48,
-            height: 48,
-          ),
+          leading: (friendRequest.payload.profilePicture != null)
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    friendRequest.payload.profilePicture!,
+                    width: 48,
+                    height: 48,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              : SvgPicture.asset(
+                  'assets/icons/profile_on_icon.svg',
+                  width: 48,
+                  height: 48,
+                ),
           title: Text(friendRequest.content,
               style: TextStyle(color: Colors.white)),
           trailing: Button(

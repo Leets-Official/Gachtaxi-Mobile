@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:gachtaxi_app/common/model/api_response.dart';
-import 'package:gachtaxi_app/common/model/pageable_model.dart';
 import 'package:gachtaxi_app/domain/notification-list/model/notification_list_model.dart';
 import 'package:gachtaxi_app/domain/notification-list/services/notification_list_service_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
