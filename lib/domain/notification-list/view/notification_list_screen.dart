@@ -131,7 +131,7 @@ class NotificationListScreen extends ConsumerWidget {
 
   String _getDateGroup(String createdAt) {
     try {
-      final nowUtc = DateTime.now().toUtc();
+      final nowUtc = DateTime.now();
       final todayUtc = DateTime(nowUtc.year, nowUtc.month, nowUtc.day);
       final notificationDateLocal = DateTime.parse(createdAt).toLocal();
       final notificationDayLocal = DateTime(
