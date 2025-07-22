@@ -22,13 +22,15 @@ class ProfileAvatar extends StatefulWidget {
 class _ProfileAvatarState extends State<ProfileAvatar> {
   String? _selectedImagePath;
   String? _uploadedUrl;
+  bool _isUploading = false;
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (widget.initialImageUrl != null && widget.initialImageUrl!.isNotEmpty) {
+      if (widget.initialImageUrl != null &&
+          widget.initialImageUrl!.isNotEmpty) {
         setState(() {
           _uploadedUrl = widget.initialImageUrl;
         });
@@ -37,10 +39,16 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
   }
 
   Future<void> _pickImage() async {
+    if (_isUploading) return;
+
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
+      setState(() {
+        _isUploading = true;
+      });
+
       try {
         final uploadedUrl = await ImageUploadService.uploadProfileImage(image);
 
@@ -52,6 +60,10 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
         widget.onImageUploaded(uploadedUrl);
       } catch (e) {
         ToastShowUtils(context: context).showSuccess("이미지 업로드에 실패했어요");
+      } finally {
+        setState(() {
+          _isUploading = false;
+        });
       }
     }
   }
@@ -101,27 +113,30 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
     }
 
     return Center(
-      child: Stack(
-        alignment: Alignment.bottomRight,
-        children: [
-          ClipOval(child: profileImage),
-          Positioned(
-            bottom: 5,
-            right: 5,
-            child: GestureDetector(
-              onTap: (_selectedImagePath != null || _uploadedUrl != null)
-                  ? _removeImage
-                  : _pickImage,
-              child: SvgPicture.asset(
-                (_selectedImagePath != null || _uploadedUrl != null)
-                    ? 'assets/icons/cancel_image.svg'
-                    : 'assets/icons/camera_icon.svg',
-                width: 30,
-                height: 30,
+      child: GestureDetector(
+        onTap: _pickImage,
+        child: Stack(
+          alignment: Alignment.bottomRight,
+          children: [
+            ClipOval(child: profileImage),
+            Positioned(
+              bottom: 5,
+              right: 5,
+              child: GestureDetector(
+                onTap: (_selectedImagePath != null || _uploadedUrl != null)
+                    ? _removeImage
+                    : _pickImage,
+                child: SvgPicture.asset(
+                  (_selectedImagePath != null || _uploadedUrl != null)
+                      ? 'assets/icons/cancel_image.svg'
+                      : 'assets/icons/camera_icon.svg',
+                  width: 30,
+                  height: 30,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
