@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gachtaxi_app/common/util/logger.dart';
+import 'package:gachtaxi_app/common/util/user_storage.dart';
 import 'package:gachtaxi_app/domain/landing/components/first_landing_screen.dart';
 import 'package:gachtaxi_app/domain/landing/components/second_landing_screen.dart';
 import 'package:gachtaxi_app/domain/landing/components/third_landing_screen.dart';
@@ -33,6 +34,26 @@ class _HomeScreenState extends State<LandingScreen> {
     if (result == null) {
       logger.e('로그인 결과가 null임');
       return;
+    }
+
+    if (!result.isUnregistered) {
+      final user = result.user;
+      if (user != null) {
+        await UserStorage.saveUserInfo(
+          userId: user['userId'],
+          studentNumber: user['studentNumber'],
+          nickname: user['nickName'],
+          realName: user['realName'],
+          profilePicture: user['profilePicture'],
+          email: user['email'],
+          role: user['role'],
+          gender: user['gender'],
+          accountNumber: user['accountNumber']?.toString() ?? '',
+        );
+        logger.i('로그인 시 유저 정보 로컬 저장 완료');
+      } else {
+        logger.w('user 정보가 null입니다. 저장하지 않음');
+      }
     }
 
     if (result.isUnregistered) {
