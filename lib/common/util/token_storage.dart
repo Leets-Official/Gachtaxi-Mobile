@@ -15,7 +15,7 @@ class TokenStorage {
   // 로그인 시 액세스, 리프레시 토큰 저장
   static Future<void> saveTokens({
     required String accessToken,
-    required String refreshToken,
+    String? refreshToken,
   }) async {
     await _storage.write(key: _accessTokenKey, value: accessToken);
     await _storage.write(key: _refreshTokenKey, value: refreshToken);
