@@ -123,6 +123,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   backgroundColor: AppColors.primary,
                   textColor: Colors.black,
                     onPressed: () async {
+                      final nickname = nicknameController.text.trim();
+                      final realName = realNameController.text.trim();
+                      final studentIdText = studentIdController.text.trim();
+
+                      if (nickname.isEmpty) {
+                        ToastShowUtils(context: context).showSuccess("닉네임을 입력해주세요!");
+                        return;
+                      }
+                      if (realName.isEmpty) {
+                        ToastShowUtils(context: context).showSuccess("본명을 입력해주세요!");
+                        return;
+                      }
+                      if (studentIdText.isEmpty) {
+                        ToastShowUtils(context: context).showSuccess("학번을 입력해주세요!");
+                        return;
+                      }
+
+                      final studentId = int.tryParse(studentIdText);
+                      if (studentId == null) {
+                        ToastShowUtils(context: context).showSuccess("학번 형식이 올바르지 않아요!");
+                        return;
+                      }
+
                       try {
                         final res = await submitSupplement(
                           profilePicture: uploadedImageUrl ?? '',
