@@ -36,12 +36,10 @@ class GoogleAuthService {
       );
 
       final accessToken = response.headers['Authorization']?.first;
-      final refreshToken = response.headers['RefreshToken']?.first;
 
-      if (accessToken != null && refreshToken != null) {
+      if (accessToken != null) {
         await TokenStorage.saveTokens(
           accessToken: accessToken,
-          refreshToken: refreshToken,
         );
         logger.i('헤더에서 토큰 저장 완료');
       } else {
