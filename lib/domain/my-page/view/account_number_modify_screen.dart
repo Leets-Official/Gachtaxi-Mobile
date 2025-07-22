@@ -31,6 +31,7 @@ class AccountNumberModifyScreen extends ConsumerWidget {
               InputField(
                 label: '계좌번호',
                 hintText: '기존 번호', // 추후 동기화
+                keyboardType: TextInputType.number,
                 controller: accountController,
               ),
               const Expanded(

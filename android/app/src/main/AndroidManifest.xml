@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <!-- 요기까지 -->
+    <!-- 위치정보 사용 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:label="gachtaxi_app"
@@ -23,9 +26,13 @@
         <meta-data
             android:name="com.google.android.gms.client_id"
             android:value="${GOOGLE_CLIENT_ID}" />
+        
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_native_app_key" />
 
         <activity
-            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:name="com.kakao.sdk.auth.AuthCodeCustomTabsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:replace="android:theme"
             android:exported="true">
