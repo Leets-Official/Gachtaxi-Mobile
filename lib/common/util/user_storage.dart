@@ -41,7 +41,7 @@ class UserStorage {
 
   static Future<String?> getNickname() => _storage.read(key: _nicknameKey);
   static Future<String?> getStudentNumber() => _storage.read(key: _studentNumberKey);
-
   static Future<String?> getProfilePicture() => _storage.read(key: _profilePictureKey);
+  static Future<String?> getAccountNumber() => _storage.read(key: _accountNumberKey);
 
 }
