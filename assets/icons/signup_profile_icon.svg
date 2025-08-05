@@ -1,12 +1,5 @@
-<svg width="109" height="109" viewBox="0 0 109 109" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="54.1016" cy="54.5776" r="54" fill="#D9D9D9"/>
-  <g transform="translate(2.5,3)"> <!-- 중앙 정렬을 위해 조정 -->
-    <mask id="mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="104" height="103">
-      <circle cx="52.1013" cy="51.5779" r="51.1277" fill="#D9D9D9"/>
-    </mask>
-    <g mask="url(#mask0)">
-      <circle cx="52.1034" cy="34.7665" r="16.8114" fill="white"/>
-      <circle cx="52.1036" cy="100.272" r="43.8887" fill="white"/>
-    </g>
-  </g>
+<svg width="97" height="97" viewBox="0 0 97 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.49707 21.3976C0.49707 9.80816 9.89195 0.413086 21.4811 0.413086H75.513C87.1022 0.413086 96.4971 9.80816 96.4971 21.3976V75.4306C96.4971 87.02 87.1022 96.415 75.513 96.415H21.4811C9.89195 96.415 0.49707 87.02 0.49707 75.4306V21.3976Z" fill="#05D976"/>
+<path d="M18.0962 83.6248C18.0962 66.835 31.707 53.2241 48.4969 53.2241C65.2867 53.2241 78.8976 66.835 78.8976 83.6248V96.4149H18.0962V83.6248Z" fill="#FAFFFD"/>
+<ellipse cx="48.4974" cy="31.9928" rx="15.5384" ry="15.5387" fill="#FAFFFD"/>
 </svg>

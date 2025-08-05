@@ -1,10 +1,12 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gachtaxi_app/common/components/button.dart';
 import 'package:gachtaxi_app/common/constants/colors.dart';
-import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/constants/spacing.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:gachtaxi_app/common/constants/typography.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
+import 'package:gachtaxi_app/domain/sign-up/services/agreement_service.dart';
 import 'package:gachtaxi_app/domain/sign-up/view/sign_up_screen.dart';
 
 class TermsAgreementModal extends StatefulWidget {
@@ -30,62 +32,71 @@ class _TermsAgreementModalState extends State<TermsAgreementModal> {
       } else if (type == "privacy") {
         privacyChecked = value ?? false;
       }
-
       allChecked = termsChecked && privacyChecked;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "가치 택시에 오신 것을\n환영합니다!",
-          style: TextStyle(
-            fontSize: AppTypography.fontSizeExtraLarge,
-            fontWeight: AppTypography.fontWeightBold,
-            color: Colors.white,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "가치 택시에 오신 것을\n환영합니다!",
+            style: TextStyle(
+              fontSize: AppTypography.fontSizeExtraLarge,
+              fontWeight: AppTypography.fontWeightBold,
+              color: Colors.white,
+            ),
           ),
-        ),
-        const SizedBox(height: AppSpacing.spaceLarge),
+          const SizedBox(height: AppSpacing.spaceLarge),
 
-        _buildCheckboxTile(
-          "약관 모두 동의",
-          allChecked,
-              (value) => _updateCheckbox(value, "all"),
-          isBold: true,
-          isAllAgreement: true,
-        ),
-        const SizedBox(height: AppSpacing.spaceMedium),
+          _buildCheckboxTile(
+            "약관 모두 동의",
+            allChecked,
+                (value) => _updateCheckbox(value, "all"),
+            isBold: true,
+            isAllAgreement: true,
+          ),
+          const SizedBox(height: AppSpacing.spaceMedium),
 
-        _buildCheckboxTile(
-          "이용 약관 동의 (필수)",
-          termsChecked,
-              (value) => _updateCheckbox(value, "terms"),
-        ),
-        _buildCheckboxTile(
-          "개인정보 수집 및 이용 동의 (필수)",
-          privacyChecked,
-              (value) => _updateCheckbox(value, "privacy"),
-        ),
-        const SizedBox(height: AppSpacing.spaceExtraCommon),
+          _buildCheckboxTile(
+            "이용 약관 동의 (필수)",
+            termsChecked,
+                (value) => _updateCheckbox(value, "terms"),
+          ),
+          _buildCheckboxTile(
+            "개인정보 수집 및 이용 동의 (필수)",
+            privacyChecked,
+                (value) => _updateCheckbox(value, "privacy"),
+          ),
+          const SizedBox(height: AppSpacing.spaceExtraCommon),
 
-        Button(
-          buttonText: "시작하기",
-          backgroundColor: allChecked ? AppColors.primary : Colors.grey,
-          textColor: Colors.black,
-          onPressed: allChecked
-              ? () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              SlidePageRoute(screen: SignUpScreen()),
-            );
-          }
-              : null,
-        ),
-      ],
+          Button(
+            buttonText: "시작하기",
+            backgroundColor: allChecked ? AppColors.primary : Colors.grey,
+            textColor: Colors.black,
+            onPressed: allChecked
+                ? () {
+              sendAgreement(
+                terms: termsChecked,
+                privacy: privacyChecked,
+                marketing: true,
+              ).then((_) {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  SlidePageRoute(screen: const SignUpScreen()),
+                );
+              }).catchError((e) {
+                print("예외 발생: $e");
+              });
+            }
+                : null,
+          ),
+        ],
+      ),
     );
   }
 
@@ -97,7 +108,9 @@ class _TermsAgreementModalState extends State<TermsAgreementModal> {
         bool isAllAgreement = false,
       }) {
     return GestureDetector(
-      onTap: () => onChanged(!value),
+      onTap: () {
+        onChanged(!value);
+      },
       child: isAllAgreement
           ? Container(
         padding: const EdgeInsets.symmetric(
@@ -127,7 +140,7 @@ class _TermsAgreementModalState extends State<TermsAgreementModal> {
           ],
         ),
       )
-          : Container(
+          : SizedBox(
         width: double.infinity,
         child: ListTile(
           contentPadding: EdgeInsets.zero,

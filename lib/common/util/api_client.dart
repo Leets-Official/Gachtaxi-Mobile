@@ -127,4 +127,13 @@ class ApiClient {
       rethrow;
     }
   }
+
+  static Future<Response> signup(Uri uri, {Map<String, dynamic>? body}) async {
+    try {
+      final response = await _dio.patchUri(uri, data: body);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
