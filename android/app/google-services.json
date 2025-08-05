@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "705848946089",
+    "project_id": "gachtaxi-e9597",
+    "storage_bucket": "gachtaxi-e9597.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705848946089:android:ef035c49a8bbf92f4d68b8",
+        "android_client_info": {
+          "package_name": "com.example.flutter_test1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpPPGjkrRHx9Y6jL5sXvdIAKFjfLn6zXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705848946089:android:8a0d6757b40a633e4d68b8",
+        "android_client_info": {
+          "package_name": "site.gachtaxi.gachtaxi_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpPPGjkrRHx9Y6jL5sXvdIAKFjfLn6zXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

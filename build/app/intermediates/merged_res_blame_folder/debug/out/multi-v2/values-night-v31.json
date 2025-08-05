@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "site.gachtaxi.gachtaxi_app-mergeDebugResources-54:/values-night-v31/values-night-v31.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\jungw\\Gachtaxi-Mobile\\android\\app\\src\\main\\res\\values-night-v31\\styles.xml",
+                    "from": {
+                        "startLines": "3,18",
+                        "startColumns": "4,4",
+                        "startOffsets": "175,1135",
+                        "endLines": "11,20",
+                        "endColumns": "12,12",
+                        "endOffsets": "777,1301"
+                    },
+                    "to": {
+                        "startLines": "2,11",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,654",
+                        "endLines": "10,13",
+                        "endColumns": "12,12",
+                        "endOffsets": "649,818"
+                    }
+                }
+            ]
+        }
+    ]
+}

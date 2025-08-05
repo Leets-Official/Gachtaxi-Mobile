@@ -1,0 +1,110 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:1:1-48:12
+INJECTED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:1:1-48:12
+	package
+		INJECTED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:1:11-69
+application
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:3:5-32:19
+activity#com.kakao.sdk.flutter.TalkAuthCodeActivity
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:4:9-9:56
+	android:launchMode
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:8:13-44
+	android:exported
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:7:13-37
+	android:configChanges
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:6:13-81
+	android:theme
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:9:13-53
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:5:13-49
+activity#com.kakao.sdk.flutter.CustomTabsActivity
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:10:9-14:56
+	android:launchMode
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:13:13-44
+	android:exported
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:12:13-36
+	android:theme
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:14:13-53
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:11:13-47
+activity#com.kakao.sdk.flutter.AuthCodeCustomTabsActivity
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:15:9-19:56
+	android:launchMode
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:18:13-44
+	android:exported
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:17:13-36
+	android:theme
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:19:13-53
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:16:13-55
+activity#com.kakao.sdk.flutter.FollowChannelHandlerActivity
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:21:9-25:56
+	android:launchMode
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:24:13-44
+	android:exported
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:23:13-36
+	android:theme
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:25:13-53
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:22:13-57
+activity#com.kakao.sdk.flutter.AppsHandlerActivity
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:27:9-31:56
+	android:launchMode
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:30:13-44
+	android:exported
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:29:13-36
+	android:theme
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:31:13-53
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:28:13-48
+queries
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:34:5-47:15
+package#com.kakao.talk
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:35:9-50
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:35:18-47
+package#com.kakao.talk.alpha
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:36:9-56
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:36:18-53
+package#com.kakao.talk.sandbox
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:37:9-58
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:37:18-55
+package#com.kakao.onetalk
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:38:9-53
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:38:18-50
+package#com.locnall.KimGiSa
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:39:9-55
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:39:18-52
+package#com.lguplus.navi
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:40:9-52
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:40:18-49
+intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:https
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:42:9-46:18
+action#android.intent.action.VIEW
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:43:13-65
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:43:21-62
+category#android.intent.category.BROWSABLE
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:44:13-74
+	android:name
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:44:23-71
+data
+ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:45:13-44
+	android:scheme
+		ADDED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml:45:19-41
+uses-sdk
+INJECTED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml
+INJECTED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\jungw\AppData\Local\Pub\Cache\hosted\pub.dev\kakao_flutter_sdk_common-1.9.7+3\android\src\main\AndroidManifest.xml

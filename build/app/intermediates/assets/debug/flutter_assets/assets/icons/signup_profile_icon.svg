@@ -1,0 +1,12 @@
+<svg width="109" height="109" viewBox="0 0 109 109" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="54.1016" cy="54.5776" r="54" fill="#D9D9D9"/>
+  <g transform="translate(2.5,3)"> <!-- 중앙 정렬을 위해 조정 -->
+    <mask id="mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="104" height="103">
+      <circle cx="52.1013" cy="51.5779" r="51.1277" fill="#D9D9D9"/>
+    </mask>
+    <g mask="url(#mask0)">
+      <circle cx="52.1034" cy="34.7665" r="16.8114" fill="white"/>
+      <circle cx="52.1036" cy="100.272" r="43.8887" fill="white"/>
+    </g>
+  </g>
+</svg>

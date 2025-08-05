@@ -1,0 +1,2 @@
+C:/Users/jungw/Gachtaxi-Mobile/android/app/.cxx/RelWithDebInfo/4i155m54/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/jungw/Gachtaxi-Mobile/android/app/.cxx/RelWithDebInfo/4i155m54/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,720 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="site.gachtaxi.gachtaxi_app"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="35" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:7:5-67
+15-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:7:22-64
+16    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+16-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:3:5-75
+16-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:3:22-73
+17    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+17-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:4:5-79
+17-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:4:22-77
+18    <uses-permission android:name="android.permission.CAMERA" />
+18-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:5:5-64
+18-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:5:22-62
+19    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+19-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:8:5-80
+19-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:8:22-78
+20    <uses-permission android:name="android.permission.VIBRATE" />
+20-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:9:5-66
+20-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:9:22-63
+21    <uses-permission android:name="android.permission.WAKE_LOCK" />
+21-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:10:5-68
+21-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:10:22-65
+22    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+22-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:11:5-81
+22-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:11:22-78
+23    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- 요기까지 -->
+23-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:12:5-76
+23-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:12:22-74
+24    <!-- 위치정보 사용 -->
+25    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+25-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:15:5-78
+25-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:15:22-76
+26    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+26-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:16:5-80
+26-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:16:22-78
+27    <!--
+28 Required to query activities that can process text, see:
+29         https://developer.android.com/training/package-visibility and
+30         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+31
+32         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+33    -->
+34    <queries>
+34-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:100:5-128:15
+35        <intent>
+35-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:101:9-103:18
+36            <action android:name="android.support.customtabs.action.CustomTabsService" />
+36-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:102:13-90
+36-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:102:21-87
+37        </intent>
+38        <intent>
+38-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:104:9-107:18
+39            <action android:name="android.intent.action.PROCESS_TEXT" />
+39-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:105:13-72
+39-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:105:21-70
+40
+41            <data android:mimeType="text/plain" />
+42        </intent>
+43        <!-- 카카오 T -->
+44        <intent>
+44-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:109:9-112:18
+45            <action android:name="android.intent.action.VIEW" />
+45-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:13-65
+45-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:21-62
+46
+47            <data android:scheme="kakaot" />
+48        </intent>
+49        <!-- 티머니 GO -->
+50        <intent>
+50-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:114:9-117:18
+51            <action android:name="android.intent.action.VIEW" />
+51-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:13-65
+51-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:21-62
+52
+53            <data android:scheme="tmoneygo" />
+54        </intent>
+55        <!-- 우버 -->
+56        <intent>
+56-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:119:9-122:18
+57            <action android:name="android.intent.action.VIEW" />
+57-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:13-65
+57-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:21-62
+58
+59            <data android:scheme="uber" />
+60        </intent>
+61        <!-- 타다 -->
+62        <intent>
+62-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:124:9-127:18
+63            <action android:name="android.intent.action.VIEW" />
+63-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:13-65
+63-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:21-62
+64
+65            <data android:scheme="tada" />
+66        </intent>
+67
+68        <package android:name="com.kakao.talk" />
+68-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-50
+68-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:8:18-47
+69        <package android:name="com.kakao.talk.alpha" />
+69-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:9:9-56
+69-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:9:18-53
+70        <package android:name="com.kakao.talk.sandbox" />
+70-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-58
+70-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:10:18-55
+71        <package android:name="com.kakao.onetalk" />
+71-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:11:9-53
+71-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:11:18-50
+72        <package android:name="com.locnall.KimGiSa" />
+72-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:12:9-55
+72-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:12:18-52
+73        <package android:name="com.lguplus.navi" />
+73-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:13:9-52
+73-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:13:18-49
+74
+75        <intent>
+75-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-21:18
+76            <action android:name="android.intent.action.VIEW" />
+76-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:13-65
+76-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:21-62
+77
+78            <category android:name="android.intent.category.BROWSABLE" />
+78-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-74
+78-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:18:23-71
+79
+80            <data android:scheme="https" />
+81        </intent> <!-- Needs to be explicitly declared on Android R+ -->
+82        <package android:name="com.google.android.apps.maps" />
+82-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\b19dcc4632df7c06eda3098fe901965a\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
+82-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\b19dcc4632df7c06eda3098fe901965a\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:33:18-61
+83    </queries>
+84
+85    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+85-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
+85-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
+86    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+86-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:26:5-82
+86-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:26:22-79
+87
+88    <uses-feature
+88-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\b19dcc4632df7c06eda3098fe901965a\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
+89        android:glEsVersion="0x00020000"
+89-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\b19dcc4632df7c06eda3098fe901965a\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:27:9-41
+90        android:required="true" />
+90-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\b19dcc4632df7c06eda3098fe901965a\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:28:9-32
+91
+92    <permission
+92-->[androidx.core:core:1.13.1] C:\Users\jungw\.gradle\caches\transforms-3\bad1ae45b637256b5f70c5e78d749f05\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+93        android:name="site.gachtaxi.gachtaxi_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+93-->[androidx.core:core:1.13.1] C:\Users\jungw\.gradle\caches\transforms-3\bad1ae45b637256b5f70c5e78d749f05\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+94        android:protectionLevel="signature" />
+94-->[androidx.core:core:1.13.1] C:\Users\jungw\.gradle\caches\transforms-3\bad1ae45b637256b5f70c5e78d749f05\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+95
+96    <uses-permission android:name="site.gachtaxi.gachtaxi_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+96-->[androidx.core:core:1.13.1] C:\Users\jungw\.gradle\caches\transforms-3\bad1ae45b637256b5f70c5e78d749f05\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+96-->[androidx.core:core:1.13.1] C:\Users\jungw\.gradle\caches\transforms-3\bad1ae45b637256b5f70c5e78d749f05\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+97
+98    <application
+99        android:name="android.app.Application"
+100        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+100-->[androidx.core:core:1.13.1] C:\Users\jungw\.gradle\caches\transforms-3\bad1ae45b637256b5f70c5e78d749f05\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+101        android:debuggable="true"
+102        android:extractNativeLibs="false"
+103        android:icon="@mipmap/ic_launcher"
+104        android:label="gachtaxi_app"
+105        android:screenOrientation="portrait" >
+106        <meta-data
+107            android:name="com.google.android.geo.API_KEY"
+108            android:value="AIzaSyCc3AJ6EQ2yt39_J0Dl4WgeRJxufm4wPXc" />
+109        <meta-data
+110            android:name="com.google.android.gms.client_id"
+111            android:value="351671928055-830qkeqk6qa51fjbdtq0m2hn7f4osju0.apps.googleusercontent.com" />
+112        <meta-data
+113            android:name="com.kakao.sdk.AppKey"
+114            android:value="@string/kakao_native_app_key" />
+115
+116        <activity
+117            android:name="com.kakao.sdk.auth.AuthCodeCustomTabsActivity"
+118            android:exported="true"
+119            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+120            <intent-filter>
+121                <action android:name="android.intent.action.VIEW" />
+121-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:13-65
+121-->C:\Users\jungw\Gachtaxi-Mobile\android\app\src\main\AndroidManifest.xml:110:21-62
+122
+123                <category android:name="android.intent.category.DEFAULT" />
+124                <category android:name="android.intent.category.BROWSABLE" />
+124-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-74
+124-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:18:23-71
+125
+126                <data
+127                    android:host="oauth"
+128                    android:scheme="kakao63078b61f568e7a91eeb092b540689ac" />
+129            </intent-filter>
+130        </activity>
+131        <activity
+132            android:name="site.gachtaxi.gachtaxi_app.MainActivity"
+133            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+134            android:exported="true"
+135            android:hardwareAccelerated="true"
+136            android:launchMode="singleTop"
+137            android:theme="@style/LaunchTheme"
+138            android:windowSoftInputMode="adjustResize" >
+139
+140            <!--
+141                 Specifies an Android theme to apply to this Activity as soon as
+142                 the Android process has started. This theme is visible to the user
+143                 while the Flutter UI initializes. After that, this theme continues
+144                 to determine the Window background behind the Flutter UI.
+145            -->
+146            <meta-data
+147                android:name="io.flutter.embedding.android.NormalTheme"
+148                android:resource="@style/NormalTheme" />
+149            <meta-data
+150                android:name="com.google.firebase.messaging.default_notification_channel_id"
+151                android:value="high_importance_channel" />
+152
+153            <intent-filter>
+154                <action android:name="android.intent.action.MAIN" />
+155
+156                <category android:name="android.intent.category.LAUNCHER" />
+157            </intent-filter>
+158            <intent-filter>
+159                <action android:name="FLUTTER_NOTIFICATION_CLICK" />
+160
+161                <category android:name="android.intent.category.DEFAULT" />
+162            </intent-filter>
+163        </activity>
+164
+165        <provider
+166            android:name="androidx.core.content.FileProvider"
+167            android:authorities="site.gachtaxi.gachtaxi_app.fileprovider"
+168            android:exported="false"
+169            android:grantUriPermissions="true" >
+170            <meta-data
+170-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-16:75
+171                android:name="android.support.FILE_PROVIDER_PATHS"
+171-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:17-67
+172                android:resource="@xml/provider_paths" />
+172-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-72
+173        </provider>
+174
+175        <!--
+176             Don't delete the meta-data below.
+177             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+178        -->
+179        <meta-data
+180            android:name="flutterEmbedding"
+181            android:value="2" />
+182
+183        <activity
+183-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:25:9-30:56
+184            android:name="com.kakao.sdk.flutter.TalkAuthCodeActivity"
+184-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-70
+185            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
+185-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-81
+186            android:exported="false"
+186-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-37
+187            android:launchMode="singleTask"
+187-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-44
+188            android:theme="@style/TransparentCompat" />
+188-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-53
+189        <activity
+189-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:31:9-35:56
+190            android:name="com.kakao.sdk.flutter.CustomTabsActivity"
+190-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:32:13-68
+191            android:exported="true"
+191-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:33:13-36
+192            android:launchMode="singleTask"
+192-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:34:13-44
+193            android:theme="@style/TransparentCompat" />
+193-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-53
+194        <activity
+194-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:36:9-40:56
+195            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+195-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:37:13-76
+196            android:exported="true"
+196-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:38:13-36
+197            android:launchMode="singleTask"
+197-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:39:13-44
+198            android:theme="@style/TransparentCompat" />
+198-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-53
+199        <activity
+199-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:41:9-45:56
+200            android:name="com.kakao.sdk.flutter.FollowChannelHandlerActivity"
+200-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:42:13-78
+201            android:exported="true"
+201-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:43:13-36
+202            android:launchMode="singleTask"
+202-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:44:13-44
+203            android:theme="@style/TransparentCompat" />
+203-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:45:13-53
+204        <activity
+204-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:46:9-50:56
+205            android:name="com.kakao.sdk.flutter.AppsHandlerActivity"
+205-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:47:13-69
+206            android:exported="true"
+206-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:48:13-36
+207            android:launchMode="singleTask"
+207-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:49:13-44
+208            android:theme="@style/TransparentCompat" />
+208-->[:kakao_flutter_sdk_common] C:\Users\jungw\Gachtaxi-Mobile\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:50:13-53
+209        <activity
+209-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:10:9-15:56
+210            android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"
+210-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:11:13-67
+211            android:configChanges="orientation|screenSize|keyboardHidden"
+211-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:12:13-74
+212            android:exported="false"
+212-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:13:13-37
+213            android:launchMode="singleTask"
+213-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:14:13-44
+214            android:theme="@style/TransparentCompat" />
+214-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:15:13-53
+215        <activity
+215-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:16:9-19:56
+216            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+216-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:17:13-70
+217            android:launchMode="singleTask"
+217-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:18:13-44
+218            android:theme="@style/TransparentCompat" />
+218-->[com.kakao.sdk:v2-auth:2.19.0] C:\Users\jungw\.gradle\caches\transforms-3\59984209d72f6b1a9d744f677328423a\transformed\jetified-v2-auth-2.19.0\AndroidManifest.xml:19:13-53
+219
+220        <service
+220-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-17:72
+221            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
+221-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-107
+222            android:exported="false"
+222-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-37
+223            android:permission="android.permission.BIND_JOB_SERVICE" />
+223-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-69
+224        <service
+224-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:18:9-24:19
+225            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+225-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-97
+226            android:exported="false" >
+226-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-37
+227            <intent-filter>
+227-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-23:29
+228                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+228-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:22:17-78
+228-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:22:25-75
+229            </intent-filter>
+230        </service>
+231
+232        <receiver
+232-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:26:9-33:20
+233            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
+233-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-98
+234            android:exported="true"
+234-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-36
+235            android:permission="com.google.android.c2dm.permission.SEND" >
+235-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-73
+236            <intent-filter>
+236-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-32:29
+237                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+237-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:31:17-81
+237-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:31:25-78
+238            </intent-filter>
+239        </receiver>
+240
+241        <service
+241-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:35:9-39:19
+242            android:name="com.google.firebase.components.ComponentDiscoveryService"
+242-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:35:18-89
+243            android:directBootAware="true"
+243-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:32:13-43
+244            android:exported="false" >
+244-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:56:13-37
+245            <meta-data
+245-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-38:85
+246                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
+246-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:37:17-128
+247                android:value="com.google.firebase.components.ComponentRegistrar" />
+247-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:38:17-82
+248            <meta-data
+248-->[:firebase_core] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
+249                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+249-->[:firebase_core] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-124
+250                android:value="com.google.firebase.components.ComponentRegistrar" />
+250-->[:firebase_core] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
+251            <meta-data
+251-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:57:13-59:85
+252                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+252-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:58:17-122
+253                android:value="com.google.firebase.components.ComponentRegistrar" />
+253-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:59:17-82
+254            <meta-data
+254-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:60:13-62:85
+255                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+255-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:61:17-119
+256                android:value="com.google.firebase.components.ComponentRegistrar" />
+256-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:62:17-82
+257            <meta-data
+257-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\jungw\.gradle\caches\transforms-3\f281987a4f8bb9951cedcd534539c44a\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:15:13-17:85
+258                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+258-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\jungw\.gradle\caches\transforms-3\f281987a4f8bb9951cedcd534539c44a\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:16:17-130
+259                android:value="com.google.firebase.components.ComponentRegistrar" />
+259-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\jungw\.gradle\caches\transforms-3\f281987a4f8bb9951cedcd534539c44a\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:17:17-82
+260            <meta-data
+260-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\jungw\.gradle\caches\transforms-3\f281987a4f8bb9951cedcd534539c44a\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:18:13-20:85
+261                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+261-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\jungw\.gradle\caches\transforms-3\f281987a4f8bb9951cedcd534539c44a\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:19:17-127
+262                android:value="com.google.firebase.components.ComponentRegistrar" />
+262-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\jungw\.gradle\caches\transforms-3\f281987a4f8bb9951cedcd534539c44a\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:20:17-82
+263            <meta-data
+263-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\d274c1a21b2aaf5409c3ae5fe079a082\transformed\jetified-firebase-common-ktx-21.0.0\AndroidManifest.xml:12:13-14:85
+264                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+264-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\d274c1a21b2aaf5409c3ae5fe079a082\transformed\jetified-firebase-common-ktx-21.0.0\AndroidManifest.xml:13:17-116
+265                android:value="com.google.firebase.components.ComponentRegistrar" />
+265-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\d274c1a21b2aaf5409c3ae5fe079a082\transformed\jetified-firebase-common-ktx-21.0.0\AndroidManifest.xml:14:17-82
+266            <meta-data
+266-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
+267                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+267-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:36:17-109
+268                android:value="com.google.firebase.components.ComponentRegistrar" />
+268-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:37:17-82
+269            <meta-data
+269-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\dce1dbfe0318882ae8b7f765691257a3\transformed\jetified-firebase-datatransport-18.2.0\AndroidManifest.xml:25:13-27:85
+270                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+270-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\dce1dbfe0318882ae8b7f765691257a3\transformed\jetified-firebase-datatransport-18.2.0\AndroidManifest.xml:26:17-115
+271                android:value="com.google.firebase.components.ComponentRegistrar" />
+271-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\dce1dbfe0318882ae8b7f765691257a3\transformed\jetified-firebase-datatransport-18.2.0\AndroidManifest.xml:27:17-82
+272        </service>
+273
+274        <provider
+274-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:41:9-45:38
+275            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
+275-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:42:13-102
+276            android:authorities="site.gachtaxi.gachtaxi_app.flutterfirebasemessaginginitprovider"
+276-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:43:13-88
+277            android:exported="false"
+277-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:44:13-37
+278            android:initOrder="99" />
+278-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:45:13-35
+279
+280        <receiver
+280-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:29:9-40:20
+281            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+281-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:30:13-78
+282            android:exported="true"
+282-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:31:13-36
+283            android:permission="com.google.android.c2dm.permission.SEND" >
+283-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:32:13-73
+284            <intent-filter>
+284-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-32:29
+285                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+285-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:31:17-81
+285-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:31:25-78
+286            </intent-filter>
+287
+288            <meta-data
+288-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:37:13-39:40
+289                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+289-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:38:17-92
+290                android:value="true" />
+290-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:39:17-37
+291        </receiver>
+292        <!--
+293             FirebaseMessagingService performs security checks at runtime,
+294             but set to not exported to explicitly avoid allowing another app to call it.
+295        -->
+296        <service
+296-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:46:9-53:19
+297            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+297-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:47:13-82
+298            android:directBootAware="true"
+298-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:48:13-43
+299            android:exported="false" >
+299-->[com.google.firebase:firebase-messaging:24.1.1] C:\Users\jungw\.gradle\caches\transforms-3\dd8aeba111599b19b04354d4c4b9cef8\transformed\jetified-firebase-messaging-24.1.1\AndroidManifest.xml:49:13-37
+300            <intent-filter android:priority="-500" >
+300-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-23:29
+301                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+301-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:22:17-78
+301-->[:firebase_messaging] C:\Users\jungw\Gachtaxi-Mobile\build\firebase_messaging\intermediates\merged_manifest\debug\AndroidManifest.xml:22:25-75
+302            </intent-filter>
+303        </service>
+304        <service
+304-->[:geolocator_android] C:\Users\jungw\Gachtaxi-Mobile\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-12:56
+305            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+305-->[:geolocator_android] C:\Users\jungw\Gachtaxi-Mobile\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-77
+306            android:enabled="true"
+306-->[:geolocator_android] C:\Users\jungw\Gachtaxi-Mobile\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-35
+307            android:exported="false"
+307-->[:geolocator_android] C:\Users\jungw\Gachtaxi-Mobile\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-37
+308            android:foregroundServiceType="location" />
+308-->[:geolocator_android] C:\Users\jungw\Gachtaxi-Mobile\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-53
+309
+310        <provider
+310-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:9-17:20
+311            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+311-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-82
+312            android:authorities="site.gachtaxi.gachtaxi_app.flutter.image_provider"
+312-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+313            android:exported="false"
+313-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+314            android:grantUriPermissions="true" >
+314-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-47
+315            <meta-data
+315-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-16:75
+316                android:name="android.support.FILE_PROVIDER_PATHS"
+316-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:17-67
+317                android:resource="@xml/flutter_image_picker_file_paths" />
+317-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-72
+318        </provider> <!-- Trigger Google Play services to install the backported photo picker module. -->
+319        <service
+319-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-31:19
+320            android:name="com.google.android.gms.metadata.ModuleDependencies"
+320-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-78
+321            android:enabled="false"
+321-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-36
+322            android:exported="false" >
+322-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-37
+323            <intent-filter>
+323-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-26:29
+324                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+324-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:25:17-94
+324-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:25:25-91
+325            </intent-filter>
+326
+327            <meta-data
+327-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-30:36
+328                android:name="photopicker_activity:0:required"
+328-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-63
+329                android:value="" />
+329-->[:image_picker_android] C:\Users\jungw\Gachtaxi-Mobile\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-33
+330        </service>
+331
+332        <activity
+332-->[:url_launcher_android] C:\Users\jungw\Gachtaxi-Mobile\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-11:74
+333            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+333-->[:url_launcher_android] C:\Users\jungw\Gachtaxi-Mobile\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-74
+334            android:exported="false"
+334-->[:url_launcher_android] C:\Users\jungw\Gachtaxi-Mobile\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-37
+335            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- Needs to be explicitly declared on P+ -->
+335-->[:url_launcher_android] C:\Users\jungw\Gachtaxi-Mobile\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-71
+336        <uses-library
+336-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\b19dcc4632df7c06eda3098fe901965a\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
+337            android:name="org.apache.http.legacy"
+337-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\b19dcc4632df7c06eda3098fe901965a\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
+338            android:required="false" />
+338-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\jungw\.gradle\caches\transforms-3\b19dcc4632df7c06eda3098fe901965a\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
+339
+340        <activity
+340-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:23:9-27:75
+341            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+341-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:24:13-93
+342            android:excludeFromRecents="true"
+342-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:25:13-46
+343            android:exported="false"
+343-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:26:13-37
+344            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+344-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:27:13-72
+345        <!--
+346            Service handling Google Sign-In user revocation. For apps that do not integrate with
+347            Google Sign-In, this service will never be started.
+348        -->
+349        <service
+349-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:33:9-37:51
+350            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+350-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:34:13-89
+351            android:exported="true"
+351-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:35:13-36
+352            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+352-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:36:13-107
+353            android:visibleToInstantApps="true" />
+353-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\1408fa9c0b9290e0ace9983c20ec158b\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:37:13-48
+354
+355        <provider
+355-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
+356            android:name="com.google.firebase.provider.FirebaseInitProvider"
+356-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:24:13-77
+357            android:authorities="site.gachtaxi.gachtaxi_app.firebaseinitprovider"
+357-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:25:13-72
+358            android:directBootAware="true"
+358-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:26:13-43
+359            android:exported="false"
+359-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:27:13-37
+360            android:initOrder="100" />
+360-->[com.google.firebase:firebase-common:21.0.0] C:\Users\jungw\.gradle\caches\transforms-3\35ea9d4f85f811678c157bde26fb46a5\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:28:13-36
+361
+362        <activity
+362-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jungw\.gradle\caches\transforms-3\0939d2c468695df6f6d44659f6dcbe56\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
+363            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+363-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jungw\.gradle\caches\transforms-3\0939d2c468695df6f6d44659f6dcbe56\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:19-85
+364            android:exported="false"
+364-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jungw\.gradle\caches\transforms-3\0939d2c468695df6f6d44659f6dcbe56\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:22:19-43
+365            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+365-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\jungw\.gradle\caches\transforms-3\0939d2c468695df6f6d44659f6dcbe56\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:21:19-78
+366
+367        <uses-library
+367-->[androidx.window:window:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\004a88af47b0b9cc0314a8f7807cb3fb\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
+368            android:name="androidx.window.extensions"
+368-->[androidx.window:window:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\004a88af47b0b9cc0314a8f7807cb3fb\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
+369            android:required="false" />
+369-->[androidx.window:window:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\004a88af47b0b9cc0314a8f7807cb3fb\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
+370        <uses-library
+370-->[androidx.window:window:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\004a88af47b0b9cc0314a8f7807cb3fb\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
+371            android:name="androidx.window.sidecar"
+371-->[androidx.window:window:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\004a88af47b0b9cc0314a8f7807cb3fb\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
+372            android:required="false" />
+372-->[androidx.window:window:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\004a88af47b0b9cc0314a8f7807cb3fb\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
+373
+374        <meta-data
+374-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jungw\.gradle\caches\transforms-3\16b9a3c275a4da641df885b95a4b82f6\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+375            android:name="com.google.android.gms.version"
+375-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jungw\.gradle\caches\transforms-3\16b9a3c275a4da641df885b95a4b82f6\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
+376            android:value="@integer/google_play_services_version" />
+376-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\jungw\.gradle\caches\transforms-3\16b9a3c275a4da641df885b95a4b82f6\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+377
+378        <provider
+378-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\96f563c4599d2791f83c2e7722244f22\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+379            android:name="androidx.startup.InitializationProvider"
+379-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\96f563c4599d2791f83c2e7722244f22\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+380            android:authorities="site.gachtaxi.gachtaxi_app.androidx-startup"
+380-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\96f563c4599d2791f83c2e7722244f22\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+381            android:exported="false" >
+381-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\96f563c4599d2791f83c2e7722244f22\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+382            <meta-data
+382-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\96f563c4599d2791f83c2e7722244f22\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+383                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+383-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\96f563c4599d2791f83c2e7722244f22\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+384                android:value="androidx.startup" />
+384-->[androidx.emoji2:emoji2:1.2.0] C:\Users\jungw\.gradle\caches\transforms-3\96f563c4599d2791f83c2e7722244f22\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+385            <meta-data
+385-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\jungw\.gradle\caches\transforms-3\5e00744cfb60aee94bc9f254ab746938\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+386                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+386-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\jungw\.gradle\caches\transforms-3\5e00744cfb60aee94bc9f254ab746938\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+387                android:value="androidx.startup" />
+387-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\jungw\.gradle\caches\transforms-3\5e00744cfb60aee94bc9f254ab746938\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+388            <meta-data
+388-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+389                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+389-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+390                android:value="androidx.startup" />
+390-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+391        </provider>
+392
+393        <receiver
+393-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+394            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+394-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+395            android:directBootAware="false"
+395-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+396            android:enabled="true"
+396-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+397            android:exported="true"
+397-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+398            android:permission="android.permission.DUMP" >
+398-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+399            <intent-filter>
+399-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+400                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+400-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+400-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+401            </intent-filter>
+402            <intent-filter>
+402-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+403                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+403-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+403-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+404            </intent-filter>
+405            <intent-filter>
+405-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+406                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+406-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+406-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+407            </intent-filter>
+408            <intent-filter>
+408-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+409                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+409-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+409-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\jungw\.gradle\caches\transforms-3\2fa1344c69d441d038d0ce3e5c45e905\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+410            </intent-filter>
+411        </receiver>
+412
+413        <service
+413-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\35eb73d47f095cac97bb1365266086ac\transformed\jetified-transport-backend-cct-3.1.9\AndroidManifest.xml:28:9-34:19
+414            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+414-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\35eb73d47f095cac97bb1365266086ac\transformed\jetified-transport-backend-cct-3.1.9\AndroidManifest.xml:29:13-103
+415            android:exported="false" >
+415-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\35eb73d47f095cac97bb1365266086ac\transformed\jetified-transport-backend-cct-3.1.9\AndroidManifest.xml:30:13-37
+416            <meta-data
+416-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\35eb73d47f095cac97bb1365266086ac\transformed\jetified-transport-backend-cct-3.1.9\AndroidManifest.xml:31:13-33:39
+417                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+417-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\35eb73d47f095cac97bb1365266086ac\transformed\jetified-transport-backend-cct-3.1.9\AndroidManifest.xml:32:17-94
+418                android:value="cct" />
+418-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\35eb73d47f095cac97bb1365266086ac\transformed\jetified-transport-backend-cct-3.1.9\AndroidManifest.xml:33:17-36
+419        </service>
+420        <service
+420-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\dd33612484c0aa3d8796ed60850cde05\transformed\jetified-transport-runtime-3.1.9\AndroidManifest.xml:26:9-30:19
+421            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+421-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\dd33612484c0aa3d8796ed60850cde05\transformed\jetified-transport-runtime-3.1.9\AndroidManifest.xml:27:13-117
+422            android:exported="false"
+422-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\dd33612484c0aa3d8796ed60850cde05\transformed\jetified-transport-runtime-3.1.9\AndroidManifest.xml:28:13-37
+423            android:permission="android.permission.BIND_JOB_SERVICE" >
+423-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\dd33612484c0aa3d8796ed60850cde05\transformed\jetified-transport-runtime-3.1.9\AndroidManifest.xml:29:13-69
+424        </service>
+425
+426        <receiver
+426-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\dd33612484c0aa3d8796ed60850cde05\transformed\jetified-transport-runtime-3.1.9\AndroidManifest.xml:32:9-34:40
+427            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+427-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\dd33612484c0aa3d8796ed60850cde05\transformed\jetified-transport-runtime-3.1.9\AndroidManifest.xml:33:13-132
+428            android:exported="false" />
+428-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\jungw\.gradle\caches\transforms-3\dd33612484c0aa3d8796ed60850cde05\transformed\jetified-transport-runtime-3.1.9\AndroidManifest.xml:34:13-37
+429    </application>
+430
+431</manifest>

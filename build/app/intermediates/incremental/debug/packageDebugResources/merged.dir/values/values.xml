@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">705848946089</string>
+    <string name="google_api_key" translatable="false">AIzaSyCpPPGjkrRHx9Y6jL5sXvdIAKFjfLn6zXo</string>
+    <string name="google_app_id" translatable="false">1:705848946089:android:8a0d6757b40a633e4d68b8</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCpPPGjkrRHx9Y6jL5sXvdIAKFjfLn6zXo</string>
+    <string name="google_storage_bucket" translatable="false">gachtaxi-e9597.firebasestorage.app</string>
+    <string name="kakao_native_app_key">63078b61f568e7a91eeb092b540689ac</string>
+    <string name="project_id" translatable="false">gachtaxi-e9597</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        
+        <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+    <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>

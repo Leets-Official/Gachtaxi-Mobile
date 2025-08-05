@@ -1,0 +1,18 @@
+R_DEF: Internal format may change without notice
+local
+drawable android12splash
+drawable background
+drawable launch_background
+drawable splash
+mipmap ic_launcher
+string gcm_defaultSenderId
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
+string kakao_native_app_key
+string project_id
+style AppTheme
+style LaunchTheme
+style NormalTheme
+xml provider_paths

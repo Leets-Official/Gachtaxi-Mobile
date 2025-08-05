@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">705848946089</string>
+    <string name="google_api_key" translatable="false">AIzaSyCpPPGjkrRHx9Y6jL5sXvdIAKFjfLn6zXo</string>
+    <string name="google_app_id" translatable="false">1:705848946089:android:8a0d6757b40a633e4d68b8</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCpPPGjkrRHx9Y6jL5sXvdIAKFjfLn6zXo</string>
+    <string name="google_storage_bucket" translatable="false">gachtaxi-e9597.firebasestorage.app</string>
+    <string name="project_id" translatable="false">gachtaxi-e9597</string>
+</resources>
