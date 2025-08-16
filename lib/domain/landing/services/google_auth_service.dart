@@ -9,23 +9,37 @@ import 'package:gachtaxi_app/domain/landing/model/auth_result.dart';
 
 class GoogleAuthService {
   static Future<AuthResult?> loginWithGoogle(BuildContext context) async {
+    final GoogleSignIn signIn = GoogleSignIn.instance;
+
     try {
-      final googleSignIn = GoogleSignIn(
-        scopes: ['email', 'profile'],
+      // 최신 API에서는 먼저 initialize() 호출
+      await signIn.initialize(
+        clientId: dotenv.env['GOOGLE_WEB_CLIENT_ID'],
         serverClientId: dotenv.env['GOOGLE_WEB_CLIENT_ID'],
       );
 
-      await googleSignIn.signOut();
-      final account = await googleSignIn.signIn();
+      // 기존 로그인 세션 제거
+      await GoogleSignIn.instance.disconnect();
 
-      if (account == null) {
-        ToastShowUtils(context: context).showSuccess('로그인을 취소했어요.');
+      // 로그인 시도
+      final account = await GoogleSignIn.instance.authenticate(
+        scopeHint: ['email', 'profile'],
+      );
+
+      // 서버 Auth Code 요청
+      final serverAuth = await account.authorizationClient.authorizeServer([
+        'email',
+        'profile',
+      ]);
+
+      if (serverAuth == null || serverAuth.serverAuthCode.isEmpty) {
+        logger.e('serverAuthCode is null');
         return null;
       }
 
-      final authCode = account.serverAuthCode;
+      final authCode = serverAuth.serverAuthCode;
 
-      if (authCode == null) {
+      if (serverAuth.serverAuthCode.isEmpty) {
         logger.e('authCode is null');
         return null;
       }

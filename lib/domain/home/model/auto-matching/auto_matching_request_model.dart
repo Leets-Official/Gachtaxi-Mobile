@@ -4,7 +4,7 @@ part 'auto_matching_request_model.freezed.dart';
 part 'auto_matching_request_model.g.dart';
 
 @freezed
-class AutoMatchingRequest with _$AutoMatchingRequest {
+abstract class AutoMatchingRequest with _$AutoMatchingRequest {
   const factory AutoMatchingRequest({
     required String startPoint,
     required String destinationPoint,

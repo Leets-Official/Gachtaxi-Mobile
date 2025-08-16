@@ -4,7 +4,7 @@ part 'manual_matching_room_model.freezed.dart';
 part 'manual_matching_room_model.g.dart';
 
 @freezed
-class MatchingRoom with _$MatchingRoom {
+abstract class MatchingRoom with _$MatchingRoom {
   const factory MatchingRoom({
     required int roomId,
     required int chattingRoomId,

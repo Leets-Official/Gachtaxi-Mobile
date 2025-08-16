@@ -6,7 +6,7 @@ part 'chat_message_response.freezed.dart';
 part 'chat_message_response.g.dart';
 
 @freezed
-class ChatMessageResponse with _$ChatMessageResponse {
+abstract class ChatMessageResponse with _$ChatMessageResponse {
   const factory ChatMessageResponse({
     required int memberId,
     DateTime? disconnectedAt,

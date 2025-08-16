@@ -8,6 +8,8 @@ class Button extends StatelessWidget {
   final String buttonText;
   final Color? backgroundColor;
   final Color? textColor;
+  final double? width;
+  final double? height;
   final VoidCallback? onPressed;
   final bool isLoading;
   final Widget? icon;
@@ -22,15 +24,21 @@ class Button extends StatelessWidget {
     this.isLoading = false,
     this.icon,
     this.borderColor,
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
-    final buttonHeight = 50.h;
+    final buttonHeight = height ?? 50.h;
+    final buttonWidth = width ?? double.infinity;
 
     return TextButton(
       style: TextButton.styleFrom(
-        fixedSize: Size(double.infinity, buttonHeight),
+        fixedSize: Size(
+          buttonWidth,
+          buttonHeight,
+        ),
         backgroundColor: backgroundColor ?? AppColors.primary,
         foregroundColor: textColor ?? AppColors.neutralDark,
         shape: RoundedRectangleBorder(

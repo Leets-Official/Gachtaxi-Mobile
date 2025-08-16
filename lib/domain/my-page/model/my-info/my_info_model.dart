@@ -4,7 +4,7 @@ part 'my_info_model.freezed.dart';
 part 'my_info_model.g.dart';
 
 @freezed
-class UserData with _$UserData {
+abstract class UserData with _$UserData {
   const factory UserData({
     required int userId,
     required int studentNumber,

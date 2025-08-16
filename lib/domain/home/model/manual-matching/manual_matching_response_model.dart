@@ -6,7 +6,7 @@ part 'manual_matching_response_model.freezed.dart';
 part 'manual_matching_response_model.g.dart';
 
 @freezed
-class MatchingData with _$MatchingData {
+abstract class MatchingData with _$MatchingData {
   const factory MatchingData({
     required List<MatchingRoom> rooms,
     required Pageable pageable,

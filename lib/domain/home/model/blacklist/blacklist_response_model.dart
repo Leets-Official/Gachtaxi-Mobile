@@ -6,7 +6,7 @@ part 'blacklist_response_model.freezed.dart';
 part 'blacklist_response_model.g.dart';
 
 @freezed
-class BlacklistResponse with _$BlacklistResponse {
+abstract class BlacklistResponse with _$BlacklistResponse {
   const factory BlacklistResponse({
     required List<Blacklist> blacklist,
     required Pageable pageable,
