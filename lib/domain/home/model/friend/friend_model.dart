@@ -5,7 +5,7 @@ part 'friend_model.freezed.dart';
 part 'friend_model.g.dart';
 
 @freezed
-class Friend with _$Friend {
+abstract class Friend with _$Friend {
   const factory Friend({
     required int friendsId,
     required String friendsNickName,

@@ -4,7 +4,7 @@ part 'unread_notification_model.freezed.dart';
 part 'unread_notification_model.g.dart';
 
 @freezed
-class UnreadNotificationModel with _$UnreadNotificationModel {
+abstract class UnreadNotificationModel with _$UnreadNotificationModel {
   const factory UnreadNotificationModel({
     required int unreadCount,
     required bool hasUnreadNotifications,

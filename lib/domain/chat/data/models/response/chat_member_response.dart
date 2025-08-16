@@ -4,7 +4,7 @@ part 'chat_member_response.freezed.dart';
 part 'chat_member_response.g.dart';
 
 @freezed
-class ChatMemberResponse with _$ChatMemberResponse {
+abstract class ChatMemberResponse with _$ChatMemberResponse {
   const factory ChatMemberResponse({
     required int memberId,
     required String nickName,

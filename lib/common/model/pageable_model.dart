@@ -4,7 +4,7 @@ part 'pageable_model.g.dart';
 part 'pageable_model.freezed.dart';
 
 @freezed
-class Pageable with _$Pageable {
+abstract class Pageable with _$Pageable {
   const factory Pageable({
     required int pageNumber,
     required int pageSize,

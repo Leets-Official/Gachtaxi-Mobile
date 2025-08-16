@@ -5,7 +5,7 @@ part 'notices_model.freezed.dart';
 part 'notices_model.g.dart';
 
 @freezed
-class NoticesData with _$NoticesData {
+abstract class NoticesData with _$NoticesData {
   const factory NoticesData({
     required List<Notice> notices,
     required Pageable pageable,
@@ -16,7 +16,7 @@ class NoticesData with _$NoticesData {
 }
 
 @freezed
-class Notice with _$Notice {
+abstract class Notice with _$Notice {
   const factory Notice({
     required int noticeId,
     required String title,

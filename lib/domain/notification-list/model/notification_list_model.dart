@@ -5,7 +5,7 @@ part 'notification_list_model.freezed.dart';
 part 'notification_list_model.g.dart';
 
 @freezed
-class NotificationListData with _$NotificationListData {
+abstract class NotificationListData with _$NotificationListData {
   const factory NotificationListData({
     required List<NotificationModel> response,
     required Pageable pageable,
@@ -58,7 +58,7 @@ sealed class NotificationModel with _$NotificationModel {
 }
 
 @freezed
-class MatchPayload with _$MatchPayload {
+abstract class MatchPayload with _$MatchPayload {
   const factory MatchPayload({
     required String startLocationName,
     required String endLocationName,
@@ -69,7 +69,7 @@ class MatchPayload with _$MatchPayload {
 }
 
 @freezed
-class FriendRequestPayload with _$FriendRequestPayload {
+abstract class FriendRequestPayload with _$FriendRequestPayload {
   const factory FriendRequestPayload({
     required String status,
     String? profilePicture,
@@ -81,7 +81,7 @@ class FriendRequestPayload with _$FriendRequestPayload {
 }
 
 @freezed
-class MatchingRequestPayload with _$MatchingRequestPayload {
+abstract class MatchingRequestPayload with _$MatchingRequestPayload {
   const factory MatchingRequestPayload({
     required String senderNickname,
     String? profilePicture,

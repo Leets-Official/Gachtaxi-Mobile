@@ -5,7 +5,7 @@ part 'blacklist_model.freezed.dart';
 part 'blacklist_model.g.dart';
 
 @freezed
-class Blacklist with _$Blacklist {
+abstract class Blacklist with _$Blacklist {
   const factory Blacklist({
     required int receiverId,
     required String receiverNickname,
