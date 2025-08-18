@@ -9,6 +9,7 @@ import 'package:gachtaxi_app/domain/home/components/default_padding.dart';
 import 'package:gachtaxi_app/common/util/slide_page_route.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/auto/expanded_setting_card.dart';
 import 'package:gachtaxi_app/domain/home/components/matching/auto/location_card.dart';
+import 'package:gachtaxi_app/domain/home/providers/response/auto_matching_status_provider.dart';
 import 'package:gachtaxi_app/domain/home/providers/ui/sheet_height_provider.dart';
 import 'package:gachtaxi_app/domain/matching-waiting/view/matching_waiting_screen.dart';
 
@@ -20,6 +21,8 @@ class AutoMatchingScreen extends ConsumerWidget {
     final sheetHeightState = ref.watch(sheetHeightNotifierProvider);
     final containerHeight = sheetHeightState.containerHeight;
     final isExpanded = containerHeight > sheetHeightState.basicHeight * 1.3;
+
+    final matchingStatusState = ref.watch(autoMatchingStatusNotifierProvider);
 
     return DefaultPadding(
       child: Column(
@@ -81,13 +84,46 @@ class AutoMatchingScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.spaceCommon),
           ],
           Button(
-            buttonText: '매칭 시작',
+            enabled: matchingStatusState.maybeWhen(
+              data: (res) => res.data != null ? !res.data!.isFound : true,
+              orElse: () => false,
+            ),
+            isLoading: matchingStatusState.isLoading,
+            buttonText: matchingStatusState.when(
+              data: (res) {
+                if (res.data != null && res.data!.isFound == true) {
+                  return '자동 매칭 이용중';
+                } else {
+                  return '매칭 시작';
+                }
+              },
+              loading: () => '확인 중...',
+              error: (err, st) => '참여 불가',
+            ),
             onPressed: () {
-              Navigator.of(context).push(
-                SlidePageRoute(screen: MatchingWaitingScreen()),
+              matchingStatusState.when(
+                data: (res) async {
+                  if (res.data!.isFound == true) {
+                    return;
+                  } else {
+                    await Navigator.push(
+                      context,
+                      SlidePageRoute(
+                        screen: MatchingWaitingScreen(),
+                      ),
+                    );
+                    await ref
+                        // ignore: unused_result
+                        .refresh(autoMatchingStatusNotifierProvider.future);
+                  }
+                },
+                error: (err, st) {
+                  debugPrint('에러 : $err');
+                },
+                loading: () {},
               );
             },
-          ),
+          )
         ],
       ),
     );
