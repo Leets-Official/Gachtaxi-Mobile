@@ -25,6 +25,7 @@ class MatchingWaitingScreen extends ConsumerStatefulWidget {
 
 class _MatchingWaitingScreenState extends ConsumerState<MatchingWaitingScreen> {
   late final ProviderSubscription _subscription;
+  bool _isMatchingComplete = false;
 
   @override
   void initState() {
@@ -35,6 +36,11 @@ class _MatchingWaitingScreenState extends ConsumerState<MatchingWaitingScreen> {
       (prev, next) async {
         if (next is AsyncData && next.value != null) {
           if (mounted) {
+            setState(() {
+              _isMatchingComplete = true;
+            });
+
+            await Future.delayed(const Duration(milliseconds: 1000));
             try {
               final freshStatus =
                   await ref.refresh(autoMatchingStatusNotifierProvider.future);
@@ -110,40 +116,43 @@ class _MatchingWaitingScreenState extends ConsumerState<MatchingWaitingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildLoadingScreen();
+    return PopScope(
+      canPop: false,
+      child: _buildLoadingScreen(),
+    );
   }
-}
 
-Widget _buildLoadingScreen() {
-  return DefaultLayout(
-    hasAppBar: false,
-    child: SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '가치 탈 인원을\n 찾는 중이에요!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: AppTypography.fontSizeExtraLarge,
-                  fontWeight: AppTypography.fontWeightSemibold,
+  Widget _buildLoadingScreen() {
+    return DefaultLayout(
+      hasAppBar: false,
+      child: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  _isMatchingComplete ? '매칭이 완료되었어요!' : '가치 탈 인원을\n 찾는 중이에요!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: AppTypography.fontSizeExtraLarge,
+                    fontWeight: AppTypography.fontWeightSemibold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: AppSpacing.spaceMedium),
-            ],
-          ),
-          Lottie.asset(
-            'assets/images/taxi_loading.json',
-            width: double.infinity,
-            height: 320,
-          ),
-        ],
+                const SizedBox(height: AppSpacing.spaceMedium),
+              ],
+            ),
+            Lottie.asset(
+              'assets/images/taxi_loading.json',
+              width: double.infinity,
+              height: 320,
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
