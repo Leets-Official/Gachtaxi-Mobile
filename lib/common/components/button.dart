@@ -14,6 +14,7 @@ class Button extends StatelessWidget {
   final bool isLoading;
   final Widget? icon;
   final Color? borderColor;
+  final bool enabled;
 
   const Button({
     super.key,
@@ -26,6 +27,7 @@ class Button extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
+    this.enabled = true,
   });
 
   @override
@@ -39,14 +41,17 @@ class Button extends StatelessWidget {
           buttonWidth,
           buttonHeight,
         ),
-        backgroundColor: backgroundColor ?? AppColors.primary,
-        foregroundColor: textColor ?? AppColors.neutralDark,
+        backgroundColor: backgroundColor ??
+            (enabled ? AppColors.primary : AppColors.darkGray),
+        foregroundColor: textColor ??
+            (enabled ? AppColors.neutralDark : AppColors.inputGrey),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
           side: BorderSide(color: borderColor ?? Colors.transparent),
         ),
       ),
-      onPressed: (isLoading || onPressed == null) ? null : onPressed,
+      onPressed:
+          (isLoading || !enabled || onPressed == null) ? null : onPressed,
       child: SizedBox(
         height: buttonHeight,
         child: Center(
